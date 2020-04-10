@@ -1,0 +1,51 @@
+/* purgecss start ignore */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+html, body {
+  @apply h-full text-gray-900;
+}
+
+p {
+  @apply mb-2;
+}
+
+h1, h2, h3 {
+  @apply mb-2;
+}
+
+h1, .h1 {
+  @apply text-2xl text-gray-900 font-bold;
+}
+
+h2, .h2 {
+  @apply text-xl text-gray-800 font-bold;
+}
+
+h3, .h3 {
+  @apply text-lg text-gray-700 font-bold;
+}
+
+h4, .h4 {
+  @apply text-gray-700 font-bold;
+}
+
+/* purgecss end ignore */
+
+.font-brand {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.link, .button-link {
+  @apply text-blue-600;
+}
+
+.label {
+  @apply block px-2 py-1 bg-gray-100 border-b-2;
+}
+
+.gutter-none {
+  @apply -mx-5;
+}
+
+@import "tailwindcss/utilities";
