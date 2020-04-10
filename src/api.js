@@ -1,4 +1,8 @@
-const baseUrl = "http://localhost:8082"
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8082"
+    : "https://cottage-api.herokuapp.com"
+
 const defaultHeaders = {
   "Content-Type": "application/json",
 }
@@ -12,5 +16,5 @@ export const login = ({ username, password }) =>
 
 export const logout = () =>
   fetch(`${baseUrl}/logout`, {
-    method: "POST"
+    method: "POST",
   })
