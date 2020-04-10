@@ -6,6 +6,10 @@ html, body {
   @apply h-full text-gray-900;
 }
 
+body {
+  @apply overflow-y-auto;
+}
+
 p {
   @apply mb-2;
 }

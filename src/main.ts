@@ -3,4 +3,8 @@ import ReactDOM from "react-dom"
 import App from "./app"
 import "./styles.css"
 
-ReactDOM.render(<App />, document.getElementById("root"))
+const root = document.createElement("div")
+root.style.height = "100%"
+document.body.appendChild(root)
+
+ReactDOM.render(<App />, root)

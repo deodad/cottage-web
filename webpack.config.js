@@ -1,5 +1,6 @@
 const path = require("path")
 const webpack = require("webpack")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: "development",
@@ -35,5 +36,6 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
     }),
+    new HtmlWebpackPlugin({ title: 'Cottage' })
   ],
 }
