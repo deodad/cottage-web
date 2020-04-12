@@ -1,12 +1,14 @@
 const path = require("path")
 const webpack = require("webpack")
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin
 
 module.exports = {
   mode: "development",
   devtool: "eval-source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
     overlay: true,
   },
@@ -14,6 +16,7 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -36,6 +39,7 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
     }),
-    new HtmlWebpackPlugin({ title: 'Cottage' })
+    new HtmlWebpackPlugin({ title: "Cottage" }),
+    // new BundleAnalyzerPlugin(),
   ],
 }
