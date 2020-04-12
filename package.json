@@ -1,17 +1,19 @@
 {
   "name": "cottage-frontend",
   "scripts": {
-    "build": "webpack --mode production",
-    "develop": "webpack-dev-server --open",
+    "build": "webpack --config webpack.prod.js",
+    "develop": "webpack-dev-server --open --config webpack.dev.js",
     "lint": "eslint src --fix",
-    "tsc": "tsc"
+    "webpack:analyze": "NODE_ENV=production webpack --config webpack.prod.js --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json"
   },
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.43",
     "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
@@ -42,6 +44,7 @@
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2",
     "yup": "^0.28.3"
   }
 }

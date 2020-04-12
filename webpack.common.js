@@ -1,18 +1,10 @@
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin
 
 module.exports = {
-  mode: "development",
-  devtool: "eval-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true,
-    overlay: true,
-  },
-  entry: "./src/main.ts",
+  target: "web",
+  entry: "./src/main.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
@@ -31,7 +23,7 @@ module.exports = {
       {
         test: /\.(ts|js)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: ["babel-loader"]
       },
     ],
   },
