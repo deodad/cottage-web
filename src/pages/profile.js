@@ -18,6 +18,7 @@ const Profile = ({ handle }) => {
 
   if (loading) return null
   if (error) return null
+  if (data.users.length === 0) return null
 
   const user = data.users[0]
 

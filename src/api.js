@@ -7,9 +7,17 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 }
 
+export const me = () =>
+  fetch(`${baseUrl}/me`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  })
+
 export const signUp = (data) =>
-  fetch(`${baseUrl}/signUp`, {
+  fetch(`${baseUrl}/sign-up`, {
     method: "POST",
+    mode: "cors",
     headers: defaultHeaders,
     body: JSON.stringify(data),
   })
@@ -17,6 +25,8 @@ export const signUp = (data) =>
 export const login = (data) =>
   fetch(`${baseUrl}/login`, {
     method: "POST",
+    mode: "cors",
+    credentials: "include",
     headers: defaultHeaders,
     body: JSON.stringify(data),
   })

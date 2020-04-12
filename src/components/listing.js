@@ -13,7 +13,7 @@ export const Listing = ({ listing, includeProfile = true, ...rest }) => (
     <img
       src={
         listing.image
-          ? "/" + listing.image
+          ? listing.image
           : "https://place-hold.it/400x400/999999/333333&text=Image"
       }
       className="max-w-full mb-2 rounded-lg border max-w-md"

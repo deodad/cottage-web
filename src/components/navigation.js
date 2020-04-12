@@ -13,7 +13,7 @@ export const NavLink = ({ className, activeClassName, ...props }) => {
 }
 
 const Navigation = () => {
-  const { handle } = useCurrentUser()
+  const user = useCurrentUser()
   const logout = () => {
     logoutReq().then(() => (window.location = "/"))
   }
@@ -59,7 +59,7 @@ const Navigation = () => {
         </li>
         <li className="mb-2">
           <NavLink
-            to={`/profile/${handle}`}
+            to={`/profile/${user && user.username}`}
             className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
             activeClassName="text-blue-600"
           >

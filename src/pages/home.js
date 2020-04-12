@@ -3,7 +3,6 @@ import { Router } from "@reach/router"
 import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
-import { Trade } from "../components/trade"
 import { UserActivity, UserLink } from "../components/user"
 import { listings, users, trades, proposals } from "../data"
 
@@ -102,16 +101,6 @@ const Listings = () => (
       ))}
     </div>
   </div>
-)
-
-const Trades = () => (
-  <ul>
-    {trades.map((trade, index) => (
-      <li key={index} className="py-2">
-        <Trade {...trade} />
-      </li>
-    ))}
-  </ul>
 )
 
 export default Home

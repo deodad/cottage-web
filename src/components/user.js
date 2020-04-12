@@ -22,7 +22,7 @@ const timeAgoFormatter = (value, unit, _, __, nextFormatter) => {
 }
 
 export const UserLink = ({ user, children, ...rest }) => (
-  <Link to={`/profile/${user.handle}`} {...rest}>
+  <Link to={`/profile/${user.username}`} {...rest}>
     {children || user.name}
   </Link>
 )
@@ -31,11 +31,11 @@ export const ProfileImage = ({ user, className, ...rest }) => (
   <img
     src={
       user.profileImage
-        ? `/${user.profileImage}`
+        ? user.profileImage
         : "https://place-hold.it/400x400/999999/333333&text=Picture"
     }
     className={classnames(className, "rounded-full w-10 h-10 border")}
-    alt={`${user.handle} profile picture`}
+    alt={`${user.username} profile picture`}
     {...rest}
   />
 )
@@ -62,7 +62,7 @@ export const UserActivity = ({ user, date, children }) => (
     <div className="flex-auto">
       <UserLink user={user}>
         <span className="font-bold">{user.name}</span>{" "}
-        <span className="text-gray-600">@{user.handle}</span>
+        <span className="text-gray-600">@{user.username}</span>
         {date && (
           <span className="text-gray-600">
             {" "}
@@ -83,7 +83,7 @@ export const UnlinkedUserActivity = ({ user, date, children }) => (
 
     <div className="flex-auto">
       <span className="font-bold">{user.name}</span>{" "}
-      <span className="text-gray-600">@{user.handle}</span>
+      <span className="text-gray-600">@{user.username}</span>
       {date && (
         <span className="text-gray-600">
           {" "}
@@ -95,14 +95,14 @@ export const UnlinkedUserActivity = ({ user, date, children }) => (
   </div>
 )
 
-export const useUser = (handle) =>
-  useQuery(GET_USER_QUERY, { variables: { handle } })
+export const useUser = (username) =>
+  useQuery(GET_USER_QUERY, { variables: { username } })
 
 export const GET_USER_QUERY = gql`
-  query getUser($handle: bpchar!) {
-    users(where: { handle: { _eq: $handle } }) {
+  query getUser($username: bpchar!) {
+    users(where: { username: { _eq: $username } }) {
       name
-      handle
+      username
       location
       date_joined
       bio
