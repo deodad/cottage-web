@@ -7,11 +7,18 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 }
 
-export const login = ({ username, password }) =>
+export const signUp = (data) =>
+  fetch(`${baseUrl}/signUp`, {
+    method: "POST",
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  })
+
+export const login = (data) =>
   fetch(`${baseUrl}/login`, {
     method: "POST",
     headers: defaultHeaders,
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify(data),
   })
 
 export const logout = () =>

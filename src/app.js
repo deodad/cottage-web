@@ -10,6 +10,7 @@ import Messages from "./pages/messages"
 import Faq from "./pages/faq"
 import Profile from "./pages/profile"
 import Listing from "./pages/listing"
+import SignUp from "./pages/sign-up"
 import NotFound from "./pages/not-found"
 
 import { users } from "./data"
@@ -23,6 +24,7 @@ const App = () => {
       <UserContext.Provider value={user}>
         <Router className="h-full">
           <Front path="/" logIn={logIn} />
+          <SignUp path="/sign-up" />
           {user && (
             <>
               <Home path="/home/*" />
