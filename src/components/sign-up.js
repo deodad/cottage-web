@@ -12,6 +12,7 @@ export const SignUp = () => {
     signUp(values).then((res) => {
       if (res.ok) {
         setSubmitting(false)
+        // TODO pass in username from response
         signIn()
       }
     })

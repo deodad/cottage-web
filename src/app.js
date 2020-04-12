@@ -6,7 +6,6 @@ import { me } from "./api"
 import { UserContext } from "./user-context"
 import Front from "./pages/front"
 import Faq from "./pages/faq"
-import NotFound from "./pages/not-found"
 import GuestApp from "./guest-app"
 import UserApp from "./user-app"
 
