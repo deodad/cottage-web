@@ -3,7 +3,7 @@ import { Router } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../components/layout"
-import { useCurrentUser } from "../use-user"
+import { useUserContext } from "../user-context"
 import { useUser } from "../components/user"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
@@ -13,7 +13,7 @@ import { Trades } from "../components/trade"
 import { trades, reviews } from "../data"
 
 const Profile = ({ handle }) => {
-  const currentUser = useCurrentUser()
+  const currentUser = useUserContext()
   const { loading, error, data } = useUser(handle)
 
   if (loading) return null
@@ -44,7 +44,7 @@ const Profile = ({ handle }) => {
           <div className="text-gray-700">@{handle}</div>
         </div>
         <div>
-          {user.handle !== currentUser.handle && (
+          {user.username !== currentUser.user && (
             <button className="mt-40 bg-blue-400 text-white font-bold px-4 py-2">
               Following
             </button>

@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
-import { listings, users, trades, proposals } from "../data"
+import { listings, users, proposals } from "../data"
 
 const myListings = [listings[0]]
 

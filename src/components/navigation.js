@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
-import { useCurrentUser } from "../use-user"
+import { useUserContext } from "../user-context"
 import { logout as logoutReq } from "../api"
 
 export const NavLink = ({ className, activeClassName, ...props }) => {
@@ -13,9 +13,9 @@ export const NavLink = ({ className, activeClassName, ...props }) => {
 }
 
 const Navigation = () => {
-  const user = useCurrentUser()
-  const logout = () => {
-    logoutReq().then(() => (window.location = "/"))
+  const { user, logout } = useUserContext()
+  const handleLogout = () => {
+    logoutReq().then(() => logout())
   }
 
   return (
@@ -68,7 +68,7 @@ const Navigation = () => {
         </li>
         <li className="mb-2">
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
           >
             Log out

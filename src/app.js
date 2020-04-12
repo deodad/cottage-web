@@ -1,57 +1,61 @@
-import React, { useState, useEffect, Suspense, lazy } from "react"
-import { Router } from "@reach/router"
+import React, { useState, useEffect } from "react"
+import { Router, navigate } from "@reach/router"
 import { ApolloProvider } from "@apollo/client"
 import { client } from "./apollo"
 import { me } from "./api"
-import { UserContext } from "./use-user"
+import { UserContext } from "./user-context"
 import Front from "./pages/front"
 import Faq from "./pages/faq"
-import SignUp from "./pages/sign-up"
-import Login from "./pages/login"
 import NotFound from "./pages/not-found"
-import { Spinner } from "./components/spinner"
-
-const Home = lazy(() => import("./pages/home"))
-const Market = lazy(() => import("./pages/market"))
-const Messages = lazy(() => import("./pages/messages"))
-const Profile = lazy(() => import("./pages/profile"))
-const Listing = lazy(() => import("./pages/listing"))
+import GuestApp from "./guest-app"
+import UserApp from "./user-app"
 
 const App = () => {
   const [user, setUser] = useState(undefined)
-  const signIn = (username) => setUser({ username })
+  const signIn = (username) => {
+    setUser({ username })
+    navigate("/home")
+  }
+
+  const logout = () => {
+    setUser(null)
+    navigate("/")
+  }
 
   useEffect(() => {
-    me().then((res) => {
-      if (res.ok) {
-        res.text().then((username) => {
-          if (username) {
-            return signIn(username)
-          }
-        })
-      }
+    me()
+      .then((res) => {
+        if (res.ok) {
+          return res.text()
+        } else {
+          throw Error()
+        }
+      })
+      .then((username) => {
+        if (username) {
+          return signIn(username)
+        }
 
-      setUser(null)
-    })
+        setUser(null)
+      })
+      .catch(() => setUser(null))
   }, [])
+
+  const userContext = {
+    user,
+    signIn,
+    logout,
+  }
 
   return (
     <ApolloProvider client={client}>
-      <UserContext.Provider value={user}>
-        <Suspense fallback={<Spinner />}>
-          <Router className="h-full">
-            <Front path="/" signIn={signIn} />
-            <Login path="/login" signIn={signIn} />
-            <SignUp path="/sign-up" signIn={signIn} />
-            <Home path="home/*" />
-            <Market path="market/*" />
-            <Messages path="messages/*" />
-            <Profile path="profile/:handle/*" />
-            <Listing path="listing/:id" />
-            <Faq path="/faq" />
-            <NotFound default />
-          </Router>
-        </Suspense>
+      <UserContext.Provider value={userContext}>
+        <Router className="h-full">
+          <Front path="/" />
+          <Faq path="/faq" />
+        </Router>
+        {user === null && <GuestApp />}
+        {user && <UserApp />}
       </UserContext.Provider>
     </ApolloProvider>
   )

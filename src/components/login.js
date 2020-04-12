@@ -1,10 +1,12 @@
 import React, { useState } from "react"
-import { Link, navigate } from "@reach/router"
+import { Link } from "@reach/router"
 import { login } from "../api"
+import { useUserContext } from "../user-context"
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const { signIn } = useUserContext()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -14,8 +16,7 @@ export const LoginForm = () => {
       password,
     }).then((res) => {
       if (res.ok) {
-        navigate("/home")
-        return
+        signIn()
       }
     })
   }
