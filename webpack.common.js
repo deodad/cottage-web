@@ -31,7 +31,8 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
     }),
-    new HtmlWebpackPlugin({ title: "Cottage" }),
-    // new BundleAnalyzerPlugin(),
+    new HtmlWebpackPlugin({ 
+      template: "src/index.html" 
+    }),
   ],
 }
