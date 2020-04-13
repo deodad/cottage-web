@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { Router, navigate } from "@reach/router"
+import { navigate } from "@reach/router"
 import { ApolloProvider } from "@apollo/client"
 import { client } from "./apollo"
 import { me } from "./api"
 import { UserContext } from "./user-context"
-import Front from "./pages/front"
-import Faq from "./pages/faq"
 import GuestApp from "./guest-app"
 import UserApp from "./user-app"
 
@@ -32,7 +30,8 @@ const App = () => {
       })
       .then((username) => {
         if (username) {
-          return signIn(username)
+          setUser({ username })
+          return
         }
 
         setUser(null)
@@ -49,10 +48,6 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <UserContext.Provider value={userContext}>
-        <Router className="h-full">
-          <Front path="/" />
-          <Faq path="/faq" />
-        </Router>
         {user === null && <GuestApp />}
         {user && <UserApp />}
       </UserContext.Provider>

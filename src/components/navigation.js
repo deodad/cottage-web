@@ -21,12 +21,7 @@ const Navigation = () => {
   return (
     <>
       <Link to="/home">
-        <div
-          className="my-5 px-3 text-xl font-bold"
-          style={{ fontFamily: "'Libre Baskerville', serif" }}
-        >
-          Cottage{" "}
-        </div>
+        <div className="my-5 px-3 text-xl font-brand font-bold">Cottage </div>
       </Link>
 
       <ul>

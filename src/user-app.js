@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react"
-import { Router } from "@reach/router"
+import { Router, Redirect } from "@reach/router"
 import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
 
@@ -8,6 +8,7 @@ const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const Profile = lazy(() => import("./pages/profile"))
 const Listing = lazy(() => import("./pages/listing"))
+const NotFound = lazy(() => import("./pages/not-found"))
 
 const UserApp = () => {
   return (
@@ -19,6 +20,10 @@ const UserApp = () => {
           <Messages path="messages/*" />
           <Profile path="profile/:handle/*" />
           <Listing path="listing/:id" />
+          <Redirect from="/" to="/home" />
+          <Redirect from="login" to="/home" />
+          <Redirect from="sign-up" to="/home" />
+          <NotFound default />
         </Router>
       </Suspense>
     </Layout>

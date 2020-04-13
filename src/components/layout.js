@@ -1,8 +1,16 @@
 import React from "react"
+import { Link } from "@reach/router"
 import Navigation from "./navigation"
 
 export const Simple = ({ children, title }) => (
   <div className="max-w-sm mx-auto py-6 px-5">
+    <Link
+      to="/"
+      className="text-2xl font-bold font-brand block mb-5"
+    >
+      Cottage
+    </Link>
+
     {title && (
       <div className="gutter-none mb-3 pb-3 px-5">
         <h1 className="text-xl m-0">{title}</h1>
