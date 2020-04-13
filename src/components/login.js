@@ -6,20 +6,26 @@ import { useUserContext } from "../user-context"
 export const LoginForm = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState(null)
   const { signIn } = useUserContext()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    setError(null)
     login({
       username,
       password,
-    }).then((res) => {
-      if (res.ok) {
-        // TODO this could be any case, use username from response
-        signIn(username)
-      }
     })
+      .then((res) => {
+        if (res.ok) {
+          // TODO this could be any case, use username from response
+          signIn(username)
+          return
+        }
+
+        return Promise.reject()
+      })
+      .catch(() => setError("Login failed. Try again."))
   }
 
   return (
@@ -51,6 +57,8 @@ export const LoginForm = () => {
           Sign up
         </Link>
       </div>
+
+      {error && <div className="mt-3 text-red-600">{error}</div>}
     </form>
   )
 }

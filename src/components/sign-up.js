@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Formik, Form } from "formik"
 import { string, object } from "yup"
 import { Input } from "./form"
@@ -7,18 +7,38 @@ import { useUserContext } from "../user-context"
 
 export const SignUp = () => {
   const { signIn } = useUserContext()
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    signUp(values).then((res) => {
-      if (res.ok) {
-        setSubmitting(false)
+  const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
+    if (isSubmitting) {
+      return
+    }
+
+    setError(null)
+    signUp(values)
+      .then((res) => {
         // TODO pass in username from response
-        signIn()
-      }
-    })
+        if (res.ok) {
+          setSubmitting(false)
+          signIn()
+          return
+        }
+
+        if (res.status === 400) {
+          return res.json().then(({ message }) => setError(message))
+        }
+
+        return Promise.reject()
+      })
+      .catch(() => setError("Sign up failed. Try again."))
   }
 
-  return <SignUpForm onSubmit={handleSubmit} />
+  return (
+    <>
+      <SignUpForm onSubmit={handleSubmit} />
+      {error && <div className="mt-3 text-red-600">{error}</div>}
+    </>
+  )
 }
 
 const validationSchema = object({
@@ -56,7 +76,10 @@ const SignUpForm = ({ onSubmit }) => (
       <Input type="password" label="Password" name="password" />
 
       <div className="mt-5">
-        <button className="w-full text-center px-4 py-2 bg-blue-600 text-white">
+        <button
+          type="submit"
+          className="w-full text-center px-4 py-2 bg-blue-600 text-white"
+        >
           Sign up
         </button>
       </div>
