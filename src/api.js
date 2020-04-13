@@ -1,7 +1,7 @@
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8082"
-    : "https://cottage-api.herokuapp.com"
+    : "https://cottage-api.livediagonal.com"
 
 const defaultHeaders = {
   "Content-Type": "application/json",
