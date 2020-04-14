@@ -7,6 +7,13 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 }
 
+export const getUser = (handle) =>
+  fetch(`${baseUrl}/users/${handle}`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  })
+
 export const me = () =>
   fetch(`${baseUrl}/me`, {
     method: "GET",

@@ -14,13 +14,12 @@ import { trades, reviews } from "../data"
 
 const Profile = ({ handle }) => {
   const currentUser = useUserContext()
-  const { loading, error, data } = useUser(handle)
+  const { isLoading, isError, data } = useUser(handle)
 
-  if (loading) return null
-  if (error) return null
-  if (data.users.length === 0) return null
+  if (isLoading) return null
+  if (isError) return null
 
-  const user = data.users[0]
+  const user = data
 
   // Mock data fetching
   const { name, dateJoined, location } = user

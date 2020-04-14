@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useEffect, useReducer } from "react"
 import TimeAgo from "react-timeago"
 import { Link } from "@reach/router"
 import { gql, useQuery } from "@apollo/client"
 import classnames from "classnames"
+import { getUser } from "../api"
 
 const timeAgoFormatter = (value, unit, _, __, nextFormatter) => {
   switch (unit) {
@@ -95,22 +96,63 @@ export const UnlinkedUserActivity = ({ user, date, children }) => (
   </div>
 )
 
-export const useUser = (username) =>
-  useQuery(GET_USER_QUERY, { variables: { username } })
-
-export const GET_USER_QUERY = gql`
-  query getUser($username: bpchar!) {
-    users(where: { username: { _eq: $username } }) {
-      name
-      username
-      location
-      date_joined
-      bio
-      listings {
-        id
-        name
-        short_description
+const useUserReducer = (state, action) => {
+  switch (action.type) {
+    case "error": {
+      return {
+        ...state,
+        status: "rejected",
+        error: action.error,
       }
     }
+    case "success": {
+      return {
+        ...state,
+        status: "resolved",
+        data: action.data,
+      }
+    }
+    case "started": {
+      return {
+        ...state,
+        status: "pending",
+      }
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
   }
-`
+}
+
+const useUserInitialState = {
+  status: "idle",
+}
+
+export const useUser = (username) => {
+  const [state, dispatch] = useReducer(useUserReducer, useUserInitialState)
+
+  useEffect(() => {
+    dispatch({ type: "started" })
+    // TODO handle failures
+    getUser(username)
+      .then((res) => {
+        if (res.ok) {
+          return res.json().then((data) => dispatch({ type: "success", data }))
+        }
+
+        if (res.status === 401) {
+          return Promise.reject("User not found")
+        }
+
+        return Promise.reject("An error occurred.")
+      })
+      .catch((error) => dispatch({ type: "error", error }))
+  }, [username])
+
+  return {
+    isLoading: state.status === "idle" || state.status === "pending",
+    data: state.data,
+    isError: state.status === "rejected",
+    error: state.error,
+  }
+}

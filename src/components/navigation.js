@@ -6,7 +6,7 @@ import { logout as logoutReq } from "../api"
 
 const navLinkClass =
   "inline-block my-2 px-6 py-2 rounded-full text-xl outline-none " +
-  "focus:bg-blue-400 focus:text-white hover:bg-blue-400 hover:text-white"
+  "focus:bg-blue-300 focus:text-white hover:bg-blue-300 hover:text-white"
 
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
@@ -34,25 +34,16 @@ const Navigation = () => {
 
       <ul>
         <li>
-          <BubbleNavLink to="/home" activeClassName="text-blue-600">
-            Home
-          </BubbleNavLink>
+          <BubbleNavLink to="/home">Home</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink to="/market" activeClassName="text-blue-600">
-            Market
-          </BubbleNavLink>
+          <BubbleNavLink to="/market">Market</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink to="/messages" activeClassName="text-blue-600">
-            Messages
-          </BubbleNavLink>
+          <BubbleNavLink to="/messages">Messages</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink
-            to={`/profile/${user.username}`}
-            activeClassName="text-blue-600"
-          >
+          <BubbleNavLink to={`/profile/${user.username}`}>
             Profile
           </BubbleNavLink>
         </li>
