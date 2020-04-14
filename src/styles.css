@@ -14,23 +14,23 @@ p {
   @apply mb-2;
 }
 
-h1, h2, h3 {
+.h1, .h2, .h3 {
   @apply mb-2;
 }
 
-h1, .h1 {
+.h1 {
   @apply text-2xl text-gray-900 font-bold;
 }
 
-h2, .h2 {
+.h2 {
   @apply text-xl text-gray-800 font-bold;
 }
 
-h3, .h3 {
+.h3 {
   @apply text-lg text-gray-700 font-bold;
 }
 
-h4, .h4 {
+.h4 {
   @apply text-gray-700 font-bold;
 }
 

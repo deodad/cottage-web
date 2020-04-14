@@ -8,7 +8,11 @@ import { users } from "../data"
 const Messages = () => {
   return (
     <Layout title="Messages">
-      <Router>
+      <h1 className="gutter-none px-5 py-3 border-b-2 border-teal-600 text-lg text-teal-600 font-bold">
+        Messages
+      </h1>
+
+      <Router className="mt-5">
         <Threads path="/" />
         <Thread path=":threadId" />
       </Router>

@@ -4,13 +4,21 @@ import classnames from "classnames"
 import { useUserContext } from "../user-context"
 import { logout as logoutReq } from "../api"
 
-export const NavLink = ({ className, activeClassName, ...props }) => {
+const navLinkClass =
+  "inline-block my-2 px-6 py-2 rounded-full text-xl outline-none " +
+  "focus:bg-blue-400 focus:text-white hover:bg-blue-400 hover:text-white"
+
+const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
-    className: classnames(className, { [activeClassName]: isPartiallyCurrent }),
+    className: classnames(navLinkClass, isPartiallyCurrent && "text-blue-600"),
   })
 
   return <Link {...props} getProps={getProps} />
 }
+
+export const BubbleNavLink = (props) => (
+  <NavLink {...props} className={navLinkClass} />
+)
 
 const Navigation = () => {
   const { user, logout } = useUserContext()
@@ -20,51 +28,39 @@ const Navigation = () => {
 
   return (
     <>
-      <Link to="/home">
-        <div className="my-5 px-3 text-xl font-brand font-bold">Cottage </div>
+      <Link to="/home" className="block mb-2 px-5 py-2 text-2xl font-bold">
+        Cottage
       </Link>
 
       <ul>
-        <li className="mb-2">
-          <NavLink
-            to="/home"
-            className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
-            activeClassName="text-blue-600"
-          >
+        <li>
+          <BubbleNavLink to="/home" activeClassName="text-blue-600">
             Home
-          </NavLink>
+          </BubbleNavLink>
         </li>
-        <li className="mb-2">
-          <NavLink
-            to="/market"
-            className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
-            activeClassName="text-blue-600"
-          >
+        <li>
+          <BubbleNavLink to="/market" activeClassName="text-blue-600">
             Market
-          </NavLink>
+          </BubbleNavLink>
         </li>
-        <li className="mb-2">
-          <NavLink
-            to="/messages"
-            className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
-            activeClassName="text-blue-600"
-          >
+        <li>
+          <BubbleNavLink to="/messages" activeClassName="text-blue-600">
             Messages
-          </NavLink>
+          </BubbleNavLink>
         </li>
-        <li className="mb-2">
-          <NavLink
+        <li>
+          <BubbleNavLink
             to={`/profile/${user.username}`}
-            className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
             activeClassName="text-blue-600"
           >
             Profile
-          </NavLink>
+          </BubbleNavLink>
         </li>
-        <li className="mb-2">
+        <li>
           <button
             onClick={handleLogout}
-            className="inline-block px-3 py-1 rounded-full hover:bg-blue-200 hover:text-blue-700 text-lg font-bold"
+            className={navLinkClass}
+            style={{ outline: "none" }}
           >
             Log out
           </button>

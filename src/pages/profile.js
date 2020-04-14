@@ -66,16 +66,10 @@ const Profile = ({ handle }) => {
       </div>
 
       <div className="mt-6">
-        <div className="gutter-none inline-flex">
-          <NavLink to="" className="px-5 py-3 font-bold">
-            Listings
-          </NavLink>
-          <NavLink to="trades" className="px-5 py-3 font-bold">
-            Trades ({userTradesCount})
-          </NavLink>
-          <NavLink to="reviews" className="px-5 py-3 font-bold">
-            Reviews ({userReviewsCount})
-          </NavLink>
+        <div className="gutter-none flex">
+          <NavLink to="">Listings</NavLink>
+          <NavLink to="trades">Trades ({userTradesCount})</NavLink>
+          <NavLink to="reviews">Reviews ({userReviewsCount})</NavLink>
         </div>
         <div className="mt-2">
           <Router>

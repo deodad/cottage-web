@@ -10,16 +10,10 @@ const myListings = [listings[0]]
 
 const Home = () => (
   <Layout title="Home">
-    <div className="-mx-5 mt-3 flex">
-      <NavLink to="" className="px-5 py-3 font-bold">
-        Activity
-      </NavLink>
-      <NavLink to="proposals" className="px-5 py-3 font-bold">
-        Open Proposals ({proposals.length})
-      </NavLink>
-      <NavLink to="listings" className="px-5 py-3 font-bold">
-        My Listings
-      </NavLink>
+    <div className="sticky top-0 flex bg-white">
+      <NavLink to="">Activity</NavLink>
+      <NavLink to="proposals">Open Proposals ({proposals.length})</NavLink>
+      <NavLink to="listings">My Listings</NavLink>
     </div>
 
     <div className="mt-5">

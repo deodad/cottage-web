@@ -6,11 +6,13 @@ const Market = () => (
   <Layout title="Market">
     <input
       type="text"
-      className="w-full mb-5 px-4 py-2 bg-gray-200"
+      className="gutter-none w-full mt-1 px-5 py-3 rounded-lg bg-gray-200 text-lg outline-none"
       placeholder="Search"
     />
 
-    <Listings />
+    <div className="mt-5">
+      <Listings />
+    </div>
   </Layout>
 )
 
