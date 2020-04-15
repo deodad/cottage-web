@@ -1,9 +1,11 @@
 import React from "react"
 import { Router } from "@reach/router"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
+import { Button } from "../components/button"
 import { listings, users, proposals } from "../data"
 
 const myListings = [listings[0]]
@@ -63,19 +65,12 @@ const Proposals = () => (
     {proposals.map(({ id, from, to, date }, index) => (
       <UserActivity key={id} user={from.user} date={date}>
         <div key={index} className="mb-5">
-          Proposed a trade:
-          <br />
-          <div className="mt-1 p-3 border">
-            <ListingLink listing={from.listing} /> for a{" "}
-            <ListingLink listing={to.listing} />.
-            <div className="mt-2">
-              <button className="px-4 py-2 bg-green-400 text-white font-bold">
-                Accept
-              </button>{" "}
-              <button className="px-4 py-2 bg-red-400 text-white font-bold">
-                Pass
-              </button>
-            </div>
+          Proposed a trading you
+          <ListingLink listing={from.listing} /> for a{" "}
+          <ListingLink listing={to.listing} />.
+          <div className="mt-2">
+            <Button emphasis="high">Accept</Button>{" "}
+            <Button emphasis="low">Pass</Button>
           </div>
         </div>
       </UserActivity>
@@ -85,9 +80,14 @@ const Proposals = () => (
 
 const Listings = () => (
   <div>
-    <button className="px-4 py-2 bg-green-400 text-white font-bold">
-      Add new
-    </button>
+    <div className="flex items-center justify-between">
+      <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
+      <div>
+        <Button icon={faPlus} emphasis="highest" size="lg">
+          Add Listing
+        </Button>
+      </div>
+    </div>
 
     <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
       {myListings.map((listing) => (

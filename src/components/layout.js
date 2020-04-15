@@ -18,7 +18,7 @@ export const Simple = ({ children, title }) => (
 )
 
 export const Layout = ({ children }) => (
-  <div className="container max-w-screen-lg h-full mx-auto px-5 flex">
+  <div className="container max-w-screen-lg h-full mx-auto flex sm:px-5">
     <div className="hidden md:block flex-none w-56 py-5">
       <div className="fixed">
         <Navigation />

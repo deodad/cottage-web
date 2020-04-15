@@ -9,6 +9,7 @@ import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
 import { Trades } from "../components/trade"
+import { ToggleButton } from "../components/button"
 
 import { trades, reviews } from "../data"
 
@@ -34,20 +35,19 @@ const Profile = ({ handle }) => {
   return (
     <Layout>
       <div className="flex justify-between">
-        <div>
+        <div className="relative w-full">
           <img
             src={"/" + user.profileImage}
             className="w-40 h-40 rounded-full border"
           />
           <div className="mt-2 text-lg font-bold">{name}</div>
           <div className="text-gray-700">@{handle}</div>
-        </div>
-        <div>
-          {user.username !== currentUser.user && (
-            <button className="mt-40 bg-blue-400 text-white font-bold px-4 py-2">
-              Following
-            </button>
-          )}
+
+          <div className="absolute right-0 top-0">
+            {user.username !== currentUser.user && (
+              <FollowButton isFollowing={true} />
+            )}
+          </div>
         </div>
       </div>
 
@@ -81,6 +81,12 @@ const Profile = ({ handle }) => {
     </Layout>
   )
 }
+
+const FollowButton = ({ isFollowing = false, ...rest }) => (
+  <ToggleButton active={isFollowing} {...rest}>
+    {isFollowing ? "Following" : "Follow"}
+  </ToggleButton>
+)
 
 const Listings = ({ listings }) => (
   <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
