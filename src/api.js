@@ -1,3 +1,5 @@
+import { navigate } from "@reach/router"
+
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8082"
@@ -7,15 +9,26 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 }
 
+const authorizedFetch = (...args) =>
+  fetch(...args).then((res) => {
+    if (res.status === 401) {
+      navigate("/login")
+      throw new Error("Unauthorized")
+    }
+
+    return res
+  })
+
 const get = (path) =>
-  fetch(`${baseUrl}/${path}`, {
+  authorizedFetch(`${baseUrl}/${path}`, {
     method: "GET",
     mode: "cors",
     headers: defaultHeaders,
+    credentials: "include",
   })
 
 const post = (path, data) =>
-  fetch(`${baseUrl}/${path}`, {
+  authorizedFetch(`${baseUrl}/${path}`, {
     method: "POST",
     mode: "cors",
     headers: defaultHeaders,

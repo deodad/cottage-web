@@ -2,7 +2,8 @@ import React from "react"
 import { Router } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import Layout from "../components/layout"
+import { withAuthentication } from "../hoc/with-authentication"
+import { withLayout } from "../hoc/with-layout"
 import { useUserContext } from "../user-context"
 import { useUser } from "../hooks/use-user"
 import { NavLink } from "../components/common"
@@ -33,7 +34,7 @@ const Profile = ({ handle }) => {
   const userReviewsCount = userReviews.length
 
   return (
-    <Layout>
+    <>
       <div className="flex justify-between">
         <div className="relative w-full">
           <img
@@ -78,7 +79,7 @@ const Profile = ({ handle }) => {
           </Router>
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 
@@ -96,4 +97,4 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default Profile
+export default withLayout(withAuthentication(Profile), "user")

@@ -1,13 +1,14 @@
 import React from "react"
 import { Link, Router } from "@reach/router"
-import Layout from "../components/layout"
+import { withAuthentication } from "../hoc/with-authentication"
+import { withLayout } from "../hoc/with-layout"
 import { UnlinkedUserActivity } from "../components/user"
 
 import { users } from "../data"
 
 const Messages = () => {
   return (
-    <Layout title="Messages">
+    <>
       <h1 className="gutter-none px-5 py-3 border-b-2 border-teal-600 text-lg text-teal-600 font-bold">
         Messages
       </h1>
@@ -16,7 +17,7 @@ const Messages = () => {
         <Threads path="/" />
         <Thread path=":threadId" />
       </Router>
-    </Layout>
+    </>
   )
 }
 
@@ -57,4 +58,4 @@ const Activity = ({ activity }) => {
 
 const Message = ({ activity }) => <div>{activity.text}</div>
 
-export default Messages
+export default withLayout(withAuthentication(Messages), "user")

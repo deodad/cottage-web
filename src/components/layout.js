@@ -1,5 +1,6 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Link } from "@reach/router"
+import { Spinner } from "./spinner"
 import Navigation from "./navigation"
 
 export const Simple = ({ children, title }) => (
@@ -24,9 +25,26 @@ export const Layout = ({ children }) => (
         <Navigation />
       </div>
     </div>
-    <div className="relative flex-1 h-full px-5 py-5">{children}</div>
+    <div className="relative flex-1 h-full px-5 py-5">
+      <Suspense fallback={<Spinner />}>{children}</Suspense>
+    </div>
   </div>
 )
+
+const UserLayout = Layout
+
+export const DynamicLayout = ({ layout, ...rest }) => {
+  switch (layout) {
+    case "user":
+      return <UserLayout {...rest} />
+    case "empty":
+      return <div {...rest} />
+    case "":
+      return <Simple {...rest} />
+    default:
+      throw new Error(`Invalid layout '${layout}'`)
+  }
+}
 
 const UserPageLayout = ({ children, title }) => (
   <>

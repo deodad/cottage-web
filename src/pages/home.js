@@ -1,6 +1,8 @@
 import React from "react"
 import { Router } from "@reach/router"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { withAuthentication } from "../hoc/with-authentication"
+import { withLayout } from "../hoc/with-layout"
 import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
@@ -108,4 +110,4 @@ const Listings = () => {
   )
 }
 
-export default Home
+export default withLayout(withAuthentication(Home), "user")

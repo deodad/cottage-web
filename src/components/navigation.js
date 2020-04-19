@@ -43,7 +43,7 @@ const Navigation = () => {
           <BubbleNavLink to="/messages">Messages</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink to={`/profile/${user.username}`}>
+          <BubbleNavLink to={`/profile/${user && user.username}`}>
             Profile
           </BubbleNavLink>
         </li>

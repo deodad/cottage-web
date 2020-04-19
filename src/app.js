@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from "react"
-import { navigate } from "@reach/router"
-import { ApolloProvider } from "@apollo/client"
-import { client } from "./apollo"
+import React, { lazy, Suspense, useState, useEffect } from "react"
+import { navigate, Router } from "@reach/router"
 import { me } from "./api"
 import { UserContext } from "./user-context"
-import GuestApp from "./guest-app"
-import UserApp from "./user-app"
+import { Spinner } from "./components/spinner"
+import Front from "./pages/front"
+
+const Login = lazy(() => import("./pages/login"))
+const SignUp = lazy(() => import("./pages/sign-up"))
+
+const Home = lazy(() => import("./pages/home"))
+const Market = lazy(() => import("./pages/market"))
+const Messages = lazy(() => import("./pages/messages"))
+const Profile = lazy(() => import("./pages/profile"))
+const Listing = lazy(() => import("./pages/listing"))
+const AddListing = lazy(() => import("./pages/add-listing"))
+const NotFound = lazy(() => import("./pages/not-found"))
 
 const App = () => {
   const [user, setUser] = useState(undefined)
@@ -46,12 +55,24 @@ const App = () => {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <UserContext.Provider value={userContext}>
-        {user === null && <GuestApp />}
-        {user && <UserApp />}
-      </UserContext.Provider>
-    </ApolloProvider>
+    <UserContext.Provider value={userContext}>
+      <Suspense fallback={<Spinner />}>
+        <Router>
+          <Front path="/" />
+          <Login path="/login" signIn={signIn} />
+          <SignUp path="/sign-up" signIn={signIn} />
+
+          <Home path="home/*" />
+          <Market path="market/*" />
+          <Messages path="messages/*" />
+          <Profile path="profile/:handle/*" />
+          <Listing path="listing/:id" />
+          <AddListing path="add-listing" />
+
+          <NotFound default />
+        </Router>
+      </Suspense>
+    </UserContext.Provider>
   )
 }
 

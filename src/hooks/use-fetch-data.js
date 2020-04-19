@@ -52,8 +52,7 @@ export const useFetchData = () => {
         return Promise.reject()
       })
       .catch((err) => {
-        failure(err)
-        throw err
+        failure("Failure")
       })
   }
 
@@ -69,6 +68,6 @@ export const useFetchData = () => {
       data: state.data,
       isError: state.status === "rejected",
       error: state.error,
-    }
+    },
   }
 }

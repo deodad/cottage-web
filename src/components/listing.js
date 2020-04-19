@@ -33,58 +33,14 @@ export const Listing = ({ listing, includeProfile = true, ...rest }) => (
   </ListingLink>
 )
 
-export const useUser = (username) => {
-  const [state, dispatch] = useReducer(useUserReducer, useUserInitialState)
-
-  useEffect(() => {
-    dispatch({ type: "started" })
-    // TODO handle failures
-    getUser(username)
-      .then((res) => {
-        if (res.ok) {
-          return res.json().then((data) => dispatch({ type: "success", data }))
-        }
-
-        if (res.status === 401) {
-          return Promise.reject("User not found")
-        }
-
-        return Promise.reject("An error occurred.")
-      })
-      .catch((error) => dispatch({ type: "error", error }))
-  }, [username])
-
-  return {
-    isLoading: state.status === "idle" || state.status === "pending",
-    data: state.data,
-    isError: state.status === "rejected",
-    error: state.error,
-  }
+export const Listings = ({ listings }) => {
+  return (
+    <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      {listings.map((listing) => (
+        <li key={listing.id} className="mb-3 sm:mb-0">
+          <Listing listing={listing} />
+        </li>
+      ))}
+    </ul>
+  )
 }
-
-// export const Listings = () => {
-//   const { loading, error, data } = useQuery(GET_LISTINGS_QUERY)
-
-//   if (loading) return <p>Loading</p>
-//   if (error) return <p>Error!</p>
-
-//   return (
-//     <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-//       {data.listings.map((listing) => (
-//         <li key={listing.id} className="mb-3 sm:mb-0">
-//           <Listing listing={listing} />
-//         </li>
-//       ))}
-//     </ul>
-//   )
-// }
-
-// export const GET_LISTINGS_QUERY = gql`
-//   query getListings {
-//     listings {
-//       id
-//       name
-//       short_description
-//     }
-//   }
-// `
