@@ -10,7 +10,10 @@ export const Input = ({ label, className, ...props }) => {
       <label className="block bg-gray-200 rounded-t">
         <div className="py-1 px-3 text-sm text-gray-700 font-bold">{label}</div>
         <input
-          className="w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-blue-600"
+          className={classnames(
+            "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-blue-600",
+            meta.error && "border-red-600"
+          )}
           {...field}
           {...props}
         />

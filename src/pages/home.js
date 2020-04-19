@@ -7,8 +7,7 @@ import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
 import { Button } from "../components/button"
 import { listings, users, proposals } from "../data"
-
-const myListings = [listings[0]]
+import { useListings } from "../hooks/use-listings"
 
 const Home = () => (
   <Layout title="Home">
@@ -78,23 +77,35 @@ const Proposals = () => (
   </>
 )
 
-const Listings = () => (
-  <div>
-    <div className="flex items-center justify-between">
-      <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
-      <div>
-        <Button icon={faPlus} emphasis="highest" size="lg">
-          Add Listing
-        </Button>
+const Listings = () => {
+  const { data, error, isLoading, isError } = useListings()
+
+  if (isError) {
+    return <div>{error}</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading</div>
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
+        <div>
+          <Button icon={faPlus} emphasis="highest" size="lg">
+            Add Listing
+          </Button>
+        </div>
+      </div>
+
+      <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
+        {data.listings.map((listing) => (
+          <Listing key={listing.id} listing={listing} />
+        ))}
       </div>
     </div>
-
-    <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
-      {myListings.map((listing) => (
-        <Listing key={listing.id} listing={listing} />
-      ))}
-    </div>
-  </div>
-)
+  )
+}
 
 export default Home

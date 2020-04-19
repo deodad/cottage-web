@@ -8,6 +8,7 @@ const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const Profile = lazy(() => import("./pages/profile"))
 const Listing = lazy(() => import("./pages/listing"))
+const AddListing = lazy(() => import("./pages/add-listing"))
 const NotFound = lazy(() => import("./pages/not-found"))
 
 const UserApp = () => {
@@ -20,6 +21,7 @@ const UserApp = () => {
           <Messages path="messages/*" />
           <Profile path="profile/:handle/*" />
           <Listing path="listing/:id" />
+          <AddListing path="add-listing" />
           <Redirect from="/" to="/home" />
           <Redirect from="login" to="/home" />
           <Redirect from="sign-up" to="/home" />

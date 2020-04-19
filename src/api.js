@@ -7,19 +7,24 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 }
 
-export const getUser = (handle) =>
-  fetch(`${baseUrl}/users/${handle}`, {
+const get = (path) =>
+  fetch(`${baseUrl}/${path}`, {
     method: "GET",
     mode: "cors",
-    credentials: "include",
+    headers: defaultHeaders,
   })
 
-export const me = () =>
-  fetch(`${baseUrl}/me`, {
-    method: "GET",
+const post = (path, data) =>
+  fetch(`${baseUrl}/${path}`, {
+    method: "POST",
     mode: "cors",
+    headers: defaultHeaders,
     credentials: "include",
+    ...(data && { body: JSON.stringify(data) }),
   })
+
+export const getUser = (handle) => get(`users/${handle}`)
+export const me = () => get("me")
 
 export const signUp = (data) =>
   fetch(`${baseUrl}/sign-up`, {
@@ -30,15 +35,18 @@ export const signUp = (data) =>
   })
 
 export const login = (data) =>
-  fetch(`${baseUrl}/login`, {
-    method: "POST",
-    mode: "cors",
-    credentials: "include",
-    headers: defaultHeaders,
-    body: JSON.stringify(data),
+  post("login", data).then((res) => {
+    if (res.ok) {
+      res.json().then(({ token }) => {
+        defaultHeaders["Authorization"] = `Bearer ${token}`
+      })
+
+      return res
+    }
+
+    return Promise.reject()
   })
 
-export const logout = () =>
-  fetch(`${baseUrl}/logout`, {
-    method: "POST",
-  })
+export const logout = () => post("logout")
+export const createListing = (data) => post("listings", data)
+export const getListings = () => get("listings")

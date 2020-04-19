@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../components/layout"
 import { useUserContext } from "../user-context"
-import { useUser } from "../components/user"
+import { useUser } from "../hooks/use-user"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
@@ -15,10 +15,10 @@ import { trades, reviews } from "../data"
 
 const Profile = ({ handle }) => {
   const currentUser = useUserContext()
-  const { isLoading, isError, data } = useUser(handle)
+  const { isLoading, isError, data, error } = useUser(handle)
 
-  if (isLoading) return null
-  if (isError) return null
+  if (isLoading) return <div>Loading</div>
+  if (isError) return <div>{error}</div>
 
   const user = data
 
@@ -89,7 +89,7 @@ const FollowButton = ({ isFollowing = false, ...rest }) => (
 )
 
 const Listings = ({ listings }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
+  <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
     {listings.map((listing) => (
       <Listing key={listing.id} listing={listing} />
     ))}
