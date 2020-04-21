@@ -1,8 +1,9 @@
 import React from "react"
-import { Router } from "@reach/router"
+import { Router, navigate } from "@reach/router"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { withAuthentication } from "../hoc/with-authentication"
 import { withLayout } from "../hoc/with-layout"
+import { compose } from "../hoc/util"
 import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
@@ -95,7 +96,12 @@ const Listings = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
         <div>
-          <Button icon={faPlus} emphasis="highest" size="lg">
+          <Button
+            icon={faPlus}
+            emphasis="highest"
+            size="lg"
+            onClick={() => navigate("/add-listing")}
+          >
             Add Listing
           </Button>
         </div>
@@ -110,4 +116,7 @@ const Listings = () => {
   )
 }
 
-export default withLayout(withAuthentication(Home), "user")
+export default compose(
+  withLayout("user"),
+  withAuthentication
+)(Home)

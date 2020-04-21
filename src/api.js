@@ -63,3 +63,6 @@ export const login = (data) =>
 export const logout = () => post("logout")
 export const createListing = (data) => post("listings", data)
 export const getListings = () => get("listings")
+
+export const getResource = (resource, id) => 
+  get(`${resource}/${id}`)

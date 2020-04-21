@@ -9,3 +9,11 @@ export const useListings = () => {
   }, [])
   return view
 }
+
+export const useListing = (id) => {
+  const { view, handleFetch } = useFetchData()
+  useEffect(() => {
+    handleFetch(getListing(id))
+  }, [id])
+  return view
+}

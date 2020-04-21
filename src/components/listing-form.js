@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Formik, Form } from "formik"
-import { string, object } from "yup"
+import { string, object, number } from "yup"
 import { Input } from "./form"
 import { createListing } from "../api"
 
@@ -40,7 +40,8 @@ export const AddListing = () => {
 
 const validationSchema = object({
   name: string().max(120, "120 character max").required(),
-  short_description: string(),
+  short_description: string().required(),
+  price: number().min(0).max(9999),
 })
 
 const ListingForm = ({ onSubmit }) => (
@@ -48,6 +49,7 @@ const ListingForm = ({ onSubmit }) => (
     initialValues={{
       name: "",
       short_description: "",
+      price: "1.00",
     }}
     validationSchema={validationSchema}
     onSubmit={onSubmit}
@@ -55,6 +57,7 @@ const ListingForm = ({ onSubmit }) => (
     <Form>
       <Input type="text" label="Name" name="name" />
       <Input type="text" label="Short Description" name="short_description" />
+      <Input type="number" step="0.01" label="Price" name="price" />
 
       <div className="mt-5">
         <button

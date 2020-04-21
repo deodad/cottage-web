@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { withAuthentication } from "../hoc/with-authentication"
 import { withLayout } from "../hoc/with-layout"
+import { compose } from "../hoc/util"
 import { useUserContext } from "../user-context"
-import { useUser } from "../hooks/use-user"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
@@ -14,20 +14,21 @@ import { ToggleButton } from "../components/button"
 
 import { trades, reviews } from "../data"
 
-const Profile = ({ handle }) => {
+const Profile = ({ isLoading, isError, data, error }) => {
   const currentUser = useUserContext()
-  const { isLoading, isError, data, error } = useUser(handle)
 
   if (isLoading) return <div>Loading</div>
   if (isError) return <div>{error}</div>
 
   const user = data
+  const handle = user.handle
 
   // Mock data fetching
   const { name, dateJoined, location } = user
   const userListings = user.listings
   const userTrades = trades.filter(
-    (t) => t.left.user.handle === handle || t.right.user.handle === handle
+    (t) =>
+      t.left.user.handle === user.handle || t.right.user.handle === user.handle
   )
   const userTradesCount = userTrades.length
   const userReviews = reviews.filter((r) => r.user.id === user.id)
@@ -97,4 +98,7 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default withLayout(withAuthentication(Profile), "user")
+export default compose(
+  withLayout("user"),
+  withAuthentication
+)(Profile)

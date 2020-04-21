@@ -4,6 +4,8 @@ import { me } from "./api"
 import { UserContext } from "./user-context"
 import { Spinner } from "./components/spinner"
 import Front from "./pages/front"
+import Profile from "./roots/profile"
+import Listing from "./roots/listing"
 
 const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
@@ -11,8 +13,6 @@ const SignUp = lazy(() => import("./pages/sign-up"))
 const Home = lazy(() => import("./pages/home"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
-const Profile = lazy(() => import("./pages/profile"))
-const Listing = lazy(() => import("./pages/listing"))
 const AddListing = lazy(() => import("./pages/add-listing"))
 const NotFound = lazy(() => import("./pages/not-found"))
 

@@ -2,6 +2,7 @@ import React from "react"
 import { Link, Router } from "@reach/router"
 import { withAuthentication } from "../hoc/with-authentication"
 import { withLayout } from "../hoc/with-layout"
+import { compose } from "../hoc/util"
 import { UnlinkedUserActivity } from "../components/user"
 
 import { users } from "../data"
@@ -58,4 +59,4 @@ const Activity = ({ activity }) => {
 
 const Message = ({ activity }) => <div>{activity.text}</div>
 
-export default withLayout(withAuthentication(Messages), "user")
+export default compose(withLayout("user"), withAuthentication)(Messages)
