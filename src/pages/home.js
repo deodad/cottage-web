@@ -13,7 +13,7 @@ import { listings, users, proposals } from "../data"
 import { useListings } from "../hooks/use-listings"
 
 const Home = () => (
-  <Layout title="Home">
+  <>
     <div className="sticky top-0 flex bg-white">
       <NavLink to="">Activity</NavLink>
       <NavLink to="proposals">Open Proposals ({proposals.length})</NavLink>
@@ -27,7 +27,7 @@ const Home = () => (
         <Listings path="listings" />
       </Router>
     </div>
-  </Layout>
+  </>
 )
 
 const Feed = () => (
@@ -116,7 +116,4 @@ const Listings = () => {
   )
 }
 
-export default compose(
-  withLayout("user"),
-  withAuthentication
-)(Home)
+export default compose(withLayout("user"), withAuthentication)(Home)

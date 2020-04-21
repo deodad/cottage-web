@@ -1,11 +1,16 @@
-import React from "react"
-import { DynamicLayout } from "../components/layout"
+import React, { useContext, useLayoutEffect } from "react"
+import { LayoutContext } from "../context"
 
-/*
- * Convuluted to support future use case? Bad.
- */
-export const withLayout = (layout) => (Component) => (props) => (
-  <DynamicLayout layout={layout}>
-    <Component {...props} />
-  </DynamicLayout>
-)
+export const withLayout = (layout) => (Component) => {
+  const WithLayout = (props) => {
+    const set = useContext(LayoutContext)
+
+    useLayoutEffect(() => {
+      set(layout)
+    })
+
+    return <Component {...props} />
+  }
+
+  return WithLayout
+}

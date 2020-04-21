@@ -1,4 +1,5 @@
 import React from "react"
+import { withLayout } from "../hoc/with-layout"
 import { Trade } from "../components/trade"
 import { LoginForm } from "../components/login"
 import { trades } from "../data"
@@ -29,4 +30,4 @@ const Front = () => (
   </div>
 )
 
-export default Front
+export default withLayout("none")(Front)

@@ -1,9 +1,10 @@
-import React, { Suspense } from "react"
+import React, { Suspense, useState } from "react"
 import { Link } from "@reach/router"
 import { Spinner } from "./spinner"
 import Navigation from "./navigation"
+import { LayoutContext } from "../context"
 
-export const Simple = ({ children, title }) => (
+const Simple = ({ children, title }) => (
   <div className="max-w-sm mx-auto py-6 px-5">
     <Link to="/" className="text-2xl font-bold font-brand block mb-5">
       Cottage
@@ -18,7 +19,7 @@ export const Simple = ({ children, title }) => (
   </div>
 )
 
-export const Layout = ({ children }) => (
+const User = ({ children }) => (
   <div className="container max-w-screen-lg h-full mx-auto flex sm:px-5">
     <div className="hidden md:block flex-none w-56 py-5">
       <div className="fixed">
@@ -31,30 +32,23 @@ export const Layout = ({ children }) => (
   </div>
 )
 
-const UserLayout = Layout
+export const Layout = ({ ...rest }) => {
+  const [layout, setLayout] = useState("none")
 
-export const DynamicLayout = ({ layout, ...rest }) => {
-  switch (layout) {
-    case "user":
-      return <UserLayout {...rest} />
-    case "empty":
-      return <div {...rest} />
-    case "":
-      return <Simple {...rest} />
-    default:
-      throw new Error(`Invalid layout '${layout}'`)
-  }
+  return (
+    <LayoutContext.Provider value={setLayout}>
+      {(() => {
+        switch (layout) {
+          case "user":
+            return <User {...rest} />
+          case "simple":
+            return <Simple {...rest} />
+          case "none":
+            return <div {...rest} />
+          default:
+            throw new Error(`Invalid layout '${layout}'`)
+        }
+      })()}
+    </LayoutContext.Provider>
+  )
 }
-
-const UserPageLayout = ({ children, title }) => (
-  <>
-    {false && title && (
-      <div className="gutter-none mt-1 pb-3 px-5">
-        <h1 className="text-xl m-0">{title}</h1>
-      </div>
-    )}
-    {children}
-  </>
-)
-
-export default UserPageLayout
