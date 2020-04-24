@@ -47,22 +47,9 @@ export const signUp = (data) =>
     body: JSON.stringify(data),
   })
 
-export const login = (data) =>
-  post("login", data).then((res) => {
-    if (res.ok) {
-      res.json().then(({ token }) => {
-        defaultHeaders["Authorization"] = `Bearer ${token}`
-      })
-
-      return res
-    }
-
-    return Promise.reject()
-  })
-
+export const login = (data) => post("login", data)
 export const logout = () => post("logout")
 export const createListing = (data) => post("listings", data)
 export const getListings = () => get("listings")
 
-export const getResource = (resource, id) => 
-  get(`${resource}/${id}`)
+export const getResource = (resource, id) => get(`${resource}/${id}`)
