@@ -1,6 +1,6 @@
 import React from "react"
-import Layout from "../components/layout"
+import { withLayout } from "../hoc/with-layout"
 
-const NotFound = () => <Layout title="Not Found">Nothing's here.</Layout>
+const NotFound = () => <div>Nothing's here.</div>
 
-export default NotFound
+export default withLayout("same")(NotFound)

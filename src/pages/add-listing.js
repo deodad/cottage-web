@@ -1,13 +1,9 @@
 import React from "react"
+import { withLayout } from "../hoc/with-layout"
 import { AddListing as AddListingForm } from "../components/listing-form"
-import { Simple } from "../components/layout"
 
-const AddListing = () => {
-  return (
-    <Simple title="Create a new listing">
-      <AddListingForm />
-    </Simple>
-  )
-}
+const AddListing = () => <AddListingForm />
 
-export default AddListing
+export default withLayout("simple", { title: "Create a new listing" })(
+  AddListing
+)

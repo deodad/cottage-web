@@ -1,13 +1,7 @@
 import React from "react"
+import { withLayout } from "../hoc/with-layout"
 import { SignUp as SignUpForm } from "../components/sign-up"
-import { Simple } from "../components/layout"
 
-const SignUp = () => {
-  return (
-    <Simple title="Create your account">
-      <SignUpForm />
-    </Simple>
-  )
-}
+const SignUp = () => <SignUpForm />
 
-export default SignUp
+export default withLayout("simple", { title: "Create an account" })(SignUp)

@@ -1,8 +1,41 @@
-import React, { Suspense, useState } from "react"
+import React, { Suspense, useReducer } from "react"
 import { Link } from "@reach/router"
 import { Spinner } from "./spinner"
 import Navigation from "./navigation"
 import { LayoutContext } from "../context"
+
+const reducer = (state, { layout, options }) => ({
+  ...state,
+  ...(layout !== "same" && { layout }),
+  options,
+})
+
+const initialState = {
+  layout: "simple",
+  options: {},
+}
+
+export const Layout = ({ ...rest }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { layout, options } = state
+
+  return (
+    <LayoutContext.Provider value={dispatch}>
+      {(() => {
+        switch (layout) {
+          case "user":
+            return <User {...options} {...rest} />
+          case "simple":
+            return <Simple {...options} {...rest} />
+          case "none":
+            return <div {...options} {...rest} />
+          default:
+            throw new Error(`Invalid layout '${layout}'`)
+        }
+      })()}
+    </LayoutContext.Provider>
+  )
+}
 
 const Simple = ({ children, title }) => (
   <div className="max-w-sm mx-auto py-6 px-5">
@@ -31,24 +64,3 @@ const User = ({ children }) => (
     </div>
   </div>
 )
-
-export const Layout = ({ ...rest }) => {
-  const [layout, setLayout] = useState("none")
-
-  return (
-    <LayoutContext.Provider value={setLayout}>
-      {(() => {
-        switch (layout) {
-          case "user":
-            return <User {...rest} />
-          case "simple":
-            return <Simple {...rest} />
-          case "none":
-            return <div {...rest} />
-          default:
-            throw new Error(`Invalid layout '${layout}'`)
-        }
-      })()}
-    </LayoutContext.Provider>
-  )
-}

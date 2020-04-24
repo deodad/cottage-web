@@ -1,12 +1,12 @@
 import React, { useContext, useLayoutEffect } from "react"
 import { LayoutContext } from "../context"
 
-export const withLayout = (layout) => (Component) => {
+export const withLayout = (layout, options = {}) => (Component) => {
   const WithLayout = (props) => {
-    const set = useContext(LayoutContext)
+    const dispatch = useContext(LayoutContext)
 
     useLayoutEffect(() => {
-      set(layout)
+      dispatch({ layout, options })
     })
 
     return <Component {...props} />
