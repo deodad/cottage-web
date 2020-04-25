@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 @import "cropperjs/dist/cropper.css";
 
 .cropper-rounded {
@@ -6,3 +7,4 @@
     border-radius: 50%;
   }
 }
+/* purgecss end ignore */
