@@ -5,12 +5,12 @@ const baseUrl =
     ? "http://localhost:8082"
     : "https://cottage-api.livediagonal.com"
 
-const defaultHeaders = {
-  "Content-Type": "application/json",
-}
-
-const authorizedFetch = (...args) =>
-  fetch(...args).then((res) => {
+const fetchWithDefaults = (path, options) =>
+  fetch(`${baseUrl}/${path}`, {
+    mode: "cors",
+    credentials: "include",
+    ...options,
+  }).then((res) => {
     if (res.status === 401) {
       navigate("/login")
       throw new Error("Unauthorized")
@@ -20,33 +20,24 @@ const authorizedFetch = (...args) =>
   })
 
 const get = (path) =>
-  authorizedFetch(`${baseUrl}/${path}`, {
+  fetchWithDefaults(path, {
     method: "GET",
-    mode: "cors",
-    headers: defaultHeaders,
-    credentials: "include",
   })
 
 const post = (path, data) =>
-  authorizedFetch(`${baseUrl}/${path}`, {
+  fetchWithDefaults(path, {
     method: "POST",
-    mode: "cors",
-    headers: defaultHeaders,
-    credentials: "include",
-    ...(data && { body: JSON.stringify(data) }),
+    ...(data && {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }),
   })
 
 export const getUser = (handle) => get(`users/${handle}`)
 export const me = () => get("me")
-
-export const signUp = (data) =>
-  fetch(`${baseUrl}/sign-up`, {
-    method: "POST",
-    mode: "cors",
-    headers: defaultHeaders,
-    body: JSON.stringify(data),
-  })
-
+export const signUp = (data) => post("sign-up", data)
 export const login = (data) => post("login", data)
 export const logout = () => post("logout")
 export const createListing = (data) => post("listings", data)
