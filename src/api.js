@@ -44,3 +44,8 @@ export const createListing = (data) => post("listings", data)
 export const getListings = () => get("listings")
 
 export const getResource = (resource, id) => get(`${resource}/${id}`)
+export const updateProfileImage = (handle, data) =>
+  fetchWithDefaults(`users/${handle}/profile-image`, {
+    method: "PUT",
+    body: data,
+  })

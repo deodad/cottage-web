@@ -3,7 +3,7 @@ import { Formik, Form } from "formik"
 import { string, object } from "yup"
 import { Input } from "./form"
 import { signUp } from "../api"
-import { useUserContext } from "../user-context"
+import { useUserContext } from "../hooks/use-user-context"
 
 export const SignUp = () => {
   const { signIn } = useUserContext()

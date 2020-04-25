@@ -1,8 +1,5 @@
 import React from "react"
-import { withAuthentication } from "../hoc/with-authentication"
-import { withLayout } from "../hoc/with-layout"
-import { withFetchData } from "../hoc/with-fetch-data"
-import { compose } from "../hoc/util"
+import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
 import { UserImageLink } from "../components/user"
 
 export const ListingImage = ({ listing }) => (

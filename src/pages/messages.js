@@ -1,8 +1,6 @@
 import React from "react"
 import { Link, Router } from "@reach/router"
-import { withAuthentication } from "../hoc/with-authentication"
-import { withLayout } from "../hoc/with-layout"
-import { compose } from "../hoc/util"
+import { compose, withAuthentication, withLayout } from "../hoc"
 import { UnlinkedUserActivity } from "../components/user"
 
 import { users } from "../data"

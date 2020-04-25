@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "@reach/router"
 import { login } from "../api"
-import { useUserContext } from "../user-context"
+import { useUserContext } from "../hooks/use-user-context"
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("")

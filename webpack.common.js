@@ -18,12 +18,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "postcss-loader"],
+        use: [
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          "postcss-loader",
+        ],
       },
       {
         test: /\.(ts|js)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
     ],
   },
@@ -31,8 +35,8 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
     }),
-    new HtmlWebpackPlugin({ 
-      template: "src/index.html" 
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
     }),
   ],
 }

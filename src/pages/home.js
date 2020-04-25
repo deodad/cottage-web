@@ -1,16 +1,14 @@
 import React from "react"
 import { Router, navigate } from "@reach/router"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { withAuthentication } from "../hoc/with-authentication"
-import { withLayout } from "../hoc/with-layout"
-import { compose } from "../hoc/util"
+import { compose, withAuthentication, withLayout } from "../hoc"
+import { useListings } from "../hooks"
 import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
 import { Button } from "../components/button"
 import { listings, users, proposals } from "../data"
-import { useListings } from "../hooks/use-listings"
 
 const Home = () => (
   <>

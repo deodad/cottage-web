@@ -1,5 +1,5 @@
 import React from "react"
-import { withLayout } from "../hoc/with-layout"
+import { withLayout } from "../hoc"
 import { LoginForm } from "../components/login"
 
 const Login = () => <LoginForm />

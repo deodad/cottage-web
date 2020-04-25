@@ -1,5 +1,5 @@
 import React from "react"
-import { withLayout } from "../hoc/with-layout"
+import { withLayout } from "../hoc"
 import { Trade } from "../components/trade"
 import { LoginForm } from "../components/login"
 import { trades } from "../data"

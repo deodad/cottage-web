@@ -2,10 +2,8 @@ import React from "react"
 import { Router } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import { withAuthentication } from "../hoc/with-authentication"
-import { withLayout } from "../hoc/with-layout"
-import { compose } from "../hoc/util"
-import { useUserContext } from "../user-context"
+import { compose, withAuthentication, withLayout } from "../hoc"
+import { useUserContext } from "../hooks"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
@@ -39,7 +37,7 @@ const Profile = ({ isLoading, isError, data, error }) => {
       <div className="flex justify-between">
         <div className="relative w-full">
           <img
-            src={"/" + user.profileImage}
+            src={user.profile_image_url}
             className="w-40 h-40 rounded-full border"
           />
           <div className="mt-2 text-lg font-bold">{name}</div>
@@ -98,7 +96,4 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default compose(
-  withLayout("user"),
-  withAuthentication
-)(Profile)
+export default compose(withLayout("user"), withAuthentication)(Profile)

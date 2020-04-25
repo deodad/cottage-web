@@ -1,8 +1,6 @@
 import React from "react"
-import { withAuthentication } from "../hoc/with-authentication"
-import { withLayout } from "../hoc/with-layout"
-import { compose } from "../hoc/util"
-import { useListings } from "../hooks/use-listings"
+import { compose, withAuthentication, withLayout } from "../hoc"
+import { useListings } from "../hooks"
 import { Listings } from "../components/listing"
 
 const Market = () => {

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
 import { me } from "./api"
-import { UserContext } from "./user-context"
+import { UserContext } from "./context"
 import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
@@ -15,6 +15,8 @@ const Home = lazy(() => import("./pages/home"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const AddListing = lazy(() => import("./pages/add-listing"))
+const ProfileSettings = lazy(() => import("./pages/profile-settings"))
+
 const NotFound = lazy(() => import("./pages/not-found"))
 
 const initialState = {
@@ -88,6 +90,7 @@ const App = () => {
               <Market path="market/*" />
               <Messages path="messages/*" />
               <Profile path="profile/:handle/*" />
+              <ProfileSettings path="settings/profile" />
               <Listing path="listing/:id" />
               <AddListing path="add-listing" />
 

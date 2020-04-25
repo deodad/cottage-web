@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
-import { useUserContext } from "../user-context"
+import { useUserContext } from "../hooks/use-user-context"
 import { logout as logoutReq } from "../api"
 
 const navLinkClass =
