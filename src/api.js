@@ -35,6 +35,12 @@ const post = (path, data) =>
     }),
   })
 
+const put = (path, data) =>
+  fetchWithDefaults(path, {
+    method: "PUT",
+    body: data
+  })
+
 export const getUser = (handle) => get(`users/${handle}`)
 export const me = () => get("me")
 export const signUp = (data) => post("sign-up", data)
@@ -49,3 +55,4 @@ export const updateProfileImage = (handle, data) =>
     method: "PUT",
     body: data,
   })
+export const updateUser = (id, data) => put(`users/${id}`, data)

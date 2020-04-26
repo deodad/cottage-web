@@ -1,5 +1,5 @@
 import React from "react"
-import { Router } from "@reach/router"
+import { Router, Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
@@ -41,8 +41,10 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
           <div className="text-gray-700">@{handle}</div>
 
           <div className="absolute right-0 top-0">
-            {user.username !== currentUser.user && (
+            {user.username !== currentUser.username ? (
               <FollowButton isFollowing={true} />
+            ) : (
+              <Link to="/settings/profile">Edit Profile</Link>
             )}
           </div>
         </div>

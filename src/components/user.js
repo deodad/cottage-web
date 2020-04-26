@@ -1,9 +1,7 @@
-import React, { useEffect, useReducer } from "react"
+import React from "react"
 import TimeAgo from "react-timeago"
 import { Link } from "@reach/router"
-import { gql, useQuery } from "@apollo/client"
 import classnames from "classnames"
-import { getUser } from "../api"
 
 const timeAgoFormatter = (value, unit, _, __, nextFormatter) => {
   switch (unit) {
@@ -37,6 +35,14 @@ export const ProfileImage = ({ user, className, ...rest }) => (
     }
     className={classnames(className, "rounded-full w-10 h-10 border")}
     alt={`${user.username} profile picture`}
+    {...rest}
+  />
+)
+
+export const ThinProfileImage = ({ url, className, ...rest }) => (
+  <img
+    src={url}
+    className={classnames(className, "rounded-full w-24 h-24 border")}
     {...rest}
   />
 )

@@ -44,3 +44,7 @@ export const Button = ({
 export const ToggleButton = ({ active, ...rest }) => (
   <Button emphasis={active ? "high" : "medium"} {...rest} />
 )
+
+export const DivButton = ({ ...rest }) => (
+  <div tabIndex="0" role="button" {...rest} />
+)

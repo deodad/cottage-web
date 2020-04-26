@@ -6,6 +6,7 @@ import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
 import Profile from "./roots/profile"
+import ProfileSettings from "./roots/profile-settings"
 import Listing from "./roots/listing"
 
 const Login = lazy(() => import("./pages/login"))
@@ -15,7 +16,6 @@ const Home = lazy(() => import("./pages/home"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const AddListing = lazy(() => import("./pages/add-listing"))
-const ProfileSettings = lazy(() => import("./pages/profile-settings"))
 
 const NotFound = lazy(() => import("./pages/not-found"))
 
@@ -63,14 +63,14 @@ const App = () => {
     me()
       .then((res) => {
         if (res.ok) {
-          return res.text()
+          return res.json()
         } else {
           throw Error()
         }
       })
-      .then((username) => {
-        if (username) {
-          signIn({ username })
+      .then((user) => {
+        if (user) {
+          signIn(user)
           return
         }
       })
