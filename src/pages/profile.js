@@ -3,7 +3,6 @@ import { Router } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
-import { useUserContext } from "../hooks"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
@@ -12,9 +11,7 @@ import { ToggleButton } from "../components/button"
 
 import { trades, reviews } from "../data"
 
-const Profile = ({ isLoading, isError, data, error }) => {
-  const currentUser = useUserContext()
-
+const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
   if (isLoading) return <div>Loading</div>
   if (isError) return <div>{error}</div>
 

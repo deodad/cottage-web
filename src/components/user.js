@@ -31,9 +31,9 @@ export const UserLink = ({ user, children, ...rest }) => (
 export const ProfileImage = ({ user, className, ...rest }) => (
   <img
     src={
-      user.profileImage
-        ? user.profileImage
-        : "https://place-hold.it/400x400/999999/333333&text=Picture"
+      user.profile_image_url
+        ? user.profile_image_url
+        : "https://place-hold.it/60x60/999999/333333"
     }
     className={classnames(className, "rounded-full w-10 h-10 border")}
     alt={`${user.username} profile picture`}

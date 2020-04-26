@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
 import { me } from "./api"
-import { UserContext } from "./context"
+import { AppContext, UserContext } from "./context"
 import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
@@ -21,6 +21,7 @@ const NotFound = lazy(() => import("./pages/not-found"))
 
 const initialState = {
   layout: "guest",
+  user: undefined,
 }
 
 const reducer = (state, action) => {
@@ -30,23 +31,31 @@ const reducer = (state, action) => {
         ...state,
         layout: action.layout,
       }
+    case "login":
+      return {
+        ...state,
+        user: action.user,
+      }
+    case "logout":
+      return {
+        ...state,
+        user: null,
+      }
     default:
-      return state
+      throw new Error(`Unknown action type '${action.type}'`)
   }
 }
 
-const AppContext = React.createContext()
-
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const [user, setUser] = useState(undefined)
-  const signIn = (username) => {
-    setUser({ username })
-    navigate("/home")
+
+  const signIn = (user, goHome = false) => {
+    dispatch({ type: "login", user })
+    if (goHome) navigate("/home")
   }
 
   const logout = () => {
-    setUser(null)
+    dispatch({ type: "logout" })
     navigate("/")
   }
 
@@ -61,17 +70,15 @@ const App = () => {
       })
       .then((username) => {
         if (username) {
-          setUser({ username })
+          signIn({ username })
           return
         }
-
-        setUser(null)
       })
-      .catch(() => setUser(null))
+      .catch(() => {})
   }, [])
 
   const userContext = {
-    user,
+    user: state.user,
     signIn,
     logout,
   }

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
+import { withAuthentication } from "../hoc"
 import { useUserContext } from "../hooks/use-user-context"
 import { logout as logoutReq } from "../api"
 
@@ -20,8 +21,8 @@ export const BubbleNavLink = (props) => (
   <NavLink {...props} className={navLinkClass} />
 )
 
-const Navigation = () => {
-  const { user, logout } = useUserContext()
+const Navigation = ({ user }) => {
+  const { logout } = useUserContext()
   const handleLogout = () => {
     logoutReq().then(() => logout())
   }
@@ -43,7 +44,7 @@ const Navigation = () => {
           <BubbleNavLink to="/messages">Messages</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink to={`/profile/${user && user.username}`}>
+          <BubbleNavLink to={`/profile/${user.username}`}>
             Profile
           </BubbleNavLink>
         </li>
@@ -61,4 +62,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default withAuthentication(Navigation)

@@ -1,7 +1,13 @@
 import React from "react"
 import { Redirect } from "@reach/router"
+import { useAppContext } from "../hooks"
 
-const isAuthed = true
+export const withAuthentication = (Component) => (props) => {
+  const { state } = useAppContext()
+  const { user } = state
 
-export const withAuthentication = (Component) => (props) =>
-  isAuthed ? <Component {...props} /> : <Redirect to="/login" />
+  if (user === undefined) return null
+  if (user === null) return <Redirect to="/login" />
+
+  return <Component user={user} {...props} />
+}

@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react"
+import { Link } from "@reach/router"
 import Cropper from "cropperjs"
-import { useUserContext } from "../hooks"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { updateProfileImage } from "../api"
 import "../cropper.css"
 
-const ProfileSettings = () => {
-  const { user } = useUserContext()
-
+const ProfileSettings = ({ user }) => {
   const [image, setImage] = useState(null)
   const ref = useRef()
 
@@ -46,6 +44,17 @@ const ProfileSettings = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="flex justify-between">
+        <div className="flex-none">
+          <Link to={`/profile/${user.username}`}>Back</Link>
+        </div>
+        <div className="flex-none">
+          <button type="submit" className="float-right">
+            Save
+          </button>
+        </div>
+      </div>
+
       <input type="file" onChange={handleChange} />
 
       {image && (
@@ -53,8 +62,6 @@ const ProfileSettings = () => {
           <img src={image} ref={ref} className="block max-w-full" />
         </div>
       )}
-
-      <button type="submit">Done</button>
     </form>
   )
 }
