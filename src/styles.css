@@ -14,6 +14,46 @@ p {
   @apply mb-2;
 }
 
+.btn {
+  @apply px-4 py-2 uppercase text-sm font-bold tracking-wide;
+}
+
+.btn-ctn {
+  @apply text-white bg-purple-700;
+}
+
+.surface {
+  position: relative;
+  outline: 0;
+  overflow: hidden;
+}
+
+
+.surface::before {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+  background-color: #fff;
+  top: calc(50% - 100%);
+  left: calc(50% - 100%);
+  width: 200%;
+  height: 200%;
+}
+
+.surface:hover::before {
+  @apply opacity-01dp;
+}
+
+.surface:focus {
+  outline: none;
+}
+
+.surface:focus::before {
+  @apply opacity-08dp;
+}
+
 .file-input {
   width: 0.1px;
   height: 0.1px;

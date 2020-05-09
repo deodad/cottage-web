@@ -48,3 +48,9 @@ export const ToggleButton = ({ active, ...rest }) => (
 export const DivButton = ({ ...rest }) => (
   <div tabIndex="0" role="button" {...rest} />
 )
+
+export const ContainedButton = ({ children, ...rest }) => (
+  <button className="btn btn-ctn surface" {...rest}>
+    {children}
+  </button>
+)

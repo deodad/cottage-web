@@ -4,6 +4,7 @@ import { Formik, Form } from "formik"
 import { string, object } from "yup"
 import { updateUser } from "../api"
 import { Input } from "./form"
+import { ContainedButton } from "./button"
 import ProfileImageInput from "./profile-image-input"
 
 const validationSchema = object({
@@ -74,7 +75,7 @@ const ProfileForm = ({ user }) => {
           <Input type="text" label="Name" name="name" />
           <Input type="text" label="Bio" name="bio" />
           <Input type="text" label="Location" name="location" />
-          <button type="submit">Save</button>
+          <ContainedButton type="submit">Save</ContainedButton>
         </Form>
       </Formik>
       {error && <div className="mt-3 text-red-600">{error}</div>}

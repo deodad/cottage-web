@@ -19,7 +19,7 @@ export const LoginForm = () => {
       .then((res) => {
         if (res.ok) {
           // TODO this could be any case, use username from response
-          signIn(username)
+          signIn(username, true)
           return
         }
 

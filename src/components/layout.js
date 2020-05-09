@@ -2,6 +2,7 @@ import React, { Suspense, useReducer } from "react"
 import { Link } from "@reach/router"
 import { Spinner } from "./spinner"
 import Navigation from "./navigation"
+import BottomNavBar from "./bottom-nav-bar"
 import { LayoutContext } from "../context"
 
 const reducer = (state, { layout, options }) => ({
@@ -53,14 +54,19 @@ const Simple = ({ children, title }) => (
 )
 
 const User = ({ children }) => (
-  <div className="container max-w-screen-lg h-full mx-auto flex sm:px-5">
-    <div className="hidden md:block flex-none w-56 py-5">
-      <div className="fixed">
+  <div className="container max-w-screen-lg h-full mx-auto">
+    <div className="flex flex-col h-full md:flex-row">
+      <div className="hidden md:flex-none md:block md:p-5 md:mr-5">
         <Navigation />
       </div>
-    </div>
-    <div className="relative flex-1 h-full px-5 py-5">
-      <Suspense fallback={<Spinner />}>{children}</Suspense>
+      <div className="flex-1 min-h-0">
+        <div className="relative h-full overflow-y-auto p-5">
+          <Suspense fallback={<Spinner />}>{children}</Suspense>
+        </div>
+      </div>
+      <div className="flex-none border border-t md:hidden">
+        <BottomNavBar />
+      </div>
     </div>
   </div>
 )

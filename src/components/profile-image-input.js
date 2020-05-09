@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react"
 import { useField } from "formik"
 import Cropper from "cropperjs"
 import { ThinProfileImage } from "./user"
-import { DivButton } from "./button"
+import { DivButton, ContainedButton } from "./button"
 import "../cropper.css"
 
 const ProfileImageInput = ({ name }) => {
@@ -94,7 +94,7 @@ const Crop = ({ image, onCrop, onCancel }) => {
       </div>
 
       <button onClick={handleCrop}>Done</button>
-      <button onClick={onCancel}>Cancel</button>
+      <ContainedButton onClick={onCancel}>Cancel</ContainedButton>
     </>
   )
 }

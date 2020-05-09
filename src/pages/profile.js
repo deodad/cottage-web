@@ -69,7 +69,7 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
           <NavLink to="trades">Trades ({userTradesCount})</NavLink>
           <NavLink to="reviews">Reviews ({userReviewsCount})</NavLink>
         </div>
-        <div className="mt-2">
+        <div className="mt-5">
           <Router>
             <Listings path="/" listings={userListings} />
             <Trades path="trades" user={user} trades={userTrades} />
@@ -88,7 +88,7 @@ const FollowButton = ({ isFollowing = false, ...rest }) => (
 )
 
 const Listings = ({ listings }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+  <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
     {listings.map((listing) => (
       <Listing key={listing.id} listing={listing} />
     ))}
