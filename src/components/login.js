@@ -18,13 +18,12 @@ export const LoginForm = () => {
     })
       .then((res) => {
         if (res.ok) {
-          // TODO this could be any case, use username from response
-          signIn(username, true)
-          return
+          return res.json()
         }
 
         return Promise.reject()
       })
+      .then(({ user }) => signIn(user, true))
       .catch(() => setError("Login failed. Try again."))
   }
 
