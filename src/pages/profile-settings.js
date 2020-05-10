@@ -1,18 +1,16 @@
 import React from "react"
-import { Link } from "@reach/router"
+import { navigate } from "@reach/router"
 import { compose, withFetchData, withLayout } from "../hoc"
 import ProfileForm from "../components/profile-form"
-import { ContainedButton } from "../components/button"
+import { TextButton, ContainedButton } from "../components/button"
 
 const ProfileSettings = ({ data: user }) => (
   <ProfileForm user={user}>
     {({ fields }) => (
       <>
-        <div className="sticky flex justify-between">
+        <div className="sticky top-0 bg-white flex justify-between">
           <div className="flex-none">
-            <Link to={`/profile/${user.username}`} className="btn-txt">
-              Back
-            </Link>
+            <TextButton onClick={() => navigate(-1)}>Back</TextButton>
           </div>
           <div className="flex-none">
             <ContainedButton type="submit">Save</ContainedButton>

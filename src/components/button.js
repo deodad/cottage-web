@@ -54,3 +54,7 @@ export const ContainedButton = ({ children, ...rest }) => (
     {children}
   </button>
 )
+
+export const TextButton = ({ ...rest }) => (
+  <button className="btn-txt" {...rest} />
+)
