@@ -16,10 +16,9 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
   if (isError) return <div>{error}</div>
 
   const user = data
-  const handle = user.handle
+  const dateJoined = new Date(user.date_joined)
 
   // Mock data fetching
-  const { name, dateJoined, location } = user
   const userListings = user.listings
   const userTrades = trades.filter(
     (t) =>
@@ -37,14 +36,16 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
             src={user.profile_image_url}
             className="w-40 h-40 rounded-full border"
           />
-          <div className="mt-2 text-lg font-bold">{name}</div>
-          <div className="text-gray-700">@{handle}</div>
+          <div className="mt-2 text-lg font-bold">{user.name}</div>
+          <div className="text-gray-700">@{user.username}</div>
 
           <div className="absolute right-0 top-0">
             {user.username !== currentUser.username ? (
               <FollowButton isFollowing={true} />
             ) : (
-              <Link to="/settings/profile">Edit Profile</Link>
+              <Link to="/settings/profile" className="btn-txt">
+                Edit Profile
+              </Link>
             )}
           </div>
         </div>
@@ -52,9 +53,11 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
 
       <div className="mt-3 inline-flex items-center">
         <FontAwesomeIcon icon={faMapMarker} />
-        <div className="ml-2 mr-5">{location}</div>
+        <div className="ml-2 mr-5">{user.location}</div>
         <FontAwesomeIcon icon={faCalendar} />
-        <div className="ml-2 mr-5">Joined {dateJoined}</div>
+        <div className="ml-2 mr-5">
+          Joined {dateJoined.toLocaleDateString()}
+        </div>
       </div>
 
       <div>
