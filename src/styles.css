@@ -14,14 +14,6 @@ p {
   @apply mb-2;
 }
 
-.btn {
-  @apply px-4 py-2 uppercase text-sm font-bold tracking-wide;
-}
-
-.btn-ctn {
-  @apply text-white bg-purple-700;
-}
-
 .surface {
   position: relative;
   outline: 0;
@@ -52,6 +44,18 @@ p {
 
 .surface:focus::before {
   @apply opacity-08dp;
+}
+
+.btn {
+  @apply surface inline-block px-4 py-3 uppercase text-sm font-bold leading-none tracking-wide;
+}
+
+.btn-ctn {
+  @apply btn text-white bg-purple-700;
+}
+
+.btn-txt {
+  @apply btn;
 }
 
 .file-input {

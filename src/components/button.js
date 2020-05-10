@@ -50,7 +50,7 @@ export const DivButton = ({ ...rest }) => (
 )
 
 export const ContainedButton = ({ children, ...rest }) => (
-  <button className="btn btn-ctn surface" {...rest}>
+  <button className="btn-ctn" {...rest}>
     {children}
   </button>
 )

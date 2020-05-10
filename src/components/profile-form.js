@@ -15,7 +15,7 @@ const validationSchema = object({
   location: string().required("Where's your local community?"),
 })
 
-const ProfileForm = ({ user }) => {
+const ProfileForm = ({ user, children }) => {
   const [error, setError] = useState(null)
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
@@ -58,6 +58,15 @@ const ProfileForm = ({ user }) => {
       .catch(() => setError("Update failed. Try again."))
   }
 
+  const fields = (
+    <>
+      <ProfileImageInput name="profile_image_url" />
+      <Input type="text" label="Name" name="name" />
+      <Input type="text" label="Bio" name="bio" />
+      <Input type="text" label="Location" name="location" />
+    </>
+  )
+
   return (
     <>
       <Formik
@@ -70,13 +79,7 @@ const ProfileForm = ({ user }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <ProfileImageInput name="profile_image_url" />
-          <Input type="text" label="Name" name="name" />
-          <Input type="text" label="Bio" name="bio" />
-          <Input type="text" label="Location" name="location" />
-          <ContainedButton type="submit">Save</ContainedButton>
-        </Form>
+        <Form>{children({ fields })}</Form>
       </Formik>
       {error && <div className="mt-3 text-red-600">{error}</div>}
     </>
