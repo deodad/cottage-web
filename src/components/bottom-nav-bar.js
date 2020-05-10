@@ -15,7 +15,7 @@ const NavLink = (props) => {
 
 const BottomNavBar = ({ user }) => {
   return (
-    <div className="flex">
+    <div className="flex border-t">
       <NavLink to="/home">Home</NavLink>
       <NavLink to="/market">Market</NavLink>
       <NavLink to="/messages">Messages</NavLink>
