@@ -3,7 +3,7 @@
 @import "tailwindcss/components";
 
 html, body {
-  @apply h-full text-gray-900;
+  @apply h-full font-sans text-gray-900;
 }
 
 body {
