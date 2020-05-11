@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useField } from "formik"
 import Cropper from "cropperjs"
 import { ThinProfileImage } from "./user"
@@ -34,7 +34,7 @@ const ProfileImageInput = ({ name }) => {
   const imageSrc = typeof value === "string" ? value : value.dataUrl
 
   return (
-    <div className="mb-1">
+    <div className="mb-2">
       <DivButton onClick={() => inputRef.current.click()}>
         <ThinProfileImage url={imageSrc} />
 

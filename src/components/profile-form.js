@@ -4,7 +4,6 @@ import { Formik, Form } from "formik"
 import { string, object } from "yup"
 import { updateUser } from "../api"
 import { Input } from "./form"
-import { ContainedButton } from "./button"
 import ProfileImageInput from "./profile-image-input"
 
 const validationSchema = object({
@@ -79,9 +78,11 @@ const ProfileForm = ({ user, children }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>{children({ fields })}</Form>
+        <Form>
+          {children({ fields })}
+          {error && <div className="mt-3 text-red-600">{error}</div>}
+        </Form>
       </Formik>
-      {error && <div className="mt-3 text-red-600">{error}</div>}
     </>
   )
 }

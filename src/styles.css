@@ -1,14 +1,31 @@
+:root {
+  /* --color-background: rgb(247, 247, 238); */
+  /* --color-surface: rgb(247, 247, 238); */
+  --color-background: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-primary: rgb(98, 125, 152);
+  --color-secondary: rgb(100, 133, 106);
+  --color-on-background: #000000;
+  --color-on-surface: #000000;
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #000000;
+}
+
 /* purgecss start ignore */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 
 html, body {
-  @apply h-full font-sans text-gray-900;
+  @apply h-full; 
 }
 
 body {
-  @apply overflow-y-auto;
+  @apply font-sans overflow-y-auto;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  color: rgba(0, 0, 0, 0.87);
 }
+
 
 p {
   @apply mb-2;
@@ -27,7 +44,7 @@ p {
   opacity: 0;
   pointer-events: none;
   content: "";
-  background-color: #fff;
+  background-color: var(--color-surface);
   top: calc(50% - 100%);
   left: calc(50% - 100%);
   width: 200%;
@@ -46,16 +63,69 @@ p {
   @apply opacity-08dp;
 }
 
-.btn {
-  @apply surface inline-block px-4 py-3 uppercase text-sm font-bold leading-none tracking-wide;
+.surface.btn-txt::before,
+.surface.btn-otl::before {
+  background-color: var(--color-primary);
 }
 
-.btn-ctn {
-  @apply btn text-white bg-purple-700;
+.surface.btn-txt-2::before, 
+.surface.btn-otl-2::before {
+  background-color: var(--color-secondary);
+}
+
+.surface.btn-ctn::before {
+  background-color: var(--color-on-primary);
+}
+
+.surface.btn-ctn-2::before {
+  background-color: var(--color-on-secondary);
+}
+
+.btn {
+  @apply inline-block px-4 py-3 uppercase text-sm font-bold leading-none tracking-wide;
+  border-radius: 0.25rem;
+}
+
+.btn-full {
+  @apply w-full text-center; 
 }
 
 .btn-txt {
   @apply btn;
+  color: var(--color-primary);
+}
+
+.btn-txt.btn-1 {
+  color: var(--color-primary);
+}
+
+.btn-txt.btn-2 {
+  color: var(--color-secondary);
+}
+
+.btn-otl {
+  @apply btn;
+  color: var(--color-on-background);
+  border: 1px solid var(--color-on-background);
+}
+
+.btn-otl.btn-1 {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-ctn {
+  @apply btn;
+}
+
+.btn-ctn.btn-1 {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btn-ctn.btn-2 {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
 }
 
 .file-input {

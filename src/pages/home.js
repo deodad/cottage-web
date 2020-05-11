@@ -3,11 +3,10 @@ import { Router, navigate } from "@reach/router"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { useListings } from "../hooks"
-import Layout from "../components/layout"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
-import { Button } from "../components/button"
+import { TextButton, ContainedButton } from "../components/button"
 import { listings, users, proposals } from "../data"
 
 const Home = () => (
@@ -69,8 +68,8 @@ const Proposals = () => (
           <ListingLink listing={from.listing} /> for a{" "}
           <ListingLink listing={to.listing} />.
           <div className="mt-2">
-            <Button emphasis="high">Accept</Button>{" "}
-            <Button emphasis="low">Pass</Button>
+            <ContainedButton emphasis="high">Accept</ContainedButton>{" "}
+            <TextButton emphasis="low">Pass</TextButton>
           </div>
         </div>
       </UserActivity>
@@ -94,14 +93,14 @@ const Listings = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
         <div>
-          <Button
+          <ContainedButton
             icon={faPlus}
             emphasis="highest"
             size="lg"
             onClick={() => navigate("/add-listing")}
           >
             Add Listing
-          </Button>
+          </ContainedButton>
         </div>
       </div>
 

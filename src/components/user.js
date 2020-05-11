@@ -42,7 +42,7 @@ export const ProfileImage = ({ user, className, ...rest }) => (
 export const ThinProfileImage = ({ url, className, ...rest }) => (
   <img
     src={url}
-    className={classnames(className, "rounded-full w-24 h-24 border")}
+    className={classnames(className, "rounded-full w-32 h-32 border")}
     {...rest}
   />
 )

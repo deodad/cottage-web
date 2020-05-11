@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "@reach/router"
+import { OutlineButton } from "./button"
 import { login } from "../api"
-import { useUserContext } from "../hooks/use-user-context"
+import { useUserContext } from "../hooks"
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("")
@@ -47,12 +48,9 @@ export const LoginForm = () => {
       </label>
 
       <div className="mt-5">
-        <button className="w-full text-center px-4 py-2 border">Log in</button>
+        <OutlineButton className="btn-full">Log in</OutlineButton>
         <div className="my-2 text-center text-sm text-gray-600">or</div>
-        <Link
-          to="/sign-up"
-          className="block w-full text-center px-4 py-2 bg-blue-600 text-white"
-        >
+        <Link to="/sign-up" className="surface btn-ctn btn-1 btn-full">
           Sign up
         </Link>
       </div>

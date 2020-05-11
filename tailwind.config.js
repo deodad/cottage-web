@@ -1,8 +1,5 @@
 module.exports = {
-  purge: [
-    './src/**/*.js',
-    './src/**/*.html'
-  ],
+  purge: ["./src/**/*.js", "./src/**/*.html"],
   theme: {
     opacity: {
       "00dp": "0",
@@ -17,9 +14,14 @@ module.exports = {
       "24dp": "0.16",
       "0": "0",
       "100": "1",
-      "disabled": "0.38",
-      "medium": "0.60",
-      "high": "0.87",
-    }
-  }
+      disabled: "0.38",
+      medium: "0.60",
+      high: "0.87",
+    },
+    color: {
+      "simply-white": "rgb(247, 247, 238)",
+      "whippie-blue": "rgb(119, 159, 177)",
+      "fairmont-green": "rgb(100, 133, 106)",
+    },
+  },
 }
