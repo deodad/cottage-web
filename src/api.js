@@ -56,6 +56,10 @@ export const updateListing = (id, body) =>
     method: "PUT",
     body,
   })
+export const deleteListing = (id) =>
+  fetchWithDefaults(`listings/${id}`, {
+    method: "DELETE"
+  })
 
 export const getListings = () => get("listings")
 

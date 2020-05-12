@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
 import { withLayout } from "../hoc"
-import { updateListing } from "../api"
+import { deleteListing, updateListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton, TextButton } from "../components/button"
 
@@ -49,22 +49,50 @@ const EditListing = ({ data, isLoading, isError }) => {
   listing.image = listing.image_url
 
   return (
-    <ListingForm listing={listing} onSubmit={handleSubmit} error={error}>
-      {({ fields }) => (
-        <>
-          <div className="sticky top-0 bg-white flex justify-between">
-            <div className="flex-none">
-              <TextButton onClick={() => navigate(-1)}>Back</TextButton>
+    <>
+      <ListingForm listing={listing} onSubmit={handleSubmit} error={error}>
+        {({ fields }) => (
+          <>
+            <div className="sticky top-0 bg-white flex justify-between">
+              <div className="flex-none">
+                <TextButton onClick={() => navigate(-1)}>Back</TextButton>
+              </div>
+              <div className="flex-none">
+                <ContainedButton type="submit">Save</ContainedButton>
+              </div>
             </div>
-            <div className="flex-none">
-              <ContainedButton type="submit">Save</ContainedButton>
-            </div>
-          </div>
 
-          <div className="mt-5">{fields}</div>
-        </>
-      )}
-    </ListingForm>
+            <div className="mt-5">{fields}</div>
+          </>
+        )}
+      </ListingForm>
+
+      <div className="mt-5">
+        <DeleteListing id={data.listing.id} />
+      </div>
+    </>
+  )
+}
+
+const DeleteListing = ({ id }) => {
+  const [error, setError] = useState(null)
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this listing?")) {
+      deleteListing(id)
+        .then(() => navigate("/home/listings"))
+        .catch(() => setError("An error occured deleting this listing."))
+    }
+  }
+
+  return (
+    <>
+      <button onClick={handleDelete} className="text-error">
+        Delete listing
+      </button>
+
+      {error && <div className="mt-3 text-error">{error}</div>}
+    </>
   )
 }
 
