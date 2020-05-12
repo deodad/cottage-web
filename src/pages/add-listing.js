@@ -37,13 +37,18 @@ const AddListing = () => {
       .catch(() => setError("Failed to create listing. Try again."))
   }
 
+  const handleBack = (e) => {
+    e.preventDefault()
+    navigate(-1)
+  }
+
   return (
     <ListingForm onSubmit={handleSubmit} error={error}>
       {({ fields }) => (
         <>
           <div className="sticky top-0 bg-white flex justify-between">
             <div className="flex-none">
-              <TextButton onClick={() => navigate(-1)}>Back</TextButton>
+              <TextButton onClick={handleBack}>Back</TextButton>
             </div>
             <div className="flex-none">
               <ContainedButton type="submit">Save</ContainedButton>

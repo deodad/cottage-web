@@ -45,6 +45,11 @@ const EditListing = ({ data, isLoading, isError }) => {
       .catch(() => setError("Failed to update listing."))
   }
 
+  const handleBack = (e) => {
+    e.preventDefault()
+    navigate(-1)
+  }
+
   const { listing } = data
   listing.image = listing.image_url
 
@@ -55,7 +60,7 @@ const EditListing = ({ data, isLoading, isError }) => {
           <>
             <div className="sticky top-0 bg-white flex justify-between">
               <div className="flex-none">
-                <TextButton onClick={() => navigate(-1)}>Back</TextButton>
+                <TextButton onClick={handleBack}>Back</TextButton>
               </div>
               <div className="flex-none">
                 <ContainedButton type="submit">Save</ContainedButton>
