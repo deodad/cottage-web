@@ -8,6 +8,7 @@ import Front from "./pages/front"
 import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
 import Listing from "./roots/listing"
+import EditListing from "./roots/edit-listing"
 
 const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
@@ -99,6 +100,7 @@ const App = () => {
               <Profile path="profile/:handle/*" />
               <ProfileSettings path="settings/profile" />
               <Listing path="listing/:id" />
+              <EditListing path="listing/:id/edit" />
               <AddListing path="add-listing" />
 
               <NotFound default />

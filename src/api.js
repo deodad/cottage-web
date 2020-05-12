@@ -51,6 +51,11 @@ export const createListing = (body) =>
     method: "POST",
     body,
   })
+export const updateListing = (id, body) =>
+  fetchWithDefaults(`listings/${id}`, {
+    method: "PUT",
+    body,
+  })
 
 export const getListings = () => get("listings")
 
