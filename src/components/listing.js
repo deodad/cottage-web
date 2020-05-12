@@ -1,7 +1,5 @@
 import React from "react"
 import { Link } from "@reach/router"
-import { useFetchData } from "../hooks/middleware"
-import { getListings } from "../api"
 
 export const ListingLink = ({ listing, children, ...rest }) => (
   <Link to={`/listing/${listing.id}`} {...rest}>
@@ -9,12 +7,12 @@ export const ListingLink = ({ listing, children, ...rest }) => (
   </Link>
 )
 
-export const Listing = ({ listing, includeProfile = true, ...rest }) => (
+export const Listing = ({ listing, ...rest }) => (
   <ListingLink listing={listing} {...rest}>
     <img
       src={
-        listing.image
-          ? listing.image
+        listing.image_url
+          ? listing.image_url
           : "https://place-hold.it/400x400/999999/333333&text=Image"
       }
       className="max-w-full mb-2 rounded-lg border max-w-md"

@@ -38,7 +38,7 @@ const post = (path, data) =>
 const put = (path, data) =>
   fetchWithDefaults(path, {
     method: "PUT",
-    body: data
+    body: data,
   })
 
 export const getUser = (handle) => get(`users/${handle}`)
@@ -46,7 +46,12 @@ export const me = () => get("me")
 export const signUp = (data) => post("sign-up", data)
 export const login = (data) => post("login", data)
 export const logout = () => post("logout")
-export const createListing = (data) => post("listings", data)
+export const createListing = (body) =>
+  fetchWithDefaults("listings", {
+    method: "POST",
+    body,
+  })
+
 export const getListings = () => get("listings")
 
 export const getResource = (resource, id) => get(`${resource}/${id}`)

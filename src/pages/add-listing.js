@@ -13,10 +13,16 @@ const AddListing = () => {
       return
     }
 
+    const data = new FormData()
+
+    data.set("name", values.name)
+    data.set("short_description", values.short_description)
+    data.set("price", values.price)
+    data.set("image", values.image.blob)
+
     setError(null)
-    createListing(values)
+    createListing(data)
       .then((res) => {
-        // TODO pass in username from response
         if (res.ok) {
           setSubmitting(false)
           return
@@ -51,6 +57,4 @@ const AddListing = () => {
   )
 }
 
-export default withLayout("simple", { title: "Create a new listing" })(
-  AddListing
-)
+export default withLayout("user", { title: "Create a new listing" })(AddListing)
