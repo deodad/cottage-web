@@ -1,17 +1,8 @@
 import React from "react"
 import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
 import { UserImageLink } from "../components/user"
-
-export const ListingImage = ({ listing }) => (
-  <img
-    src={
-      listing.image
-        ? `/${listing.image}`
-        : "https://place-hold.it/400x400/999999/333333&text=Image"
-    }
-    className="rounded border"
-  />
-)
+import { ListingImage } from "../components/listing"
+import { ContainedButton } from "../components/button"
 
 const Listing = ({ data }) => {
   const { listing } = data
@@ -22,9 +13,7 @@ const Listing = ({ data }) => {
       <div className="mb-3 text-gray-800">{listing.shortDescription}</div>
       <ListingImage listing={listing} />
       <div className="mt-6 flex items-center">
-        <button className="px-4 py-2 bg-green-400 text-white font-bold">
-          Purchase
-        </button>
+        <ContainedButton>Purchase</ContainedButton>
         <div className="ml-5 text-gray-700">8 trades &middot; 3 available</div>
       </div>
       <UserImageLink user={listing.user} className="mt-5" />

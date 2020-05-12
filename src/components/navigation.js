@@ -29,7 +29,11 @@ const Navigation = ({ user }) => {
 
   return (
     <>
-      <Link to="/home" className="block mb-2 px-5 py-2 text-2xl font-bold">
+      <Link
+        to="/home"
+        className="block mb-2 px-5 py-2 text-2xl font-bold"
+        style={{ color: "rgb(103, 43, 38)" }}
+      >
         Cottage
       </Link>
 

@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
+import cx from "classnames"
 
 export const ListingLink = ({ listing, children, ...rest }) => (
   <Link to={`/listing/${listing.id}`} {...rest}>
@@ -7,16 +8,20 @@ export const ListingLink = ({ listing, children, ...rest }) => (
   </Link>
 )
 
+export const ListingImage = ({ className, listing }) => (
+  <img
+    src={
+      listing.image_url
+        ? listing.image_url
+        : "https://place-hold.it/400x400/999999/333333&text=Image"
+    }
+    className={cx("rounded border", className)}
+  />
+)
+
 export const Listing = ({ listing, ...rest }) => (
   <ListingLink listing={listing} {...rest}>
-    <img
-      src={
-        listing.image_url
-          ? listing.image_url
-          : "https://place-hold.it/400x400/999999/333333&text=Image"
-      }
-      className="max-w-full mb-2 rounded-lg border max-w-md"
-    />
+    <ListingImage listing={listing} />
 
     <div className="px-2">
       <div className="text-lg font-bold">{listing.name}</div>

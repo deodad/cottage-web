@@ -11,7 +11,7 @@ export const Input = ({ label, className, ...props }) => {
         <div className="py-1 px-3 text-sm text-gray-700 font-bold">{label}</div>
         <input
           className={classnames(
-            "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-blue-600",
+            "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-primary",
             meta.error && "border-error"
           )}
           {...field}
