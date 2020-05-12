@@ -36,7 +36,7 @@ export const SignUp = () => {
   return (
     <>
       <SignUpForm onSubmit={handleSubmit} />
-      {error && <div className="mt-3 text-red-600">{error}</div>}
+      {error && <div className="mt-3 text-error">{error}</div>}
     </>
   )
 }

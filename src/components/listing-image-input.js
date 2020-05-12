@@ -53,7 +53,7 @@ const ListingImageUrl = ({ name }) => {
         />
       </DivButton>
 
-      {error && <div className="text-red-600">{error}</div>}
+      {error && <div className="text-error">{error}</div>}
 
       {inputImage && (
         <Crop image={inputImage} onCrop={handleCrop} onCancel={handleCancel} />

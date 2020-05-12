@@ -55,7 +55,7 @@ export const LoginForm = () => {
         </Link>
       </div>
 
-      {error && <div className="mt-3 text-red-600">{error}</div>}
+      {error && <div className="mt-3 text-error">{error}</div>}
     </form>
   )
 }
