@@ -3,11 +3,13 @@ import { Link } from "@reach/router"
 import cx from "classnames"
 import { withAuthentication } from "../hoc"
 
-const navLinkClass = "block w-1/4 py-2 text-center outline-none text-lg"
-
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
-    className: cx(navLinkClass, isPartiallyCurrent && "text-blue-600"),
+    className: cx(
+      "block w-1/4 py-4 outline-none",
+      "text-center font-bold uppercase",
+      isPartiallyCurrent ? "text-secondary" : "text-gray-500"
+    ),
   })
 
   return <Link {...props} getProps={getProps} />

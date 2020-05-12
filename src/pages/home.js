@@ -7,20 +7,18 @@ import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
 import { UserActivity, UserLink } from "../components/user"
 import { TextButton, ContainedButton } from "../components/button"
-import { listings, users, proposals } from "../data"
+import { listings, users } from "../data"
 
 const Home = () => (
   <>
-    <div className="sticky top-0 flex bg-white">
+    <div className="gutter-none sticky top-0 flex bg-white">
       <NavLink to="">Activity</NavLink>
-      <NavLink to="proposals">Open Proposals ({proposals.length})</NavLink>
       <NavLink to="listings">My Listings</NavLink>
     </div>
 
     <div className="mt-5">
       <Router>
         <Feed path="/" />
-        <Proposals path="proposals" />
         <Listings path="listings" />
       </Router>
     </div>
@@ -59,24 +57,6 @@ const Feed = () => (
   </>
 )
 
-const Proposals = () => (
-  <>
-    {proposals.map(({ id, from, to, date }, index) => (
-      <UserActivity key={id} user={from.user} date={date}>
-        <div key={index} className="mb-5">
-          Proposed a trading you
-          <ListingLink listing={from.listing} /> for a{" "}
-          <ListingLink listing={to.listing} />.
-          <div className="mt-2">
-            <ContainedButton emphasis="high">Accept</ContainedButton>{" "}
-            <TextButton emphasis="low">Pass</TextButton>
-          </div>
-        </div>
-      </UserActivity>
-    ))}
-  </>
-)
-
 const Listings = () => {
   const { data, error, isLoading, isError } = useListings()
 
@@ -104,7 +84,7 @@ const Listings = () => {
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
+      <div className="mt-5 grid gap-3 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
         {data.listings.map((listing) => (
           <Listing key={listing.id} listing={listing} />
         ))}
