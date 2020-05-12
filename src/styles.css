@@ -1,14 +1,18 @@
 :root {
   /* --color-background: rgb(247, 247, 238); */
   /* --color-surface: rgb(247, 247, 238); */
-  --color-background: #FFFFFF;
-  --color-surface: #FFFFFF;
+  --color-background: rgb(253, 253, 251);
+  --color-surface: rgb(253, 253, 251);
+
   --color-primary: rgb(98, 125, 152);
   --color-secondary: rgb(100, 133, 106);
-  --color-on-background: #000000;
-  --color-on-surface: #000000;
-  --color-on-primary: #FFFFFF;
-  --color-on-secondary: #000000;
+  --color-error: rgb(103, 43, 38);
+
+  --color-on-background: rgb(20, 20, 21);
+  --color-on-surface: rgb(20, 20, 21);
+
+  --color-on-primary: rgb(253, 253, 251);
+  --color-on-secondary: rgb(20, 20, 21);
 }
 
 /* purgecss start ignore */
@@ -22,10 +26,8 @@ html, body {
 body {
   @apply font-sans overflow-y-auto;
   background-color: var(--color-background);
-  color: var(--color-on-background);
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(20, 20, 21, 0.87);
 }
-
 
 p {
   @apply mb-2;

@@ -1,3 +1,5 @@
+const { colors } = require("tailwindcss/defaultTheme")
+
 module.exports = {
   purge: ["./src/**/*.js", "./src/**/*.html"],
   theme: {
@@ -18,7 +20,11 @@ module.exports = {
       medium: "0.60",
       high: "0.87",
     },
-    color: {
+    colors: {
+      ...colors,
+      white: "rgb(253, 253, 251)",
+      black: "rgb(3, 3, 5)",
+      error: "rgb(154, 11, 21)",
       "simply-white": "rgb(247, 247, 238)",
       "whippie-blue": "rgb(119, 159, 177)",
       "fairmont-green": "rgb(100, 133, 106)",

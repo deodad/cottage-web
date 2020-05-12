@@ -36,7 +36,7 @@ export const ListingForm = ({ children, error, listing = {}, onSubmit }) => {
     >
       <Form>
         {children({ fields })}
-        {error && <div className="mt-3 text-red-600">{error}</div>}
+        {error && <div className="mt-3 text-error">{error}</div>}
       </Form>
     </Formik>
   )

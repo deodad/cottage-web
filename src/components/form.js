@@ -12,14 +12,14 @@ export const Input = ({ label, className, ...props }) => {
         <input
           className={classnames(
             "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-blue-600",
-            meta.error && "border-red-600"
+            meta.error && "border-error"
           )}
           {...field}
           {...props}
         />
       </label>
 
-      <div className="px-3 text-sm text-red-600 h-6">
+      <div className="px-3 text-sm text-error h-6">
         {meta.touched && meta.error}
       </div>
     </div>
