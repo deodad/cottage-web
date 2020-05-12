@@ -56,17 +56,17 @@ const Simple = ({ children, title }) => (
 const User = ({ children }) => (
   <div className="container max-w-screen-lg h-full mx-auto">
     <div className="flex flex-col h-full md:flex-row">
-      <div className="flex-none hidden md:block">
-        <div className="h-full overflow-y-auto mr-5 p-5">
+      <div className="flex-none p-5 mr-5 w-56 hidden md:block">
+        <div className="fixed">
           <Navigation />
         </div>
       </div>
-      <div className="flex-1 min-h-0">
-        <div className="relative h-full overflow-y-auto p-5">
-          <Suspense fallback={<Spinner />}>{children}</Suspense>
-        </div>
+      <div className="flex-1 relative mb-16 p-5 md:h-full md:min-h-0 md:mb-0">
+        <Suspense fallback={<Spinner />}>{children}</Suspense>
       </div>
-      <div className="flex-none md:hidden">
+    </div>
+    <div className="fixed bottom-0 inset-x-0 md:hidden">
+      <div className="bg-white">
         <BottomNavBar />
       </div>
     </div>

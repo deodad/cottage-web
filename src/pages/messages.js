@@ -8,7 +8,7 @@ import { users } from "../data"
 const Messages = () => {
   return (
     <>
-      <h1 className="gutter-none px-5 py-3 border-b-2 border-teal-600 text-lg text-teal-600 font-bold">
+      <h1 className="gutter-none px-5 py-3 border-b-2 border-secondary text-lg text-secondary font-bold">
         Messages
       </h1>
 
