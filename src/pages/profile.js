@@ -3,6 +3,7 @@ import { Router, Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
+import { follow, unfollow } from "../api"
 import { NavLink } from "../components/common"
 import { Listing } from "../components/listing"
 import { Reviews } from "../components/review"
@@ -41,7 +42,7 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
 
           <div className="absolute right-0 top-0">
             {user.username !== currentUser.username ? (
-              <FollowButton isFollowing={true} />
+              <FollowButton userId={user.id} isFollowed={user.isFollowed} />
             ) : (
               <Link to="/settings/profile" className="btn-txt">
                 Edit Profile
@@ -84,11 +85,22 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
   )
 }
 
-const FollowButton = ({ isFollowing = false, ...rest }) => (
-  <ToggleButton active={isFollowing} {...rest}>
-    {isFollowing ? "Following" : "Follow"}
-  </ToggleButton>
-)
+const FollowButton = ({ userId, isFollowed, ...rest }) => {
+  // TODO state management, set isFollowed on user, etc
+  const handleClick = () => {
+    if (isFollowed) {
+      unfollow(userId)
+    } else {
+      follow(userId)
+    }
+  }
+
+  return (
+    <ToggleButton active={isFollowed} onClick={handleClick} {...rest}>
+      {isFollowed ? "Following" : "Follow"}
+    </ToggleButton>
+  )
+}
 
 const Listings = ({ listings }) => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">

@@ -41,6 +41,12 @@ const put = (path, data) =>
     body: data,
   })
 
+const del = (path, options = {}) =>
+  fetchWithDefaults(path, {
+    method: "DELETE",
+    ...options,
+  })
+
 export const getUser = (handle) => get(`users/${handle}`)
 export const me = () => get("me")
 export const signUp = (data) => post("sign-up", data)
@@ -58,15 +64,13 @@ export const updateListing = (id, body) =>
   })
 export const deleteListing = (id) =>
   fetchWithDefaults(`listings/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
   })
 
 export const getListings = () => get("listings")
 
 export const getResource = (resource, id) => get(`${resource}/${id}`)
-export const updateProfileImage = (handle, data) =>
-  fetchWithDefaults(`users/${handle}/profile-image`, {
-    method: "PUT",
-    body: data,
-  })
+
 export const updateUser = (id, data) => put(`users/${id}`, data)
+export const follow = (id) => post(`me/follow/${id}`)
+export const unfollow = (id) => del(`me/follow/${id}`)
