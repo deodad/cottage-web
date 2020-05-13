@@ -21,7 +21,7 @@ export const BubbleNavLink = (props) => (
   <NavLink {...props} className={navLinkClass} />
 )
 
-const Navigation = ({ user }) => {
+const Navigation = ({ authenticatedUser }) => {
   const { logout } = useUserContext()
   const handleLogout = () => {
     logoutReq().then(() => logout())
@@ -48,7 +48,7 @@ const Navigation = ({ user }) => {
           <BubbleNavLink to="/messages">Messages</BubbleNavLink>
         </li>
         <li>
-          <BubbleNavLink to={`/profile/${user.username}`}>
+          <BubbleNavLink to={`/profile/${authenticatedUser.username}`}>
             Profile
           </BubbleNavLink>
         </li>

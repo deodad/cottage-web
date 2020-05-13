@@ -13,13 +13,22 @@ const reducer = (state, action) => {
       return {
         ...state,
         status: "resolved",
-        data: action.data,
+        [action.key]: action.data,
       }
     }
     case "start": {
       return {
         ...state,
         status: "pending",
+      }
+    }
+    case "update": {
+      return {
+        ...state,
+        [action.key]: {
+          ...state[action.key],
+          ...action.data,
+        },
       }
     }
     default: {
@@ -32,12 +41,13 @@ const initialState = {
   status: "idle",
 }
 
-export const useFetchData = () => {
+export const useFetchData = (key = "data") => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const failure = (err) => dispatch({ type: "error", error: err })
-  const success = (data) => dispatch({ type: "success", data })
   const start = () => dispatch({ type: "start" })
+  const failure = (err) => dispatch({ type: "error", error: err })
+  const success = (data) => dispatch({ type: "success", key, data })
+  const update = (data) => dispatch({ type: "update", key, data })
 
   const handleFetch = (fetchRequest) => {
     start()
@@ -62,10 +72,11 @@ export const useFetchData = () => {
     failure,
     success,
     start,
+    update,
     handleFetch,
     view: {
       isLoading: state.status === "idle" || state.status === "pending",
-      data: state.data,
+      [key]: state[key],
       isError: state.status === "rejected",
       error: state.error,
     },

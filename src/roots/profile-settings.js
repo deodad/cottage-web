@@ -4,8 +4,8 @@ import { withAuthentication } from "../hoc"
 
 const ProfileSettingsPage = lazy(() => import("../pages/profile-settings"))
 
-const ProfileSettings = ({ user }) => {
-  const data = useUser(user.username)
+const ProfileSettings = ({ authenticatedUser }) => {
+  const data = useUser(authenticatedUser.username)
 
   return <ProfileSettingsPage {...data} />
 }

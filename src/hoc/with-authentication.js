@@ -9,5 +9,5 @@ export const withAuthentication = (Component) => (props) => {
   if (user === undefined) return null
   if (user === null) return <Redirect to="/login" />
 
-  return <Component user={user} {...props} />
+  return <Component authenticatedUser={user} {...props} />
 }

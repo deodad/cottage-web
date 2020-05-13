@@ -12,7 +12,14 @@ import { ToggleButton } from "../components/button"
 
 import { trades, reviews } from "../data"
 
-const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
+const Profile = ({
+  authenticatedUser,
+  isLoading,
+  isError,
+  update,
+  data,
+  error,
+}) => {
   if (isLoading) return <div>Loading</div>
   if (isError) return <div>{error}</div>
 
@@ -41,8 +48,12 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
           <div className="text-gray-700">@{user.username}</div>
 
           <div className="absolute right-0 top-0">
-            {user.username !== currentUser.username ? (
-              <FollowButton userId={user.id} isFollowed={user.isFollowed} />
+            {user.username !== authenticatedUser.username ? (
+              <FollowButton
+                userId={user.id}
+                isFollowed={user.isFollowed}
+                update={update}
+              />
             ) : (
               <Link to="/settings/profile" className="btn-txt">
                 Edit Profile
@@ -85,7 +96,7 @@ const Profile = ({ user: currentUser, isLoading, isError, data, error }) => {
   )
 }
 
-const FollowButton = ({ userId, isFollowed, ...rest }) => {
+const FollowButton = ({ update, userId, isFollowed, ...rest }) => {
   // TODO state management, set isFollowed on user, etc
   const handleClick = () => {
     if (isFollowed) {
@@ -93,6 +104,8 @@ const FollowButton = ({ userId, isFollowed, ...rest }) => {
     } else {
       follow(userId)
     }
+
+    update({ isFollowed: !isFollowed })
   }
 
   return (
