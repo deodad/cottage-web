@@ -33,6 +33,20 @@ p {
   @apply mb-2;
 }
 
+.empahsis-high {
+  /* TODO make this happen via variables */
+  color: rgba(20, 20, 21, 0.87);
+}
+.emphasis-medium {
+  /* TODO make this happen via variables */
+  color: rgba(20, 20, 21, 0.60);
+}
+
+.emphasis-low {
+  /* TODO make this happen via variables */
+  color: rgba(20, 20, 21, 0.38);
+}
+
 .surface {
   position: relative;
   outline: 0;

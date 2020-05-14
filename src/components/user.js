@@ -54,7 +54,8 @@ export const UserImageLink = ({ user, className, ...rest }) => (
     {...rest}
   >
     <ProfileImage user={user} className="mr-2" />
-    <span className="font-bold">{user.name}</span>
+    <span className="font-bold">{user.name}</span>{" "}
+    <span className="ml-1 emphasis-medium">@{user.username}</span>
   </UserLink>
 )
 
