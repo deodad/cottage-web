@@ -17,11 +17,11 @@ export const SignUp = () => {
     setError(null)
     signUp(values)
       .then((res) => {
-        // TODO pass in username from response
         if (res.ok) {
-          setSubmitting(false)
-          signIn(null, true)
-          return
+          return res.json().then((data) => {
+            setSubmitting(false)
+            signIn(data, true)
+          })
         }
 
         if (res.status === 400) {
