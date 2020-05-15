@@ -81,4 +81,4 @@ const Listings = () => {
   )
 }
 
-export default compose(withLayout("user"), withAuthentication)(Home)
+export default compose(withAuthentication, withLayout("user"))(Home)

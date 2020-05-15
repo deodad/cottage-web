@@ -1,5 +1,3 @@
-import { navigate } from "@reach/router"
-
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8082"
@@ -10,13 +8,6 @@ const fetchWithDefaults = (path, options) =>
     mode: "cors",
     credentials: "include",
     ...options,
-  }).then((res) => {
-    if (res.status === 401) {
-      navigate("/login")
-      throw new Error("Unauthorized")
-    }
-
-    return res
   })
 
 const get = (path) =>

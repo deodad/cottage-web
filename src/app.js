@@ -64,16 +64,15 @@ const App = () => {
     me()
       .then((res) => {
         if (res.ok) {
-          return res.json()
-        } else {
-          throw Error()
+          return res.json().then(signIn)
         }
-      })
-      .then((user) => {
-        if (user) {
-          signIn(user)
-          return
+
+        if (res.status == 401) {
+          return dispatch({ type: "logout" })
         }
+
+        // TODO better
+        throw Error()
       })
       .catch(() => {})
   }, [])
