@@ -4,10 +4,9 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { useActivities, useListings } from "../hooks"
 import { NavLink } from "../components/common"
-import { ListingLink, Listing } from "../components/listing"
+import { Listing } from "../components/listing"
 import { Activity } from "../components/activity"
 import { ContainedButton } from "../components/button"
-import { listings, users } from "../data"
 
 const Home = () => (
   <>
@@ -28,7 +27,7 @@ const Home = () => (
 const Feed = () => {
   const { data, error, isLoading, isError } = useActivities()
 
-  if (isLoading) return null
+  if (isLoading) return tnull
   if (isError) return <div>{error}</div>
 
   return (
@@ -81,7 +80,4 @@ const Listings = () => {
   )
 }
 
-export default compose(
-  withAuthentication, 
-  withLayout("user")
-)(Home)
+export default compose(withAuthentication, withLayout("user"))(Home)
