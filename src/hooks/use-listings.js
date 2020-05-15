@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useFetchData } from "./use-fetch-data"
-import { getListings } from "../api"
+import { getListing, getListings } from "../api"
 
 export const useListings = () => {
   const { view, handleFetch } = useFetchData()

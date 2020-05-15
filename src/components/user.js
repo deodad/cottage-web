@@ -1,24 +1,7 @@
 import React from "react"
-import TimeAgo from "react-timeago"
 import { Link } from "@reach/router"
 import classnames from "classnames"
-
-const timeAgoFormatter = (value, unit, _, __, nextFormatter) => {
-  switch (unit) {
-    case "second":
-      return `${value}s`
-    case "minute":
-      return `${value}m`
-    case "hour":
-      return `${value}h`
-    case "day":
-      if (value <= 7) {
-        return `${value}d`
-      }
-  }
-
-  return nextFormatter()
-}
+import { TimeAgo } from "./time"
 
 export const UserLink = ({ user, children, ...rest }) => (
   <Link to={`/profile/${user.username}`} {...rest}>
@@ -70,11 +53,11 @@ export const UserActivity = ({ user, date, children }) => (
     <div className="flex-auto">
       <UserLink user={user}>
         <span className="font-bold">{user.name}</span>{" "}
-        <span className="text-gray-600">@{user.username}</span>
+        <span className="emphasis-medium">@{user.username}</span>
         {date && (
-          <span className="text-gray-600">
+          <span className="emphasis-medium">
             {" "}
-            &middot; <TimeAgo date={date} formatter={timeAgoFormatter} />
+            &middot; <TimeAgo date={date} />
           </span>
         )}
       </UserLink>
@@ -95,7 +78,7 @@ export const UnlinkedUserActivity = ({ user, date, children }) => (
       {date && (
         <span className="text-gray-600">
           {" "}
-          &middot; <TimeAgo date={date} formatter={timeAgoFormatter} />
+          &middot; <TimeAgo date={date} />
         </span>
       )}
       <div className="mt-1">{children}</div>

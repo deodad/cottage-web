@@ -2,11 +2,11 @@ import React from "react"
 import { Router, navigate } from "@reach/router"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
-import { useListings } from "../hooks"
+import { useActivities, useListings } from "../hooks"
 import { NavLink } from "../components/common"
 import { ListingLink, Listing } from "../components/listing"
-import { UserActivity, UserLink } from "../components/user"
-import { TextButton, ContainedButton } from "../components/button"
+import { Activity } from "../components/activity"
+import { ContainedButton } from "../components/button"
 import { listings, users } from "../data"
 
 const Home = () => (
@@ -25,37 +25,25 @@ const Home = () => (
   </>
 )
 
-const Feed = () => (
-  <>
-    <UserActivity user={users[1]} date={new Date() - 10 * 60000}>
-      Listed <ListingLink listing={listings[1]} className="font-bold" />
-    </UserActivity>
-    <UserActivity user={users[2]} date={new Date() - 240 * 60000}>
-      Traded <ListingLink listing={listings[2]} className="font-bold" /> to{" "}
-      <UserLink user={users[0]} /> for a{" "}
-      <ListingLink listing={listings[3]} className="font-bold" />
-    </UserActivity>
-    <UserActivity user={users[5]} date={new Date() - 10 * 60 * 60000}>
-      Traded <ListingLink listing={listings[6]} className="font-bold" /> to{" "}
-      <UserLink user={users[4]} /> for a{" "}
-      <span className="font-bold">Salsa Rojo</span>
-    </UserActivity>
-    <UserActivity user={users[4]} date={new Date() - 10 * 2000 * 60000}>
-      Listed <ListingLink listing={listings[5]} className="font-bold" />
-    </UserActivity>
+const Feed = () => {
+  const { data, error, isLoading, isError } = useActivities()
 
-    <div className="hidden mt-5">
-      <p>What goes on here?</p>
-      Activities from people you are following:
-      <ul>
-        <li>Listed item</li>
-        <li>Trade</li>
-        <li>Comment</li>
-        <li>Post</li>
-      </ul>
-    </div>
-  </>
-)
+  if (isLoading) return null
+  if (isError) return <div>{error}</div>
+
+  return (
+    <>
+      {data.activities.map((activity) => (
+        <Activity
+          key={activity.id}
+          user={activity.user}
+          activity={activity.activity_data}
+          date={new Date(activity.created_at)}
+        />
+      ))}
+    </>
+  )
+}
 
 const Listings = () => {
   const { data, error, isLoading, isError } = useListings()
