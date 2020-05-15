@@ -1,10 +1,6 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import App from "./app"
 import "./styles.css"
+import { me } from "./api"
 
-const root = document.createElement("div")
-root.style.height = "100%"
-document.body.appendChild(root)
+const req = me()
 
-ReactDOM.render(<App />, root)
+import("./mount").then(({ mount }) => mount(req))

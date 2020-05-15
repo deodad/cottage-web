@@ -7,7 +7,7 @@ export const withLayout = (layout, options = {}) => (Component) => {
 
     useLayoutEffect(() => {
       dispatch({ layout, options })
-    })
+    }, [])
 
     return <Component {...props} />
   }

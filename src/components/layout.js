@@ -12,7 +12,7 @@ const reducer = (state, { layout, options }) => ({
 })
 
 const initialState = {
-  layout: "simple",
+  layout: "none",
   options: {},
 }
 
@@ -29,7 +29,7 @@ export const Layout = ({ ...rest }) => {
           case "simple":
             return <Simple {...options} {...rest} />
           case "none":
-            return <div {...options} {...rest} />
+            return <>{rest.children}</>
           default:
             throw new Error(`Invalid layout '${layout}'`)
         }

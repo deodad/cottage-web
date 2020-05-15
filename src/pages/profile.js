@@ -20,7 +20,7 @@ const Profile = ({
   data,
   error,
 }) => {
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return null
   if (isError) return <div>{error}</div>
 
   const user = data

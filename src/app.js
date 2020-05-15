@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
-import { me } from "./api"
 import { AppContext, UserContext } from "./context"
 import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
@@ -21,12 +20,19 @@ const AddListing = lazy(() => import("./pages/add-listing"))
 const NotFound = lazy(() => import("./pages/not-found"))
 
 const initialState = {
-  layout: "guest",
+  layout: "none",
+  isInit: false,
   user: undefined,
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "init":
+      return {
+        ...state,
+        isInit: true,
+        user: action.user,
+      }
     case "setLayout":
       return {
         ...state,
@@ -47,7 +53,7 @@ const reducer = (state, action) => {
   }
 }
 
-const App = () => {
+const App = ({ me }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const signIn = (user, goHome = false) => {
@@ -61,20 +67,18 @@ const App = () => {
   }
 
   useEffect(() => {
-    me()
-      .then((res) => {
-        if (res.ok) {
-          return res.json().then(signIn)
-        }
+    me.then((res) => {
+      if (res.ok) {
+        res.json().then((user) => dispatch({ type: "init", user }))
+      }
 
-        if (res.status == 401) {
-          return dispatch({ type: "logout" })
-        }
+      if (res.status == 401) {
+        return dispatch({ type: "init", user: null })
+      }
 
-        // TODO better
-        throw Error()
-      })
-      .catch(() => {})
+      // TODO better
+      throw Error()
+    }).catch(() => {})
   }, [])
 
   const userContext = {

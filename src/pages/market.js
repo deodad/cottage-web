@@ -6,7 +6,7 @@ import { Listings } from "../components/listing"
 const Market = () => {
   const { data, isLoading, isError, error } = useListings()
 
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return null
   if (isError) return <div>{error}</div>
 
   return (
