@@ -28,11 +28,13 @@ const EditListing = ({ data, isLoading, isError }) => {
       formData.set("image", values.image.blob)
     }
 
+    // TODO prevent double submissions
     setError(null)
     updateListing(data.listing.id, formData)
       .then((res) => {
         if (res.ok) {
           setSubmitting(false)
+          navigate(-1)
           return
         }
 

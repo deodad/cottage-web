@@ -20,11 +20,13 @@ const AddListing = () => {
     data.set("price", values.price)
     data.set("image", values.image.blob)
 
+    // TODO prevent double submissions
     setError(null)
     createListing(data)
       .then((res) => {
         if (res.ok) {
           setSubmitting(false)
+          navigate(-1)
           return
         }
 
