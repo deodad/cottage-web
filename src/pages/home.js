@@ -27,7 +27,7 @@ const Home = () => (
 const Feed = () => {
   const { data, error, isLoading, isError } = useActivities()
 
-  if (isLoading) return tnull
+  if (isLoading) return null
   if (isError) return <div>{error}</div>
 
   return (
