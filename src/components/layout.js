@@ -53,22 +53,26 @@ const Simple = ({ children, title }) => (
   </div>
 )
 
-const User = ({ children }) => (
-  <div className="container max-w-screen-lg h-full mx-auto">
-    <div className="flex flex-col h-full md:flex-row">
+const User = ({ children, focus }) => (
+  <div className="container max-w-screen-lg mx-auto">
+    <div className="flex flex-col md:flex-row">
       <div className="flex-none p-5 mr-5 w-56 hidden md:block">
         <div className="fixed">
           <Navigation />
         </div>
       </div>
-      <div className="flex-1 relative mb-16 p-5 md:h-full md:min-h-0 md:mb-0">
+      <div className="flex-1 relative p-5 md:mb-0">
         <Suspense fallback={<Spinner />}>{children}</Suspense>
       </div>
     </div>
-    <div className="fixed bottom-0 inset-x-0 md:hidden">
-      <div className="bg-white">
-        <BottomNavBar />
+    {!focus && (
+      <div className="h-16">
+        <div className="fixed bottom-0 inset-x-0 md:hidden">
+          <div className="bg-white">
+            <BottomNavBar />
+          </div>
+        </div>
       </div>
-    </div>
+    )}
   </div>
 )

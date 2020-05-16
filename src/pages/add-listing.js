@@ -64,4 +64,7 @@ const AddListing = () => {
   )
 }
 
-export default withLayout("user", { title: "Create a new listing" })(AddListing)
+export default withLayout("user", {
+  focus: true,
+  title: "Create a new listing",
+})(AddListing)

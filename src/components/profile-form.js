@@ -41,7 +41,6 @@ const ProfileForm = ({ user, children }) => {
 
     updateUser(user.id, data)
       .then((res) => {
-        // TODO pass in username from response
         if (res.ok) {
           setSubmitting(false)
           navigate(`/profile/${user.username}`)

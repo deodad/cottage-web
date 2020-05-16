@@ -103,4 +103,4 @@ const DeleteListing = ({ id }) => {
   )
 }
 
-export default withLayout("user")(EditListing)
+export default withLayout("user", { focus: true })(EditListing)
