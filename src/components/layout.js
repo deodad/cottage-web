@@ -61,10 +61,8 @@ const User = ({ children, focus }) => (
           <Navigation />
         </div>
       </div>
-      <div className="flex-1 min-h-0 relative overflow-y-auto md:border-l md:overflow-y-visible">
-        <div className="p-5 md:mb-0">
-          <Suspense fallback={<Spinner />}>{children}</Suspense>
-        </div>
+      <div className="flex-1 min-h-0 p-5 relative overflow-y-auto md:border-l md:overflow-y-visible">
+        <Suspense fallback={<Spinner />}>{children}</Suspense>
       </div>
       {!focus && (
         <div className="flex-none md:hidden">
