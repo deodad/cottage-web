@@ -62,7 +62,9 @@ const User = ({ children, focus }) => (
         </div>
       </div>
       <div className="flex-1 min-h-0 p-5 relative overflow-y-auto md:border-l md:overflow-y-visible">
-        <Suspense fallback={<Spinner />}>{children}</Suspense>
+        <Suspense fallback={<Spinner className="flex justify-center mt-16" />}>
+          {children}
+        </Suspense>
       </div>
       {!focus && (
         <div className="flex-none md:hidden">

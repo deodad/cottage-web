@@ -1,7 +1,6 @@
-import React, { lazy, Suspense, useState, useEffect, useReducer } from "react"
+import React, { lazy, Suspense, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
 import { AppContext, UserContext } from "./context"
-import { Spinner } from "./components/spinner"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
 import Profile from "./roots/profile"
@@ -91,7 +90,7 @@ const App = ({ me }) => {
     <AppContext.Provider value={{ state, dispatch }}>
       <UserContext.Provider value={userContext}>
         <Layout>
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<div />}>
             <Router>
               <Front path="/" />
               <Login path="/login" signIn={signIn} />
