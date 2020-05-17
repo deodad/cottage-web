@@ -1,11 +1,9 @@
 import React from "react"
-import { navigate, Link } from "@reach/router"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "@reach/router"
 import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
 import { UserImageLink } from "../components/user"
 import { ListingImage } from "../components/listing"
-import { ContainedButton, TextButton } from "../components/button"
+import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
 
 const Listing = ({ authenticatedUser, data }) => {
@@ -16,7 +14,7 @@ const Listing = ({ authenticatedUser, data }) => {
       <TopBar title="Listing" back={true}>
         {listing.user_id === authenticatedUser.id && (
           <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
-            Edit listing
+            Edit
           </Link>
         )}
       </TopBar>
@@ -37,7 +35,7 @@ const Listing = ({ authenticatedUser, data }) => {
 }
 
 export default compose(
+  withAuthentication,
   withFetchData,
-  withLayout("user", { focus: true }),
-  withAuthentication
+  withLayout("user", { focus: true })
 )(Listing)
