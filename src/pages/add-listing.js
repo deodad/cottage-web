@@ -4,6 +4,7 @@ import { withLayout } from "../hoc"
 import { createListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton, TextButton } from "../components/button"
+import { TopBar } from "../components/layout"
 
 const AddListing = () => {
   const [error, setError] = useState(null)
@@ -39,32 +40,19 @@ const AddListing = () => {
       .catch(() => setError("Failed to create listing. Try again."))
   }
 
-  const handleBack = (e) => {
-    e.preventDefault()
-    navigate(-1)
-  }
-
   return (
     <ListingForm onSubmit={handleSubmit} error={error}>
       {({ fields }) => (
         <>
-          <div className="sticky top-0 bg-white flex justify-between">
-            <div className="flex-none">
-              <TextButton onClick={handleBack}>Back</TextButton>
-            </div>
-            <div className="flex-none">
-              <ContainedButton type="submit">Save</ContainedButton>
-            </div>
-          </div>
+          <TopBar title="Add Listing" back={true}>
+            <ContainedButton type="submit">Save</ContainedButton>
+          </TopBar>
 
-          <div className="mt-5">{fields}</div>
+          {fields}
         </>
       )}
     </ListingForm>
   )
 }
 
-export default withLayout("user", {
-  focus: true,
-  title: "Create a new listing",
-})(AddListing)
+export default withLayout("user", { focus: true })(AddListing)

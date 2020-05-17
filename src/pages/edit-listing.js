@@ -4,6 +4,7 @@ import { withLayout } from "../hoc"
 import { deleteListing, updateListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton, TextButton } from "../components/button"
+import { TopBar } from "../components/layout"
 
 const EditListing = ({ data, isLoading, isError }) => {
   const [error, setError] = useState(null)
@@ -60,16 +61,11 @@ const EditListing = ({ data, isLoading, isError }) => {
       <ListingForm listing={listing} onSubmit={handleSubmit} error={error}>
         {({ fields }) => (
           <>
-            <div className="sticky top-0 bg-white flex justify-between">
-              <div className="flex-none">
-                <TextButton onClick={handleBack}>Back</TextButton>
-              </div>
-              <div className="flex-none">
-                <ContainedButton type="submit">Save</ContainedButton>
-              </div>
-            </div>
+            <TopBar title="Edit Listing" back={true}>
+              <ContainedButton type="submit">Save</ContainedButton>
+            </TopBar>
 
-            <div className="mt-5">{fields}</div>
+            {fields}
           </>
         )}
       </ListingForm>

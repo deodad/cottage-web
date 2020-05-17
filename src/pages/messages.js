@@ -2,17 +2,15 @@ import React from "react"
 import { Link, Router } from "@reach/router"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { UnlinkedUserActivity } from "../components/user"
+import { TopBar } from "../components/layout"
 
 import { users } from "../data"
 
 const Messages = () => {
   return (
     <>
-      <h1 className="gutter-none px-5 py-3 border-b-2 border-secondary text-lg text-secondary font-bold">
-        Messages
-      </h1>
-
-      <Router className="mt-5">
+      <TopBar title="Messages" />
+      <Router>
         <Threads path="/" />
         <Thread path=":threadId" />
       </Router>
@@ -57,4 +55,7 @@ const Activity = ({ activity }) => {
 
 const Message = ({ activity }) => <div>{activity.text}</div>
 
-export default compose(withLayout("user"), withAuthentication)(Messages)
+export default compose(
+  withLayout("user", { title: "Messages" }),
+  withAuthentication
+)(Messages)

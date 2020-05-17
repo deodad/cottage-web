@@ -5,21 +5,15 @@ import { withAuthentication } from "../hoc"
 import { useUserContext } from "../hooks/use-user-context"
 import { logout as logoutReq } from "../api"
 
-const navLinkClass =
-  "inline-block my-2 px-6 py-2 rounded-full text-xl outline-none " +
-  "focus:bg-blue-300 focus:text-white hover:bg-blue-300 hover:text-white"
+const navLinkClass = "block my-2 btn-txt text-lg surface"
 
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
-    className: classnames(navLinkClass, isPartiallyCurrent && "text-blue-600"),
+    className: classnames(navLinkClass, isPartiallyCurrent && "btn-2"),
   })
 
   return <Link {...props} getProps={getProps} />
 }
-
-export const BubbleNavLink = (props) => (
-  <NavLink {...props} className={navLinkClass} />
-)
 
 const Navigation = ({ authenticatedUser }) => {
   const { logout } = useUserContext()
@@ -29,28 +23,30 @@ const Navigation = ({ authenticatedUser }) => {
 
   return (
     <>
-      <Link
-        to="/home"
-        className="block mb-2 px-5 py-2 text-2xl font-bold"
-        style={{ color: "rgb(103, 43, 38)" }}
-      >
-        Cottage
-      </Link>
+      <div className="box-content h-10 py-3 flex items-center mb-2">
+        <Link
+          to="/home"
+          className="block px-4 text-2xl font-bold"
+          style={{ color: "rgb(103, 43, 38)" }}
+        >
+          Cottage
+        </Link>
+      </div>
 
       <ul>
         <li>
-          <BubbleNavLink to="/home">Home</BubbleNavLink>
+          <NavLink to="/home">Home</NavLink>
         </li>
         <li>
-          <BubbleNavLink to="/market">Market</BubbleNavLink>
+          <NavLink to="/market">Market</NavLink>
         </li>
         <li>
-          <BubbleNavLink to="/messages">Messages</BubbleNavLink>
+          <NavLink to="/messages">Messages</NavLink>
         </li>
         <li>
-          <BubbleNavLink to={`/profile/${authenticatedUser.username}`}>
+          <NavLink to={`/profile/${authenticatedUser.username}`}>
             Profile
-          </BubbleNavLink>
+          </NavLink>
         </li>
         <li>
           <button
