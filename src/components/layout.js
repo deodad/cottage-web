@@ -67,8 +67,8 @@ const User = ({ children, focus }) => (
           <Navigation />
         </div>
       </div>
-      <div className="flex-1 min-h-0 relative overflow-y-auto md:border-l md:overflow-y-visible">
-        <div className="p-5">
+      <div className="flex-1 min-h-0 relative overflow-y-auto md:overflow-y-visible">
+        <div className="min-h-full border-l p-5">
           <Suspense
             fallback={<Spinner className="flex justify-center mt-16" />}
           >
@@ -106,4 +106,8 @@ export const TopBar = ({ children, back = false, title }) => (
     )}
     {!title && children}
   </div>
+)
+
+export const TopPanel = ({ children }) => (
+  <div className="-mt-5 -mx-5 mb-5 px-5 py-3 bg-white border-b">{children}</div>
 )
