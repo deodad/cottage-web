@@ -76,9 +76,11 @@ const App = ({ me }) => {
         return dispatch({ type: "init", user: null })
       }
 
-      // TODO better
+      // TODO better, what to do if this fails? retry?
       throw Error()
-    }).catch(() => {})
+    }).catch(() => {
+      dispatch({ type: "init", user: null })
+    })
   }, [])
 
   const userContext = {

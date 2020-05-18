@@ -36,6 +36,8 @@ export const Listing = ({ listing, ...rest }) => (
   </ListingLink>
 )
 
+export const ListingHit = ({ hit }) => <Listing listing={hit} />
+
 export const Listings = ({ listings }) => {
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -44,8 +44,8 @@ const Profile = ({
             src={user.profile_image_url}
             className="w-40 h-40 rounded-full border"
           />
-          <div className="mt-2 text-lg font-bold">{user.name}</div>
-          <div className="text-gray-700">@{user.username}</div>
+          <div className="mt-1 text-lg font-bold">{user.name}</div>
+          <div className="emphasis-medium">@{user.username}</div>
 
           <div className="absolute right-0 top-0">
             {user.username !== authenticatedUser.username ? (
@@ -63,7 +63,9 @@ const Profile = ({
         </div>
       </div>
 
-      <div className="mt-3 inline-flex items-center">
+      <div className="mt-3">{user.bio}</div>
+
+      <div className="mt-3 flex items-center emphasis-medium">
         <FontAwesomeIcon icon={faMapMarker} />
         <div className="ml-2 mr-5">{user.location}</div>
         <FontAwesomeIcon icon={faCalendar} />
@@ -123,4 +125,4 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default compose(withLayout("user"), withAuthentication)(Profile)
+export default compose(withAuthentication, withLayout("user"))(Profile)
