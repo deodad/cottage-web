@@ -8,7 +8,6 @@ import { compose, withAuthentication, withLayout } from "../hoc"
 import { Listing } from "../components/listing"
 import { TopBar } from "../components/layout"
 import { searchClient } from "../algolia"
-import "instantsearch.css/themes/reset.css"
 
 export const SearchBox = connectSearchBox(
   ({ currentRefinement, isSearchStalled, refine }) => (
@@ -29,7 +28,7 @@ export const Hits = connectHits(({ hits }) => {
     <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {hits.map((hit) => (
         <li key={hit.objectID} className="mb-3 sm:mb-0">
-          <Listing listing={{ ...hit, id: hit.objectID }} />
+          <Listing listing={hit} />
         </li>
       ))}
     </ul>
