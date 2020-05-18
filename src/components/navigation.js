@@ -26,7 +26,7 @@ const Navigation = ({ authenticatedUser }) => {
       <div className="box-content h-10 py-3 flex items-center mb-2">
         <Link
           to="/home"
-          className="block px-4 text-2xl font-bold"
+          className="block px-4 text-2xl font-bold font-brand"
           style={{ color: "rgb(103, 43, 38)" }}
         >
           Cottage

@@ -27,6 +27,7 @@ module.exports = {
       primary: "var(--color-primary)",
       secondary: "var(--color-secondary)",
       error: "var(--color-error)",
+      brand: "rgb(103, 43, 38)",
       "simply-white": "rgb(247, 247, 238)",
       "whippie-blue": "rgb(119, 159, 177)",
       "fairmont-green": "rgb(100, 133, 106)",

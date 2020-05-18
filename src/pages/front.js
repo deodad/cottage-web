@@ -5,9 +5,8 @@ import { LoginForm } from "../components/login"
 import { trades } from "../data"
 
 const Front = () => (
-  <div className="container max-w-screen-lg mx-auto my-6 flex">
-    <div className="flex-1 px-5">
-      <h1 className="font-brand">Cottage</h1>
+  <div className="flex">
+    <div className="flex-1">
       <div>Welcome to the peer to peer economy!</div>
 
       <div className="mt-6">
@@ -30,4 +29,4 @@ const Front = () => (
   </div>
 )
 
-export default withLayout("none")(Front)
+export default withLayout("simple")(Front)

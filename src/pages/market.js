@@ -2,6 +2,7 @@ import React from "react"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { useListings } from "../hooks"
 import { Listings } from "../components/listing"
+import { TopBar } from "../components/layout"
 
 const Market = () => {
   const { data, isLoading, isError, error } = useListings()
@@ -11,15 +12,15 @@ const Market = () => {
 
   return (
     <>
-      <input
-        type="text"
-        className="w-full mt-1 px-5 py-3 rounded-lg bg-gray-200 text-lg outline-none"
-        placeholder="Search"
-      />
+      <TopBar>
+        <input
+          type="text"
+          className="w-full px-4 py-2 rounded-lg bg-gray-200 text-lg outline-none"
+          placeholder="Search"
+        />
+      </TopBar>
 
-      <div className="mt-5">
-        <Listings listings={data.listings} />
-      </div>
+      <Listings listings={data.listings} />
     </>
   )
 }

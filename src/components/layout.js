@@ -42,13 +42,16 @@ export const Layout = ({ ...rest }) => {
 }
 
 const Simple = ({ children, title }) => (
-  <div className="max-w-sm mx-auto py-6 px-5">
-    <Link to="/" className="text-2xl font-bold font-brand block mb-5">
+  <div className="max-w-screen-lg container mx-auto px-5 py-3">
+    <Link
+      to="/"
+      className="text-2xl font-bold font-brand text-brand block mb-5"
+    >
       Cottage
     </Link>
 
     {title && (
-      <div className="gutter-none mb-3 pb-3 px-5">
+      <div className="pb-5">
         <h1 className="text-xl m-0">{title}</h1>
       </div>
     )}
@@ -86,16 +89,21 @@ const User = ({ children, focus }) => (
 
 export const TopBar = ({ children, back = false, title }) => (
   <div className="sticky top-0 box-content h-10 -mt-5 -mx-5 mb-5 px-5 py-3 bg-white border-b flex items-center justify-between">
-    <div className="flex-none flex items-center">
-      {back && (
-        <div className="mr-3">
-          <TextButton onClick={() => navigate(-1)}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </TextButton>
+    {title && (
+      <>
+        <div className="flex-none flex items-center">
+          {back && (
+            <div className="mr-3">
+              <TextButton onClick={() => navigate(-1)}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </TextButton>
+            </div>
+          )}
+          <div className="font-bold text-lg">{title}</div>
         </div>
-      )}
-      <div className="font-bold text-lg">{title}</div>
-    </div>
-    <div className="flex-none">{children}</div>
+        <div className="flex-none">{children}</div>
+      </>
+    )}
+    {!title && children}
   </div>
 )

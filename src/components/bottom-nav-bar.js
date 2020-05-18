@@ -7,7 +7,7 @@ const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
     className: cx(
       "block w-1/4 py-4 outline-none",
-      "text-center font-bold uppercase",
+      "text-center font-bold leading-none tracking-wide",
       isPartiallyCurrent ? "text-secondary" : "text-gray-500"
     ),
   })

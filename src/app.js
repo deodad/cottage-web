@@ -12,6 +12,7 @@ const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
 
 const Home = lazy(() => import("./pages/home"))
+const Pricing = lazy(() => import("./pages/pricing"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const AddListing = lazy(() => import("./pages/add-listing"))
@@ -93,6 +94,7 @@ const App = ({ me }) => {
           <Suspense fallback={<div />}>
             <Router>
               <Front path="/" />
+              <Pricing path="/pricing" />
               <Login path="/login" signIn={signIn} />
               <SignUp path="/sign-up" signIn={signIn} />
 
