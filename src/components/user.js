@@ -59,7 +59,7 @@ export const CompactUserImageLink = ({ user, className, ...rest }) => (
 )
 
 export const UserActivity = ({ user, date, children }) => (
-  <div className="gutter-none p-4 flex">
+  <div className="flex">
     <div className="flex-none mr-2">
       <UserLink user={user}>
         <ProfileImage user={user} />
@@ -83,7 +83,7 @@ export const UserActivity = ({ user, date, children }) => (
 )
 
 export const UnlinkedUserActivity = ({ user, date, children }) => (
-  <div className="gutter-none p-4 flex">
+  <div className="flex">
     <div className="flex-none mr-2">
       <ProfileImage user={user} />
     </div>

@@ -31,16 +31,17 @@ const Feed = () => {
   if (isError) return <div>{error}</div>
 
   return (
-    <>
+    <ul className="space-y-5">
       {data.activities.map((activity) => (
-        <Activity
-          key={activity.id}
-          user={activity.user}
-          activity={activity.activity_data}
-          date={new Date(activity.created_at)}
-        />
+        <li key={activity.id}>
+          <Activity
+            user={activity.user}
+            activity={activity.activity_data}
+            date={new Date(activity.created_at)}
+          />
+        </li>
       ))}
-    </>
+    </ul>
   )
 }
 

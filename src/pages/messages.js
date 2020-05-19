@@ -20,7 +20,7 @@ const Messages = () => {
 }
 
 const Threads = () => (
-  <ul>
+  <ul className="space-y-5">
     {users[0].threads.map((thread) => (
       <li key={thread.id}>
         <Link to={thread.id.toString()}>
