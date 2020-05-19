@@ -9,14 +9,19 @@ export const UserLink = ({ user, children, ...rest }) => (
   </Link>
 )
 
-export const ProfileImage = ({ user, className, ...rest }) => (
+export const ProfileImage = ({
+  user,
+  className,
+  size = "w-10 h-10",
+  ...rest
+}) => (
   <img
     src={
       user.profile_image_url
         ? user.profile_image_url
         : "https://place-hold.it/60x60/999999/333333"
     }
-    className={classnames(className, "rounded-full w-10 h-10 border")}
+    className={classnames(className, size, "rounded-full border")}
     alt={`${user.username} profile picture`}
     {...rest}
   />
@@ -39,6 +44,17 @@ export const UserImageLink = ({ user, className, ...rest }) => (
     <ProfileImage user={user} className="mr-2" />
     <span className="font-bold">{user.name}</span>{" "}
     <span className="ml-1 emphasis-medium">@{user.username}</span>
+  </UserLink>
+)
+
+export const CompactUserImageLink = ({ user, className, ...rest }) => (
+  <UserLink
+    user={user}
+    className={classnames(className, "flex items-center")}
+    {...rest}
+  >
+    <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
+    <div className="text-sm leading-tight font-bold">{user.username}</div>
   </UserLink>
 )
 

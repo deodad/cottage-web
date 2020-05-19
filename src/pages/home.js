@@ -10,12 +10,12 @@ import { ContainedButton } from "../components/button"
 
 const Home = () => (
   <>
-    <div className="gutter-none sticky top-0 flex bg-white">
+    <div className="sticky top-0 flex bg-white">
       <NavLink to="">Activity</NavLink>
       <NavLink to="listings">My Listings</NavLink>
     </div>
 
-    <div className="mt-5">
+    <div className="mt-3 px-3">
       <Router>
         <Feed path="/" />
         <Listings path="listings" />

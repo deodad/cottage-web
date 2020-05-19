@@ -69,7 +69,7 @@ const App = ({ me }) => {
   useEffect(() => {
     me.then((res) => {
       if (res.ok) {
-        res.json().then((user) => dispatch({ type: "init", user }))
+        return res.json().then((user) => dispatch({ type: "init", user }))
       }
 
       if (res.status == 401) {

@@ -5,6 +5,7 @@ import { string, object } from "yup"
 import { updateUser } from "../api"
 import { Input } from "./form"
 import ProfileImageInput from "./profile-image-input"
+import AddressInput from "./address-input"
 
 const validationSchema = object({
   name: string()
@@ -61,7 +62,7 @@ const ProfileForm = ({ user, children }) => {
       <ProfileImageInput name="profile_image_url" />
       <Input type="text" label="Name" name="name" />
       <Input type="text" label="Bio" name="bio" />
-      <Input type="text" label="Location" name="location" />
+      <AddressInput type="text" label="Location" name="location" />
     </>
   )
 

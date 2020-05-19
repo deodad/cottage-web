@@ -9,6 +9,9 @@ const ListingImageUrl = ({ name }) => {
   const [inputImage, setInputImage] = useState(null)
   const inputRef = useRef()
 
+  const { error, value } = meta
+  const { setValue } = helpers
+
   const handleInputChange = (e) => {
     var reader = new FileReader()
     reader.onload = (e) => setInputImage(e.target.result)
@@ -26,9 +29,6 @@ const ListingImageUrl = ({ name }) => {
   const handleCancel = () => {
     setInputImage(null)
   }
-
-  const { error, value } = meta
-  const { setValue } = helpers
 
   const imageSrc =
     typeof value === "string" || typeof value === "undefined"

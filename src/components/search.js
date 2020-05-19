@@ -1,6 +1,11 @@
 import React from "react"
 import { searchClient } from "./algolia"
-import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
+import {
+  Configure,
+  InstantSearch,
+  SearchBox,
+  Hits,
+} from "react-instantsearch-dom"
 import "instantsearch.css/themes/algolia.css"
 
 const Search = () => (
@@ -8,8 +13,10 @@ const Search = () => (
     searchClient={searchClient}
     indexName={`search_${process.env.NODE_ENV}`}
   >
+    <Configure aroundLatLng="30.253494, -97.7262973999" />
     <SearchBox />
     <Hits />
+    Nice!
   </InstantSearch>
 )
 

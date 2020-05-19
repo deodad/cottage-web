@@ -71,7 +71,9 @@ const Profile = ({
         </div>
       </TopPanel>
 
-      <Listings path="/" listings={userListings} />
+      <div className="sm:px-3">
+        <Listings path="/" listings={userListings} />
+      </div>
     </>
   )
 }
@@ -96,7 +98,8 @@ const FollowButton = ({ update, userId, isFollowed, ...rest }) => {
 }
 
 const Listings = ({ listings }) => (
-  <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+  // <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+  <div className="space-y-5">
     {listings.map((listing) => (
       <Listing key={listing.id} listing={listing} />
     ))}

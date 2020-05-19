@@ -1,5 +1,6 @@
 export * from "./use-app-context"
 export * from "./use-activities"
+export * from "./use-google-maps"
 export * from "./use-listings"
 export * from "./use-resource"
 export * from "./use-user"

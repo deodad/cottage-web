@@ -19,17 +19,19 @@ const Listing = ({ authenticatedUser, data }) => {
         )}
       </TopBar>
 
-      <h1 className="text-2xl m-0">{listing.name}</h1>
-      <div>{listing.short_description}</div>
-      <div className="my-3">
-        <ListingImage listing={listing} />
+      <div className="px-3">
+        <h1 className="text-2xl m-0">{listing.name}</h1>
+        <div>{listing.short_description}</div>
+        <div className="my-3">
+          <ListingImage listing={listing} />
+        </div>
+        <div className="mb-3 text-lg text-gray-800">${listing.price}</div>
+        <div className="flex items-center">
+          <ContainedButton>Purchase</ContainedButton>
+        </div>
+        <div className="mt-5 text-sm font-bold text-gray-600">Produced by:</div>
+        <UserImageLink user={listing.user} className="mt-1" />
       </div>
-      <div className="mb-3 text-lg text-gray-800">${listing.price}</div>
-      <div className="flex items-center">
-        <ContainedButton>Purchase</ContainedButton>
-      </div>
-      <div className="mt-5 text-sm font-bold text-gray-600">Produced by:</div>
-      <UserImageLink user={listing.user} className="mt-3" />
     </>
   )
 }

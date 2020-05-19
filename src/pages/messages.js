@@ -10,7 +10,8 @@ const Messages = () => {
   return (
     <>
       <TopBar title="Messages" />
-      <Router>
+
+      <Router className="px-3">
         <Threads path="/" />
         <Thread path=":threadId" />
       </Router>

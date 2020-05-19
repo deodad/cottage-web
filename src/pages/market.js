@@ -1,5 +1,6 @@
 import React from "react"
 import {
+  Configure,
   InstantSearch,
   connectSearchBox,
   connectHits,
@@ -8,6 +9,7 @@ import { compose, withAuthentication, withLayout } from "../hoc"
 import { Listing } from "../components/listing"
 import { TopBar } from "../components/layout"
 import { searchClient } from "../algolia"
+import { formatDistance } from "../util/distance"
 
 export const SearchBox = connectSearchBox(
   ({ currentRefinement, isSearchStalled, refine }) => (
@@ -25,10 +27,16 @@ export const SearchBox = connectSearchBox(
 
 export const Hits = connectHits(({ hits }) => {
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    <ul className="space-y-5">
       {hits.map((hit) => (
-        <li key={hit.objectID} className="mb-3 sm:mb-0">
-          <Listing listing={hit} />
+        <li key={hit.objectID}>
+          <Listing
+            listing={hit}
+            user={hit.user}
+            distance={formatDistance(
+              hit._rankingInfo.matchedGeoLocation.distance
+            )}
+          />
         </li>
       ))}
     </ul>
@@ -41,11 +49,22 @@ const Market = () => {
       searchClient={searchClient}
       indexName={`search_${process.env.NODE_ENV}`}
     >
+      <Configure
+        getRankingInfo={true}
+        aroundLatLng="30.253494, -97.723297"
+        aroundPrecision={[
+          { from: 0, value: 250 },
+          { from: 1000, value: 500 },
+          { from: 5000, value: 2000 },
+        ]}
+      />
       <TopBar>
         <SearchBox />
       </TopBar>
 
-      <Hits />
+      <div className="sm:px-3">
+        <Hits />
+      </div>
     </InstantSearch>
   )
 }

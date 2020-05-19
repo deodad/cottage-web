@@ -31,7 +31,7 @@ const ProfileImageInput = ({ name }) => {
   const { value } = meta
   const { setValue } = helpers
 
-  const imageSrc = typeof value === "string" ? value : value.dataUrl
+  const imageSrc = value && (typeof value === "string" ? value : value.dataUrl)
 
   return (
     <div className="mb-2">

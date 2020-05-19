@@ -12,7 +12,7 @@ const ProfileSettings = ({ data: user }) => (
           <ContainedButton type="submit">Save</ContainedButton>
         </TopBar>
 
-        {fields}
+        <div className="px-3">{fields}</div>
       </>
     )}
   </ProfileForm>

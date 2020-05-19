@@ -60,15 +60,15 @@ const Simple = ({ children, title }) => (
 )
 
 const User = ({ children, focus }) => (
-  <div className="max-w-screen-lg container h-full mx-auto">
+  <div className="max-w-screen-sm container h-full mx-auto">
     <div className="flex flex-col h-full md:flex-row">
-      <div className="flex-none h-full px-5 pb-3 w-40 hidden md:block">
+      <div className="flex-none h-full px-3 pb-3 w-40 hidden md:block">
         <div className="fixed">
           <Navigation />
         </div>
       </div>
       <div className="flex-1 min-h-0 relative overflow-y-auto md:overflow-y-visible">
-        <div className="min-h-full border-l p-5">
+        <div className="min-h-full border-l border-r pb-5">
           <Suspense
             fallback={<Spinner className="flex justify-center mt-16" />}
           >
@@ -88,7 +88,7 @@ const User = ({ children, focus }) => (
 )
 
 export const TopBar = ({ children, back = false, title }) => (
-  <div className="sticky top-0 box-content h-10 -mt-5 -mx-5 mb-5 px-5 py-3 bg-white border-b flex items-center justify-between">
+  <div className="sticky top-0 box-content h-10 mb-3 p-3 bg-white border-b flex items-center justify-between">
     {title && (
       <>
         <div className="flex-none flex items-center">
@@ -109,5 +109,5 @@ export const TopBar = ({ children, back = false, title }) => (
 )
 
 export const TopPanel = ({ children }) => (
-  <div className="-mt-5 -mx-5 mb-5 px-5 py-3 bg-white border-b">{children}</div>
+  <div className="mb-3 p-3 bg-white border-b">{children}</div>
 )
