@@ -65,12 +65,12 @@ const EditListing = ({ data, isLoading, isError }) => {
               <ContainedButton type="submit">Save</ContainedButton>
             </TopBar>
 
-            {fields}
+            <div className="px-3">{fields}</div>
           </>
         )}
       </ListingForm>
 
-      <div className="mt-5">
+      <div className="mt-5 px-3">
         <DeleteListing id={data.listing.id} />
       </div>
     </>

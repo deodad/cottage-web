@@ -48,7 +48,9 @@ const AddListing = () => {
             <ContainedButton type="submit">Save</ContainedButton>
           </TopBar>
 
-          {fields}
+          <div className="px-3">
+            {fields}
+          </div>
         </>
       )}
     </ListingForm>
