@@ -28,7 +28,7 @@ export const SearchBox = connectSearchBox(
 
 export const Hits = connectHits(({ hits }) => {
   return (
-    <ul className="space-y-5">
+    <ul className="space-y-3">
       {hits.map((hit) => (
         <li key={hit.objectID}>
           <HorizontalListing

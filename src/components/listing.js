@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
-import { CompactUserImageLink } from "./user"
+import { CompactUserBadge } from "./user"
 
 export const ListingLink = ({ listing, children, ...rest }) => (
   <Link to={`/listing/${listing.id}`} {...rest}>
@@ -63,21 +63,19 @@ export const HorizontalListing = ({ listing, user, distance }) => (
 
       {user && (
         <div className="mt-3">
-          <CompactUserImageLink user={user} />
+          <CompactUserBadge user={user} />
         </div>
       )}
     </div>
   </ListingLink>
 )
 
-export const ListingHit = ({ hit }) => <Listing listing={hit} />
-
 export const Listings = ({ listings }) => {
   return (
     // <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    <ul>
+    <ul className="space-y-3">
       {listings.map((listing) => (
-        <li key={listing.id} className="mb-3 sm:mb-0">
+        <li key={listing.id}>
           <Listing listing={listing} />
         </li>
       ))}

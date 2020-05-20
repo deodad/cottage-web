@@ -58,7 +58,7 @@ export const CompactUserImageLink = ({ user, className, ...rest }) => (
   </UserLink>
 )
 
-export const CompactUserDisplay = ({ user }) => (
+export const CompactUserBadge = ({ user }) => (
   <div className="flex items-center">
     <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
     <div className="text-sm leading-tight font-bold">{user.username}</div>
