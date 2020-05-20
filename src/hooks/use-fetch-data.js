@@ -62,7 +62,7 @@ export const useFetchData = (key = "data") => {
         return Promise.reject()
       })
       .catch((err) => {
-        failure("Failure")
+        failure("An error occured.")
       })
   }
 
