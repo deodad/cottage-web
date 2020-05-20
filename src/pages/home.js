@@ -1,16 +1,15 @@
 import React from "react"
 import { Router, navigate } from "@reach/router"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
-import { useActivities, useListings } from "../hooks"
+import { useActivities } from "../hooks"
 import { NavLink } from "../components/common"
-import { Listing } from "../components/listing"
+import { HorizontalListing } from "../components/listing"
 import { Activity } from "../components/activity"
 import { ContainedButton } from "../components/button"
 
 const Home = () => (
   <>
-    <div className="sticky top-0 flex bg-white">
+    <div className="sticky top-0 z-30 flex bg-white">
       <NavLink to="">Activity</NavLink>
       <NavLink to="listings">My Listings</NavLink>
     </div>
@@ -45,8 +44,17 @@ const Feed = () => {
   )
 }
 
+import { useEffect } from "react"
+import { useFetchData } from "../hooks"
+import { getMyListings } from "../api"
+
 const Listings = () => {
-  const { data, error, isLoading, isError } = useListings()
+  const { view, handleFetch } = useFetchData()
+  const { data, error, isLoading, isError } = view
+
+  useEffect(() => {
+    handleFetch(getMyListings())
+  }, [])
 
   if (isError) {
     return <div>{error}</div>
@@ -56,25 +64,20 @@ const Listings = () => {
     return <div>Loading</div>
   }
 
+  console.log(data.listings)
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-700">My Listings</h1>
-        <div>
-          <ContainedButton
-            icon={faPlus}
-            emphasis="highest"
-            size="lg"
-            onClick={() => navigate("/add-listing")}
-          >
-            Add Listing
-          </ContainedButton>
-        </div>
-      </div>
+      <ContainedButton
+        emphasis="highest"
+        size="lg"
+        onClick={() => navigate("/add-listing")}
+      >
+        Add Listing
+      </ContainedButton>
 
-      <div className="mt-5 grid gap-3 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="mt-3 space-y-3">
         {data.listings.map((listing) => (
-          <Listing key={listing.id} listing={listing} />
+          <HorizontalListing key={listing.id} listing={listing} />
         ))}
       </div>
     </div>

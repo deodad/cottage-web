@@ -53,14 +53,13 @@ p {
   overflow: hidden;
 }
 
-
 .surface::before {
   position: absolute;
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
   content: "";
-  background-color: var(--color-surface);
+  background-color: var(--color-on-surface);
   top: calc(50% - 100%);
   left: calc(50% - 100%);
   width: 200%;

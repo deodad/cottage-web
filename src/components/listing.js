@@ -44,24 +44,22 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
 )
 
 export const HorizontalListing = ({ listing, user, distance }) => (
-  <div className="flex">
-    <ListingLink listing={listing} className="flex-none w-48 h-48">
+  <ListingLink listing={listing} className="flex surface rounded">
+    <div className="flex-none w-48 h-48">
       <img src={listing.image_url} alt={listing.name} className="rounded" />
-    </ListingLink>
+    </div>
 
     <div className="flex-1 ml-3">
-      <ListingLink listing={listing}>
-        <div className="mt-1 text-sm">
-          <div className="text-lg font-bold">{listing.name}</div>
-          <div className="emphasis-medium">
-            ${listing.price}
-            {distance && <span> &middot; {distance}</span>}
-          </div>
-          {listing.short_description && (
-            <div className="mt-1">{listing.short_description}</div>
-          )}
+      <div className="mt-1 text-sm">
+        <div className="text-lg font-bold">{listing.name}</div>
+        <div className="emphasis-medium">
+          ${listing.price}
+          {distance && <span> &middot; {distance}</span>}
         </div>
-      </ListingLink>
+        {listing.short_description && (
+          <div className="mt-1">{listing.short_description}</div>
+        )}
+      </div>
 
       {user && (
         <div className="mt-3">
@@ -69,7 +67,7 @@ export const HorizontalListing = ({ listing, user, distance }) => (
         </div>
       )}
     </div>
-  </div>
+  </ListingLink>
 )
 
 export const ListingHit = ({ hit }) => <Listing listing={hit} />

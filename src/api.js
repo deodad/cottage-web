@@ -45,6 +45,7 @@ export const logout = () => post("logout")
 export const me = () => get("me")
 export const follow = (id) => post(`me/follow/${id}`)
 export const unfollow = (id) => del(`me/follow/${id}`)
+export const getMyListings = () => get(`me/listings`)
 
 export const createListing = (body) =>
   fetchWithDefaults("listings", {
