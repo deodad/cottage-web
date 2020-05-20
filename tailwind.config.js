@@ -28,6 +28,7 @@ module.exports = {
       ...colors,
       white: "rgb(253, 253, 251)",
       black: "rgb(3, 3, 5)",
+      grey: "rgb(213, 217, 211)",
       primary: "var(--color-primary)",
       secondary: "var(--color-secondary)",
       error: "var(--color-error)",

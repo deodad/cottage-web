@@ -65,7 +65,7 @@ const Market = () => {
 
       <Map />
 
-      <div className="m-3">
+      <div className="mt-3 mx-3">
         <Hits />
       </div>
     </InstantSearch>

@@ -1,11 +1,10 @@
 import React from "react"
-import { Router, navigate } from "@reach/router"
+import { Router } from "@reach/router"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { useActivities } from "../hooks"
 import { NavLink } from "../components/common"
-import { HorizontalListing } from "../components/listing"
 import { Activity } from "../components/activity"
-import { ContainedButton } from "../components/button"
+import Listings from "./home/listings"
 
 const Home = () => (
   <>
@@ -41,46 +40,6 @@ const Feed = () => {
         </li>
       ))}
     </ul>
-  )
-}
-
-import { useEffect } from "react"
-import { useFetchData } from "../hooks"
-import { getMyListings } from "../api"
-
-const Listings = () => {
-  const { view, handleFetch } = useFetchData()
-  const { data, error, isLoading, isError } = view
-
-  useEffect(() => {
-    handleFetch(getMyListings())
-  }, [])
-
-  if (isError) {
-    return <div>{error}</div>
-  }
-
-  if (isLoading) {
-    return <div>Loading</div>
-  }
-
-  console.log(data.listings)
-  return (
-    <div>
-      <ContainedButton
-        emphasis="highest"
-        size="lg"
-        onClick={() => navigate("/add-listing")}
-      >
-        Add Listing
-      </ContainedButton>
-
-      <div className="mt-3 space-y-3">
-        {data.listings.map((listing) => (
-          <HorizontalListing key={listing.id} listing={listing} />
-        ))}
-      </div>
-    </div>
   )
 }
 

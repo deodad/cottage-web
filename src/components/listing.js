@@ -49,17 +49,15 @@ export const HorizontalListing = ({ listing, user, distance }) => (
       <img src={listing.image_url} alt={listing.name} className="rounded" />
     </div>
 
-    <div className="flex-1 ml-3">
-      <div className="mt-1 text-sm">
-        <div className="text-lg font-bold">{listing.name}</div>
-        <div className="emphasis-medium">
-          ${listing.price}
-          {distance && <span> &middot; {distance}</span>}
-        </div>
-        {listing.short_description && (
-          <div className="mt-1">{listing.short_description}</div>
-        )}
+    <div className="flex-1 mt-2 ml-2">
+      <div className="text-lg font-bold">{listing.name}</div>
+      <div className="text-sm emphasis-medium">
+        ${listing.price}
+        {distance && <span> &middot; {distance}</span>}
       </div>
+      {listing.short_description && (
+        <div className="mt-1">{listing.short_description}</div>
+      )}
 
       {user && (
         <div className="mt-3">
