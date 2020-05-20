@@ -93,7 +93,7 @@ export const TopBar = ({
   onBack = () => navigate(-1),
   title,
 }) => (
-  <div className="sticky top-0 box-content h-10 mb-3 p-3 bg-white border-b flex items-center justify-between">
+  <div className="sticky top-0 z-30 box-content h-10 mb-3 p-3 bg-white border-b flex items-center justify-between">
     {title && (
       <>
         <div className="flex-none flex items-center">

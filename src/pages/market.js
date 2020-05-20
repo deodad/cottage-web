@@ -8,6 +8,7 @@ import {
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { HorizontalListing, Listing } from "../components/listing"
 import { TopBar } from "../components/layout"
+import Map from "../components/map"
 import { searchClient } from "../algolia"
 import { formatDistance } from "../util/distance"
 
@@ -61,6 +62,8 @@ const Market = () => {
       <TopBar>
         <SearchBox />
       </TopBar>
+
+      <Map />
 
       <div className="m-3">
         <Hits />
