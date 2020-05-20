@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { compose, withAuthentication, withLayout } from "../hoc"
 import { follow, unfollow } from "../api"
-import { Listing } from "../components/listing"
+import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
@@ -71,7 +71,9 @@ const Profile = ({
         </div>
       </TopPanel>
 
-      <Listings path="/" listings={userListings} />
+      <div className="px-3">
+        <Listings path="/" listings={userListings} />
+      </div>
     </>
   )
 }
@@ -98,7 +100,7 @@ const FollowButton = ({ update, userId, isFollowed, ...rest }) => {
 const Listings = ({ listings }) => (
   <div className="space-y-5">
     {listings.map((listing) => (
-      <Listing key={listing.id} listing={listing} />
+      <HorizontalListing key={listing.id} listing={listing} />
     ))}
   </div>
 )
