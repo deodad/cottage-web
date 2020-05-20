@@ -20,6 +20,10 @@ module.exports = {
       medium: "0.60",
       high: "0.87",
     },
+    borderColor: (theme) => ({
+      ...theme("colors"),
+      default: "rgb(213, 217, 211)",
+    }),
     colors: {
       ...colors,
       white: "rgb(253, 253, 251)",

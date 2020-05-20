@@ -6,7 +6,7 @@ import {
   connectHits,
 } from "react-instantsearch-dom"
 import { compose, withAuthentication, withLayout } from "../hoc"
-import { Listing } from "../components/listing"
+import { HorizontalListing, Listing } from "../components/listing"
 import { TopBar } from "../components/layout"
 import { searchClient } from "../algolia"
 import { formatDistance } from "../util/distance"
@@ -30,7 +30,7 @@ export const Hits = connectHits(({ hits }) => {
     <ul className="space-y-5">
       {hits.map((hit) => (
         <li key={hit.objectID}>
-          <Listing
+          <HorizontalListing
             listing={hit}
             user={hit.user}
             distance={formatDistance(
@@ -62,7 +62,7 @@ const Market = () => {
         <SearchBox />
       </TopBar>
 
-      <div className="sm:px-3">
+      <div className="m-3">
         <Hits />
       </div>
     </InstantSearch>

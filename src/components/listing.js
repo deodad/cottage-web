@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "@reach/router"
-import cx from "classnames"
 import { CompactUserImageLink } from "./user"
 
 export const ListingLink = ({ listing, children, ...rest }) => (
@@ -9,14 +8,13 @@ export const ListingLink = ({ listing, children, ...rest }) => (
   </Link>
 )
 
-export const ListingImage = ({ className, listing }) => (
+export const ListingImage = ({ listing }) => (
   <img
     src={
       listing.image_url
         ? listing.image_url
         : "https://place-hold.it/400x400/999999/333333&text=Image"
     }
-    className={cx("rounded border", className)}
   />
 )
 
@@ -29,11 +27,7 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
     )}
 
     <ListingLink listing={listing} {...rest}>
-      <img
-        src={listing.image_url}
-        className="sm:rounded sm:border"
-        alt={listing.name}
-      />
+      <img src={listing.image_url} alt={listing.name} />
 
       <div className="mt-1 px-2 text-sm">
         <div className="text-lg font-bold">{listing.name}</div>
@@ -46,6 +40,35 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
         )}
       </div>
     </ListingLink>
+  </div>
+)
+
+export const HorizontalListing = ({ listing, user, distance }) => (
+  <div className="flex">
+    <ListingLink listing={listing} className="flex-none w-48 h-48">
+      <img src={listing.image_url} alt={listing.name} className="rounded" />
+    </ListingLink>
+
+    <div className="flex-1 ml-3">
+      <ListingLink listing={listing}>
+        <div className="mt-1 text-sm">
+          <div className="text-lg font-bold">{listing.name}</div>
+          <div className="emphasis-medium">
+            ${listing.price}
+            {distance && <span> &middot; {distance}</span>}
+          </div>
+          {listing.short_description && (
+            <div className="mt-1">{listing.short_description}</div>
+          )}
+        </div>
+      </ListingLink>
+
+      {user && (
+        <div className="mt-3">
+          <CompactUserImageLink user={user} />
+        </div>
+      )}
+    </div>
   </div>
 )
 
