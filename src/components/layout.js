@@ -87,14 +87,19 @@ const User = ({ children, focus }) => (
   </div>
 )
 
-export const TopBar = ({ children, back = false, title }) => (
+export const TopBar = ({
+  children,
+  back = false,
+  onBack = () => navigate(-1),
+  title,
+}) => (
   <div className="sticky top-0 box-content h-10 mb-3 p-3 bg-white border-b flex items-center justify-between">
     {title && (
       <>
         <div className="flex-none flex items-center">
           {back && (
             <div className="mr-3">
-              <TextButton onClick={() => navigate(-1)}>
+              <TextButton onClick={onBack}>
                 <FontAwesomeIcon icon={faArrowLeft} />
               </TextButton>
             </div>

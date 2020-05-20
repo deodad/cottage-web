@@ -179,6 +179,14 @@ p {
   @apply text-gray-700 font-bold;
 }
 
+/*
+ * react-modal
+ */
+
+.ReactModal__Content {
+  background-color: blue;
+}
+
 /* purgecss end ignore */
 
 .font-brand {
@@ -196,5 +204,6 @@ p {
 .gutter-none {
   @apply -mx-5;
 }
+
 
 @import "tailwindcss/utilities";

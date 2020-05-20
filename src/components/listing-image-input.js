@@ -1,8 +1,18 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import { useField } from "formik"
-import Cropper from "cropperjs"
-import { DivButton, TextButton, ContainedButton } from "./button"
-import "../cropper.css"
+import { DivButton } from "./button"
+import Crop from "./crop"
+
+const cropperOptions = {
+  aspectRatio: 1,
+  viewMode: 2,
+  zoomable: false,
+}
+
+const getCroppedCanvasOptions = {
+  maxWidth: 800,
+  maxHeight: 800,
+}
 
 const ListingImageUrl = ({ name }) => {
   const [, meta, helpers] = useField(name)
@@ -56,51 +66,15 @@ const ListingImageUrl = ({ name }) => {
       {error && <div className="text-error">{error}</div>}
 
       {inputImage && (
-        <Crop image={inputImage} onCrop={handleCrop} onCancel={handleCancel} />
+        <Crop
+          image={inputImage}
+          onCrop={handleCrop}
+          onCancel={handleCancel}
+          cropperOptions={cropperOptions}
+          getCroppedCanvasOptions={getCroppedCanvasOptions}
+        />
       )}
     </div>
-  )
-}
-
-const Crop = ({ image, onCrop, onCancel }) => {
-  const ref = useRef()
-
-  const handleCrop = (e) => {
-    e.preventDefault()
-
-    const canvas = window.cropper.getCroppedCanvas()
-
-    const dataUrl = canvas.toDataURL()
-
-    canvas.toBlob((blob) => {
-      onCrop({
-        dataUrl,
-        blob,
-      })
-    })
-  }
-
-  useEffect(() => {
-    const cropper = new Cropper(ref.current, {
-      aspectRatio: 1,
-      viewMode: 2,
-    })
-
-    // TODO don't do this
-    window.cropper = cropper
-
-    return () => cropper.destroy()
-  }, [image, ref])
-
-  return (
-    <>
-      <div className="mt-5 mb-1">
-        <img src={image} ref={ref} className="block max-w-full" />
-      </div>
-
-      <ContainedButton onClick={handleCrop}>Done</ContainedButton>
-      <TextButton onClick={onCancel}>Cancel</TextButton>
-    </>
   )
 }
 
