@@ -8,7 +8,7 @@ export const withFetchData = (Component) => ({
   ...rest
 }) => {
   if (isLoading) return <Spinner className="flex justify-center pt-16" />
-  if (isError) return <div className="text-center text-error">{error}</div>
+  if (isError) return <div className="text-center text-error p-5">{error}</div>
 
   return <Component {...rest} />
 }

@@ -1,18 +1,25 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
 import { Formik, Form } from "formik"
-import { string, object } from "yup"
+import { number, object, string } from "yup"
 import { updateUser } from "../api"
 import { Input } from "./form"
 import ProfileImageInput from "./profile-image-input"
-import AddressInput from "./address-input"
+import LocationInput from "./location-input"
 
 const validationSchema = object({
   name: string()
     .max(60, "60 character max")
     .required("What should we call you?"),
   bio: string(),
-  location: string().required("Where's your local community?"),
+  location: object()
+    .shape({
+      lng: number(),
+      lat: number(),
+      location: string(),
+    })
+    .typeError("Select a location from the autocomplete")
+    .required("Where's your local community?"),
 })
 
 const ProfileForm = ({ user, children }) => {
@@ -38,7 +45,9 @@ const ProfileForm = ({ user, children }) => {
 
     data.set("name", values.name)
     data.set("bio", values.bio)
-    data.set("location", values.location)
+    data.set("location", values.location.address)
+    data.set("lng", values.location.lng)
+    data.set("lat", values.location.lat)
 
     updateUser(user.id, data)
       .then((res) => {
@@ -62,9 +71,19 @@ const ProfileForm = ({ user, children }) => {
       <ProfileImageInput name="profile_image_url" />
       <Input type="text" label="Name" name="name" />
       <Input type="text" label="Bio" name="bio" />
-      <AddressInput type="text" label="Location" name="location" />
+      <LocationInput type="text" label="Location" name="location" />
+
+      {error && <div className="mt-3 text-error">{error}</div>}
     </>
   )
+
+  const initialLocation = user.location
+    ? {
+        address: user.location,
+        lng: user.lng,
+        lat: user.lat,
+      }
+    : ""
 
   return (
     <>
@@ -72,16 +91,13 @@ const ProfileForm = ({ user, children }) => {
         initialValues={{
           name: user.name,
           bio: user.bio || "",
-          location: user.location || "",
+          location: initialLocation,
           profile_image_url: user.profile_image_url,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          {children({ fields })}
-          {error && <div className="mt-3 text-error">{error}</div>}
-        </Form>
+        <Form>{children({ fields })}</Form>
       </Formik>
     </>
   )

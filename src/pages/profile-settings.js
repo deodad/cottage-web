@@ -6,7 +6,7 @@ import { TopBar } from "../components/layout"
 
 const ProfileSettings = ({ data: user }) => (
   <ProfileForm user={user}>
-    {({ fields }) => (
+    {({ fields, error }) => (
       <>
         <TopBar title="Edit Profile" back={true}>
           <ContainedButton type="submit">Save</ContainedButton>
