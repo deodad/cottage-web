@@ -35,6 +35,7 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
+      COTTAGE_API_HOST: "http://localhost:8082"
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html",

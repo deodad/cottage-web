@@ -1,7 +1,4 @@
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8082"
-    : "https://cottage-api.livediagonal.com"
+const baseUrl = process.env.COTTAGE_API_HOST || "http://localhost:8082"
 
 const fetchWithDefaults = (path, options) =>
   fetch(`${baseUrl}/${path}`, {
