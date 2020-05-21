@@ -44,7 +44,7 @@ export const Hits = connectHits(({ hits }) => {
   )
 })
 
-const Market = () => {
+const Market = ({ authenticatedUser }) => {
   return (
     <InstantSearch
       searchClient={searchClient}
@@ -52,7 +52,7 @@ const Market = () => {
     >
       <Configure
         getRankingInfo={true}
-        aroundLatLng="30.253494, -97.723297"
+        aroundLatLng={`${authenticatedUser.lat}, ${authenticatedUser.lng}`}
         aroundPrecision={[
           { from: 0, value: 250 },
           { from: 1000, value: 500 },
@@ -72,4 +72,4 @@ const Market = () => {
   )
 }
 
-export default compose(withLayout("user"), withAuthentication)(Market)
+export default compose(withAuthentication, withLayout("user"))(Market)
