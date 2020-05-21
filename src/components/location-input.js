@@ -48,9 +48,7 @@ const PlaceInput = ({ onChange, initialValue, ...rest }) => {
       })
     })
 
-    console.log("mounting")
     return () => {
-      console.log("Unmounting?")
       if (autocomplete) {
         google.maps.event.clearInstanceListeners(autocomplete)
       }
