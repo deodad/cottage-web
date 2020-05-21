@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { Formik, Form } from "formik"
-import { string, object } from "yup"
+import { number, string, object } from "yup"
 import { Input } from "./form"
+import LocationInput from "./location-input"
 import { signUp } from "../api"
 import { useUserContext } from "../hooks/use-user-context"
 import { ContainedButton } from "./button"
@@ -16,6 +17,16 @@ export const SignUp = () => {
     }
 
     setError(null)
+
+    const { location, ...rest } = values
+    const { address, ...lnglat } = location
+
+    values = {
+      ...rest,
+      ...lnglat,
+      location: address,
+    }
+
     signUp(values)
       .then((res) => {
         if (res.ok) {
@@ -50,7 +61,14 @@ const validationSchema = object({
   email: string()
     .email("Invalid email address")
     .required("Where can we reach you?"),
-  location: string().required("Where's your local community?"),
+  location: object()
+    .shape({
+      lng: number(),
+      lat: number(),
+      location: string(),
+    })
+    .typeError("Select a location from the autocomplete")
+    .required("Where's your local community?"),
   password: string()
     .min(8, "8 character min")
     .max(64, "64 character max")
@@ -73,7 +91,7 @@ const SignUpForm = ({ onSubmit }) => (
       <Input type="text" label="Username" name="username" />
       <Input type="text" label="Name" name="name" />
       <Input type="email" label="Email" name="email" />
-      <Input type="text" label="Location" name="location" />
+      <LocationInput label="Location" name="location" />
       <Input type="password" label="Password" name="password" />
       <ContainedButton type="submit">Sign up</ContainedButton>
     </Form>
