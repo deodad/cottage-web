@@ -1,31 +1,16 @@
 import React from "react"
 import { withLayout } from "../hoc"
-import { Trade } from "../components/trade"
 import { LoginForm } from "../components/login"
-import { trades } from "../data"
 
 const Front = () => (
-  <div className="flex">
-    <div className="flex-1">
-      <div>Welcome to the peer to peer economy!</div>
+  <div className="container max-w-sm mx-auto">
+    <div>Welcome to the peer to peer economy!</div>
 
-      <div className="mt-6">
-        <ul>
-          {trades.map((trade, index) => (
-            <li key={index} className="py-2">
-              <Trade {...trade} />
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="mt-10 text-lg font-bold">
+      Start trading with people in your community
     </div>
-    <div className="px-5" style={{ width: 300 }}>
-      <div className="mt-10 text-lg font-bold">
-        Start trading with people in your community
-      </div>
 
-      <LoginForm />
-    </div>
+    <LoginForm />
   </div>
 )
 
