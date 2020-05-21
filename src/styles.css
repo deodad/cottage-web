@@ -186,6 +186,10 @@ p {
   background-color: blue;
 }
 
+.ReactModal__Overlay {
+  z-index: 41;
+}
+
 /* purgecss end ignore */
 
 .font-brand {

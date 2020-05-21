@@ -42,7 +42,7 @@ export const Layout = ({ ...rest }) => {
 }
 
 const Simple = ({ children, title }) => (
-  <div className="max-w-screen-lg container mx-auto px-5 py-3">
+  <div className="max-w-sm container mx-auto px-5 py-3">
     <Link
       to="/"
       className="text-2xl font-bold font-brand text-brand block mb-5"
@@ -51,8 +51,8 @@ const Simple = ({ children, title }) => (
     </Link>
 
     {title && (
-      <div className="pb-5">
-        <h1 className="text-xl m-0">{title}</h1>
+      <div className="mb-3">
+        <h1 className="text-lg font-bold m-0">{title}</h1>
       </div>
     )}
     {children}

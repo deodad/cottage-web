@@ -4,6 +4,7 @@ import { string, object } from "yup"
 import { Input } from "./form"
 import { signUp } from "../api"
 import { useUserContext } from "../hooks/use-user-context"
+import { ContainedButton } from "./button"
 
 export const SignUp = () => {
   const { signIn } = useUserContext()
@@ -74,15 +75,7 @@ const SignUpForm = ({ onSubmit }) => (
       <Input type="email" label="Email" name="email" />
       <Input type="text" label="Location" name="location" />
       <Input type="password" label="Password" name="password" />
-
-      <div className="mt-5">
-        <button
-          type="submit"
-          className="w-full text-center px-4 py-2 bg-blue-600 text-white"
-        >
-          Sign up
-        </button>
-      </div>
+      <ContainedButton type="submit">Sign up</ContainedButton>
     </Form>
   </Formik>
 )
