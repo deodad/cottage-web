@@ -2,28 +2,15 @@ import React from "react"
 import { Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import { compose, withAuthentication, withLayout } from "../hoc"
+import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
 import { follow, unfollow } from "../api"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
-const Profile = ({
-  authenticatedUser,
-  isLoading,
-  isError,
-  update,
-  data,
-  error,
-}) => {
-  if (isLoading) return null
-  if (isError) return <div>{error}</div>
-
+const Profile = ({ authenticatedUser, update, data }) => {
   const user = data
   const dateJoined = new Date(user.date_joined)
-
-  // Mock data fetching
-  const userListings = user.listings
 
   return (
     <>
@@ -72,7 +59,7 @@ const Profile = ({
       </TopPanel>
 
       <div className="px-3">
-        <Listings path="/" listings={userListings} />
+        <Listings path="/" listings={user.listings} />
       </div>
     </>
   )
@@ -105,4 +92,8 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default compose(withAuthentication, withLayout("user"))(Profile)
+export default compose(
+  withAuthentication,
+  withLayout("user"),
+  withFetchData
+)(Profile)
