@@ -70,7 +70,7 @@ const User = ({ children, focus }) => (
       <div className="flex-1 min-h-0 relative overflow-y-auto md:overflow-y-visible">
         <div className="min-h-full sm:border-l sm:border-r pb-5">
           <Suspense
-            fallback={<Spinner className="flex justify-center mt-16" />}
+            fallback={<Spinner className="flex justify-center pt-16" />}
           >
             {children}
           </Suspense>
