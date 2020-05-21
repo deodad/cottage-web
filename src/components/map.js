@@ -49,7 +49,7 @@ const Map = connectGeoSearch(
   }
 )
 
-const Popup = ({ distance, listing, user }) => (
+const Popup = ({ distance, listing }) => (
   <div className="flex items-center">
     <div className="flex-none w-12 h-12">
       <img src={listing.image_url} alt={listing.name} className="rounded" />
