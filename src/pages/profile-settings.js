@@ -1,5 +1,5 @@
 import React from "react"
-import { compose, withFetchData, withLayout } from "../hoc"
+import { compose, withSWR, withLayout } from "../hoc"
 import ProfileForm from "../components/profile-form"
 import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
@@ -20,5 +20,5 @@ const ProfileSettings = ({ data: user }) => (
 
 export default compose(
   withLayout("user", { focus: true }),
-  withFetchData
+  withSWR
 )(ProfileSettings)

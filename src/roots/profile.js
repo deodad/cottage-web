@@ -1,12 +1,12 @@
 import React, { lazy } from "react"
-import { useUser } from "../hooks/use-user"
+import useSWR from "swr"
 
-const ProfilePage = lazy(() => import("../pages/profile"))
+const fetcher = (url) => get(url).then((r) => r.json())
+const Profile = lazy(() => import("../pages/profile"))
+const ProfileRoot = ({ handle }) => {
+  const { data, error, isValidating } = useSWR(`users/${handle}`)
 
-const Profile = ({ handle }) => {
-  const data = useUser(handle)
-
-  return <ProfilePage {...data} />
+  return <Profile {...{ data, error, isValidating }} />
 }
 
-export default Profile
+export default ProfileRoot

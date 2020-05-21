@@ -1,13 +1,16 @@
 import React, { lazy } from "react"
-import { useUser } from "../hooks"
+import useSWR from "swr"
 import { withAuthentication } from "../hoc"
 
-const ProfileSettingsPage = lazy(() => import("../pages/profile-settings"))
+const ProfileSettings = lazy(() => import("../pages/profile-settings"))
+const ProfileSettingsRoot = ({ authenticatedUser }) => {
+  const { data, error, isValidating } = useSWR(
+    `users/${authenticatedUser.username}`
+  )
 
-const ProfileSettings = ({ authenticatedUser }) => {
-  const data = useUser(authenticatedUser.username)
-
-  return <ProfileSettingsPage {...data} />
+  return (
+    <ProfileSettings {...{ data, error, isValidating, authenticatedUser }} />
+  )
 }
 
-export default withAuthentication(ProfileSettings)
+export default withAuthentication(ProfileSettingsRoot)

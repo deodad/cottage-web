@@ -1,3 +1,5 @@
+import fetch from "unfetch"
+
 const baseUrl = process.env.COTTAGE_API_HOST || "http://localhost:8082"
 
 const fetchWithDefaults = (path, options) =>
@@ -7,7 +9,7 @@ const fetchWithDefaults = (path, options) =>
     ...options,
   })
 
-const get = (path) =>
+export const get = (path) =>
   fetchWithDefaults(path, {
     method: "GET",
   })

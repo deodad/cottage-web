@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
+import { compose, withAuthentication, withSWR, withLayout } from "../hoc"
 import { follow, unfollow } from "../api"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
@@ -95,5 +95,5 @@ const Listings = ({ listings }) => (
 export default compose(
   withAuthentication,
   withLayout("user"),
-  withFetchData
+  withSWR,
 )(Profile)

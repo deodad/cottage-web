@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
+import { SWRConfig } from "swr"
 import { AppContext, UserContext } from "./context"
+import { get } from "./api"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
 import Profile from "./roots/profile"
@@ -10,13 +12,11 @@ import EditListing from "./roots/edit-listing"
 
 const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
-
 const Home = lazy(() => import("./pages/home"))
 const Pricing = lazy(() => import("./pages/pricing"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const AddListing = lazy(() => import("./pages/add-listing"))
-
 const NotFound = lazy(() => import("./pages/not-found"))
 
 const initialState = {
@@ -51,6 +51,10 @@ const reducer = (state, action) => {
     default:
       throw new Error(`Unknown action type '${action.type}'`)
   }
+}
+
+const swrConfig = {
+  fetcher: (...args) => get(...args).then((r) => r.json()),
 }
 
 const App = ({ me }) => {
@@ -92,27 +96,29 @@ const App = ({ me }) => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <UserContext.Provider value={userContext}>
-        <Layout>
-          <Suspense fallback={<div />}>
-            <Router>
-              <Front path="/" />
-              <Pricing path="/pricing" />
-              <Login path="/login" signIn={signIn} />
-              <SignUp path="/sign-up" signIn={signIn} />
+        <SWRConfig value={swrConfig}>
+          <Layout>
+            <Suspense fallback={<div />}>
+              <Router>
+                <Front path="/" />
+                <Pricing path="/pricing" />
+                <Login path="/login" signIn={signIn} />
+                <SignUp path="/sign-up" signIn={signIn} />
 
-              <Home path="home/*" />
-              <Market path="market/*" />
-              <Messages path="messages/*" />
-              <Profile path="profile/:handle/*" />
-              <ProfileSettings path="settings/profile" />
-              <Listing path="listing/:id" />
-              <EditListing path="listing/:id/edit" />
-              <AddListing path="add-listing" />
+                <Home path="home/*" />
+                <Market path="market/*" />
+                <Messages path="messages/*" />
+                <Profile path="profile/:handle/*" />
+                <ProfileSettings path="settings/profile" />
+                <Listing path="listing/:id" />
+                <EditListing path="listing/:id/edit" />
+                <AddListing path="add-listing" />
 
-              <NotFound default />
-            </Router>
-          </Suspense>
-        </Layout>
+                <NotFound default />
+              </Router>
+            </Suspense>
+          </Layout>
+        </SWRConfig>
       </UserContext.Provider>
     </AppContext.Provider>
   )

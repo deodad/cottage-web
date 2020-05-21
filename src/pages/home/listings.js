@@ -1,17 +1,12 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { navigate } from "@reach/router"
-import { withFetchData } from "../../hoc"
-import { useFetchData } from "../../hooks"
-import { getMyListings } from "../../api"
+import useSWR from "swr"
+import { withSWR } from "../../hoc"
 import { HorizontalListing } from "../../components/listing"
 import { ContainedButton } from "../../components/button"
 
 const ListingsContainer = () => {
-  const { view, handleFetch } = useFetchData()
-
-  useEffect(() => {
-    handleFetch(getMyListings())
-  }, [])
+  const { data, error, isValidating } = useSWR(`me/listings`)
 
   return (
     <div>
@@ -23,12 +18,12 @@ const ListingsContainer = () => {
         Add Listing
       </ContainedButton>
 
-      <Listings {...view} />
+      <Listings {...{ data, error, isValidating }} />
     </div>
   )
 }
 
-const Listings = withFetchData(({ data }) => (
+const Listings = withSWR(({ data }) => (
   <ul className="mt-3 space-y-3">
     {data.listings.map((listing) => (
       <li key={listing.id}>

@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
-import { compose, withAuthentication, withFetchData, withLayout } from "../hoc"
+import { compose, withAuthentication, withSWR, withLayout } from "../hoc"
 import { UserImageLink } from "../components/user"
 import { ListingImage } from "../components/listing"
 import { ContainedButton } from "../components/button"
@@ -45,6 +45,6 @@ const Listing = ({ authenticatedUser, data }) => {
 
 export default compose(
   withAuthentication,
-  withFetchData,
-  withLayout("user", { focus: true })
+  withLayout("user", { focus: true }),
+  withSWR
 )(Listing)

@@ -1,17 +1,13 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { withLayout } from "../hoc"
+import { compose, withAuthentication, withLayout, withSWR } from "../hoc"
 import { deleteListing, updateListing } from "../api"
 import { ListingForm } from "../components/listing-form"
-import { ContainedButton, TextButton } from "../components/button"
+import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
 
-const EditListing = ({ data, isLoading, isError }) => {
+const EditListing = ({ data }) => {
   const [error, setError] = useState(null)
-
-  if (isLoading || isError) {
-    return null
-  }
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
     if (isSubmitting) {
@@ -46,11 +42,6 @@ const EditListing = ({ data, isLoading, isError }) => {
         return Promise.reject()
       })
       .catch(() => setError("Failed to update listing."))
-  }
-
-  const handleBack = (e) => {
-    e.preventDefault()
-    navigate(-1)
   }
 
   const { listing } = data
@@ -99,4 +90,8 @@ const DeleteListing = ({ id }) => {
   )
 }
 
-export default withLayout("user", { focus: true })(EditListing)
+export default compose(
+  withAuthentication,
+  withLayout("user", { focus: true }),
+  withSWR
+)(EditListing)

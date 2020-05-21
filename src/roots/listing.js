@@ -1,7 +1,11 @@
 import React, { lazy } from "react"
-import { useResource } from "../hooks/use-resource"
+import useSWR from "swr"
 
 const ListingPage = lazy(() => import("../pages/listing"))
-const Listing = ({ id }) => <ListingPage {...useResource("listings", id)} />
+const Listing = ({ id }) => {
+  const { data, error, isValidating } = useSWR(`listings/${id}`)
+
+  return <ListingPage {...{ data, error, isValidating}} />
+}
 
 export default Listing

@@ -1,7 +1,11 @@
 import React, { lazy } from "react"
-import { useResource } from "../hooks/use-resource"
+import useSWR from "swr"
 
-const Page = lazy(() => import("../pages/edit-listing"))
-const Root = ({ id }) => <Page {...useResource("listings", id)} />
+const EditListing = lazy(() => import("../pages/edit-listing"))
+const EditListingRoot = ({ id }) => {
+  const { data, error, isValidating } = useSWR(`listings/${id}`)
 
-export default Root
+  return <EditListing {...{ data, error, isValidating }} />
+}
+
+export default EditListingRoot
