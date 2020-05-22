@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
 import { SWRConfig } from "swr"
 import { AppContext, UserContext } from "./context"
-import { get } from "./api"
+import swrConfig from "./swr"
 import { Layout } from "./components/layout"
 import Front from "./pages/front"
 import Profile from "./roots/profile"
@@ -51,10 +51,6 @@ const reducer = (state, action) => {
     default:
       throw new Error(`Unknown action type '${action.type}'`)
   }
-}
-
-const swrConfig = {
-  fetcher: (...args) => get(...args).then((r) => r.json()),
 }
 
 const App = ({ me }) => {
