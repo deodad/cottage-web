@@ -15,7 +15,7 @@ const fetcher = (...args) =>
 
     return Promise.reject({
       type: "Unknown",
-      message: "Unable to laod data",
+      message: "Unable to load data",
     })
   })
 
