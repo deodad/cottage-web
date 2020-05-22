@@ -1,12 +1,11 @@
 import React, { lazy } from "react"
 import useSWR from "swr"
 
-const fetcher = (url) => get(url).then((r) => r.json())
 const Profile = lazy(() => import("../pages/profile"))
 const ProfileRoot = ({ handle }) => {
-  const { data, error, isValidating } = useSWR(`users/${handle}`)
+  const { data, error, isValidating, mutate } = useSWR(`users/${handle}`)
 
-  return <Profile {...{ data, error, isValidating }} />
+  return <Profile {...{ data, error, isValidating, mutate }} />
 }
 
 export default ProfileRoot

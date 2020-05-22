@@ -8,7 +8,7 @@ import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
-const Profile = ({ authenticatedUser, update, data }) => {
+const Profile = ({ authenticatedUser, mutate, data }) => {
   const user = data
   const dateJoined = new Date(user.date_joined)
 
@@ -29,7 +29,7 @@ const Profile = ({ authenticatedUser, update, data }) => {
                 <FollowButton
                   userId={user.id}
                   isFollowed={user.isFollowed}
-                  update={update}
+                  mutate={(isFollowed) => mutate({ ...data, isFollowed })}
                 />
               ) : (
                 <Link to="/settings/profile" className="btn-txt">
@@ -65,7 +65,7 @@ const Profile = ({ authenticatedUser, update, data }) => {
   )
 }
 
-const FollowButton = ({ update, userId, isFollowed, ...rest }) => {
+const FollowButton = ({ mutate, userId, isFollowed, ...rest }) => {
   // TODO state management, set isFollowed on user, etc
   const handleClick = () => {
     if (isFollowed) {
@@ -74,7 +74,7 @@ const FollowButton = ({ update, userId, isFollowed, ...rest }) => {
       follow(userId)
     }
 
-    update({ isFollowed: !isFollowed })
+    mutate(!isFollowed)
   }
 
   return (
@@ -92,8 +92,4 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default compose(
-  withAuthentication,
-  withLayout("user"),
-  withSWR,
-)(Profile)
+export default compose(withAuthentication, withLayout("user"), withSWR)(Profile)
