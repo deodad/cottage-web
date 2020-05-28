@@ -4,7 +4,9 @@ import { SWRConfig } from "swr"
 import { AppContext, UserContext } from "./context"
 import swrConfig from "./swr"
 import { Layout } from "./components/layout"
+import Bag from "./components/bag"
 import Front from "./pages/front"
+
 import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
 import Listing from "./roots/listing"
@@ -23,30 +25,57 @@ const initialState = {
   layout: "none",
   isInit: false,
   user: undefined,
+  bag: {
+    isOpen: false,
+    items: [],
+    total: 0,
+  },
 }
 
 const reducer = (state, action) => {
-  switch (action.type) {
+  const { type, ...options } = action
+
+  switch (type) {
     case "init":
       return {
         ...state,
+        user: options.user,
+        bag: {
+          ...state.bag,
+          ...options.bag,
+        },
         isInit: true,
-        user: action.user,
       }
     case "setLayout":
       return {
         ...state,
-        layout: action.layout,
+        ...options,
       }
     case "login":
       return {
         ...state,
-        user: action.user,
+        ...options,
       }
     case "logout":
       return {
         ...state,
         user: null,
+      }
+    case "openBag":
+      return {
+        ...state,
+        bag: {
+          ...state.bag,
+          isOpen: true,
+        },
+      }
+    case "closeBag":
+      return {
+        ...state,
+        bag: {
+          ...state.bag,
+          isOpen: false,
+        },
       }
     default:
       throw new Error(`Unknown action type '${action.type}'`)
@@ -69,7 +98,9 @@ const App = ({ me }) => {
   useEffect(() => {
     me.then((res) => {
       if (res.ok) {
-        return res.json().then((user) => dispatch({ type: "init", user }))
+        return res
+          .json()
+          .then(({ user, bag }) => dispatch({ type: "init", user, bag }))
       }
 
       if (res.status == 401) {
@@ -114,6 +145,7 @@ const App = ({ me }) => {
               </Router>
             </Suspense>
           </Layout>
+          <Bag state={state.bag} dispatch={dispatch} />
         </SWRConfig>
       </UserContext.Provider>
     </AppContext.Provider>

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
 import { withAuthentication } from "../hoc"
-import { useUserContext } from "../hooks/use-user-context"
+import { useAppContext, useUserContext } from "../hooks"
 import { logout as logoutReq } from "../api"
 
 const navLinkClass = "block my-2 btn-txt text-lg surface"
@@ -17,9 +17,10 @@ const NavLink = (props) => {
 
 const Navigation = ({ authenticatedUser }) => {
   const { logout } = useUserContext()
-  const handleLogout = () => {
-    logoutReq().then(() => logout())
-  }
+  const { dispatch } = useAppContext()
+
+  const handleLogout = () => logoutReq().then(() => logout())
+  const openBag = () => dispatch({ type: "openBag" })
 
   return (
     <>
@@ -47,6 +48,11 @@ const Navigation = ({ authenticatedUser }) => {
           <NavLink to={`/profile/${authenticatedUser.username}`}>
             Profile
           </NavLink>
+        </li>
+        <li>
+          <button className={navLinkClass} onClick={openBag}>
+            Bag
+          </button>
         </li>
         <li>
           <button
