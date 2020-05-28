@@ -15,6 +15,7 @@ import EditListing from "./roots/edit-listing"
 const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
 const Home = lazy(() => import("./pages/home"))
+const Checkout = lazy(() => import("./pages/checkout"))
 const Pricing = lazy(() => import("./pages/pricing"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
@@ -75,6 +76,14 @@ const reducer = (state, action) => {
         bag: {
           ...state.bag,
           isOpen: false,
+        },
+      }
+    case "updateBag":
+      return {
+        ...state,
+        bag: {
+          ...state.bag,
+          ...options,
         },
       }
     default:
@@ -140,6 +149,7 @@ const App = ({ me }) => {
                 <Listing path="listing/:id" />
                 <EditListing path="listing/:id/edit" />
                 <AddListing path="add-listing" />
+                <Checkout path="checkout/*" />
 
                 <NotFound default />
               </Router>

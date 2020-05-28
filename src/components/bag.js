@@ -1,5 +1,6 @@
 import React from "react"
 import ReactModal from "react-modal"
+import { navigate } from "@reach/router"
 import { ContainedButton } from "./button"
 import { TopBar } from "./layout"
 
@@ -21,18 +22,42 @@ const Bag = ({ state, dispatch }) => {
       }}
     >
       <TopBar title="Shopping Bag" back={true} onBack={close}>
-        <ContainedButton>Checkout</ContainedButton>
+        <ContainedButton onClick={() => navigate("/checkout")}>
+          Checkout
+        </ContainedButton>
       </TopBar>
 
-      <Items items={state.items} />
+      <div className="container-md">
+        <Contents items={state.items} total={state.total} />
+      </div>
     </ReactModal>
   )
 }
 
-const Items = ({ items }) => {
+const Contents = ({ items, total }) => {
   if (items.length === 0) {
     return <div className="px-3">Your bag is empty</div>
   }
+
+  return (
+    <div className="px-3">
+      <div className="divide-y">
+        {items.map((item, idx) => (
+          <div key={idx} className="flex justify-between py-2">
+            <div>
+              {item.name} x {item.quantity}
+            </div>
+            <div>${item.price * item.quantity}</div>
+          </div>
+        ))}
+
+        <div className="flex justify-between py-2">
+          <div className="font-bold">Total</div>
+          <div>${total}</div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Bag

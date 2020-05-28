@@ -22,7 +22,7 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
   <div>
     {user && (
       <div className="mb-1 px-2">
-        <CompactUserImageLink user={user} />
+        <CompactUserBadge user={user} />
       </div>
     )}
 

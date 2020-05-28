@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { navigate } from "@reach/router"
 import { Formik, Form } from "formik"
 import { number, object, string } from "yup"
-import { updateUser } from "../api"
+import { updateProfile } from "../api"
 import { Input } from "./form"
 import ProfileImageInput from "./profile-image-input"
 import LocationInput from "./location-input"
@@ -49,7 +49,7 @@ const ProfileForm = ({ user, children }) => {
     data.set("lng", values.location.lng)
     data.set("lat", values.location.lat)
 
-    updateUser(user.id, data)
+    updateProfile(data)
       .then((res) => {
         if (res.ok) {
           setSubmitting(false)

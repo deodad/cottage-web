@@ -14,7 +14,7 @@ export const get = (path) =>
     method: "GET",
   })
 
-const post = (path, data) =>
+export const post = (path, data) =>
   fetchWithDefaults(path, {
     method: "POST",
     ...(data && {
@@ -25,13 +25,13 @@ const post = (path, data) =>
     }),
   })
 
-const put = (path, data) =>
+export const put = (path, data) =>
   fetchWithDefaults(path, {
     method: "PUT",
     body: data,
   })
 
-const del = (path, options = {}) =>
+export const del = (path, options = {}) =>
   fetchWithDefaults(path, {
     method: "DELETE",
     ...options,
@@ -42,6 +42,7 @@ export const login = (data) => post("login", data)
 export const logout = () => post("logout")
 
 export const me = () => get("me")
+export const updateProfile = (data) => put(`me`, data)
 export const follow = (id) => post(`me/follow/${id}`)
 export const unfollow = (id) => del(`me/follow/${id}`)
 export const getMyListings = () => get(`me/listings`)
@@ -67,3 +68,5 @@ export const getActivities = () => get("activities")
 
 export const getUser = (handle) => get(`users/${handle}`)
 export const updateUser = (id, data) => put(`users/${id}`, data)
+
+export const addItem = (id, data) => post(`bag`, data)

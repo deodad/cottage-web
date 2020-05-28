@@ -42,17 +42,17 @@ export const Layout = ({ ...rest }) => {
 }
 
 const Simple = ({ children, title }) => (
-  <div className="max-w-sm container mx-auto px-5 py-3">
+  <div className="container max-w-sm px-5 py-3 mx-auto">
     <Link
       to="/"
-      className="text-2xl font-bold font-brand text-brand block mb-5"
+      className="block mb-5 text-2xl font-bold font-brand text-brand"
     >
       Cottage
     </Link>
 
     {title && (
       <div className="mb-3">
-        <h1 className="text-lg font-bold m-0">{title}</h1>
+        <h1 className="m-0 text-lg font-bold">{title}</h1>
       </div>
     )}
     {children}
@@ -60,15 +60,15 @@ const Simple = ({ children, title }) => (
 )
 
 const User = ({ children, focus }) => (
-  <div className="max-w-screen-sm container h-full mx-auto">
+  <div className="container h-full mx-auto max-w-screen-sm">
     <div className="flex flex-col h-full md:flex-row">
-      <div className="flex-none h-full px-3 pb-3 w-40 hidden md:block">
+      <div className="flex-none hidden w-40 h-full px-3 pb-3 md:block">
         <div className="fixed">
           <Navigation />
         </div>
       </div>
-      <div className="flex-1 min-h-0 relative overflow-y-auto md:overflow-y-visible">
-        <div className="min-h-full sm:border-l sm:border-r pb-5">
+      <div className="relative flex-1 min-h-0 overflow-y-auto md:overflow-y-visible">
+        <div className="min-h-full pb-5 sm:border-l sm:border-r">
           <Suspense
             fallback={<Spinner className="flex justify-center pt-16" />}
           >
@@ -89,14 +89,14 @@ const User = ({ children, focus }) => (
 
 export const TopBar = ({
   children,
-  back = false,
+  back = true,
   onBack = () => navigate(-1),
   title,
 }) => (
-  <div className="sticky top-0 z-30 box-content h-10 mb-3 p-3 bg-white border-b flex items-center justify-between">
+  <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
     {title && (
       <>
-        <div className="flex-none flex items-center">
+        <div className="flex items-center flex-none">
           {back && (
             <div className="mr-3">
               <TextButton onClick={onBack}>
@@ -104,7 +104,7 @@ export const TopBar = ({
               </TextButton>
             </div>
           )}
-          <div className="font-bold text-lg">{title}</div>
+          <div className="text-lg font-bold">{title}</div>
         </div>
         <div className="flex-none">{children}</div>
       </>
@@ -114,5 +114,5 @@ export const TopBar = ({
 )
 
 export const TopPanel = ({ children }) => (
-  <div className="mb-3 p-3 bg-white border-b">{children}</div>
+  <div className="p-3 mb-3 bg-white border-b">{children}</div>
 )

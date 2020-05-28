@@ -24,13 +24,21 @@ html, body {
 }
 
 body {
-  @apply font-sans overflow-y-auto;
+  @apply overflow-y-auto font-sans;
   background-color: var(--color-background);
   color: rgba(20, 20, 21, 0.87);
 }
 
 p {
   @apply mb-2;
+}
+
+.container-sm {
+  @apply max-w-sm mx-auto;
+}
+
+.container-md {
+  @apply max-w-md mx-auto;
 }
 
 .empahsis-high {
@@ -163,19 +171,19 @@ p {
 }
 
 .h1 {
-  @apply text-2xl text-gray-900 font-bold;
+  @apply text-2xl font-bold text-gray-900;
 }
 
 .h2 {
-  @apply text-xl text-gray-800 font-bold;
+  @apply text-xl font-bold text-gray-800;
 }
 
 .h3 {
-  @apply text-lg text-gray-700 font-bold;
+  @apply text-lg font-bold text-gray-700;
 }
 
 .h4 {
-  @apply text-gray-700 font-bold;
+  @apply font-bold text-gray-700;
 }
 
 /*
