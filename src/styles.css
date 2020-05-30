@@ -143,6 +143,10 @@ p {
   @apply btn;
 }
 
+.btn-ctn:disabled {
+  @apply bg-gray-500 text-gray-900 opacity-disabled !important;
+}
+
 .btn-ctn.btn-1 {
   background-color: var(--color-primary);
   color: var(--color-on-primary);

@@ -34,7 +34,7 @@ export const Layout = ({ ...rest }) => {
           case "none":
             return <>{rest.children}</>
           default:
-            throw new Error(`Invalid layout '${layout}'`)
+            return null
         }
       })()}
     </LayoutContext.Provider>

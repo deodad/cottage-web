@@ -1,5 +1,4 @@
 const path = require("path")
-const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
 
@@ -33,10 +32,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: "development",
-      COTTAGE_API_HOST: "http://localhost:8082"
-    }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
