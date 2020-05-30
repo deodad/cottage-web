@@ -24,7 +24,7 @@ export const Layout = ({ ...rest }) => {
   const { layout, options } = state
 
   return (
-    <LayoutContext.Provider value={dispatch}>
+    <LayoutContext.Provider value={{ state, dispatch }}>
       {(() => {
         switch (layout) {
           case "user":
@@ -32,9 +32,9 @@ export const Layout = ({ ...rest }) => {
           case "simple":
             return <Simple {...options} {...rest} />
           case "none":
-            return <>{rest.children}</>
+            return <div {...rest} />
           default:
-            return null
+            throw new Error(`Unknown layout '${layout}'`)
         }
       })()}
     </LayoutContext.Provider>

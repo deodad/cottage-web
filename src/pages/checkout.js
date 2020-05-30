@@ -36,7 +36,6 @@ const Checkout = () => {
   const [checkout, setCheckout] = useState(null)
 
   useEffect(() => {
-    console.log("Mounting")
     post("checkout")
       .then((res) => {
         if (res.ok) {
@@ -49,7 +48,6 @@ const Checkout = () => {
       .catch(() => {
         setError(true)
       })
-    return () => console.log("Unmounting")
   }, [])
 
   if (error) {

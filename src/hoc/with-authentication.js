@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Redirect } from "@reach/router"
 import { useAppContext } from "../hooks"
 
@@ -7,7 +7,6 @@ export const withAuthentication = (Component) => {
     const { state } = useAppContext()
     const { user } = state
 
-    console.log(user)
     if (user === undefined) return null
     if (user === null) return <Redirect to="/login" />
 
