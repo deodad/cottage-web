@@ -1,16 +1,33 @@
 import React, { lazy } from "react"
-import useSWR from "swr"
-import { withAuthentication } from "../hoc"
+import { useQuery } from "react-query"
+import { compose, withAuthentication, withLayout } from "../hoc"
+import { request } from "../api"
 
 const ProfileSettings = lazy(() => import("../pages/profile-settings"))
-const ProfileSettingsRoot = ({ authenticatedUser }) => {
-  const { data, error, isValidating } = useSWR(
-    `users/${authenticatedUser.username}`
+const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
+  const { data } = useQuery(
+    ["profile-settings", authenticatedUser.id],
+    (_key, userId) => request(`
+      {
+        person(id: "${userId}") {
+          id
+          username
+          name
+          bio
+          location
+          lat
+          lng
+          imageUrl
+        }
+      }
+    `)
   )
-
   return (
-    <ProfileSettings {...{ data, error, isValidating, authenticatedUser }} />
+    <ProfileSettings {...{ data, ...rest }} />
   )
 }
 
-export default withAuthentication(ProfileSettingsRoot)
+export default compose(
+  withAuthentication,
+  withLayout("user")
+)(ProfileSettingsRoot)

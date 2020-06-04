@@ -39,8 +39,8 @@ const ProfileForm = ({ user, children }) => {
      * url, if the user adds an image it change to an object with
      * { dataUrl, blob }
      */
-    if (typeof values.profile_image_url !== "string") {
-      data.set("profile_image", values.profile_image_url.blob)
+    if (typeof values.imageUrl !== "string") {
+      data.set("image", values.imageUrl.blob)
     }
 
     data.set("name", values.name)
@@ -68,7 +68,7 @@ const ProfileForm = ({ user, children }) => {
 
   const fields = (
     <>
-      <ProfileImageInput name="profile_image_url" />
+      <ProfileImageInput name="imageUrl" />
       <Input type="text" label="Name" name="name" />
       <Input type="text" label="Bio" name="bio" />
       <LocationInput type="text" label="Location" name="location" />
@@ -92,7 +92,7 @@ const ProfileForm = ({ user, children }) => {
           name: user.name,
           bio: user.bio || "",
           location: initialLocation,
-          profile_image_url: user.profile_image_url,
+          imageUrl: user.imageUrl,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}

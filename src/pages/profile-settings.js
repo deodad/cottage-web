@@ -4,7 +4,7 @@ import ProfileForm from "../components/profile-form"
 import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
 
-const ProfileSettings = ({ data: user }) => (
+const ProfileSettings = ({ data: { person: user } }) => (
   <ProfileForm user={user}>
     {({ fields, error }) => (
       <>

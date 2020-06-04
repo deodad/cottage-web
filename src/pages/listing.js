@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "@reach/router"
-import { compose, withAuthentication, withSWR, withLayout } from "../hoc"
 import { useAppContext } from "../hooks"
 import { UserImageLink } from "../components/user"
 import { ListingImage } from "../components/listing"
@@ -33,7 +32,7 @@ const Listing = ({ authenticatedUser, data }) => {
   return (
     <>
       <TopBar title="Listing" back={true}>
-        {listing.user_id === authenticatedUser.id && (
+        {listing.personId == authenticatedUser.id && (
           <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
             Edit
           </Link>
@@ -41,7 +40,7 @@ const Listing = ({ authenticatedUser, data }) => {
       </TopBar>
 
       <div className="px-3">
-        <UserImageLink user={listing.user} className="mt-1" />
+        <UserImageLink user={listing.person} className="mt-1" />
       </div>
       <div className="my-2">
         <ListingImage listing={listing} />
@@ -52,8 +51,8 @@ const Listing = ({ authenticatedUser, data }) => {
           ${listing.price}
           {distance && <span> &middot; {distance}</span>}
         </div>
-        {listing.short_description && (
-          <div className="mt-1">{listing.short_description}</div>
+        {listing.shortDescription && (
+          <div className="mt-1">{listing.shortDescription }</div>
         )}
 
         <div className="mt-3">
@@ -64,8 +63,4 @@ const Listing = ({ authenticatedUser, data }) => {
   )
 }
 
-export default compose(
-  withAuthentication,
-  withLayout("user", { focus: true }),
-  withSWR
-)(Listing)
+export default Listing

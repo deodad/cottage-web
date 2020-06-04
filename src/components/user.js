@@ -17,8 +17,8 @@ export const ProfileImage = ({
 }) => (
   <img
     src={
-      user.profile_image_url
-        ? user.profile_image_url
+      user.imageUrl
+        ? user.imageUrl
         : "https://place-hold.it/60x60/999999/333333"
     }
     className={classnames(className, size, "rounded-full border")}
@@ -54,14 +54,14 @@ export const CompactUserImageLink = ({ user, className, ...rest }) => (
     {...rest}
   >
     <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
-    <div className="text-sm leading-tight font-bold">{user.username}</div>
+    <div className="text-sm font-bold leading-tight">{user.username}</div>
   </UserLink>
 )
 
 export const CompactUserBadge = ({ user }) => (
   <div className="flex items-center">
     <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
-    <div className="text-sm leading-tight font-bold">{user.username}</div>
+    <div className="text-sm font-bold leading-tight">{user.username}</div>
   </div>
 )
 

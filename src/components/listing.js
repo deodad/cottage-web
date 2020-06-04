@@ -11,8 +11,8 @@ export const ListingLink = ({ listing, children, ...rest }) => (
 export const ListingImage = ({ listing }) => (
   <img
     src={
-      listing.image_url
-        ? listing.image_url
+      listing.imageUrl
+        ? listing.imageUrl
         : "https://place-hold.it/400x400/999999/333333&text=Image"
     }
   />
@@ -27,7 +27,7 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
     )}
 
     <ListingLink listing={listing} {...rest}>
-      <img src={listing.image_url} alt={listing.name} />
+      <img src={listing.imageUrl} alt={listing.name} />
 
       <div className="px-2 mt-1 text-sm">
         <div className="text-lg font-bold">{listing.name}</div>
@@ -35,8 +35,8 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
           ${listing.price}
           {distance && <span> &middot; {distance}</span>}
         </div>
-        {listing.short_description && (
-          <div className="mt-1">{listing.short_description}</div>
+        {listing.shortDescription && (
+          <div className="mt-1">{listing.shortDescription}</div>
         )}
       </div>
     </ListingLink>
