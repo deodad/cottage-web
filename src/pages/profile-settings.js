@@ -1,10 +1,9 @@
 import React from "react"
-import { compose, withSWR, withLayout } from "../hoc"
 import ProfileForm from "../components/profile-form"
 import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
 
-const ProfileSettings = ({ data: { person: user } }) => (
+const ProfileSettings = ({ user }) => (
   <ProfileForm user={user}>
     {({ fields, error }) => (
       <>
@@ -18,7 +17,4 @@ const ProfileSettings = ({ data: { person: user } }) => (
   </ProfileForm>
 )
 
-export default compose(
-  withLayout("user", { focus: true }),
-  withSWR
-)(ProfileSettings)
+export default ProfileSettings

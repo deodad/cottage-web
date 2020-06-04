@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { compose, withAuthentication, withLayout, withSWR } from "../hoc"
 import { deleteListing, updateListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
 import { TopBar } from "../components/layout"
 
-const EditListing = ({ data }) => {
+const EditListing = ({ listing }) => {
   const [error, setError] = useState(null)
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
@@ -17,7 +16,7 @@ const EditListing = ({ data }) => {
     const formData = new FormData()
 
     formData.set("name", values.name)
-    formData.set("short_description", values.short_description)
+    formData.set("short_description", values.shortDescription)
     formData.set("price", values.price)
 
     // If the image is a string it hasn't been updated
@@ -27,7 +26,7 @@ const EditListing = ({ data }) => {
 
     // TODO prevent double submissions
     setError(null)
-    updateListing(data.listing.id, formData)
+    updateListing(listing.id, formData)
       .then((res) => {
         if (res.ok) {
           setSubmitting(false)
@@ -44,8 +43,7 @@ const EditListing = ({ data }) => {
       .catch(() => setError("Failed to update listing."))
   }
 
-  const { listing } = data
-  listing.image = listing.image_url
+  listing.image = listing.imageUrl
 
   return (
     <>
@@ -61,8 +59,8 @@ const EditListing = ({ data }) => {
         )}
       </ListingForm>
 
-      <div className="mt-5 px-3">
-        <DeleteListing id={data.listing.id} />
+      <div className="px-3 mt-5">
+        <DeleteListing id={listing.id} />
       </div>
     </>
   )
@@ -90,8 +88,4 @@ const DeleteListing = ({ id }) => {
   )
 }
 
-export default compose(
-  withAuthentication,
-  withLayout("user", { focus: true }),
-  withSWR
-)(EditListing)
+export default EditListing

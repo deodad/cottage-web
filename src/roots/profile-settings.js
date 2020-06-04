@@ -7,9 +7,9 @@ const ProfileSettings = lazy(() => import("../pages/profile-settings"))
 const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
   const { data } = useQuery(
     ["profile-settings", authenticatedUser.id],
-    (_key, userId) => request(`
+    () => request(`
       {
-        person(id: "${userId}") {
+        currentPerson {
           id
           username
           name
@@ -22,8 +22,9 @@ const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
       }
     `)
   )
+
   return (
-    <ProfileSettings {...{ data, ...rest }} />
+    <ProfileSettings user={data.currentPerson} {...rest } />
   )
 }
 

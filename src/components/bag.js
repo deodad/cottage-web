@@ -3,6 +3,7 @@ import ReactModal from "react-modal"
 import { navigate } from "@reach/router"
 import { ContainedButton } from "./button"
 import { TopBar } from "./layout"
+import Currency from "./currency"
 
 const Bag = ({ state, dispatch }) => {
   const close = () => dispatch({ type: "closeBag" })
@@ -47,13 +48,13 @@ const Contents = ({ items, total }) => {
             <div>
               {item.name} x {item.quantity}
             </div>
-            <div>${item.price * item.quantity}</div>
+            <div><Currency amount={item.price * item.quantity} /></div>
           </div>
         ))}
 
         <div className="flex justify-between py-2">
           <div className="font-bold">Total</div>
-          <div>${total}</div>
+          <div><Currency amount={total} /></div>
         </div>
       </div>
     </div>

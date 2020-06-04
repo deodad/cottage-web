@@ -1,12 +1,31 @@
 import React from "react"
 import { navigate } from "@reach/router"
-import useSWR from "swr"
-import { withSWR } from "../../hoc"
+import { useQuery } from "react-query"
+import { request } from "../../api"
 import { HorizontalListing } from "../../components/listing"
 import { ContainedButton } from "../../components/button"
 
 const ListingsContainer = () => {
-  const { data, error, isValidating } = useSWR(`me/listings`)
+  const { data } = useQuery(
+    "my-listings",
+    () => request(`
+      {
+        currentPerson {
+          listings {
+            nodes {
+              id
+              name
+              price
+              shortDescription
+              description
+              imageUrl
+              deletedAt
+            }
+          }
+        }
+      }
+    `)
+  )
 
   return (
     <div>
@@ -18,19 +37,19 @@ const ListingsContainer = () => {
         Add Listing
       </ContainedButton>
 
-      <Listings {...{ data, error, isValidating }} />
+      <Listings {...{ data }} />
     </div>
   )
 }
 
-const Listings = withSWR(({ data }) => (
+const Listings = ({ data }) => (
   <ul className="mt-3 space-y-3">
-    {data.listings.map((listing) => (
+    {data.currentPerson.listings.nodes.map((listing) => (
       <li key={listing.id}>
         <HorizontalListing listing={listing} />
       </li>
     ))}
   </ul>
-))
+)
 
 export default ListingsContainer

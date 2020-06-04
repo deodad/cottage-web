@@ -10,7 +10,7 @@ const EditListingRoot = ({ id, ...rest }) => {
     (_key, listingId) => request(`
       {
         listing(id: "${listingId}") {
-          id,
+          id
           name
           price
           shortDescription
@@ -22,8 +22,7 @@ const EditListingRoot = ({ id, ...rest }) => {
     `)
   )
 
-
-  return <EditListing {...{ data, ...rest }} />
+  return <EditListing {...rest } listing={data.listing} />
 }
 
 export default compose(

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import { useAppContext } from "../hooks"
+import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
 import { ListingImage } from "../components/listing"
 import { ContainedButton } from "../components/button"
@@ -48,7 +49,7 @@ const Listing = ({ authenticatedUser, data }) => {
       <div className="px-3">
         <div className="text-xl font-bold">{listing.name}</div>
         <div className="emphasis-medium">
-          ${listing.price}
+          <Currency amount={listing.price} />
           {distance && <span> &middot; {distance}</span>}
         </div>
         {listing.shortDescription && (

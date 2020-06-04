@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import { CompactUserBadge } from "./user"
+import Currency from "./currency"
 
 export const ListingLink = ({ listing, children, ...rest }) => (
   <Link to={`/listing/${listing.id}`} {...rest}>
@@ -32,7 +33,7 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
       <div className="px-2 mt-1 text-sm">
         <div className="text-lg font-bold">{listing.name}</div>
         <div className="emphasis-medium">
-          ${listing.price}
+          <Currency amount={listing.price} />
           {distance && <span> &middot; {distance}</span>}
         </div>
         {listing.shortDescription && (
@@ -52,7 +53,7 @@ export const HorizontalListing = ({ listing, user, distance }) => (
     <div className="flex-1 mt-2 ml-2">
       <div className="text-lg font-bold">{listing.name}</div>
       <div className="text-sm emphasis-medium">
-        ${listing.price}
+        <Currency amount={listing.price} />
         {distance && <span> &middot; {distance}</span>}
       </div>
       {listing.shortDescription && (
