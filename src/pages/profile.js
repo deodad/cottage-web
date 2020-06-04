@@ -9,7 +9,8 @@ import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
 const Profile = ({ authenticatedUser, mutate, data }) => {
-  const user = data
+  const user = data.query.personByUsername
+  const listings = user.listings.nodes
   const dateJoined = new Date(user.date_joined)
 
   return (
@@ -18,13 +19,13 @@ const Profile = ({ authenticatedUser, mutate, data }) => {
         <div className="flex justify-between">
           <div className="relative w-full">
             <img
-              src={user.profile_image_url}
-              className="w-40 h-40 rounded-full border"
+              src={user.imageUrl}
+              className="w-40 h-40 border rounded-full"
             />
             <div className="mt-1 text-lg font-bold">{user.name}</div>
             <div className="emphasis-medium">@{user.username}</div>
 
-            <div className="absolute right-0 top-0">
+            <div className="absolute top-0 right-0">
               {user.username !== authenticatedUser.username ? (
                 <FollowButton
                   userId={user.id}
@@ -42,7 +43,7 @@ const Profile = ({ authenticatedUser, mutate, data }) => {
 
         <div className="mt-3">{user.bio}</div>
 
-        <div className="mt-3 flex items-center emphasis-medium">
+        <div className="flex items-center mt-3 emphasis-medium">
           <FontAwesomeIcon icon={faMapMarker} />
           <div className="ml-2 mr-5">{user.location}</div>
           <FontAwesomeIcon icon={faCalendar} />
@@ -59,7 +60,7 @@ const Profile = ({ authenticatedUser, mutate, data }) => {
       </TopPanel>
 
       <div className="px-3">
-        <Listings path="/" listings={user.listings} />
+        <Listings path="/" listings={listings} />
       </div>
     </>
   )

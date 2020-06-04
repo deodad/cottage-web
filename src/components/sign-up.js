@@ -30,9 +30,9 @@ export const SignUp = () => {
     signUp(values)
       .then((res) => {
         if (res.ok) {
-          return res.json().then((data) => {
+          return res.json().then(({ user }) => {
             setSubmitting(false)
-            signIn(data, true)
+            signIn({ user }, true)
           })
         }
 

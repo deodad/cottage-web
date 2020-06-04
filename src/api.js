@@ -37,9 +37,9 @@ export const del = (path, options = {}) =>
     ...options,
   })
 
-export const signUp = (data) => post("sign-up", data)
-export const login = (data) => post("login", data)
-export const logout = () => post("logout")
+export const signUp = (data) => post("auth/sign-up", data)
+export const login = (data) => post("auth/login", data)
+export const logout = () => post("auth/logout")
 
 export const me = () => get("me")
 export const updateProfile = (data) => put(`me`, data)

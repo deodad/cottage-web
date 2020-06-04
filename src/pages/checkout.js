@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react"
+import React, { useReducer, useState } from "react"
 import {
   CardElement,
   Elements,
@@ -6,71 +6,38 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import { compose, withAuthentication, withLayout } from "../hoc"
-import { post } from "../api"
+import useSWR from "swr"
+import { compose, withAuthentication, withLayout, withSWR } from "../hoc"
 import { TopBar } from "../components/layout"
 import { ContainedButton } from "../components/button"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
+const refreshInterval = 5 * 60 * 1000 // 5 minutes
 
-// const reducer = (state, action) => {
-//   const { type, ...options } = action
+const CheckoutContainer = () => {
+  const { data, error, isValidating } = useSWR("checkout", { refreshInterval })
 
-//   switch (type) {
-//     case "init":
-//       return {
-//         ready: true,
-//         ...options
-//       }
-//     case "error": {
+  return <Checkout {...{ data, error, isValidating }} />
+}
 
-//     }
-//   }
-//         checkout:
-
-//   }
-// }
-
-const Checkout = () => {
-  const [error, setError] = useState(null)
-  const [checkout, setCheckout] = useState(null)
-
-  useEffect(() => {
-    post("checkout")
-      .then((res) => {
-        if (res.ok) {
-          res.json().then(setCheckout)
-          return
-        }
-
-        throw Error("An error occured.")
-      })
-      .catch(() => {
-        setError(true)
-      })
-  }, [])
-
-  if (error) {
-    return (
-      <>
-        <TopBar title="Checkout" />
-        <div className="px-3 text-error">Unable to initialize checkout.</div>
-      </>
-    )
-  }
-
-  if (!checkout) return null
+const Checkout = withSWR(({ data }) => {
+  const { stripeClientSecret } = data
 
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm stripeClientSecret={checkout.stripeClientSecret} />
+      <CheckoutForm stripeClientSecret={stripeClientSecret} />
     </Elements>
   )
-}
+})
 
 const reducer = (state, action) => {
-  switch (action.state) {
+  switch (action.type) {
     case "submit":
+      return {
+        ...state,
+        isSubmitting: true,
+      }
+    case "complete":
       return {
         ...state,
         isSubmitting: false,
@@ -91,41 +58,40 @@ const initialState = {
   error: null,
 }
 
-const CheckoutForm = ({ stripeClientSecret }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+const CheckoutForm = ({ onComplete, stripeClientSecret }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (!stripe || !elements) {
+    if (!stripe || !elements || state.isSubmitting) {
       return
     }
+
+    dispatch({ type: "submit" })
 
     stripe
       .confirmCardPayment(stripeClientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
-        // setup_for_future_usage:
       })
       .then((result) => {
         if (result.error) {
           dispatch({ type: "error", message: result.error.message })
         } else {
           if (result.paymentIntent.status === "succeeded") {
-            // Show a success message to your customer
-            // There's a risk of the customer closing the window before callback
-            // execution. Set up a webhook or plugin to listen for the
-            // payment_intent.succeeded event that handles any business critical
-            // post-payment actions.
+            onComplete && onComplete()
           }
         }
       })
-      .catch((e) => {
-        // TODO send somewhere?
-        console.error(e)
+      .catch(() => {
+        dispatch({
+          type: "error",
+          message: "An error occurred. You have not been charged.",
+        })
       })
   }
 
@@ -149,4 +115,14 @@ const CheckoutForm = ({ stripeClientSecret }) => {
   )
 }
 
-export default compose(withAuthentication, withLayout("user"))(Checkout)
+const CheckoutSuccess = () => (
+  <>
+    <TopBar title="Checkout" />
+    <p>Your payment has been received!</p>
+  </>
+)
+
+export default compose(
+  withAuthentication,
+  withLayout("user")
+)(CheckoutContainer)
