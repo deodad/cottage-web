@@ -2,14 +2,15 @@ import React from "react"
 import { Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import { compose, withAuthentication, withSWR, withLayout } from "../hoc"
 import { follow, unfollow } from "../api"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
-const Profile = ({ authenticatedUser, mutate, data }) => {
-  const user = data.query.personByUsername
+const Profile = ({ authenticatedUser, data, mutate }) => {
+  if (!data) return null
+
+  const user = data.personByUsername
   const listings = user.listings.nodes
   const dateJoined = new Date(user.date_joined)
 
@@ -93,4 +94,4 @@ const Listings = ({ listings }) => (
   </div>
 )
 
-export default compose(withAuthentication, withLayout("user"), withSWR)(Profile)
+export default Profile

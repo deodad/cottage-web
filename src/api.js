@@ -1,6 +1,14 @@
 import fetch from "unfetch"
+import { GraphQLClient } from "graphql-request"
 
 const baseUrl = process.env.COTTAGE_API_HOST || "http://localhost:8082"
+
+export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, {
+  credentials: "include",
+  mode: "cors",
+})
+
+export const request = graphQLClient.request.bind(graphQLClient)
 
 const fetchWithDefaults = (path, options) =>
   fetch(`${baseUrl}/${path}`, {

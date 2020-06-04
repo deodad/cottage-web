@@ -1,9 +1,12 @@
 import React, { lazy, Suspense, useEffect, useReducer } from "react"
 import { navigate, Router } from "@reach/router"
+import { ReactQueryConfigProvider } from "react-query"
 import { SWRConfig } from "swr"
 import { AppContext, UserContext } from "./context"
 import swrConfig from "./swr"
+import ErrorBoundary from "./components/error-boundary"
 import { Layout } from "./components/layout"
+import { Spinner } from "./components/spinner"
 import Bag from "./components/bag"
 import Front from "./pages/front"
 
@@ -132,31 +135,37 @@ const App = ({ me }) => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <UserContext.Provider value={userContext}>
-        <SWRConfig value={swrConfig}>
-          <Layout>
-            <Suspense fallback={<div />}>
-              <Router>
-                <Front path="/" />
-                <Pricing path="/pricing" />
-                <Login path="/login" signIn={signIn} />
-                <SignUp path="/sign-up" signIn={signIn} />
+        <ReactQueryConfigProvider config={{ suspense: true }}>
+          <SWRConfig value={swrConfig}>
+            <Layout>
+              <ErrorBoundary>
+                <Suspense
+                  fallback={<Spinner className="flex justify-center pt-16" />}
+                >
+                  <Router>
+                    <Front path="/" />
+                    <Pricing path="/pricing" />
+                    <Login path="/login" signIn={signIn} />
+                    <SignUp path="/sign-up" signIn={signIn} />
 
-                <Home path="home/*" />
-                <Market path="market/*" />
-                <Messages path="messages/*" />
-                <Profile path="profile/:handle/*" />
-                <ProfileSettings path="settings/profile" />
-                <Listing path="listing/:id" />
-                <EditListing path="listing/:id/edit" />
-                <AddListing path="add-listing" />
-                <Checkout path="checkout/*" />
+                    <Home path="home/*" />
+                    <Market path="market/*" />
+                    <Messages path="messages/*" />
+                    <Profile path="profile/:handle/*" />
+                    <ProfileSettings path="settings/profile" />
+                    <Listing path="listing/:id" />
+                    <EditListing path="listing/:id/edit" />
+                    <AddListing path="add-listing" />
+                    <Checkout path="checkout/*" />
 
-                <NotFound default />
-              </Router>
-            </Suspense>
-          </Layout>
-          <Bag state={state.bag} dispatch={dispatch} />
-        </SWRConfig>
+                    <NotFound default />
+                  </Router>
+                </Suspense>
+              </ErrorBoundary>
+            </Layout>
+            <Bag state={state.bag} dispatch={dispatch} />
+          </SWRConfig>
+        </ReactQueryConfigProvider>
       </UserContext.Provider>
     </AppContext.Provider>
   )
