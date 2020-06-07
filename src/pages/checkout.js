@@ -9,7 +9,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import useSWR from "swr"
 import { request } from "../api"
 import { useAppContext } from "../hooks"
-import { compose, withAuthentication, withLayout, withSWR } from "../hoc"
+import { compose, withUser, withLayout, withSWR } from "../hoc"
 import { TopBar } from "../components/layout"
 import { ContainedButton } from "../components/button"
 
@@ -137,6 +137,6 @@ const CheckoutSuccess = () => (
 )
 
 export default compose(
-  withAuthentication,
+  withUser,
   withLayout("user")
 )(CheckoutContainer)

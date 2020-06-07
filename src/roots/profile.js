@@ -1,6 +1,6 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
-import { compose, withAuthentication, withLayout } from "../hoc"
+import { compose, withUser, withLayout } from "../hoc"
 import { request } from "../api"
 
 const Profile = lazy(() => import("../pages/profile"))
@@ -36,6 +36,6 @@ const ProfileRoot = ({ handle, ...rest }) => {
 }
 
 export default compose(
-  withAuthentication, 
+  withUser, 
   withLayout("user")
 )(ProfileRoot)

@@ -1,7 +1,10 @@
 import React from "react"
-import { withLayout } from "../hoc"
+import { compose, withGuest, withLayout } from "../hoc"
 import { LoginForm } from "../components/login"
 
 const Login = () => <LoginForm />
 
-export default withLayout("simple", { title: "Log in" })(Login)
+export default compose(
+  withGuest(),
+  withLayout("simple", { title: "Log in" })
+)(Login)

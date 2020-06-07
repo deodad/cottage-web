@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
-import { withAuthentication } from "../hoc"
+import { withUser } from "../hoc"
 import { useAppContext, useUserContext } from "../hooks"
 import { logout as logoutReq } from "../api"
 
@@ -24,7 +24,7 @@ const Navigation = ({ authenticatedUser }) => {
 
   return (
     <>
-      <div className="box-content h-10 py-3 flex items-center mb-2">
+      <div className="flex items-center h-10 py-3 mb-2 box-content">
         <Link
           to="/home"
           className="block px-4 text-2xl font-bold font-brand"
@@ -68,4 +68,4 @@ const Navigation = ({ authenticatedUser }) => {
   )
 }
 
-export default withAuthentication(Navigation)
+export default withUser(Navigation)

@@ -2,8 +2,8 @@ import React from "react"
 import { Redirect } from "@reach/router"
 import { useAppContext } from "../hooks"
 
-export const withAuthentication = (Component) => {
-  const WithAuthentication = (props) => {
+export const withUser = (Component) => {
+  const WithUser = (props) => {
     const { state } = useAppContext()
     const { user } = state
 
@@ -13,5 +13,5 @@ export const withAuthentication = (Component) => {
     return <Component authenticatedUser={user} {...props} />
   }
 
-  return WithAuthentication
+  return WithUser
 }

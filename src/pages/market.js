@@ -5,7 +5,7 @@ import {
   connectSearchBox,
   connectHits,
 } from "react-instantsearch-dom"
-import { compose, withAuthentication, withLayout } from "../hoc"
+import { compose, withUser, withLayout } from "../hoc"
 import { HorizontalListing} from "../components/listing"
 import { TopBar } from "../components/layout"
 import Map from "../components/map"
@@ -72,4 +72,4 @@ const Market = ({ authenticatedUser }) => {
   )
 }
 
-export default compose(withAuthentication, withLayout("user"))(Market)
+export default compose(withUser, withLayout("user"))(Market)

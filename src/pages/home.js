@@ -1,6 +1,6 @@
 import React from "react"
 import { Router } from "@reach/router"
-import { compose, withAuthentication, withLayout } from "../hoc"
+import { compose, withUser, withLayout } from "../hoc"
 import { NavLink } from "../components/common"
 import Activities from "./home/activities"
 import Listings from "./home/listings"
@@ -21,4 +21,4 @@ const Home = () => (
   </>
 )
 
-export default compose(withAuthentication, withLayout("user"))(Home)
+export default compose(withUser, withLayout("user"))(Home)

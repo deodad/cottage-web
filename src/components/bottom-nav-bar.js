@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import cx from "classnames"
-import { withAuthentication } from "../hoc"
+import { withUser } from "../hoc"
 
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
@@ -26,4 +26,4 @@ const BottomNavBar = ({ authenticatedUser }) => {
   )
 }
 
-export default withAuthentication(BottomNavBar)
+export default withUser(BottomNavBar)

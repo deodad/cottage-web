@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, Router } from "@reach/router"
-import { compose, withAuthentication, withLayout } from "../hoc"
+import { compose, withUser, withLayout } from "../hoc"
 import { UnlinkedUserActivity } from "../components/user"
 import { TopBar } from "../components/layout"
 
@@ -58,5 +58,5 @@ const Message = ({ activity }) => <div>{activity.text}</div>
 
 export default compose(
   withLayout("user", { title: "Messages" }),
-  withAuthentication
+  withUser
 )(Messages)
