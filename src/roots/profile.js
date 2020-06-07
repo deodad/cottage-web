@@ -7,8 +7,8 @@ const Profile = lazy(() => import("../pages/profile"))
 
 const ProfileRoot = ({ handle, ...rest }) => {
   const { data } = useQuery(
-    ["profile", handle], 
-    (_key, username) =>
+    [handle, 'profile'], 
+    (username) =>
       request(`
         {
           personByUsername(username: "${username}") {
@@ -18,7 +18,7 @@ const ProfileRoot = ({ handle, ...rest }) => {
             bio
             location
             isFollowed
-            listings {
+            listings(filter: { deletedAt: { isNull: true } }){
               nodes {
                 id
                 name
@@ -32,7 +32,7 @@ const ProfileRoot = ({ handle, ...rest }) => {
       `)
   )
 
-  return <Profile {...{ data, ...rest }} />
+  return <Profile user={data.personByUsername}  {...rest } />
 }
 
 export default compose(

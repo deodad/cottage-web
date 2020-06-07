@@ -32,8 +32,8 @@ const Activities = withSWR(({ data }) => (
       <li key={activity.id}>
         <Activity
           user={activity.user}
-          activity={activity.activity_data}
-          date={new Date(activity.created_at)}
+          activity={activity.activityData}
+          date={new Date(activity.createdAt)}
         />
       </li>
     ))}

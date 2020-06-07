@@ -6,7 +6,7 @@ import {
   connectHits,
 } from "react-instantsearch-dom"
 import { compose, withAuthentication, withLayout } from "../hoc"
-import { HorizontalListing, Listing } from "../components/listing"
+import { HorizontalListing} from "../components/listing"
 import { TopBar } from "../components/layout"
 import Map from "../components/map"
 import { searchClient } from "../algolia"
@@ -17,7 +17,7 @@ export const SearchBox = connectSearchBox(
     <form noValidate action="" role="search" className="w-full">
       <input
         type="search"
-        className="w-full px-4 py-2 rounded-lg bg-gray-200 text-lg outline-none"
+        className="w-full px-4 py-2 text-lg bg-gray-200 rounded-lg outline-none"
         placeholder="Search"
         value={currentRefinement}
         onChange={(event) => refine(event.currentTarget.value)}
@@ -65,7 +65,7 @@ const Market = ({ authenticatedUser }) => {
 
       <Map />
 
-      <div className="mt-3 mx-3">
+      <div className="mx-3 mt-3">
         <Hits />
       </div>
     </InstantSearch>

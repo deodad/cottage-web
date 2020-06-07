@@ -32,7 +32,6 @@ const initialState = {
   bag: {
     isOpen: false,
     items: [],
-    total: 0,
   },
 }
 
@@ -80,6 +79,14 @@ const reducer = (state, action) => {
           ...state.bag,
           isOpen: false,
         },
+      }
+    case "emptyBag": 
+      return {
+        ...state,
+        bag: {
+          ...state.bag,
+          items: []
+        }
       }
     case "updateBag":
       return {

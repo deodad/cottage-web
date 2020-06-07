@@ -37,14 +37,14 @@ const ListingsContainer = () => {
         Add Listing
       </ContainedButton>
 
-      <Listings {...{ data }} />
+      <Listings listings={data.currentPerson.listings.nodes} />
     </div>
   )
 }
 
-const Listings = ({ data }) => (
+const Listings = ({ listings }) => (
   <ul className="mt-3 space-y-3">
-    {data.currentPerson.listings.nodes.map((listing) => (
+    {listings.filter(l => !l.deletedAt).map((listing) => (
       <li key={listing.id}>
         <HorizontalListing listing={listing} />
       </li>

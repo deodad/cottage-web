@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react"
+import React, { useReducer } from "react"
 import {
   CardElement,
   Elements,
@@ -7,6 +7,8 @@ import {
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import useSWR from "swr"
+import { request } from "../api"
+import { useAppContext } from "../hooks"
 import { compose, withAuthentication, withLayout, withSWR } from "../hoc"
 import { TopBar } from "../components/layout"
 import { ContainedButton } from "../components/button"
@@ -16,16 +18,18 @@ const refreshInterval = 5 * 60 * 1000 // 5 minutes
 
 const CheckoutContainer = () => {
   const { data, error, isValidating } = useSWR("checkout", { refreshInterval })
+  const { dispatch } = useAppContext()
+  const emptyBag = () => dispatch({ type: "emptyBag" })
 
-  return <Checkout {...{ data, error, isValidating }} />
+  return <Checkout {...{ data, error, isValidating, emptyBag }} />
 }
 
-const Checkout = withSWR(({ data }) => {
+const Checkout = withSWR(({ data, emptyBag }) => {
   const { stripeClientSecret } = data
 
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm stripeClientSecret={stripeClientSecret} />
+      <CheckoutForm stripeClientSecret={stripeClientSecret} emptyBag={emptyBag} />
     </Elements>
   )
 })
@@ -58,7 +62,7 @@ const initialState = {
   error: null,
 }
 
-const CheckoutForm = ({ onComplete, stripeClientSecret }) => {
+const CheckoutForm = ({ emptyBag, onComplete, stripeClientSecret }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -83,6 +87,16 @@ const CheckoutForm = ({ onComplete, stripeClientSecret }) => {
           dispatch({ type: "error", message: result.error.message })
         } else {
           if (result.paymentIntent.status === "succeeded") {
+            dispatch({ type: "complete" })
+            request(`
+              mutation EmptyBag {
+                emptyBag(input: {}) {
+                  clientMutationId
+                }
+              }
+            `).then(emptyBag)
+            // TODO navigate away!
+
             onComplete && onComplete()
           }
         }

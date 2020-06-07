@@ -7,10 +7,7 @@ import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
 
-const Profile = ({ authenticatedUser, data, mutate }) => {
-  if (!data) return null
-
-  const user = data.personByUsername
+const Profile = ({ authenticatedUser, user, mutate }) => {
   const listings = user.listings.nodes
   const dateJoined = new Date(user.date_joined)
 
