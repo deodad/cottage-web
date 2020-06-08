@@ -1,6 +1,8 @@
 import React from "react"
 import ReactModal from "react-modal"
 import { navigate } from "@reach/router"
+import { useQuery } from "react-query"
+import { request } from "../api"
 import { ContainedButton } from "./button"
 import { TopBar } from "./layout"
 import Currency from "./currency"

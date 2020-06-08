@@ -1,8 +1,10 @@
 import fetch from "unfetch"
 import { GraphQLClient } from "graphql-request"
+import { RequestError } from "./error"
 
 const baseUrl = process.env.COTTAGE_API_HOST || "http://localhost:8082"
 
+/* Setup GraphQL client */
 export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, {
   credentials: "include",
   mode: "cors",
@@ -10,7 +12,8 @@ export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, {
 
 export const request = graphQLClient.request.bind(graphQLClient)
 
-const fetchWithDefaults = (path, options) =>
+/* Setup REST client */
+export const fetchWithDefaults = (path, options) =>
   fetch(`${baseUrl}/${path}`, {
     mode: "cors",
     credentials: "include",
@@ -43,6 +46,23 @@ export const del = (path, options = {}) =>
   fetchWithDefaults(path, {
     method: "DELETE",
     ...options,
+  })
+
+export const safeGet = (...args) =>
+  get(...args).then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+
+    const { status } = res
+
+    if (status >= 400 && status < 500) {
+      return res.json().then((error) =>
+        Promise.reject(new RequestError(status, error.message, error))
+      )
+    }
+
+    return Promise.reject(new RequestError(status, "An error occurred while loading data"))
   })
 
 export const signUp = (data) => post("auth/sign-up", data)

@@ -10,10 +10,6 @@ export default class ErrorBoundary extends React.Component {
     return { error }
   }
 
-  componentDidCatch() {
-    // log the error to the server
-  }
-
   render() {
     return this.state.error ? (
       <div className="p-5 text-center text-error">

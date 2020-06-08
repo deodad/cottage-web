@@ -10,6 +10,8 @@ import { Spinner } from "./components/spinner"
 import Bag from "./components/bag"
 import Front from "./pages/front"
 
+import Checkout from "./roots/checkout"
+import Orders from "./roots/orders"
 import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
 import Listing from "./roots/listing"
@@ -18,7 +20,6 @@ import EditListing from "./roots/edit-listing"
 const Login = lazy(() => import("./pages/login"))
 const SignUp = lazy(() => import("./pages/sign-up"))
 const Home = lazy(() => import("./pages/home"))
-const Checkout = lazy(() => import("./pages/checkout"))
 const Pricing = lazy(() => import("./pages/pricing"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
@@ -164,6 +165,7 @@ const App = ({ me }) => {
                     <EditListing path="listing/:id/edit" />
                     <AddListing path="add-listing" />
                     <Checkout path="checkout/*" />
+                    <Orders path="orders/*" />
 
                     <NotFound default />
                   </Router>

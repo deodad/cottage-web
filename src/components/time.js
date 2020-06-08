@@ -21,3 +21,13 @@ const timeAgoFormatter = (value, unit, _, __, nextFormatter) => {
 export const TimeAgo = (props) => (
   <ReactTimeAgo {...props} formatter={timeAgoFormatter} />
 )
+
+const dateFmt = new Intl.DateTimeFormat("en-us", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+})
+
+export const ShortDate = ({ date, ...rest }) => (
+  <span {...rest}>{dateFmt.format(Date.parse(date))}</span>
+)

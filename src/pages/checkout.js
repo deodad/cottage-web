@@ -6,33 +6,29 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import useSWR from "swr"
 import { request } from "../api"
 import { useAppContext } from "../hooks"
-import { compose, withUser, withLayout, withSWR } from "../hoc"
 import { TopBar } from "../components/layout"
 import { ContainedButton } from "../components/button"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
-const refreshInterval = 5 * 60 * 1000 // 5 minutes
 
-const CheckoutContainer = () => {
-  const { data, error, isValidating } = useSWR("checkout", { refreshInterval })
+const CheckoutContainer = ({ checkout }) => {
   const { dispatch } = useAppContext()
   const emptyBag = () => dispatch({ type: "emptyBag" })
 
-  return <Checkout {...{ data, error, isValidating, emptyBag }} />
+  return <Checkout {...{ checkout, emptyBag }} />
 }
 
-const Checkout = withSWR(({ data, emptyBag }) => {
-  const { stripeClientSecret } = data
+const Checkout = ({ checkout, emptyBag }) => {
+  const { stripeClientSecret } = checkout
 
   return (
     <Elements stripe={stripePromise}>
       <CheckoutForm stripeClientSecret={stripeClientSecret} emptyBag={emptyBag} />
     </Elements>
   )
-})
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -136,7 +132,4 @@ const CheckoutSuccess = () => (
   </>
 )
 
-export default compose(
-  withUser,
-  withLayout("user")
-)(CheckoutContainer)
+export default CheckoutContainer
