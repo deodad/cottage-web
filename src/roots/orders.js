@@ -19,7 +19,6 @@ const OrdersRoot = ({ ...rest }) => {
               nodes {
                 id
                 price
-                quantity
                 listing {
                   name
                   imageUrl
