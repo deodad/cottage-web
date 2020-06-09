@@ -18,6 +18,7 @@ const getCheckout = () => safeGet("checkout").catch((error) => {
 
 const CheckoutRoot = () => {
   const { data } = useQuery("checkout", getCheckout, {
+    refecthOnWindowFocus: false,
     refetchInterval,
     retry: (failureCount, error) => {
       if (isRedirect(error)) {
