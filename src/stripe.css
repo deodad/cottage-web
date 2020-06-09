@@ -1,0 +1,11 @@
+.StripeElement {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+
+  @apply border;
+}
+
+.StripeElement--invalid {
+  @apply text-error;
+}
