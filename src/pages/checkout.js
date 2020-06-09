@@ -16,19 +16,25 @@ import "../stripe.css"
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
 const CheckoutContainer = ({ checkout }) => {
-  const { stripeClientSecret } = checkout
+  const { clientSecret } = checkout
   const { dispatch } = useAppContext()
   const emptyBag = () => dispatch({ type: "emptyBag" })
 
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm checkout={checkout} stripeClientSecret={stripeClientSecret} emptyBag={emptyBag} />
+      <CheckoutForm checkout={checkout} clientSecret={clientSecret} emptyBag={emptyBag} />
     </Elements>
   )
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "change":
+      return {
+        ...state,
+        error: action.event.error,
+        isComplete: action.event.complete,
+      }
     case "submit":
       return {
         ...state,
@@ -43,7 +49,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isSubmitting: false,
-        error: action.message,
+        error: action.error,
       }
     default:
       throw new Error(`Unknown type '${action.type}'`)
@@ -52,7 +58,8 @@ const reducer = (state, action) => {
 
 const initialState = {
   isSubmitting: false,
-  error: null,
+  isComplete: false,
+  error: null, // { message, type?, code? }
 }
 
 const cardOptions = {
@@ -74,13 +81,17 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, stripeClientSecret }) =>
   const elements = useElements()
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // Disable the form if stripe or elements haven't loaded or if submitting
   const disabled = !stripe || !elements || state.isSubmitting
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
     if (disabled) {
+      return
+    }
+
+    if (state.error || !state.isComplete) {
+      elements.getElement(CardElement).focus()
       return
     }
 
@@ -94,7 +105,7 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, stripeClientSecret }) =>
       })
       .then((result) => {
         if (result.error) {
-          dispatch({ type: "error", message: result.error.message })
+          dispatch({ type: "error", message: result.error })
         } else {
           if (result.paymentIntent.status === "succeeded") {
             dispatch({ type: "complete" })
@@ -114,7 +125,9 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, stripeClientSecret }) =>
       .catch(() => {
         dispatch({
           type: "error",
-          message: "An error occurred. You have not been charged.",
+          error: {
+            message: "An error occurred. You have not been charged.",
+          }
         })
       })
   }
@@ -131,10 +144,17 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, stripeClientSecret }) =>
           Total: <Currency amount={checkout.total} />
         </div>
         <div className="mb-3">
-          <CardElement options={cardOptions} disabled={disabled} />
+          <CardElement 
+            onChange={(event) => dispatch({ type: "change", event })}
+            onReady={(el) => el.focus()}
+            options={cardOptions} 
+            disabled={disabled} 
+          />
+          <div className="h-4 mt-1 text-sm text-error leading-4">
+            { state.error && state.error.message}
+          </div>
         </div>
 
-        {state.error && <div className="mt-3 text-error">{state.error}</div>}
         <div className="mt-2 space-y-3">
           {checkout.items.map((item) => (
             <div key={item.id}>
