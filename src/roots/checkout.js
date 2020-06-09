@@ -1,12 +1,12 @@
 import React, { lazy } from "react"
 import { isRedirect, redirectTo } from "@reach/router"
 import { useQuery } from "react-query"
-import { safeGet } from "../api"
+import { get } from "../api"
 import { compose, withLayout, withUser } from "../hoc"
 
 const Checkout = lazy(() => import("../pages/checkout"))
 const refetchInterval = 5 * 60 * 1000 // 5 minutes
-const getCheckout = () => safeGet("checkout").catch((error) => {
+const getCheckout = () => get("checkout").catch((error) => {
   if (error.status === 422) {
     // TODO this currently is being thrown twice and causing multiple
     // redirects. Issue filed here: https://github.com/tannerlinsley/react-query/issues/564

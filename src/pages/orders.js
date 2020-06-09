@@ -9,7 +9,7 @@ const Orders = ({ orders }) => {
     <>
       <TopBar title="Orders" />
 
-      <div className="px-3 space-y-8">
+      <div className="space-y-4">
         {orders.nodes.map((order) => (
           <div key={order.id}>
             <Order {...{ order }} />
@@ -21,9 +21,13 @@ const Orders = ({ orders }) => {
 }
 
 const Order = ({ order }) => (
-  <div>
-    Order #{order.id}{" "}|{" "} 
-    <ShortDate date={order.createdAt} />
+  <div className="px-3 pb-4 border-b">
+    <div className="text-sm emphasis-medium">
+      <ShortDate date={order.createdAt} />
+    </div>
+    <div className="text-lg">
+      Order #{order.id}
+    </div>
 
     <div className="mt-2 space-y-3">
       {order.items.nodes.map((item) => (

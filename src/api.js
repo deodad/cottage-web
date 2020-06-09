@@ -18,6 +18,20 @@ export const fetchWithDefaults = (path, options) =>
     mode: "cors",
     credentials: "include",
     ...options,
+  }).then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+
+    const { status } = res
+
+    if (status >= 400 && status < 500) {
+      return res.json().then((error) =>
+        Promise.reject(new RequestError(status, error.message, error))
+      )
+    }
+
+    return Promise.reject(new RequestError(status, "An error occurred."))
   })
 
 export const get = (path) =>
@@ -39,30 +53,24 @@ export const post = (path, data) =>
 export const put = (path, data) =>
   fetchWithDefaults(path, {
     method: "PUT",
-    body: data,
+    ...(data && {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
   })
 
-export const del = (path, options = {}) =>
+export const del = (path, data = {}, options = {}) =>
   fetchWithDefaults(path, {
     method: "DELETE",
+    ...(data && {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }),
     ...options,
-  })
-
-export const safeGet = (...args) =>
-  get(...args).then((res) => {
-    if (res.ok) {
-      return res.json()
-    }
-
-    const { status } = res
-
-    if (status >= 400 && status < 500) {
-      return res.json().then((error) =>
-        Promise.reject(new RequestError(status, error.message, error))
-      )
-    }
-
-    return Promise.reject(new RequestError(status, "An error occurred while loading data"))
   })
 
 export const signUp = (data) => post("auth/sign-up", data)

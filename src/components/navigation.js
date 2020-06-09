@@ -45,14 +45,15 @@ const Navigation = ({ authenticatedUser }) => {
           <NavLink to="/messages">Messages</NavLink>
         </li>
         <li>
+          <NavLink to="/orders">Orders</NavLink>
+        </li>
+        <li>
+          <NavLink to="/bag">Bag</NavLink>
+        </li>
+        <li>
           <NavLink to={`/profile/${authenticatedUser.username}`}>
             Profile
           </NavLink>
-        </li>
-        <li>
-          <button className={navLinkClass} onClick={openBag}>
-            Bag
-          </button>
         </li>
         <li>
           <button

@@ -7,7 +7,7 @@ import swrConfig from "./swr"
 import ErrorBoundary from "./components/error-boundary"
 import { Layout } from "./components/layout"
 import { Spinner } from "./components/spinner"
-import Bag from "./components/bag"
+import Bag from "./pages/bag"
 import Front from "./pages/front"
 
 import Checkout from "./roots/checkout"
@@ -116,22 +116,9 @@ const App = ({ me }) => {
   }
 
   useEffect(() => {
-    me.then((res) => {
-      if (res.ok) {
-        return res
-          .json()
-          .then(({ user, bag }) => dispatch({ type: "init", user, bag }))
-      }
-
-      if (res.status == 401) {
-        return dispatch({ type: "init", user: null })
-      }
-
-      // TODO better, what to do if this fails? retry?
-      throw Error()
-    }).catch(() => {
-      dispatch({ type: "init", user: null })
-    })
+    me
+      .then(({ user, bag }) => dispatch({ type: "init", user, bag }))
+      .catch(() => dispatch({ type: "init", user: null }))
   }, [])
 
   const userContext = {
@@ -153,8 +140,8 @@ const App = ({ me }) => {
                   <Router>
                     <Front path="/" />
                     <Pricing path="/pricing" />
-                    <Login path="/login" signIn={signIn} />
-                    <SignUp path="/sign-up" signIn={signIn} />
+                    <Login path="/login" />
+                    <SignUp path="/sign-up" />
 
                     <Home path="home/*" />
                     <Market path="market/*" />
@@ -164,6 +151,7 @@ const App = ({ me }) => {
                     <Listing path="listing/:id" />
                     <EditListing path="listing/:id/edit" />
                     <AddListing path="add-listing" />
+                    <Bag path="bag" state={state.bag} dispatch={dispatch} />
                     <Checkout path="checkout/*" />
                     <Orders path="orders/*" />
 
@@ -172,7 +160,6 @@ const App = ({ me }) => {
                 </Suspense>
               </ErrorBoundary>
             </Layout>
-            <Bag state={state.bag} dispatch={dispatch} />
           </SWRConfig>
         </ReactQueryConfigProvider>
       </UserContext.Provider>
