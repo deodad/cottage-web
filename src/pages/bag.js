@@ -38,7 +38,10 @@ const Contents = ({ items, total }) => {
           <div key={idx} className="flex justify-between py-2">
             <div>
               {item.name} x {item.quantity}
-              <button onClick={() => remove({ listingId: item.listingId })}>
+              <button 
+                className="ml-2 text-sm text-error"
+                onClick={() => remove({ listingId: item.listingId })}
+              >
                 Remove
               </button>
             </div>
