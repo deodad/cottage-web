@@ -24,6 +24,7 @@ const Pricing = lazy(() => import("./pages/pricing"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
 const AddListing = lazy(() => import("./pages/add-listing"))
+const Trust = lazy(() => import("./pages/trust"))
 const NotFound = lazy(() => import("./pages/not-found"))
 
 const initialState = {
@@ -139,6 +140,7 @@ const App = ({ me }) => {
                 >
                   <Router>
                     <Front path="/" />
+                    <Trust path="/trust" />
                     <Pricing path="/pricing" />
                     <Login path="/login" />
                     <SignUp path="/sign-up" />

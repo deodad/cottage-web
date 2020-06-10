@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "@reach/router"
 import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
 import { ShortDate } from "../components/time"
@@ -50,8 +51,9 @@ const ItemSummary = ({ item }) => (
       <img className="w-32 h-32" src={item.listing.imageUrl} />
     </div>
     <div>
-      <div className="mb-1 font-bold">{item.listing.name}</div>
-      <Currency amount={item.price} />
+      <div className="font-bold">{item.listing.name}</div>
+      <div className="mt-1"><Currency amount={item.price} /></div>
+      { !item.isReviewed && <Link to="/review" className="mt-3 text-sm">Add a review</Link> }
     </div>
   </div>
 )

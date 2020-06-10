@@ -42,7 +42,7 @@ export const Layout = ({ ...rest }) => {
 }
 
 const Simple = ({ children, title }) => (
-  <div className="container max-w-sm px-5 py-3 mx-auto">
+  <div className="container px-5 py-3 mx-auto max-w-screen-lg">
     <Link
       to="/"
       className="block mb-5 text-2xl font-bold font-brand text-brand"

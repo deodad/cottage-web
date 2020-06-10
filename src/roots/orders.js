@@ -22,6 +22,7 @@ const OrdersRoot = ({ ...rest }) => {
                 listing {
                   name
                   imageUrl
+                  isReviewed
                 }
               }
             }

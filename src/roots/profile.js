@@ -12,11 +12,14 @@ const ProfileRoot = ({ handle, ...rest }) => {
       request(`
         {
           personByUsername(username: "${username}") {
+            id
             name
             username
             imageUrl
             bio
             location
+            followedCount
+            followerCount
             isFollowed
             listings(filter: { deletedAt: { isNull: true } }){
               nodes {

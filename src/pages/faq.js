@@ -3,18 +3,18 @@ import Layout from "../components/layout"
 
 const Faq = () => (
   <Layout title="FAQ">
-    <div className="font-bold mb-1 mt-5">What is Cottage?</div>
+    <div className="mt-5 mb-1 font-bold">What is Cottage?</div>
 
     <p>
       Cottage is an online marketplace for the trade of local goods and
       services.
     </p>
 
-    <div className="font-bold mb-1 mt-5">What can I trade on Cottage?</div>
+    <div className="mt-5 mb-1 font-bold">What can I trade on Cottage?</div>
 
     <p>The initial focus will be on durable food items.</p>
 
-    <div className="font-bold mb-1 mt-5">
+    <div className="mt-5 mb-1 font-bold">
       Is it legal for me to sell food on cottage?
     </div>
 
@@ -25,7 +25,24 @@ const Faq = () => (
       fermented and dried goods are allowed. Consult your states local laws.
     </p>
 
-    <div className="font-bold mb-1 mt-5">Why "Cottage"?</div>
+    <div className="mt-5 mb-1 font-bold">Who are the requirements to sell on Cottage?</div>
+    <div className="mt-5 mb-1 font-bold">Who are the requirements to buy on Cottage?</div>
+
+    <p>
+      Anyone who wants to buy on Cottage will first need to provide a pieces of information that
+      will help the seller know who is buying from them and how to contact them:
+    </p>
+
+    <ul>
+      <li>Name</li>
+      <li>Email address (never exposed directly but used to forward messages)</li>
+      <li>Profile Image</li>
+      <li>Introductory message<li>
+      <li>Agreement to Cottage Community Rules</li>
+      <li>Payment information</li>
+    </ul>
+
+    <div className="mt-5 mb-1 font-bold">Why "Cottage"?</div>
 
     <p>
       Before the industrial revolution shifted the majority of work to
@@ -35,14 +52,14 @@ const Faq = () => (
       but also some drawbacks, greater homogeneity.
     </p>
 
-    <div className="font-bold mb-1 mt-5">What is a peer-to-peer economy?</div>
+    <div className="mt-5 mb-1 font-bold">What is a peer-to-peer economy?</div>
 
     <p>
       An economy where individuals provide goods and services directly to other
       individuals.
     </p>
 
-    <div className="font-bold mb-1 mt-5">What are its advantages?</div>
+    <div className="mt-5 mb-1 font-bold">What are its advantages?</div>
 
     <p>Resiliency from production being distributed across a population.</p>
 
@@ -64,7 +81,7 @@ const Faq = () => (
       parents.
     </p>
 
-    <div className="font-bold mb-1 mt-5">
+    <div className="mt-5 mb-1 font-bold">
       What are the core components of Cottage?
     </div>
 
@@ -72,7 +89,7 @@ const Faq = () => (
     <p>Establish trust between two parties.</p>
     <p>Facilitate exchange of goods.</p>
 
-    <div className="font-bold mb-1 mt-5">How is this different than _____?</div>
+    <div className="mt-5 mb-1 font-bold">How is this different than _____?</div>
 
     <p>
       Etsy is a global marketplace, goods are shipped across the world. Cottage

@@ -51,9 +51,9 @@ const Profile = ({ authenticatedUser, user, mutate }) => {
         </div>
 
         <div>
-          <span className="font-bold">7</span>{" "}
+          <span className="font-bold">{user.followedCount}</span>{" "}
           <span className="mr-5">following</span>
-          <span className="font-bold">5</span> followers
+          <span className="font-bold">{user.followerCount}</span> followers
         </div>
       </TopPanel>
 
