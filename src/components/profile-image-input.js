@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import { useField } from "formik"
 import { ThinProfileImage } from "./user"
 import { DivButton } from "./button"

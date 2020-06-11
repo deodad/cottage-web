@@ -50,18 +50,9 @@ const ProfileForm = ({ user, children }) => {
     data.set("lat", values.location.lat)
 
     updateProfile(data)
-      .then((res) => {
-        if (res.ok) {
-          setSubmitting(false)
-          navigate(`/profile/${user.username}`)
-          return
-        }
-
-        if (res.status === 400) {
-          return res.json().then(({ message }) => setError(message))
-        }
-
-        return Promise.reject()
+      .then(() => {
+        setSubmitting(false)
+        navigate(`/profile/${user.username}`)
       })
       .catch(() => setError("Update failed. Try again."))
   }

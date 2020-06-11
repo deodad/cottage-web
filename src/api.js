@@ -1,46 +1,50 @@
-import fetch from "unfetch"
+import unfetch from "unfetch"
 import { GraphQLClient } from "graphql-request"
 import { RequestError } from "./error"
 
 const baseUrl = process.env.COTTAGE_API_HOST || "http://localhost:8082"
 
-/* Setup GraphQL client */
-export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, {
-  credentials: "include",
+const defaultFetchOptions = {
   mode: "cors",
-})
+  credentials: "include"
+}
 
+
+/* Setup GraphQL client */
+export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, defaultFetchOptions)
 export const request = graphQLClient.request.bind(graphQLClient)
 
 /* Setup REST client */
-export const fetchWithDefaults = (path, options) =>
-  fetch(`${baseUrl}/${path}`, {
-    mode: "cors",
-    credentials: "include",
-    ...options,
-  }).then((res) => {
-    if (res.ok) {
-      return res.json()
-    }
+export const fetch = (path, options = {}) =>
+  unfetch(`${baseUrl}/${path}`, { ...defaultFetchOptions, ...options })
+    .then((res) => {
+      const contentType = res.headers.get('content-type');
+      const hasJson = contentType && contentType.includes('application/json')
+      
+      if (res.ok) {
+        if (hasJson) {
+          return res.json()
+        }
 
-    const { status } = res
+        return res
+      }
 
-    if (status >= 400 && status < 500) {
-      return res.json().then((error) =>
-        Promise.reject(new RequestError(status, error.message, error))
-      )
-    }
+      const { status } = res
 
-    return Promise.reject(new RequestError(status, "An error occurred."))
-  })
+      if (hasJson) {
+        return res.json().then((error) =>
+          Promise.reject(new RequestError(status, error.message, error))
+        )
+      }
+
+      return Promise.reject(new RequestError(status, "An error occurred."))
+    })
 
 export const get = (path) =>
-  fetchWithDefaults(path, {
-    method: "GET",
-  })
+  fetch(path, { method: "GET" })
 
 export const post = (path, data) =>
-  fetchWithDefaults(path, {
+  fetch(path, {
     method: "POST",
     ...(data && {
       headers: {
@@ -51,7 +55,7 @@ export const post = (path, data) =>
   })
 
 export const put = (path, data) =>
-  fetchWithDefaults(path, {
+  fetch(path, {
     method: "PUT",
     ...(data && {
       headers: {
@@ -62,7 +66,7 @@ export const put = (path, data) =>
   })
 
 export const del = (path, data = {}, options = {}) =>
-  fetchWithDefaults(path, {
+  fetch(path, {
     method: "DELETE",
     ...(data && {
       headers: {
@@ -75,28 +79,31 @@ export const del = (path, data = {}, options = {}) =>
 
 export const signUp = (data) => post("auth/sign-up", data)
 export const login = (data) => post("auth/login", data)
-export const logout = () => post("auth/logout")
+export const logout = () => fetch("auth/logout", { method: 'POST' })
 
 export const me = () => get("me")
-export const updateProfile = (data) => put(`me`, data)
+export const updateProfile = (data) => fetch(`me`, {
+  method: 'PUT',
+  body: data
+})
 export const follow = (id) => post(`me/follow/${id}`)
 export const unfollow = (id) => del(`me/follow/${id}`)
 export const getMyListings = () => get(`me/listings`)
 
 export const createListing = (body) =>
-  fetchWithDefaults("listings", {
+  fetch("listings", {
     method: "POST",
     body,
   })
 export const getListings = () => get("listings")
 export const getListing = (id) => get(`listings/${id}`)
 export const updateListing = (id, body) =>
-  fetchWithDefaults(`listings/${id}`, {
+  fetch(`listings/${id}`, {
     method: "PUT",
     body,
   })
 export const deleteListing = (id) =>
-  fetchWithDefaults(`listings/${id}`, {
+  fetch(`listings/${id}`, {
     method: "DELETE",
   })
 export const getResource = (resource, id) => get(`${resource}/${id}`)

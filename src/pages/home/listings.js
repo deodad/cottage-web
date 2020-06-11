@@ -32,7 +32,7 @@ const ListingsContainer = () => {
       <ContainedButton
         emphasis="highest"
         size="lg"
-        onClick={() => navigate("/add-listing")}
+        onClick={() => navigate("/listing/new")}
       >
         Add Listing
       </ContainedButton>

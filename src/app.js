@@ -11,21 +11,22 @@ import Bag from "./pages/bag"
 import Front from "./pages/front"
 
 import Checkout from "./roots/checkout"
+import EditListing from "./roots/edit-listing"
+import Listing from "./roots/listing"
 import Orders from "./roots/orders"
 import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
-import Listing from "./roots/listing"
-import EditListing from "./roots/edit-listing"
 
-const Login = lazy(() => import("./pages/login"))
-const SignUp = lazy(() => import("./pages/sign-up"))
+const AddListing = lazy(() => import("./pages/add-listing"))
 const Home = lazy(() => import("./pages/home"))
-const Pricing = lazy(() => import("./pages/pricing"))
+const Login = lazy(() => import("./pages/login"))
 const Market = lazy(() => import("./pages/market"))
 const Messages = lazy(() => import("./pages/messages"))
-const AddListing = lazy(() => import("./pages/add-listing"))
-const Trust = lazy(() => import("./pages/trust"))
 const NotFound = lazy(() => import("./pages/not-found"))
+const Pricing = lazy(() => import("./pages/pricing"))
+const Privacy = lazy(() => import("./pages/privacy"))
+const SignUp = lazy(() => import("./pages/sign-up"))
+const Trust = lazy(() => import("./pages/trust"))
 
 const initialState = {
   layout: "none",
@@ -139,11 +140,12 @@ const App = ({ me }) => {
                   fallback={<Spinner className="flex justify-center pt-16" />}
                 >
                   <Router>
-                    <Front path="/" />
-                    <Trust path="/trust" />
-                    <Pricing path="/pricing" />
+                    <Front path="/" signIn={signIn} />
                     <Login path="/login" />
+                    <Pricing path="/pricing" />
+                    <Privacy path="/privacy" />
                     <SignUp path="/sign-up" />
+                    <Trust path="/trust" />
 
                     <Home path="home/*" />
                     <Market path="market/*" />
@@ -151,11 +153,11 @@ const App = ({ me }) => {
                     <Profile path="profile/:handle/*" />
                     <ProfileSettings path="settings/profile" />
                     <Listing path="listing/:id" />
-                    <EditListing path="listing/:id/edit" />
-                    <AddListing path="add-listing" />
                     <Bag path="bag" state={state.bag} dispatch={dispatch} />
                     <Checkout path="checkout/*" />
                     <Orders path="orders/*" />
+                    <AddListing path="listing/new" />
+                    <EditListing path="listing/:id/edit" />
 
                     <NotFound default />
                   </Router>

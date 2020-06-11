@@ -20,6 +20,8 @@ const ProfileRoot = ({ handle, ...rest }) => {
             location
             followedCount
             followerCount
+            sellerReviewCount
+            averageSellerRating
             isFollowed
             listings(filter: { deletedAt: { isNull: true } }){
               nodes {

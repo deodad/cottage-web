@@ -51,6 +51,8 @@ const Trust = () => (
       AirBnB: safety, security, fairness, authenticity, reliability
       Reading list:
       Jane Jacobs
+      Rosa Luxemborg
+      De Bouis
     </div>
   </>
 )
