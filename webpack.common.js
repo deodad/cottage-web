@@ -1,6 +1,5 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
 
 module.exports = {
   target: "web",
@@ -35,6 +34,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
-    new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/, /main/]),
-  ],
+  ]
 }
