@@ -27,20 +27,11 @@ const EditListing = ({ listing }) => {
     // TODO prevent double submissions
     setError(null)
     updateListing(listing.id, formData)
-      .then((res) => {
-        if (res.ok) {
-          setSubmitting(false)
-          navigate(-1)
-          return
-        }
-
-        if (res.status === 400) {
-          return res.json().then(({ message }) => setError(message))
-        }
-
-        return Promise.reject()
+      .then(() => {
+        setSubmitting(false)
+        navigate(-1)
       })
-      .catch(() => setError("Failed to update listing."))
+      .catch((err) => setError(err.message || "Failed to update listing."))
   }
 
   listing.image = listing.imageUrl
@@ -48,10 +39,10 @@ const EditListing = ({ listing }) => {
   return (
     <>
       <ListingForm listing={listing} onSubmit={handleSubmit} error={error}>
-        {({ fields }) => (
+        {({ fields, isSubmitting }) => (
           <>
             <TopBar title="Edit Listing" back={true}>
-              <ContainedButton type="submit">Save</ContainedButton>
+              <ContainedButton type="submit" disabled={isSubmitting}>Save</ContainedButton>
             </TopBar>
 
             <div className="px-3">{fields}</div>

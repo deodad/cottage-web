@@ -18,6 +18,8 @@ export const ListingForm = ({ children, error, listing = {}, onSubmit }) => {
       <Input type="text" label="Short Description" name="shortDescription" />
       <Input type="number" step="0.01" label="Price" name="price" />
       <ListingImageInput name="image" />
+
+      {error && <div className="mt-3 text-error">{error}</div>}
     </>
   )
 
@@ -34,10 +36,11 @@ export const ListingForm = ({ children, error, listing = {}, onSubmit }) => {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <Form>
-        {children({ fields })}
-        {error && <div className="mt-3 text-error">{error}</div>}
-      </Form>
+      {({ isSubmitting }) => (
+        <Form>
+          {children({ fields, isSubmitting })}
+        </Form>
+      )}
     </Formik>
   )
 }
