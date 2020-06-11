@@ -2,14 +2,13 @@ import React from "react"
 import { Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
-import { follow, unfollow } from "../api"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopPanel } from "../components/layout"
+import { ShortDate } from "../components/time"
 
-const Profile = ({ authenticatedUser, user, mutate }) => {
+const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
   const listings = user.listings.nodes
-  const dateJoined = new Date(user.date_joined)
 
   return (
     <>
@@ -26,9 +25,10 @@ const Profile = ({ authenticatedUser, user, mutate }) => {
             <div className="absolute top-0 right-0">
               {user.username !== authenticatedUser.username ? (
                 <FollowButton
-                  userId={user.id}
                   isFollowed={user.isFollowed}
-                  mutate={(isFollowed) => mutate({ ...data, isFollowed })}
+                  userId={user.id}
+                  follow={follow}
+                  unfollow={unfollow}
                 />
               ) : (
                 <Link to="/settings/profile" className="btn-txt">
@@ -46,7 +46,7 @@ const Profile = ({ authenticatedUser, user, mutate }) => {
           <div className="ml-2 mr-5">{user.location}</div>
           <FontAwesomeIcon icon={faCalendar} />
           <div className="ml-2 mr-5">
-            Joined {dateJoined.toLocaleDateString()}
+            Joined <ShortDate date={user.createdAt} />
           </div>
         </div>
 
@@ -64,16 +64,13 @@ const Profile = ({ authenticatedUser, user, mutate }) => {
   )
 }
 
-const FollowButton = ({ mutate, userId, isFollowed, ...rest }) => {
-  // TODO state management, set isFollowed on user, etc
+const FollowButton = ({ follow, unfollow, userId, isFollowed, ...rest }) => {
   const handleClick = () => {
     if (isFollowed) {
-      unfollow(userId)
+      unfollow({ userId })
     } else {
-      follow(userId)
+      follow({ userId })
     }
-
-    mutate(!isFollowed)
   }
 
   return (

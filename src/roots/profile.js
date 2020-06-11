@@ -1,43 +1,71 @@
 import React, { lazy } from "react"
-import { useQuery } from "react-query"
+import { queryCache, useMutation, useQuery } from "react-query"
 import { compose, withUser, withLayout } from "../hoc"
-import { request } from "../api"
+import { request, follow, unfollow } from "../api"
+
+const queryProfile = (username) => request(`
+  query Profile {
+    profile: personByUsername(username: "${username}") {
+      id
+      name
+      username
+      imageUrl
+      bio
+      location
+      createdAt
+      followedCount
+      followerCount
+      sellerReviewCount
+      averageSellerRating
+      isFollowed
+      listings(filter: { deletedAt: { isNull: true } }){
+        nodes {
+          id
+          name
+          shortDescription
+          imageUrl
+          price
+        }
+      }
+    }
+  }
+`)
+
+const followMutation = ({ userId }) => follow(userId)
+const unfollowMutation = ({ userId }) => unfollow(userId)
 
 const Profile = lazy(() => import("../pages/profile"))
-
 const ProfileRoot = ({ handle, ...rest }) => {
-  const { data } = useQuery(
-    [handle, 'profile'], 
-    (username) =>
-      request(`
-        {
-          personByUsername(username: "${username}") {
-            id
-            name
-            username
-            imageUrl
-            bio
-            location
-            followedCount
-            followerCount
-            sellerReviewCount
-            averageSellerRating
-            isFollowed
-            listings(filter: { deletedAt: { isNull: true } }){
-              nodes {
-                id
-                name
-                shortDescription
-                imageUrl
-                price
-              }
-            }
-          }
-        }
-      `)
-  )
+  const queryKey = [handle, 'profile']
 
-  return <Profile user={data.personByUsername}  {...rest } />
+  const { data } = useQuery(queryKey, queryProfile)
+
+  const [followM] = useMutation(followMutation, {
+    onSuccess: () => queryCache.setQueryData(queryKey, ({ profile }) => ({
+      profile: {
+        ...profile,
+        isFollowed: true
+      }
+    }))
+  })
+
+  const [unfollowM] = useMutation(unfollowMutation, {
+    onSuccess: () => queryCache.setQueryData(queryKey, ({ profile }) => ({
+      profile: {
+        ...profile,
+        isFollowed: false
+      }
+    }))
+  })
+
+  return (
+    <Profile 
+      user={data.profile}  
+      follow={followM}
+      unfollow={unfollowM}
+      {...rest } 
+     />
+  )
 }
 
 export default compose(
