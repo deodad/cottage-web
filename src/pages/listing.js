@@ -8,11 +8,12 @@ import AddToBag from "../components/add-to-bag"
 
 const Listing = ({ authenticatedUser, data }) => {
   const { listing, distance } = data
+  const isOwn = listing.personId == authenticatedUser.id
 
   return (
     <>
       <TopBarContent>
-        {listing.personId == authenticatedUser.id && (
+        {isOwn && (
           <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
             Edit
           </Link>
@@ -35,9 +36,11 @@ const Listing = ({ authenticatedUser, data }) => {
           <div className="mt-1">{listing.shortDescription }</div>
         )}
 
-        <div className="mt-3">
-          <AddToBag listingId={listing.id} />
-        </div>
+        { !isOwn && 
+          <div className="mt-3">
+            <AddToBag listingId={listing.id} />
+          </div>
+        }
       </div>
     </>
   )
