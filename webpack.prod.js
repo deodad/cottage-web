@@ -10,7 +10,7 @@ module.exports = merge(common, {
     new webpack.EnvironmentPlugin([
       'NODE_ENV', 
       'COTTAGE_API_HOST', 
-      'STRIPE_PUBLIASHABLE_KEY'
+      'STRIPE_PUBLISHABLE_KEY'
     ]),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/, /main/]),
   ],
