@@ -1,4 +1,5 @@
 const merge = require('webpack-merge')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
 const common = require('./webpack.common.js')
