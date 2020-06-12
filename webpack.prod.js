@@ -7,7 +7,11 @@ const common = require('./webpack.common.js')
 module.exports = merge(common, {
   mode: "production",
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV', 'COTTAGE_API_HOST']),
+    new webpack.EnvironmentPlugin([
+      'NODE_ENV', 
+      'COTTAGE_API_HOST', 
+      'STRIPE_PUBLIASHABLE_KEY'
+    ]),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime/, /main/]),
   ],
 })
