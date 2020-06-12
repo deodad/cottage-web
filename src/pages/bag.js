@@ -17,9 +17,7 @@ const Bag = () => {
         </ContainedButton>
       </TopBar>
 
-      <div className="container-md">
-        <Contents items={data.items} total={data.total} />
-      </div>
+      <Contents items={data.items} total={data.total} />
     </>
   )
 }
@@ -33,30 +31,36 @@ const Contents = ({ items, total }) => {
 
   return (
     <div className="px-3">
-      <div className="divide-y">
-        {items.map((item, idx) => (
-          <div key={idx} className="flex justify-between py-2">
-            <div>
-              {item.name} x {item.quantity}
-              <button 
-                className="ml-2 text-sm text-error"
-                onClick={() => remove({ listingId: item.listingId })}
-              >
-                Remove
-              </button>
-            </div>
-            <div><Currency amount={item.price * item.quantity} /></div>
-          </div>
-        ))}
+      <div className="flex justify-between text-lg">
+        <div className="font-bold">Total</div>
+        <div><Currency amount={total} /></div>
+      </div>
 
-        <div className="flex justify-between py-2">
-          <div className="font-bold">Total</div>
-          <div><Currency amount={total} /></div>
-        </div>
+      <div className="mt-3 space-y-3">
+        {items.map((item) => (
+          <Item key={item.listingId} item={item} remove={() => remove({ listingId: item.listingId })} />
+        ))}
       </div>
     </div>
   )
 }
+
+const Item = ({ item, remove }) => (
+  <div className="flex">
+    <div className="mr-3">
+      <img className="w-32 h-32 rounded" src={item.imageUrl} />
+    </div>
+    <div>
+      <div className="font-bold">{item.name}</div>
+      <div className="mt-1">{item.quantity} x  <Currency amount={item.price} /></div>
+
+      <div className="mt-3">
+        <button className="link">Update quantity</button><br/>
+        <button onClick={remove} className="link text-error">Remove</button>
+      </div>
+    </div>
+  </div>
+)
 
 export default compose(
   withUser,

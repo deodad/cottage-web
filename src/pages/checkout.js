@@ -8,7 +8,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js"
 import { request } from "../api"
 import { useAppContext } from "../hooks"
-import { TopBar } from "../components/layout"
+import { TopBarContent } from "../components/page"
 import { ContainedButton } from "../components/button"
 import Currency from "../components/currency"
 import "../stripe.css"
@@ -134,16 +134,18 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TopBar title="Checkout">
+      <TopBarContent>
         <ContainedButton type="submit" disabled={disabled}>
           Complete
         </ContainedButton>
-      </TopBar>
+      </TopBarContent>
+
       <div className="px-3">
-        <div className="mb-3">
-          Total: <Currency amount={checkout.total} />
+        <div className="flex justify-between text-lg">
+          <div>Total</div> 
+          <Currency amount={checkout.total} />
         </div>
-        <div className="mb-3">
+        <div className="mt-3">
           <CardElement 
             onChange={(event) => dispatch({ type: "change", event })}
             onReady={(el) => el.focus()}
@@ -154,7 +156,6 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
             { state.error && state.error.message}
           </div>
         </div>
-
         <div className="mt-2 space-y-3">
           {checkout.items.map((item, idx) => (
             <div key={idx}>
@@ -162,7 +163,6 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
             </div>
           ))}
         </div>
-
       </div>
     </form>
   )

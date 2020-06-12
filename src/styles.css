@@ -33,6 +33,10 @@ p {
   @apply mb-2;
 }
 
+.link {
+  @apply text-primary underline
+}
+
 .container-sm {
   @apply max-w-sm mx-auto;
 }
@@ -206,10 +210,6 @@ p {
 
 .font-brand {
   font-family: 'Libre Baskerville', serif;
-}
-
-.link, .button-link {
-  @apply text-blue-600;
 }
 
 .label {

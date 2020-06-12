@@ -1,27 +1,20 @@
 import React, { lazy } from "react"
-import { isRedirect, redirectTo } from "@reach/router"
 import { useQuery } from "react-query"
+import { RequestError } from "../error"
+import { Page } from "../components/page"
 import { get } from "../api"
 import { compose, withLayout, withUser } from "../hoc"
 
-const Checkout = lazy(() => import("../pages/checkout"))
 const refetchInterval = 5 * 60 * 1000 // 5 minutes
-const getCheckout = () => get("checkout").catch((error) => {
-  if (error.status === 422) {
-    // TODO this currently is being thrown twice and causing multiple
-    // redirects. Issue filed here: https://github.com/tannerlinsley/react-query/issues/564
-    redirectTo(-1) 
-  } else {
-    throw error
-  }
-})
+const getCheckout = () => get("checkout")
 
-const CheckoutRoot = () => {
+const Checkout = lazy(() => import("../pages/checkout"))
+const CheckoutContainer = () => {
   const { data } = useQuery("checkout", getCheckout, {
     refecthOnWindowFocus: false,
     refetchInterval,
     retry: (failureCount, error) => {
-      if (isRedirect(error)) {
+      if (error instanceof RequestError) {
         return false
       } else {
         return failureCount < 3
@@ -31,6 +24,11 @@ const CheckoutRoot = () => {
 
   return <Checkout checkout={data.checkout} />
 }
+
+const CheckoutRoot = (props) =>
+  <Page title="Checkout">
+    <CheckoutContainer {...props} /> 
+  </Page>
 
 export default compose(
   withUser, 
