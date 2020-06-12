@@ -54,7 +54,7 @@ export const SignUp = () => {
 }
 
 const validationSchema = object({
-  username: string().max(20, "20 character max").required("Choose a handle"),
+  username: string().max(20, "20 character max").matches(/^\w+$/, 'alphanumeric + underscore only').required("Choose a handle"),
   name: string()
     .max(60, "60 character max")
     .required("What should we call you?"),
