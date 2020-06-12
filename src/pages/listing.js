@@ -3,7 +3,7 @@ import { Link } from "@reach/router"
 import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
 import { ListingImage } from "../components/listing"
-import { TopBar } from "../components/layout"
+import { TopBarContent } from "../components/page"
 import AddToBag from "../components/add-to-bag"
 
 const Listing = ({ authenticatedUser, data }) => {
@@ -11,13 +11,13 @@ const Listing = ({ authenticatedUser, data }) => {
 
   return (
     <>
-      <TopBar title="Listing" back={true}>
+      <TopBarContent>
         {listing.personId == authenticatedUser.id && (
           <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
             Edit
           </Link>
         )}
-      </TopBar>
+      </TopBarContent>
 
       <div className="px-3">
         <UserImageLink user={listing.person} className="mt-1" />
