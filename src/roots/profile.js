@@ -44,7 +44,8 @@ const ProfileRoot = ({ handle, ...rest }) => {
     onSuccess: () => queryCache.setQueryData(queryKey, ({ profile }) => ({
       profile: {
         ...profile,
-        isFollowed: true
+        isFollowed: true,
+        followerCount: profile.followerCount + 1
       }
     }))
   })
@@ -53,7 +54,8 @@ const ProfileRoot = ({ handle, ...rest }) => {
     onSuccess: () => queryCache.setQueryData(queryKey, ({ profile }) => ({
       profile: {
         ...profile,
-        isFollowed: false
+        isFollowed: false,
+        followerCount: profile.followerCount - 1
       }
     }))
   })
