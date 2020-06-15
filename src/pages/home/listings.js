@@ -28,7 +28,7 @@ const ListingsContainer = () => {
   )
 
   return (
-    <div>
+    <div className="px-3">
       <ContainedButton
         emphasis="highest"
         size="lg"
