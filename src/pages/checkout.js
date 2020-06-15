@@ -133,9 +133,9 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="checkout-form">
       <TopBarContent>
-        <ContainedButton type="submit" disabled={disabled}>
+        <ContainedButton form="checkout-form" type="submit" disabled={disabled}>
           Complete
         </ContainedButton>
       </TopBarContent>
