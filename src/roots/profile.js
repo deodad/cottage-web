@@ -45,7 +45,7 @@ const ProfileRoot = ({ handle, ...rest }) => {
       profile: {
         ...profile,
         isFollowed: true,
-        followerCount: profile.followerCount + 1
+        followerCount: parseInt(profile.followerCount) + 1
       }
     }))
   })
@@ -55,7 +55,7 @@ const ProfileRoot = ({ handle, ...rest }) => {
       profile: {
         ...profile,
         isFollowed: false,
-        followerCount: profile.followerCount - 1
+        followerCount: parseInt(profile.followerCount) - 1
       }
     }))
   })
