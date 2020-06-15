@@ -1,6 +1,7 @@
 import React from "react"
 import { UserActivity } from "./user"
 import { ListingLink } from "./listing"
+import { HorizontalListing } from "./listing"
 
 export const Activity = ({ activity, user, date }) => (
   <UserActivity user={user} date={date}>
@@ -22,7 +23,7 @@ const NewListing = ({ activity }) => (
     Added a new listing
 
     <div className="mt-1">
-      <ListingShort listing={activity.listing} />
+      <HorizontalListing listing={activity.listing} compact={true} />
     </div>
   </div>
 )
@@ -34,20 +35,8 @@ const Transaction = ({ activity }) => (
 
     <div className="mt-3 space-y-3">
       {activity.items.map((item, idx) => (
-        <ListingShort key={idx} listing={item} />
+        <HorizontalListing key={idx} listing={item} compact={true} />
        ))}
     </div>
   </div>
-)
-
-export const ListingShort = ({ listing }) => (
-  <ListingLink listing={listing} className="flex rounded surface">
-    <div className="flex-none">
-      <img className="w-32 h-32" src={listing.imageUrl} />
-    </div>
-    <div className="flex-1 p-2 ml-1">
-      <div className="text-lg font-bold">{listing.name}</div>
-      <div className="text-sm">{listing.shortDescription}</div>
-    </div>
-  </ListingLink>
 )

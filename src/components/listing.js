@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
+import cx from "classnames"
 import { CompactUserBadge } from "./user"
 import Currency from "./currency"
 
@@ -44,20 +45,22 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
   </div>
 )
 
-export const HorizontalListing = ({ listing, user, distance }) => (
+export const HorizontalListing = ({ listing, user, distance, compact = false }) => (
   <ListingLink listing={listing} className="flex rounded surface">
-    <div className="flex-none w-48 h-48">
+    <div className={cx("flex-none", compact ? "w-32 h-32" : "w-48 h-48")}>
       <img src={listing.imageUrl} alt={listing.name} className="rounded" />
     </div>
 
     <div className="flex-1 p-2 ml-1">
       <div className="text-lg font-bold">{listing.name}</div>
-      <div className="text-sm emphasis-medium">
-        {listing.price && <Currency amount={listing.price} />}
-        {distance && <span> &middot; {distance}</span>}
-      </div>
+      { (listing.price || distance) &&
+        <div className="mb-1 text-sm emphasis-medium">
+          {listing.price && <Currency amount={listing.price} />}
+          {distance && <span> &middot; {distance}</span>}
+        </div>
+      }
       {listing.shortDescription && (
-        <div className="mt-1">{listing.shortDescription}</div>
+        <div className={cx(compact && "text-sm")}>{listing.shortDescription}</div>
       )}
 
       {user && (
