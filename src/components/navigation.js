@@ -46,9 +46,6 @@ const Navigation = ({ authenticatedUser }) => {
           <NavLink to="/orders">Orders</NavLink>
         </li>
         <li>
-          <NavLink to="/messages">Messages</NavLink>
-        </li>
-        <li>
           <NavLink to={`/profile/${authenticatedUser.username}`}>
             Profile
           </NavLink>

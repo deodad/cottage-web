@@ -20,7 +20,7 @@ const BottomNavBar = ({ authenticatedUser }) => {
     <div className="flex border-t">
       <NavLink to="/home">Home</NavLink>
       <NavLink to="/market">Market</NavLink>
-      <NavLink to="/messages">Messages</NavLink>
+      <NavLink to="/bag">Bag</NavLink>
       <NavLink to={`/profile/${authenticatedUser.username}`}>Profile</NavLink>
     </div>
   )

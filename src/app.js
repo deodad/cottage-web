@@ -21,7 +21,6 @@ const AddListing = lazy(() => import("./pages/add-listing"))
 const Home = lazy(() => import("./pages/home"))
 const Login = lazy(() => import("./pages/login"))
 const Market = lazy(() => import("./pages/market"))
-const Messages = lazy(() => import("./pages/messages"))
 const NotFound = lazy(() => import("./pages/not-found"))
 const Pricing = lazy(() => import("./pages/pricing"))
 const Privacy = lazy(() => import("./pages/privacy"))
@@ -149,7 +148,6 @@ const App = ({ me }) => {
 
                     <Home path="home/*" />
                     <Market path="market/*" />
-                    <Messages path="messages/*" />
                     <Profile path="profile/:handle/*" />
                     <ProfileSettings path="settings/profile" />
                     <Listing path="listing/:id" />
