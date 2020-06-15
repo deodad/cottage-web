@@ -12,7 +12,7 @@ const Home = () => (
       <NavLink to="listings">My Listings</NavLink>
     </div>
 
-    <div className="mt-3 px-3">
+    <div className="mt-3">
       <Router>
         <Activities path="/" />
         <Listings path="listings" />

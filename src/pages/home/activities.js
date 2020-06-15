@@ -1,43 +1,29 @@
 import React from "react"
-import { GraphQLClient } from "graphql-request"
-import useSWR from "swr"
-import { withSWR } from "../../hoc"
+import cx from "classnames"
+import { useQuery } from "react-query"
+import { get } from "../../api"
 import { Activity } from "../../components/activity"
 
-const endpoint = "http://localhost:8082/graphql"
-
-const graphQLClient = new GraphQLClient(endpoint, {
-  credentials: "include",
-  mode: "cors",
-})
+const queryActivities = () => get("activities")
 
 const ActivitiesContainer = () => {
-  const { data, error, isValidating } = useSWR("activities")
-  useSWR(
-    `{
-      currentPerson {
-        id
-        name
-      }
-  }`,
-    (query) => graphQLClient.request(query)
-  )
+  const { data } = useQuery("activities", queryActivities)
 
-  return <Activities {...{ data, error, isValidating }} />
+  return <Activities activities={data.activities} />
 }
 
-const Activities = withSWR(({ data }) => (
-  <ul className="space-y-5">
-    {data.activities.map((activity) => (
-      <li key={activity.id}>
+const Activities = ({ activities }) => (
+  <ul className="space-y-5 divide-y">
+    {activities.map((activity, idx) => (
+      <li className={cx("px-3", idx > 0 && "pt-5")} key={idx}>
         <Activity
-          user={activity.user}
-          activity={activity.activityData}
+          user={activity.person}
+          activity={activity.data}
           date={new Date(activity.createdAt)}
         />
       </li>
     ))}
   </ul>
-))
+)
 
 export default ActivitiesContainer
