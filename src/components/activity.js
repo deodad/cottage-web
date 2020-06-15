@@ -41,13 +41,13 @@ const Transaction = ({ activity }) => (
 )
 
 export const ListingShort = ({ listing }) => (
-  <div className="flex">
-    <div className="mr-3">
+  <ListingLink listing={listing} className="flex rounded surface">
+    <div className="flex-none">
       <img className="w-32 h-32" src={listing.imageUrl} />
     </div>
-    <div>
-      <div className="font-bold">{listing.name}</div>
-      <div className="mt-1 text-sm">{listing.shortDescription}</div>
+    <div className="flex-1 p-2 ml-1">
+      <div className="text-lg font-bold">{listing.name}</div>
+      <div className="text-sm">{listing.shortDescription}</div>
     </div>
-  </div>
+  </ListingLink>
 )

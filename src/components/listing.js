@@ -50,10 +50,10 @@ export const HorizontalListing = ({ listing, user, distance }) => (
       <img src={listing.imageUrl} alt={listing.name} className="rounded" />
     </div>
 
-    <div className="flex-1 mt-2 ml-2">
+    <div className="flex-1 p-2 ml-1">
       <div className="text-lg font-bold">{listing.name}</div>
       <div className="text-sm emphasis-medium">
-        <Currency amount={listing.price} />
+        {listing.price && <Currency amount={listing.price} />}
         {distance && <span> &middot; {distance}</span>}
       </div>
       {listing.shortDescription && (
