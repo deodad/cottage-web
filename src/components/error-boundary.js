@@ -1,8 +1,8 @@
 import React from "react"
+import { Location } from "@reach/router"
 import { Page } from "./page"
 
-
-export default class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
     this.state = { error: null }
@@ -10,6 +10,12 @@ export default class ErrorBoundary extends React.Component {
 
   static getDerivedStateFromError(error) {
     return { error }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.path != prevProps.path) {
+      this.setState({ error: null })
+    }
   }
 
   render() {
@@ -24,3 +30,15 @@ export default class ErrorBoundary extends React.Component {
     )
   }
 }
+
+const WithLocation = (props) => {
+  return (
+    <Location>
+      {({location}) => (
+        <ErrorBoundary path={location.pathname} {...props} />
+      )}
+    </Location>
+  )
+}
+
+export default WithLocation
