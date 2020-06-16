@@ -12,6 +12,7 @@ export class Page extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
+    this.el.className = "el"
     this.container = React.createRef()
     this.state = { error: null }
   }
@@ -21,7 +22,9 @@ export class Page extends React.Component {
   }
 
   componentWillUnmount() {
-    this.container.current.removeChild(this.el)
+    if (this.el.parentNode == this.container.current) {
+      this.container.current.removeChild(this.el)
+    }
   }
 
   componentDidCatch(error) {
@@ -36,7 +39,7 @@ export class Page extends React.Component {
     return (
       <PageContext.Provider value={{ topBarEl: this.el }}>
         <TopBar title={this.props.title}>
-          <div ref={this.container} />
+          <div className="container" ref={this.container} />
         </TopBar>
 
         <Suspense fallback={<Spinner className="flex justify-center pt-16" />}>

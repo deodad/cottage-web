@@ -3,13 +3,10 @@ import { Link } from "@reach/router"
 import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
 import { ShortDate } from "../components/time"
-import { TopBar } from "../components/layout"
 
 const Orders = ({ orders }) => {
   return (
     <>
-      <TopBar title="Orders" />
-
       <div className="space-y-4">
         {orders.nodes.map((order) => (
           <div key={order.id}>

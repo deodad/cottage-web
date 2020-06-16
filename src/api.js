@@ -12,7 +12,7 @@ const defaultFetchOptions = {
 
 /* Setup GraphQL client */
 export const graphQLClient = new GraphQLClient(`${baseUrl}/graphql`, defaultFetchOptions)
-export const request = graphQLClient.request.bind(graphQLClient)
+export const request = (...args) => graphQLClient.request(...args).catch(() => Promise.reject(new RequestError(400, "An error occurred fetching data.")))
 
 /* Setup REST client */
 export const fetch = (path, options = {}) =>

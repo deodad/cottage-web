@@ -1,4 +1,6 @@
 import React from "react"
+import { Page } from "./page"
+
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,9 +14,11 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     return this.state.error ? (
-      <div className="p-5 text-center text-error">
-        {this.state.error.message}
-      </div>
+      <Page title="Error">
+        <div className="px-3 text-error">
+          {this.state.error.message}
+        </div>
+      </Page>
     ) : (
       this.props.children
     )
