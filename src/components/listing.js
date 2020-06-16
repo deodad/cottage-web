@@ -4,21 +4,18 @@ import cx from "classnames"
 import { CompactUserBadge } from "./user"
 import Currency from "./currency"
 
-export const ListingLink = ({ listing, children, ...rest }) => (
+export const ListingLink = ({ listing, children, ...rest }) =>
   <Link to={`/listing/${listing.id}`} {...rest}>
     {children || listing.name}
   </Link>
-)
 
-export const ListingImage = ({ listing }) => (
-  <img
-    src={
-      listing.imageUrl
-        ? listing.imageUrl
-        : "https://place-hold.it/400x400/999999/333333&text=Image"
-    }
-  />
-)
+export const ListingDisplayPrice = ({ price }) =>
+  price === 0 ? "Free" : <Currency amount={price} />
+
+const imagePlaceholder = "https://place-hold.it/400x400/999999/333333&text=Image"
+
+export const ListingImage = ({ listing }) =>
+  <img src={listing.imageUrl || imagePlaceholder} />
 
 export const Listing = ({ listing, user, distance, ...rest }) => (
   <div>
@@ -53,9 +50,9 @@ export const HorizontalListing = ({ listing, user, distance, compact = false }) 
 
     <div className="flex-1 p-2 ml-1">
       <div className="text-lg font-bold">{listing.name}</div>
-      { (listing.price || distance) &&
+      { (listing.price !== undefined || distance !== undefined) &&
         <div className="mb-1 text-sm emphasis-medium">
-          {listing.price && <Currency amount={listing.price} />}
+          {listing.price !== undefined && <ListingDisplayPrice price={listing.price} />} 
           {distance && <span> &middot; {distance}</span>}
         </div>
       }

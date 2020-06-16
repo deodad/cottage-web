@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "@reach/router"
 import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
-import { ListingImage } from "../components/listing"
+import { ListingImage, ListingDisplayPrice } from "../components/listing"
 import { TopBarContent } from "../components/page"
 import AddToBag from "../components/add-to-bag"
 
@@ -29,7 +29,7 @@ const Listing = ({ authenticatedUser, data }) => {
       <div className="px-3">
         <div className="text-xl font-bold">{listing.name}</div>
         <div className="emphasis-medium">
-          <Currency amount={listing.price} />
+          <ListingDisplayPrice price={listing.price} />
           {distance && <span> &middot; {distance}</span>}
         </div>
         {listing.shortDescription && (
