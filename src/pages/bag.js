@@ -12,7 +12,7 @@ const Bag = () => {
   return (
     <>
       <TopBar title="Shopping Bag">
-        <ContainedButton onClick={() => navigate("/checkout")} disabled={data.items.length === 0}>
+        <ContainedButton onClick={() => navigate("/checkout", { replace: true })} disabled={data.items.length === 0}>
           Checkout
         </ContainedButton>
       </TopBar>
@@ -64,5 +64,5 @@ const Item = ({ item, remove }) => (
 
 export default compose(
   withUser,
-  withLayout("user")
+  withLayout("user", { focus: true })
 )(Bag)

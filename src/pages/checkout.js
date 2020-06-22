@@ -1,4 +1,5 @@
 import React, { useReducer } from "react"
+import { navigate } from "@reach/router"
 import {
   CardElement,
   Elements,
@@ -6,26 +7,11 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import { request } from "../api"
-import { useAppContext } from "../hooks"
+import { request, post } from "../api"
 import { TopBarContent } from "../components/page"
 import { ContainedButton } from "../components/button"
 import Currency from "../components/currency"
 import "../stripe.css"
-
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
-
-const CheckoutContainer = ({ checkout }) => {
-  const { clientSecret } = checkout
-  const { dispatch } = useAppContext()
-  const emptyBag = () => dispatch({ type: "emptyBag" })
-
-  return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm checkout={checkout} clientSecret={clientSecret} emptyBag={emptyBag} />
-    </Elements>
-  )
-}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -33,7 +19,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         error: action.event.error,
-        isComplete: action.event.complete,
+        isFormCompleted: action.event.complete,
       }
     case "submit":
       return {
@@ -58,8 +44,24 @@ const reducer = (state, action) => {
 
 const initialState = {
   isSubmitting: false,
-  isComplete: false,
+  isFormCompleted: false, // whether or not the form is completed
   error: null, // { message, type?, code? }
+}
+
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
+
+const CheckoutContainer = ({ checkout }) => {
+  if (checkout.total == 0) {
+    return <FreeCheckoutForm checkout={checkout} />
+  }
+
+  const { clientSecret } = checkout
+
+  return (
+    <Elements stripe={stripePromise}>
+      <CheckoutForm checkout={checkout} clientSecret={clientSecret} />
+    </Elements>
+  )
 }
 
 const cardOptions = {
@@ -90,7 +92,7 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
       return
     }
 
-    if (state.error || !state.isComplete) {
+    if (state.error || !state.isFormCompleted) {
       elements.getElement(CardElement).focus()
       return
     }
@@ -181,6 +183,60 @@ const ItemSummary = ({ item }) => (
   </div>
 )
 
+const FreeCheckoutForm = ({ checkout }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const disabled = state.isSubmitting
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (disabled) {
+      return
+    }
+
+    dispatch({ type: "submit" })
+
+    post('checkout/confirm')
+      .then(() => navigate('/orders'))
+      .catch(() => {
+        dispatch({
+          type: "error",
+          error: {
+            message: "An error occurred. You have not been charged.",
+          }
+        })
+      })
+  }
+
+  return (
+    <form onSubmit={handleSubmit} id="checkout-form">
+      <TopBarContent>
+        <ContainedButton form="checkout-form" type="submit" disabled={disabled}>
+          Complete
+        </ContainedButton>
+      </TopBarContent>
+
+      <div className="px-3">
+        <div className="flex justify-between text-lg">
+          <div>Total</div> 
+          <Currency amount={checkout.total} />
+        </div>
+        <div className="mt-1">
+          <div className="h-4 mt-1 text-sm text-error leading-4">
+            { state.error && state.error.message}
+          </div>
+        </div>
+        <div className="mt-2 space-y-3">
+          {checkout.items.map((item, idx) => (
+            <div key={idx}>
+              <ItemSummary {...{ item }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </form>
+  )
+}
 
 const CheckoutSuccess = () => (
   <>

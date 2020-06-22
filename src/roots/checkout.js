@@ -11,7 +11,7 @@ const getCheckout = () => get("checkout")
 const Checkout = lazy(() => import("../pages/checkout"))
 const CheckoutContainer = () => {
   const { data } = useQuery("checkout", getCheckout, {
-    refecthOnWindowFocus: false,
+    refetchOnWindowFocus: false,
     refetchInterval,
     retry: (failureCount, error) => {
       if (error instanceof RequestError) {
@@ -32,7 +32,5 @@ const CheckoutRoot = (props) =>
 
 export default compose(
   withUser, 
-  withLayout("user")
+  withLayout("user", { focus: true })
 )(CheckoutRoot)
-
-

@@ -61,13 +61,13 @@ const Simple = ({ children, title }) => (
 
 const User = ({ children, focus }) => (
   <div className="container h-full mx-auto max-w-screen-sm">
-    <div className="flex flex-col h-full md:flex-row">
-      <div className="flex-none hidden w-40 h-full px-3 pb-3 md:block">
+    <div className="flex flex-col h-full sm:flex-row">
+      <div className="flex-none hidden w-40 h-full px-3 pb-3 sm:block">
         <div className="fixed">
           <Navigation />
         </div>
       </div>
-      <div className="relative flex-1 min-h-0 overflow-y-auto md:overflow-y-visible">
+      <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible">
         <div className="min-h-full pb-5 sm:border-l sm:border-r">
           <Suspense
             fallback={<Spinner className="flex justify-center pt-16" />}
@@ -77,7 +77,7 @@ const User = ({ children, focus }) => (
         </div>
       </div>
       {!focus && (
-        <div className="flex-none md:hidden">
+        <div className="flex-none sm:hidden">
           <div className="bg-white">
             <BottomNavBar />
           </div>

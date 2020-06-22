@@ -16,6 +16,7 @@ import Listing from "./roots/listing"
 import Orders from "./roots/orders"
 import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
+import StripeConnect from "./roots/stripe-connect"
 
 const AddListing = lazy(() => import("./pages/add-listing"))
 const Home = lazy(() => import("./pages/home"))
@@ -150,6 +151,7 @@ const App = ({ me }) => {
                     <Market path="market/*" />
                     <Profile path="profile/:handle/*" />
                     <ProfileSettings path="settings/profile" />
+                    <StripeConnect path="settings/connect" />
                     <Listing path="listing/:id" />
                     <Bag path="bag" state={state.bag} dispatch={dispatch} />
                     <Checkout path="checkout/*" />
