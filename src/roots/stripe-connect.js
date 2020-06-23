@@ -26,7 +26,7 @@ const StripeConnect = ({ data }) => {
         the connect button below to setup your account information.
       </p>
 
-      <a href={data.url}>
+      <a className="surface btn btn-ctn btn-1" href={data.url}>
         Connect
       </a>
     </div>
