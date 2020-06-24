@@ -1,5 +1,5 @@
 import React from "react"
-import { Location } from "@reach/router"
+import { Location, navigate } from "@reach/router"
 import { Page } from "./page"
 
 class ErrorBoundary extends React.Component {
@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     return this.state.error ? (
-      <Page title="Error">
+      <Page title="Error"> 
         <div className="px-3 text-error">
           {this.state.error.message}
         </div>

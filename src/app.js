@@ -35,10 +35,6 @@ const initialState = {
   layout: "none",
   isInit: false,
   user: undefined,
-  bag: {
-    isOpen: false,
-    items: [],
-  },
 }
 
 const reducer = (state, action) => {
@@ -49,10 +45,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: options.user,
-        bag: {
-          ...state.bag,
-          ...options.bag,
-        },
         isInit: true,
       }
     case "setLayout":
@@ -69,38 +61,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: null,
-      }
-    case "openBag":
-      return {
-        ...state,
-        bag: {
-          ...state.bag,
-          isOpen: true,
-        },
-      }
-    case "closeBag":
-      return {
-        ...state,
-        bag: {
-          ...state.bag,
-          isOpen: false,
-        },
-      }
-    case "emptyBag": 
-      return {
-        ...state,
-        bag: {
-          ...state.bag,
-          items: []
-        }
-      }
-    case "updateBag":
-      return {
-        ...state,
-        bag: {
-          ...state.bag,
-          ...options,
-        },
       }
     default:
       throw new Error(`Unknown action type '${action.type}'`)

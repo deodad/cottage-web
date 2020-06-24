@@ -38,7 +38,7 @@ export class Page extends React.Component {
   render() {
     return (
       <PageContext.Provider value={{ topBarEl: this.el }}>
-        <TopBar title={this.props.title}>
+        <TopBar title={this.props.title} back={this.props.back} onBack={this.props.onBack}>
           <div className="container" ref={this.container} />
         </TopBar>
 
@@ -59,8 +59,8 @@ export class Page extends React.Component {
 
 const TopBar = ({
   children,
-  back = true,
-  onBack = () => navigate(-1),
+  back = -1,
+  onBack,
   title,
 }) => (
   <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
@@ -69,7 +69,7 @@ const TopBar = ({
         <div className="flex items-center flex-none">
           {back && (
             <div className="mr-3">
-              <TextButton onClick={onBack}>
+              <TextButton onClick={() => onBack ? onBack() : navigate(back)}>
                 <FontAwesomeIcon icon={faArrowLeft} />
               </TextButton>
             </div>

@@ -1,10 +1,11 @@
 import React from "react"
 import { useQuery } from "react-query"
 import { get } from "../api"
+import { withUserDefault } from "../hoc"
 import { Page } from "../components/page"
 
 const StripeConnectRoot = (props) =>
-  <Page title="Stripe Connect">
+  <Page title="Stripe Connect" back="/settings">
     <StripeConnectContainer {...props} /> 
   </Page>
 
@@ -52,4 +53,4 @@ const StripeDashboardLink = () => {
   )
 }
 
-export default StripeConnectRoot
+export default withUserDefault(StripeConnectRoot)
