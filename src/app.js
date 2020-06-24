@@ -18,6 +18,9 @@ import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
 import StripeConnect from "./roots/stripe-connect"
 
+import StoreOrders from "./roots/store-orders"
+import StoreOrder from "./roots/store-order"
+
 const AddListing = lazy(() => import("./pages/add-listing"))
 const Home = lazy(() => import("./pages/home"))
 const Login = lazy(() => import("./pages/login"))
@@ -158,6 +161,9 @@ const App = ({ me }) => {
                     <Orders path="orders/*" />
                     <AddListing path="listing/new" />
                     <EditListing path="listing/:id/edit" />
+
+                    <StoreOrders path="store/orders" />
+                    <StoreOrder path="store/orders/:orderNumber" />
 
                     <NotFound default />
                   </Router>

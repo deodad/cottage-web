@@ -1,25 +1,10 @@
 import React from "react"
-import { Link } from "@reach/router"
 import Currency from "../components/currency"
 import { UserImageLink } from "../components/user"
 import { ShortDate } from "../components/time"
 
-const Orders = ({ orders }) => {
-  return (
-    <>
-      <div className="space-y-4">
-        {orders.nodes.map((order) => (
-          <div key={order.id}>
-            <Order {...{ order }} />
-          </div>
-        ))}
-      </div>
-    </>
-  )
-}
-
 const Order = ({ order }) => (
-  <div className="px-3 pb-4 border-b">
+  <div className="px-3">
     <div className="text-sm emphasis-medium">
       <ShortDate date={order.createdAt} />
     </div>
@@ -36,8 +21,7 @@ const Order = ({ order }) => (
     </div>
 
     <div className="mt-3">
-      <div className="text-sm font-bold emphasis-medium">Sold by:</div>
-      <UserImageLink user={order.seller} />
+      <UserImageLink user={order.person} />
     </div>
   </div>
 )
@@ -50,9 +34,8 @@ const ItemSummary = ({ item }) => (
     <div>
       <div className="font-bold">{item.listing.name}</div>
       <div className="mt-1"><Currency amount={item.price} /></div>
-      { !item.isReviewed && <Link to="/review" className="mt-3 text-sm">Add a review</Link> }
     </div>
   </div>
 )
 
-export default Orders
+export default Order

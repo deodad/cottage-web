@@ -5,8 +5,8 @@ import { compose, withUser, withLayout } from "../hoc"
 import { Page } from "../components/page"
 
 const getOrders = () => request(`
-  query MyOrders {
-    myOrders {
+  query MyStoreOrders {
+    myStoreOrders {
       nodes {
         id
         number
@@ -23,7 +23,7 @@ const getOrders = () => request(`
             }
           }
         }
-        seller {
+        person {
           name
           username
           imageUrl
@@ -33,15 +33,15 @@ const getOrders = () => request(`
   }
 `)
 
-const Orders = lazy(() => import("../pages/orders"))
+const Orders = lazy(() => import("../pages/store-orders"))
 const OrdersContainer = ({ ...rest }) => {
   const { data } = useQuery('orders', getOrders)
 
-  return <Orders orders={data.myOrders}  {...rest } />
+  return <Orders orders={data.myStoreOrders}  {...rest } />
 }
 
 const OrdersRoot = (props) =>
-  <Page title="My Orders">
+  <Page title="Orders">
     <OrdersContainer {...props} />
   </Page>
 

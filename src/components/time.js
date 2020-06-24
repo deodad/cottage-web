@@ -31,3 +31,13 @@ const dateFmt = new Intl.DateTimeFormat("en-us", {
 export const ShortDate = ({ date, ...rest }) => (
   <span {...rest}>{dateFmt.format(Date.parse(date))}</span>
 )
+
+const dateShortFormat = new Intl.DateTimeFormat("en-us", {
+  month: "numeric",
+  day: "numeric",
+  year: "numeric"
+})
+
+export const DateShort = ({ date, ...rest }) => (
+  <span {...rest}>{dateShortFormat.format(Date.parse(date))}</span>
+)
