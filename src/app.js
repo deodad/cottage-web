@@ -4,14 +4,16 @@ import { ReactQueryConfigProvider } from "react-query"
 import { SWRConfig } from "swr"
 import { AppContext, UserContext } from "./context"
 import swrConfig from "./swr"
+import { Size } from "./media-match"
 import ErrorBoundary from "./components/error-boundary"
 import { Layout } from "./components/layout"
 import { Spinner } from "./components/spinner"
+
+import Store from "./store"
 import Bag from "./pages/bag"
 import Front from "./pages/front"
 
 import Checkout from "./roots/checkout"
-import EditListing from "./roots/edit-listing"
 import Listing from "./roots/listing"
 import Orders from "./roots/orders"
 import Profile from "./roots/profile"
@@ -21,7 +23,6 @@ import StripeConnect from "./roots/stripe-connect"
 import StoreOrders from "./roots/store-orders"
 import StoreOrder from "./roots/store-order"
 
-const AddListing = lazy(() => import("./pages/add-listing"))
 const Home = lazy(() => import("./pages/home"))
 const Login = lazy(() => import("./pages/login"))
 const Market = lazy(() => import("./pages/market"))
@@ -32,8 +33,8 @@ const SignUp = lazy(() => import("./pages/sign-up"))
 const Trust = lazy(() => import("./pages/trust"))
 
 const initialState = {
-  layout: "none",
   isInit: false,
+  isSideNavOpen: false,
   user: undefined,
 }
 
@@ -47,11 +48,6 @@ const reducer = (state, action) => {
         user: options.user,
         isInit: true,
       }
-    case "setLayout":
-      return {
-        ...state,
-        ...options,
-      }
     case "login":
       return {
         ...state,
@@ -61,6 +57,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: null,
+      }
+    case "toggleSideNav":
+      return {
+        ...state,
+        isSideNavOpen: !state.isSideNavOpen,
       }
     default:
       throw new Error(`Unknown action type '${action.type}'`)
@@ -80,60 +81,61 @@ const App = ({ me }) => {
     navigate("/")
   }
 
-  useEffect(() => {
-    me
-      .then(({ user, bag }) => dispatch({ type: "init", user, bag }))
-      .catch(() => dispatch({ type: "init", user: null }))
-  }, [])
-
   const userContext = {
     user: state.user,
     signIn,
     logout,
   }
 
+  useEffect(() => {
+    me
+      .then(({ user, bag }) => dispatch({ type: "init", user, bag }))
+      .catch(() => dispatch({ type: "init", user: null }))
+  }, [])
+
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      <UserContext.Provider value={userContext}>
-        <ReactQueryConfigProvider config={{ suspense: true }}>
-          <SWRConfig value={swrConfig}>
-            <Layout>
-              <ErrorBoundary>
-                <Suspense
-                  fallback={<Spinner className="flex justify-center pt-16" />}
-                >
-                  <Router>
-                    <Front path="/" signIn={signIn} />
-                    <Login path="/login" />
-                    <Pricing path="/pricing" />
-                    <Privacy path="/privacy" />
-                    <SignUp path="/sign-up" />
-                    <Trust path="/trust" />
+    <Size.Provider>
+      <AppContext.Provider value={{ state, dispatch }}>
+        <UserContext.Provider value={userContext}>
+          <ReactQueryConfigProvider config={{ suspense: true }}>
+            <SWRConfig value={swrConfig}>
+              <Layout>
+                <ErrorBoundary>
+                  <Suspense
+                    fallback={<Spinner className="flex justify-center pt-16" />}
+                  >
+                    <Router>
+                      <Store path="/store/*" />
+                      <Front path="/" signIn={signIn} />
+                      <Login path="/login" />
+                      <Pricing path="/pricing" />
+                      <Privacy path="/privacy" />
+                      <SignUp path="/sign-up" />
+                      <Trust path="/trust" />
 
-                    <Home path="home/*" />
-                    <Market path="market/*" />
-                    <Profile path="profile/:handle/*" />
-                    <ProfileSettings path="settings/profile" />
-                    <StripeConnect path="settings/connect" />
-                    <Listing path="listing/:id" />
-                    <Bag path="bag" state={state.bag} dispatch={dispatch} />
-                    <Checkout path="checkout/*" />
-                    <Orders path="orders/*" />
-                    <AddListing path="listing/new" />
-                    <EditListing path="listing/:id/edit" />
+                      <Home path="home/*" />
+                      <Market path="market/*" />
+                      <Profile path="profile/:handle/*" />
+                      <ProfileSettings path="settings/profile" />
+                      <StripeConnect path="settings/connect" />
+                      <Listing path="listing/:id" />
+                      <Bag path="bag" state={state.bag} dispatch={dispatch} />
+                      <Checkout path="checkout/*" />
+                      <Orders path="orders/*" />
 
-                    <StoreOrders path="store/orders" />
-                    <StoreOrder path="store/orders/:orderNumber" />
+                      <StoreOrders path="store/orders" />
+                      <StoreOrder path="store/orders/:orderNumber" />
 
-                    <NotFound default />
-                  </Router>
-                </Suspense>
-              </ErrorBoundary>
-            </Layout>
-          </SWRConfig>
-        </ReactQueryConfigProvider>
-      </UserContext.Provider>
-    </AppContext.Provider>
+                      <NotFound default />
+                    </Router>
+                  </Suspense>
+                </ErrorBoundary>
+              </Layout>
+            </SWRConfig>
+          </ReactQueryConfigProvider>
+        </UserContext.Provider>
+      </AppContext.Provider>
+    </Size.Provider>
   )
 }
 

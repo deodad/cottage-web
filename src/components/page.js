@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { PageContext } from "../context"
 import { ApplicationError } from "../error"
+import { useAppContext } from "../hooks"
 import { TextButton } from "./button"
 import { Spinner } from "./spinner"
 
@@ -28,6 +29,7 @@ export class Page extends React.Component {
   }
 
   componentDidCatch(error) {
+    console.log("ERROR HAPPENED")
     if (error instanceof ApplicationError) {
       this.setState({ error })
     } else {
@@ -59,31 +61,42 @@ export class Page extends React.Component {
 
 const TopBar = ({
   children,
-  back = -1,
+  back,
+  backLocation = -1,
   onBack,
   title,
-}) => (
-  <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
-    {title && (
-      <>
-        <div className="flex items-center flex-none">
-          {back && (
-            <div className="mr-3">
-              <TextButton onClick={() => onBack ? onBack() : navigate(back)}>
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </TextButton>
+}) => {
+  const { state, dispatch } = useAppContext()
+  
+  return (
+    <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
+      {title && (
+        <>
+          <div className="flex items-center flex-1">
+            <div className="mr-5 sm:hidden">
+              <button onClick={() => dispatch({ type: 'toggleSideNav' })}>
+                <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
+              </button>
             </div>
-          )}
-          <div className="text-lg font-bold">{title}</div>
-        </div>
-        <div className="flex-none">{children}</div>
-      </>
-    )}
+            <div className="flex items-center flex-none">
+              {back && (
+                <div className="mr-3">
+                  <TextButton onClick={() => onBack ? onBack() : navigate(backLocation)}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </TextButton>
+                </div>
+              )}
+              <div className="text-lg font-bold">{title}</div>
+            </div>
+          </div>
+          <div className="flex-none">{children}</div>
+        </>
+      )}
 
-    {!title && children}
-  </div>
-)
-
+      {!title && children}
+    </div>
+  )
+}
 
 export const TopBarContent = ({ children }) => {
   const { topBarEl } = useContext(PageContext)
