@@ -24,7 +24,7 @@ html, body {
 }
 
 body {
-  @apply overflow-y-auto font-sans;
+  @apply overflow-y-scroll font-sans;
   background-color: var(--color-background);
   color: rgba(20, 20, 21, 0.87);
 }
