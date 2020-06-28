@@ -3,10 +3,8 @@ import { Link } from "@reach/router"
 import classnames from "classnames"
 import { TimeAgo } from "./time"
 
-export const UserLink = ({ user, children, ...rest }) => (
-  <Link to={`/profile/${user.username}`} {...rest}>
-    {children || user.name}
-  </Link>
+export const UserLink = ({ user, ...rest }) => (
+  <Link to={`/profile/${user.username}`} {...rest} />
 )
 
 export const ProfileImage = ({
@@ -68,7 +66,7 @@ export const CompactUserBadge = ({ user }) => (
 )
 
 export const UserBadge = ({ user }) => (
-  <div className="flex items-center">
+  <UserLink user={user} className="flex items-center">
     <ProfileImage user={user} size="w-10 h-10" className="mr-2" />
     <div>
       <div className="font-bold leading-tight">{user.name}</div>
@@ -78,7 +76,7 @@ export const UserBadge = ({ user }) => (
         { user.isFollower && <Badge label="Follows you" /> }
       </div>
     </div>
-  </div>
+  </UserLink>
 )
 
 export const Badge = ({ label }) => (
