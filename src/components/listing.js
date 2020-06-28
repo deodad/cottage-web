@@ -5,7 +5,7 @@ import { CompactUserBadge } from "./user"
 import Currency from "./currency"
 
 export const ListingLink = ({ listing, ...rest }) =>
-  <Link to={`listing/${listing.id}`} {...rest} />
+  <Link to={`/listing/${listing.id}`} {...rest} />
 
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
