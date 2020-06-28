@@ -4,24 +4,39 @@ import { UserImageLink } from "../components/user"
 import { ShortDate } from "../components/time"
 
 const Order = ({ order }) => (
-  <div className="px-3">
-    <div className="text-sm emphasis-medium">
+  <div className="px-3 space-y-4">
+    <div>
+      <div className="text-sm emphasis-medium">
+        Placed on
+      </div>
       <ShortDate date={order.createdAt} />
     </div>
-    <div className="text-lg">
-      Order #{order.number}
+
+    <div>
+      <div className="text-sm emphasis-medium">
+        Total
+      </div>
+      <Currency amount={order.total} />
     </div>
 
-    <div className="mt-2 space-y-3">
-      {order.items.nodes.map((item) => (
-        <div key={item.id}>
-          <ItemSummary {...{ item }} />
-        </div>
-      ))}
-    </div>
-
-    <div className="mt-3">
+    <div>
+      <div className="mb-1 text-sm emphasis-medium">
+        Customer
+      </div>
       <UserImageLink user={order.person} />
+    </div>
+
+    <div>
+      <div className="mb-1 text-sm emphasis-medium">
+        Items
+      </div>
+      <div className="space-y-3">
+        {order.items.nodes.map((item) => (
+          <div key={item.id}>
+            <ItemSummary {...{ item }} />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 )
