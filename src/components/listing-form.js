@@ -11,7 +11,7 @@ const validationSchema = object({
   image: mixed().required(),
 })
 
-export const ListingForm = ({ children, error, listing = {}, onSubmit }) => {
+export const ListingForm = ({ children, error, listing = {}, onSubmit, ...rest }) => {
   const fields = (
     <>
       <Input type="text" label="Name" name="name" />
@@ -37,7 +37,7 @@ export const ListingForm = ({ children, error, listing = {}, onSubmit }) => {
       onSubmit={onSubmit}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form {...rest}>
           {children({ fields, isSubmitting })}
         </Form>
       )}

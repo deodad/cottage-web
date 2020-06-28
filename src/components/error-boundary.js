@@ -1,5 +1,5 @@
 import React from "react"
-import { Location, navigate } from "@reach/router"
+import { Location, isRedirect } from "@reach/router"
 import { Page } from "./page"
 
 class ErrorBoundary extends React.Component {
@@ -18,13 +18,17 @@ class ErrorBoundary extends React.Component {
     }
   }
 
+  componentDidCatch(error) {
+    if (isRedirect(error)) {
+      throw error
+    } 
+  }
+
   render() {
     return this.state.error ? (
-      <Page title="Error"> 
-        <div className="px-3 text-error">
-          {this.state.error.message}
-        </div>
-      </Page>
+      <div className="px-3 text-error">
+        {this.state.error.message}
+      </div>
     ) : (
       this.props.children
     )

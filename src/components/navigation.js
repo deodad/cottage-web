@@ -34,7 +34,7 @@ const Navigation = ({ authenticatedUser }) => {
         </Link>
       </div>
 
-      <div className="flex items-center hidden px-4 py-3 sm:block">
+      <div className="items-center hidden px-4 py-3 sm:flex">
         <img className="w-10 h-10 rounded-full" src={authenticatedUser.imageUrl} />
         <div className="ml-3">
           <div className="text-sm font-bold leading-none">{authenticatedUser.name}</div>

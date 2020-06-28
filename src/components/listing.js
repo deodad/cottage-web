@@ -4,10 +4,8 @@ import cx from "classnames"
 import { CompactUserBadge } from "./user"
 import Currency from "./currency"
 
-export const ListingLink = ({ listing, children, ...rest }) =>
-  <Link to={`/listing/${listing.id}`} {...rest}>
-    {children || listing.name}
-  </Link>
+export const ListingLink = ({ listing, ...rest }) =>
+  <Link to={`listing/${listing.id}`} {...rest} />
 
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
@@ -42,8 +40,8 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
   </div>
 )
 
-export const HorizontalListing = ({ listing, user, distance, compact = false }) => (
-  <ListingLink listing={listing} className="flex rounded surface">
+export const HorizontalListing = ({ linkProps = {}, listing, user, distance, compact = false }) => (
+  <ListingLink listing={listing} className="flex rounded surface" {...linkProps}>
     <div className={cx("flex-none", compact ? "w-32 h-32" : "w-48 h-48")}>
       <img src={listing.imageUrl} alt={listing.name} className="rounded" />
     </div>

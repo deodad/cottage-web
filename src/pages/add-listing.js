@@ -1,15 +1,16 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { withLayout } from "../hoc"
+import { withUserDefault } from "../hoc"
 import { createListing } from "../api"
 import { ListingForm } from "../components/listing-form"
-import { ContainedButton, TextButton } from "../components/button"
-import { TopBar } from "../components/layout"
+import { ContainedButton } from "../components/button"
+import { Page, TopBarContent } from "../components/page"
 
 const AddListing = () => {
   const [error, setError] = useState(null)
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
+    console.log("Submit")
     if (isSubmitting) {
       return
     }
@@ -41,20 +42,22 @@ const AddListing = () => {
   }
 
   return (
-    <ListingForm onSubmit={handleSubmit} error={error}>
-      {({ fields }) => (
-        <>
-          <TopBar title="Add Listing" back={true}>
-            <ContainedButton type="submit">Save</ContainedButton>
-          </TopBar>
+    <Page title="Add listing" back={true}>
+      <ListingForm id="add-listing" onSubmit={handleSubmit} error={error}>
+        {({ fields }) => (
+          <>
+            <TopBarContent>
+              <ContainedButton type="submit" form="add-listing">Save</ContainedButton>
+            </TopBarContent>
 
-          <div className="px-3">
-            {fields}
-          </div>
-        </>
-      )}
-    </ListingForm>
+            <div className="px-3">
+              {fields}
+            </div>
+          </>
+        )}
+      </ListingForm>
+    </Page>
   )
 }
 
-export default withLayout("user", { focus: true })(AddListing)
+export default withUserDefault(AddListing)

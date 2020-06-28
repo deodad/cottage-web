@@ -6,7 +6,7 @@ import { Page } from "../components/page"
 
 const getOrders = () => request(`
   query MyStoreOrders {
-    myStoreOrders {
+    orders: myStoreOrders {
       nodes {
         id
         number
@@ -37,7 +37,7 @@ const Orders = lazy(() => import("../pages/store-orders"))
 const OrdersContainer = ({ ...rest }) => {
   const { data } = useQuery('orders', getOrders)
 
-  return <Orders orders={data.myStoreOrders}  {...rest } />
+  return <Orders orders={data.orders}  {...rest } />
 }
 
 const OrdersRoot = (props) =>

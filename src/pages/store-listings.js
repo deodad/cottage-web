@@ -1,9 +1,9 @@
 import React from "react"
-import { Router, navigate } from "@reach/router"
+import { Link, Router } from "@reach/router"
 import { useQuery } from "react-query"
 import { request } from "../api"
 import { HorizontalListing } from "../components/listing"
-import { ContainedButton } from "../components/button"
+import { ContainedLink } from "../components/button"
 import { Page, TopBarContent } from "../components/page"
 
 import EditListing from "../roots/edit-listing"
@@ -47,19 +47,19 @@ const ListingsContainer = () => {
 const Listings = ({ listings }) => (
   <Page title="Listings">
     <TopBarContent>
-      <ContainedButton
+      <ContainedLink
         emphasis="highest"
         size="lg"
-      onClick={() => navigate("listings/new")}
+        to="new"
       >
         Add Listing
-      </ContainedButton>
+      </ContainedLink>
     </TopBarContent>
 
     <ul className="px-3 mt-3 space-y-3">
       {listings.filter(l => !l.deletedAt).map((listing) => (
         <li key={listing.id}>
-          <HorizontalListing listing={listing} />
+          <HorizontalListing listing={listing} linkProps={{to: listing.id}} />
         </li>
       ))}
     </ul>

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "@reach/router"
 import cx from "classnames"
 
 export const TextButton = ({ className, ...rest }) => (
@@ -23,4 +24,12 @@ export const DivButton = ({ className, ...rest }) => (
     className={cx("focus:outline-none", className)}
     {...rest}
   />
+)
+
+export const OutlineLink = ({ className, ...rest }) => (
+  <Link className={cx("surface btn-otl btn-1", className)} {...rest} />
+)
+
+export const ContainedLink = ({ className, ...rest }) => (
+  <Link className={cx("surface btn-ctn btn-1", className)} {...rest} />
 )

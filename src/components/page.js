@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react"
+import React, { Suspense, useContext, useState } from "react"
 import ReactDOM from "react-dom"
 import { navigate } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -19,17 +19,20 @@ export class Page extends React.Component {
   }
 
   componentDidMount() {
-    this.container.current.appendChild(this.el)
-  }
-
-  componentWillUnmount() {
-    if (this.el.parentNode == this.container.current) {
-      this.container.current.removeChild(this.el)
+    /* If an error occurs TopBar the container ref won't get set. */
+    if (this.container.current) {
+      this.container.current.appendChild(this.el)
     }
   }
 
+  // Is just unmounting enough? does that node need to specifically be disposed of?
+  // componentWillUnmount() {
+  //   if (this.el.parentNode == this.container.current && this.container.current) {
+  //     this.container.current.removeChild(this.el)
+  //   }
+  // }
+
   componentDidCatch(error) {
-    console.log("ERROR HAPPENED")
     if (error instanceof ApplicationError) {
       this.setState({ error })
     } else {
@@ -67,21 +70,29 @@ const TopBar = ({
   title,
 }) => {
   const { state, dispatch } = useAppContext()
+  const [ isNavigating, setIsNavigating ] = useState()
+  const handleBack = () => {
+    if (isNavigating) return
+    onBack ? onBack() : navigate(backLocation)
+    setIsNavigating(true)
+  }
   
   return (
     <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
       {title && (
         <>
           <div className="flex items-center flex-1">
-            <div className="mr-5 sm:hidden">
-              <button onClick={() => dispatch({ type: 'toggleSideNav' })}>
-                <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
-              </button>
-            </div>
+            { state.user && 
+              <div className="mr-5 sm:hidden">
+                <button onClick={() => dispatch({ type: 'toggleSideNav' })}>
+                  <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
+                </button>
+              </div>
+            }
             <div className="flex items-center flex-none">
               {back && (
                 <div className="mr-3">
-                  <TextButton onClick={() => onBack ? onBack() : navigate(backLocation)}>
+                  <TextButton onClick={handleBack}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                   </TextButton>
                 </div>
