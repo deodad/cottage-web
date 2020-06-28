@@ -1,6 +1,6 @@
 import React from "react"
 import Currency from "../components/currency"
-import { UserImageLink } from "../components/user"
+import { UserBadge } from "../components/user"
 import { ShortDate } from "../components/time"
 
 const Order = ({ order }) => (
@@ -23,7 +23,7 @@ const Order = ({ order }) => (
       <div className="mb-1 text-sm emphasis-medium">
         Customer
       </div>
-      <UserImageLink user={order.person} />
+      <UserBadge user={order.person} />
     </div>
 
     <div>

@@ -62,7 +62,27 @@ export const CompactUserBadge = ({ user }) => (
   <div className="flex items-center">
     <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
     <div className="text-sm font-bold leading-tight">{user.username}</div>
+    { user.isSeller && <div className="p-px mx-1 text-sm bg-gray-300">Seller</div> }
+    { user.isFollower && <div className="p-px mx-1 text-sm bg-gray-300">Follows you</div> }
   </div>
+)
+
+export const UserBadge = ({ user }) => (
+  <div className="flex items-center">
+    <ProfileImage user={user} size="w-10 h-10" className="mr-2" />
+    <div>
+      <div className="font-bold leading-tight">{user.name}</div>
+      <div className="flex items-center">
+        <div className="text-sm emphasis-medium">@{user.username}</div>
+        { user.isSeller && <Badge label="Seller" /> } 
+        { user.isFollower && <Badge label="Follows you" /> }
+      </div>
+    </div>
+  </div>
+)
+
+export const Badge = ({ label }) => (
+  <div className="p-1 mx-1 text-xs leading-none text-gray-700 bg-gray-200">{label}</div>
 )
 
 export const UserActivity = ({ user, date, children }) => (

@@ -25,6 +25,8 @@ const getStoreOrder = (number) => request(`
         name
         username
         imageUrl
+        isSeller
+        isFollower
       }
     }
   }
