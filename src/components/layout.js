@@ -93,8 +93,7 @@ const SideNavContainer = () => {
 const SideNav = ({ isOpen, dispatch }) => 
   <Size.Matcher
     default={
-      isOpen &&
-        <div className="fixed inset-0 z-40 bg-black bg-opacity-disabled" onClick={() => dispatch({ type: 'toggleSideNav' })}>
+      <div className={cx(!isOpen && "hidden", "fixed inset-0 z-40 bg-black bg-opacity-disabled")} onClick={() => dispatch({ type: 'toggleSideNav' })}>
           <Size.Matcher sm='small' md='md' lg='lg' />
         <div className="fixed top-0 left-0 z-20 w-64 pb-3 bg-white" style={{height: '100vh'}}>
           <Navigation />
