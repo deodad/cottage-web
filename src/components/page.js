@@ -78,7 +78,7 @@ const TopBar = ({
   }
   
   return (
-    <div className="sticky top-0 z-30 flex items-center justify-between h-10 p-3 mb-3 bg-white border-b box-content">
+    <div className="sticky top-0 z-30 flex items-center justify-between h-10 px-3 py-2 mb-3 bg-white border-b box-content">
       {title && (
         <>
           <div className="flex items-center flex-1">
@@ -97,7 +97,7 @@ const TopBar = ({
                   </TextButton>
                 </div>
               )}
-              <div className="text-lg font-bold">{title}</div>
+              <div className="text-xl font-bold">{title}</div>
             </div>
           </div>
           <div className="flex-none">{children}</div>

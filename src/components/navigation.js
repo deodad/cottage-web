@@ -18,26 +18,30 @@ const NavLink = (props) => {
   return <Link {...props} getProps={getProps} />
 }
 
+const ToggleLink = (props) => (
+  <Link className="inline-block my-1 text-lg btn-otl btn-2 surface" {...props} />
+)
+
 const Navigation = ({ authenticatedUser }) => {
   const { logout } = useUserContext()
   const handleLogout = () => logoutReq().then(() => logout())
 
   return (
     <>
-      <div className="h-10 py-3 box-content">
+      <div className="h-10 py-2 mb-2 box-content">
         <Link
           to="/home"
-          className="block px-4 text-2xl font-bold font-brand"
+          className="block px-4 text-3xl font-bold font-brand"
           style={{ color: "rgb(103, 43, 38)" }}
         >
           Cottage
         </Link>
       </div>
 
-      <div className="items-center hidden px-4 py-3 sm:flex">
-        <img className="w-10 h-10 rounded-full" src={authenticatedUser.imageUrl} />
+      <div className="items-center hidden px-4 py-2 mb-5 sm:flex">
+        <img className="w-12 h-12 rounded-full" src={authenticatedUser.imageUrl} />
         <div className="ml-3">
-          <div className="text-sm font-bold leading-none">{authenticatedUser.name}</div>
+          <div className="font-bold leading-none">{authenticatedUser.name}</div>
           <div className="text-sm emphasis-low">@{authenticatedUser.username}</div>
         </div>
       </div>
@@ -53,11 +57,10 @@ const Navigation = ({ authenticatedUser }) => {
 
 const Nav = ({ user, handleLogout }) => (
   <>
-    <div className="py-3">
-      <NavLink to="/store">Switch to store</NavLink>
-    </div>
-
     <ul>
+      <li>
+        <ToggleLink to="/store">Switch to store</ToggleLink>
+      </li>
       <li>
         <NavLink to="/home">Home</NavLink>
       </li>
@@ -90,11 +93,10 @@ const Nav = ({ user, handleLogout }) => (
 
 const StoreNav = ({ handleLogout }) => (
   <>
-    <div className="py-3">
-      <NavLink to="/home">Switch to market</NavLink>
-    </div>
-
     <ul>
+      <li>
+        <ToggleLink to="/market">Switch to market</ToggleLink>
+      </li>
       <li>
         <NavLink to="dashboard">Dashboard</NavLink>
       </li>

@@ -3,22 +3,22 @@ import { navigate } from "@reach/router"
 import { compose, withUser, withLayout } from "../hoc"
 import { useBag, useRemove } from "../hooks/use-bag"
 import { ContainedButton } from "../components/button"
-import { TopBar } from "../components/layout"
+import { Page, TopBarContent } from "../components/page"
 import Currency from "../components/currency"
 
 const Bag = () => {
   const { data } = useBag()
 
   return (
-    <>
-      <TopBar title="Shopping Bag">
+    <Page title="Shopping Bag">
+      <TopBarContent>
         <ContainedButton onClick={() => navigate("/checkout", { replace: true })} disabled={data.items.length === 0}>
           Checkout
         </ContainedButton>
-      </TopBar>
+      </TopBarContent>
 
       <Contents items={data.items} total={data.total} />
-    </>
+    </Page>
   )
 }
 

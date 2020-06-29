@@ -37,7 +37,7 @@ const OrderRoot = ({ orderNumber }) => {
   const { data } = useQuery([orderNumber, 'store-order'], getStoreOrder)
 
   return (
-    <Page title={`Order #${data.order.number}`}>
+    <Page title={`Order #${data.order.number}`} back={true}>
       <Order order={data.order} />
     </Page>
   )

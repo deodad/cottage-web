@@ -12,7 +12,7 @@
   --color-on-surface: rgb(20, 20, 21);
 
   --color-on-primary: rgb(253, 253, 251);
-  --color-on-secondary: rgb(20, 20, 21);
+  --color-on-secondary: rgb(253, 253, 251);
 }
 
 /* purgecss start ignore */
@@ -104,8 +104,8 @@ p {
   background-color: var(--color-primary);
 }
 
-.surface.btn-txt-2::before, 
-.surface.btn-otl-2::before,
+.surface.btn-txt.btn-2::before, 
+.surface.btn-otl.btn-2::before,
 .surface-2::before {
   background-color: var(--color-secondary);
 }
@@ -114,7 +114,7 @@ p {
   background-color: var(--color-on-primary);
 }
 
-.surface.btn-ctn-2::before {
+.surface.btn-ctn.btn-2::before {
   background-color: var(--color-on-secondary);
 }
 
@@ -149,6 +149,11 @@ p {
 .btn-otl.btn-1 {
   color: var(--color-primary);
   border-color: var(--color-primary);
+}
+
+.btn-otl.btn-2 {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
 }
 
 .btn-ctn {
