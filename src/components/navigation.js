@@ -1,11 +1,11 @@
-import React from "react"
-import { Link, Router } from "@reach/router"
+import React, { useState } from "react"
+import { Link, navigate } from "@reach/router"
 import classnames from "classnames"
 import { withUser } from "../hoc"
 import { useUserContext } from "../hooks"
 import { logout as logoutReq } from "../api"
 
-const navLinkClass = "block my-1 btn-txt text-lg surface"
+const navLinkClass = "inline-block my-1 btn-txt text-lg surface"
 
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
@@ -18,47 +18,63 @@ const NavLink = (props) => {
   return <Link {...props} getProps={getProps} />
 }
 
-const ToggleLink = (props) => (
-  <Link className="inline-block my-1 text-lg btn-otl btn-2 surface" {...props} />
+const ModeButton = (props) => (
+  <button className="inline-block mb-3 btn-otl btn-2 surface" {...props} />
 )
 
 const Navigation = ({ authenticatedUser }) => {
   const { logout } = useUserContext()
+  const [mode, setMode] = useState('buyer')
+
   const handleLogout = () => logoutReq().then(() => logout())
+
+  const changeToBuyer = () => {
+    setMode('buyer')
+    navigate("/home")
+  }
+
+  const changeToSeller = () => {
+    setMode('seller')
+    navigate("/store")
+  }
 
   return (
     <div className="px-3">
       <div className="h-10 py-2 mb-2 box-content">
         <Link
           to="/home"
-          className="block px-4 text-3xl font-bold font-brand"
+          className="block text-3xl font-bold font-brand"
           style={{ color: "rgb(103, 43, 38)" }}
         >
           Cottage
         </Link>
       </div>
 
-      <div className="items-center hidden px-4 py-2 mb-5 sm:flex">
-        <img className="w-12 h-12 rounded-full" src={authenticatedUser.imageUrl} />
-        <div className="ml-3">
-          <div className="font-bold leading-none">{authenticatedUser.name}</div>
-          <div className="text-sm emphasis-low">@{authenticatedUser.username}</div>
-        </div>
+      <div className="hidden py-2 sm:block">
+        <Link to={`/profile/${authenticatedUser.username}`} className="flex items-center px-3 py-2 -ml-3 rounded surface">
+          <img className="w-12 h-12 rounded-full" src={authenticatedUser.imageUrl} />
+          <div className="ml-3">
+            <div className="font-bold leading-none">{authenticatedUser.name}</div>
+            <div className="text-sm emphasis-low">@{authenticatedUser.username}</div>
+          </div>
+        </Link>
       </div>
 
-      <Router>
-        <StoreNav path="/store/*" user={authenticatedUser} handleLogout={handleLogout} />
-        <Nav default user={authenticatedUser} handleLogout={handleLogout} />
-      </Router>
+      <div className="mt-5 -ml-2">
+        { mode === 'buyer' 
+            ? <Nav user={authenticatedUser} logout={handleLogout} changeToSeller={changeToSeller} />
+            : <StoreNav user={authenticatedUser} logout={handleLogout} changeToBuyer={changeToBuyer} />
+        }
+      </div>
     </div>
   )
 }
 
-const Nav = ({ user, handleLogout }) => (
+const Nav = ({ user, logout, changeToSeller }) => (
   <>
     <ul>
       <li>
-        <ToggleLink to="/store">Switch to store</ToggleLink>
+        <ModeButton onClick={changeToSeller}>Switch to seller</ModeButton>
       </li>
       <li>
         <NavLink to="/home">Home</NavLink>
@@ -79,7 +95,7 @@ const Nav = ({ user, handleLogout }) => (
       </li>
       <li>
         <button
-          onClick={handleLogout}
+          onClick={logout}
           className={navLinkClass}
           style={{ outline: "none" }}
         >
@@ -90,11 +106,11 @@ const Nav = ({ user, handleLogout }) => (
   </>
 )
 
-const StoreNav = ({ handleLogout }) => (
+const StoreNav = ({ logout, changeToBuyer }) => (
   <>
     <ul>
       <li>
-        <ToggleLink to="/market">Switch to market</ToggleLink>
+        <ModeButton onClick={changeToBuyer}>Switch to buyer</ModeButton>
       </li>
       <li>
         <NavLink to="dashboard">Dashboard</NavLink>
@@ -107,7 +123,7 @@ const StoreNav = ({ handleLogout }) => (
       </li>
       <li>
         <button
-          onClick={handleLogout}
+          onClick={logout}
           className={navLinkClass}
           style={{ outline: "none" }}
         >
