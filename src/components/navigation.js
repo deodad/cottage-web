@@ -113,13 +113,13 @@ const StoreNav = ({ logout, changeToBuyer }) => (
         <ModeButton onClick={changeToBuyer}>Switch to buyer</ModeButton>
       </li>
       <li>
-        <NavLink to="dashboard">Dashboard</NavLink>
+        <NavLink to="/store/ashboard">Dashboard</NavLink>
       </li>
       <li>
-        <NavLink to="orders">Orders</NavLink>
+        <NavLink to="/store/orders">Orders</NavLink>
       </li>
       <li>
-        <NavLink to="listings">Listings</NavLink>
+        <NavLink to="/store/listings">Listings</NavLink>
       </li>
       <li>
         <button
