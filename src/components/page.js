@@ -83,11 +83,9 @@ const TopBar = ({
         <>
           <div className="flex items-center flex-1">
             { state.user && 
-              <div className="mr-5 sm:hidden">
-                <button onClick={() => dispatch({ type: 'toggleSideNav' })}>
-                  <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
-                </button>
-              </div>
+              <button className="mr-5 sm:hidden" onClick={() => dispatch({ type: 'toggleSideNav' })}>
+                <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
+              </button>
             }
             <div className="flex items-center flex-none">
               {back && (
