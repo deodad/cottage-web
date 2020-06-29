@@ -24,9 +24,15 @@ html, body {
 }
 
 body {
-  @apply overflow-y-scroll font-sans;
+  @apply font-sans;
   background-color: var(--color-background);
   color: rgba(20, 20, 21, 0.87);
+}
+
+@screen sm {
+  body {
+    @apply overflow-y-scroll;
+  }
 }
 
 p {
