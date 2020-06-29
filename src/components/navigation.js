@@ -39,7 +39,7 @@ const Navigation = ({ authenticatedUser }) => {
   }
 
   return (
-    <div className="px-3">
+    <div className="px-6">
       <div className="h-10 py-2 mb-2 box-content">
         <Link
           to="/home"
