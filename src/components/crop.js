@@ -3,7 +3,7 @@ import ReactModal from "react-modal"
 import cx from "classnames"
 import Cropper from "cropperjs"
 import { ContainedButton } from "./button"
-import { TopBar } from "./layout"
+import { TopBar } from "./page"
 import "../cropper.css"
 
 const Crop = ({

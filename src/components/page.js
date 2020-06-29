@@ -62,7 +62,7 @@ export class Page extends React.Component {
   }
 }
 
-const TopBar = ({
+export const TopBar = ({
   children,
   back,
   backLocation = -1,

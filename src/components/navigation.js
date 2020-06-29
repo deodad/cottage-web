@@ -62,15 +62,15 @@ const Navigation = ({ authenticatedUser }) => {
 
       <div className="mt-5 -ml-2">
         { mode === 'buyer' 
-            ? <Nav user={authenticatedUser} logout={handleLogout} changeToSeller={changeToSeller} />
-            : <StoreNav user={authenticatedUser} logout={handleLogout} changeToBuyer={changeToBuyer} />
+            ? <Nav logout={handleLogout} changeToSeller={changeToSeller} />
+            : <StoreNav logout={handleLogout} changeToBuyer={changeToBuyer} />
         }
       </div>
     </div>
   )
 }
 
-const Nav = ({ user, logout, changeToSeller }) => (
+const Nav = ({ logout, changeToSeller }) => (
   <>
     <ul>
       <li>
@@ -87,11 +87,6 @@ const Nav = ({ user, logout, changeToSeller }) => (
       </li>
       <li>
         <NavLink to="/orders">Orders</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/profile/${user.username}`}>
-          Profile
-        </NavLink>
       </li>
       <li>
         <button

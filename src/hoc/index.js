@@ -4,6 +4,7 @@ import { withUser } from "./with-user"
 export * from "./with-layout"
 export * from "./with-swr"
 export * from "./with-guest"
+export * from "./with-page"
 export * from "./with-user"
 
 export const compose = (...fns) =>

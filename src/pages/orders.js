@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import Currency from "../components/currency"
-import { UserImageLink } from "../components/user"
+import { UserBadge } from "../components/user"
 import { ShortDate } from "../components/time"
 
 const Orders = ({ orders }) => {
@@ -36,8 +36,8 @@ const Order = ({ order }) => (
     </div>
 
     <div className="mt-3">
-      <div className="text-sm font-bold emphasis-medium">Sold by:</div>
-      <UserImageLink user={order.seller} />
+      <div className="mb-1 text-sm emphasis-medium">Seller</div>
+      <UserBadge user={order.seller} />
     </div>
   </div>
 )
