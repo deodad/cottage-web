@@ -7,7 +7,7 @@ import {
 } from "react-instantsearch-dom"
 import { compose, withUser, withLayout } from "../hoc"
 import { HorizontalListing} from "../components/listing"
-import { TopBar } from "../components/layout"
+import { Page, TopBarContent } from "../components/page"
 import Map from "../components/map"
 import { searchClient } from "../algolia"
 import { formatDistance } from "../util/distance"
@@ -59,15 +59,17 @@ const Market = ({ authenticatedUser }) => {
           { from: 5000, value: 2000 },
         ]}
       />
-      <TopBar>
-        <SearchBox />
-      </TopBar>
+      <Page>
+        <TopBarContent>
+          <SearchBox />
+        </TopBarContent>
 
-      <Map />
+        <Map />
 
-      <div className="mx-3 mt-3">
-        <Hits />
-      </div>
+        <div className="mx-3 mt-3">
+          <Hits />
+        </div>
+      </Page>
     </InstantSearch>
   )
 }

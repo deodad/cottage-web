@@ -79,30 +79,26 @@ const TopBar = ({
   
   return (
     <div className="sticky top-0 z-30 flex items-center justify-between h-10 px-3 py-2 mb-3 bg-white border-b box-content">
-      {title && (
-        <>
-          <div className="flex items-center flex-1">
-            { state.user && 
-              <button className="mr-5 sm:hidden" onClick={() => dispatch({ type: 'toggleSideNav' })}>
-                <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
-              </button>
-            }
-            <div className="flex items-center flex-none">
-              {back && (
-                <div className="mr-3">
-                  <TextButton onClick={handleBack}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                  </TextButton>
-                </div>
-              )}
-              <div className="text-xl font-bold">{title}</div>
+      <div className="flex items-center flex-none">
+        { state.user && 
+          <button className="mr-5 sm:hidden" onClick={() => dispatch({ type: 'toggleSideNav' })}>
+            <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
+          </button>
+        }
+        <div className="flex items-center flex-none">
+          {back && (
+            <div className="mr-3">
+              <TextButton onClick={handleBack}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </TextButton>
             </div>
-          </div>
-          <div className="flex-none">{children}</div>
-        </>
-      )}
-
-      {!title && children}
+          )}
+          { title && 
+            <div className="text-xl font-bold">{title}</div>
+          }
+        </div>
+      </div>
+      <div className="flex-1">{children}</div>
     </div>
   )
 }
