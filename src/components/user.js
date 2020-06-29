@@ -67,7 +67,7 @@ export const CompactUserBadge = ({ user }) => (
 
 export const UserBadge = ({ user }) => (
   <UserLink user={user} className="flex items-center">
-    <ProfileImage user={user} size="w-10 h-10" className="mr-2" />
+    <ProfileImage user={user} size="w-12 h-12" className="mr-2" />
     <div>
       <div className="font-bold leading-tight">{user.name}</div>
       <div className="flex items-center">

@@ -1,5 +1,6 @@
 import React, { Suspense, useReducer } from "react"
 import { Link, navigate } from "@reach/router"
+import Currency from "../components/currency"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import cx from "classnames"
@@ -66,7 +67,7 @@ const User = ({ children, focus }) => (
   <div className="flex flex-col justify-center sm:flex-row">
     <SideNavContainer />
     <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible max-w-screen-sm">
-      <div className="min-h-full pb-5 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
+      <div className="min-h-full pb-3 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
         <Suspense
           fallback={<Spinner className="flex justify-center pt-16" />}
         >

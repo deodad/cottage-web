@@ -22,6 +22,8 @@ const ListingContainer = ({ id, ...rest }) => {
             name
             username
             imageUrl
+            isFollower
+            isSeller
           }
         }
       }

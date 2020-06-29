@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
-import Currency from "../components/currency"
-import { UserImageLink } from "../components/user"
+import { UserBadge } from "../components/user"
 import { ListingImage, ListingDisplayPrice } from "../components/listing"
 import { TopBarContent } from "../components/page"
 import AddToBag from "../components/add-to-bag"
@@ -12,21 +11,19 @@ const Listing = ({ authenticatedUser, data }) => {
 
   return (
     <>
-      <TopBarContent>
-        {isOwn && (
-          <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
-            Edit
-          </Link>
-        )}
-      </TopBarContent>
+      {isOwn && (
+        <TopBarContent>
+            <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
+              Edit
+            </Link>
+        </TopBarContent>
+      )}
 
-      <div className="px-3">
-        <UserImageLink user={listing.person} className="mt-1" />
-      </div>
-      <div className="my-2">
+      <div className="-mt-3">
         <ListingImage listing={listing} />
       </div>
-      <div className="px-3">
+
+      <div className="px-3 mb-2">
         <div className="text-xl font-bold">{listing.name}</div>
         <div className="emphasis-medium">
           <ListingDisplayPrice price={listing.price} />
@@ -41,6 +38,10 @@ const Listing = ({ authenticatedUser, data }) => {
             <AddToBag listingId={listing.id} />
           </div>
         }
+
+        <div className="mt-8">
+          <UserBadge user={listing.person} />
+        </div>
       </div>
     </>
   )
