@@ -27,7 +27,7 @@ const Navigation = ({ authenticatedUser }) => {
   const handleLogout = () => logoutReq().then(() => logout())
 
   return (
-    <>
+    <div className="px-3">
       <div className="h-10 py-2 mb-2 box-content">
         <Link
           to="/home"
@@ -50,8 +50,7 @@ const Navigation = ({ authenticatedUser }) => {
         <StoreNav path="/store/*" user={authenticatedUser} handleLogout={handleLogout} />
         <Nav default user={authenticatedUser} handleLogout={handleLogout} />
       </Router>
-
-    </>
+    </div>
   )
 }
 
