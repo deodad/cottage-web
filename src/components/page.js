@@ -81,7 +81,7 @@ const TopBar = ({
     <div className="sticky top-0 z-30 flex items-center justify-between h-10 px-3 py-2 mb-3 bg-white border-b box-content">
       <div className="flex items-center flex-none">
         { state.user && 
-          <button className="mr-5 sm:hidden" onClick={() => dispatch({ type: 'toggleSideNav' })}>
+          <button className="p-1 mr-3 sm:hidden" onClick={() => dispatch({ type: 'toggleSideNav' })}>
             <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
           </button>
         }
@@ -98,7 +98,7 @@ const TopBar = ({
           }
         </div>
       </div>
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 text-right">{children}</div>
     </div>
   )
 }
