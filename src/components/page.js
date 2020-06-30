@@ -13,6 +13,7 @@ export class Page extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
+    this.el.className = "flex justify-end"
     this.container = React.createRef()
     this.state = { error: null }
   }
@@ -45,7 +46,7 @@ export class Page extends React.Component {
     return (
       <PageContext.Provider value={{ topBarEl: this.el }}>
         <TopBar {...topProps}>
-          <div className="container" ref={this.container} />
+          <div className="flex-1" ref={this.container} />
         </TopBar>
 
         <Suspense fallback={<Spinner className="flex justify-center pt-16" />}>
@@ -116,16 +117,16 @@ export const TopBar = ({
           }
         </div>
       </div>
-      <div className="flex-1 text-right">{children}</div>
+      <div className="flex items-center justify-end flex-1">{children}</div>
     </div>
   )
 }
 
-export const TopBarContent = ({ children, ...rest }) => {
+export const TopBarContent = ({ children }) => {
   const { topBarEl } = useContext(PageContext)
 
   return ReactDOM.createPortal(
-    <div {...rest}>{children}</div>,
+    children,
     topBarEl
   )
 }
