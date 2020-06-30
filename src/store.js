@@ -8,7 +8,8 @@ import Order from "./roots/store-order"
 const ShopApp = () => {
   return (
     <Router>
-      <Dashboard path="/" />
+      <Redirect from="/" to="dashboard" />
+      <Dashboard path="dashboard" />
       <Listings path="listings/*" />
       <Orders path="orders" />
       <Order path="orders/:orderNumber" />

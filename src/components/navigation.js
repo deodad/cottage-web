@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Link, navigate } from "@reach/router"
+import React from "react"
+import { Link } from "@reach/router"
 import classnames from "classnames"
 import { withUser } from "../hoc"
 import { useUserContext } from "../hooks"
