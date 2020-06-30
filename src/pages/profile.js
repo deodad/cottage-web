@@ -12,49 +12,51 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
 
   return (
     <>
-      <TopBarContent className="p-3">
-        <div className="absolute top-0 right-0 z-10 mt-3 mr-3">
-          {user.username !== authenticatedUser.username ? (
-            <FollowButton
-              isFollowed={user.isFollowed}
-              userId={user.id}
-              follow={follow}
-              unfollow={unfollow}
-            />
-          ) : (
-            <Link to="/settings/profile" className="btn-txt">
-              Edit Profile
-            </Link>
-          )}
-        </div>
-
-        <div className="flex justify-between mt-8">
-          <div className="w-full">
-            <img
-              src={user.imageUrl}
-              className="w-40 h-40 border rounded-full"
-            />
-            <div className="mt-1 text-lg font-bold">{user.name}</div>
-            <div className="emphasis-medium">@{user.username}</div>
-
+      <TopBarContent>
+        <div className="flex-1 p-3">
+          <div className="absolute top-0 right-0 z-10 mt-3 mr-3">
+            {user.username !== authenticatedUser.username ? (
+              <FollowButton
+                isFollowed={user.isFollowed}
+                userId={user.id}
+                follow={follow}
+                unfollow={unfollow}
+              />
+            ) : (
+              <Link to="/settings/profile" className="surface btn-flt">
+                Edit Profile
+              </Link>
+            )}
           </div>
-        </div>
 
-        <div className="mt-3">{user.bio}</div>
+          <div className="flex justify-between mt-8">
+            <div className="w-full">
+              <img
+                src={user.imageUrl}
+                className="w-40 h-40 border rounded-full"
+              />
+              <div className="mt-1 text-lg font-bold">{user.name}</div>
+              <div className="emphasis-medium">@{user.username}</div>
 
-        <div className="flex items-center mt-3 emphasis-medium">
-          <FontAwesomeIcon icon={faMapMarker} />
-          <div className="ml-2 mr-5">{user.location}</div>
-          <FontAwesomeIcon icon={faCalendar} />
-          <div className="ml-2 mr-5">
-            Joined <ShortDate date={user.createdAt} />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <span className="font-bold">{user.followedCount}</span>{" "}
-          <span className="mr-5">following</span>
-          <span className="font-bold">{user.followerCount}</span> followers
+          <div className="mt-3">{user.bio}</div>
+
+          <div className="flex items-center mt-3 emphasis-medium">
+            <FontAwesomeIcon icon={faMapMarker} />
+            <div className="ml-2 mr-5">{user.location}</div>
+            <FontAwesomeIcon icon={faCalendar} />
+            <div className="ml-2 mr-5">
+              Joined <ShortDate date={user.createdAt} />
+            </div>
+          </div>
+
+          <div>
+            <span className="font-bold">{user.followedCount}</span>{" "}
+            <span className="mr-5">following</span>
+            <span className="font-bold">{user.followerCount}</span> followers
+          </div>
         </div>
       </TopBarContent>
 
