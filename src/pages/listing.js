@@ -11,17 +11,17 @@ const Listing = ({ authenticatedUser, data }) => {
 
   return (
     <>
-      {isOwn && (
-        <TopBarContent>
+      <TopBarContent>
+        {isOwn && (
+          <div className="absolute top-0 right-0 z-10 mt-5 mr-3">
             <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
               Edit
             </Link>
-        </TopBarContent>
-      )}
+          </div>
+        )}
 
-      <div className="-mt-3">
         <ListingImage listing={listing} />
-      </div>
+      </TopBarContent>
 
       <div className="px-3 mb-2">
         <div className="text-xl font-bold">{listing.name}</div>

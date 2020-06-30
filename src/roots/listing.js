@@ -33,4 +33,10 @@ const ListingRoot = ({ id, ...rest }) => {
   return <Listing {...{ data, ...rest}} />
 }
 
-export default withUserPage({ page: { title: "Listing" }})(ListingRoot)
+export default withUserPage({ 
+  page: { 
+    top: 'panel',
+    title: 'Listing',
+    back: true
+  }
+})(ListingRoot)

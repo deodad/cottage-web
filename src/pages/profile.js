@@ -12,9 +12,24 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
 
   return (
     <>
-      <TopBarContent>
-        <div className="flex justify-between">
-          <div className="relative w-full">
+      <TopBarContent className="p-3">
+        <div className="absolute top-0 right-0 z-10 mt-3 mr-3">
+          {user.username !== authenticatedUser.username ? (
+            <FollowButton
+              isFollowed={user.isFollowed}
+              userId={user.id}
+              follow={follow}
+              unfollow={unfollow}
+            />
+          ) : (
+            <Link to="/settings/profile" className="btn-txt">
+              Edit Profile
+            </Link>
+          )}
+        </div>
+
+        <div className="flex justify-between mt-5">
+          <div className="w-full">
             <img
               src={user.imageUrl}
               className="w-40 h-40 border rounded-full"
@@ -22,20 +37,6 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
             <div className="mt-1 text-lg font-bold">{user.name}</div>
             <div className="emphasis-medium">@{user.username}</div>
 
-            <div className="absolute top-0 right-0">
-              {user.username !== authenticatedUser.username ? (
-                <FollowButton
-                  isFollowed={user.isFollowed}
-                  userId={user.id}
-                  follow={follow}
-                  unfollow={unfollow}
-                />
-              ) : (
-                <Link to="/settings/profile" className="btn-txt">
-                  Edit Profile
-                </Link>
-              )}
-            </div>
           </div>
         </div>
 

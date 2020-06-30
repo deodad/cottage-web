@@ -55,7 +55,7 @@ export class Page extends React.Component {
                 {this.state.error.message}
               </div>
             ) : (
-              this.props.children
+              children
             )
           }
         </Suspense>
@@ -82,7 +82,16 @@ export const TopBar = ({
   
   if (top === 'panel') {
     return (
-      <div className="p-3 mb-3 bg-white border-b">{children}</div>
+      <div className="relative mb-3 bg-white border-b">
+        { back && (
+          <div className="absolute top-0 left-0 z-10 mt-3 ml-3">
+            <TextButton onClick={handleBack}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </TextButton>
+          </div>
+        )}
+        {children}
+      </div>
     )
   }
 
@@ -112,11 +121,11 @@ export const TopBar = ({
   )
 }
 
-export const TopBarContent = ({ children }) => {
+export const TopBarContent = ({ children, ...rest }) => {
   const { topBarEl } = useContext(PageContext)
 
   return ReactDOM.createPortal(
-    children,
+    <div {...rest}>{children}</div>,
     topBarEl
   )
 }

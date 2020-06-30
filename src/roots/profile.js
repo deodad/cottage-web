@@ -70,4 +70,4 @@ const ProfileRoot = ({ handle, ...rest }) => {
   )
 }
 
-export default withUserPage({ page: { top: 'panel' }})(ProfileRoot)
+export default withUserPage({ page: { top: 'panel', back: true }})(ProfileRoot)
