@@ -1,8 +1,7 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
 import { request } from "../api"
-import { compose, withUser, withLayout } from "../hoc"
-import { Page } from "../components/page"
+import { withUserPage } from "../hoc"
 
 const getStoreOrder = (number) => request(`
   query StoreOrder {
@@ -37,13 +36,13 @@ const OrderRoot = ({ orderNumber }) => {
   const { data } = useQuery([orderNumber, 'store-order'], getStoreOrder)
 
   return (
-    <Page title={`Order #${data.order.number}`} back={true}>
-      <Order order={data.order} />
-    </Page>
+    <Order order={data.order} />
   )
 }
 
-export default compose(
-  withUser, 
-  withLayout("user")
-)(OrderRoot)
+export default withUserPage({ 
+  page: { 
+    title: ({ orderNumber }) => `Order #${orderNumber}`,
+    back: true
+  }
+})(OrderRoot)

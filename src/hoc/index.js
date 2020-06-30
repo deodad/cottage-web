@@ -1,4 +1,5 @@
 import { withLayout } from "./with-layout"
+import { withPage } from "./with-page"
 import { withUser } from "./with-user"
 
 export * from "./with-layout"
@@ -15,3 +16,11 @@ export const withUserDefault = (Component) =>
     withUser,
     withLayout("user")
   )(Component)
+
+export const withUserPage = ({ page }) => 
+  (Component) =>
+    compose(
+      withUser,
+      withLayout("user"),
+      withPage(page)
+    )(Component)

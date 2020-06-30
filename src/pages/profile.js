@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
-import { TopPanel } from "../components/layout"
+import { TopBarContent } from "../components/page"
 import { ShortDate } from "../components/time"
 
 const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
@@ -12,7 +12,7 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
 
   return (
     <>
-      <TopPanel>
+      <TopBarContent>
         <div className="flex justify-between">
           <div className="relative w-full">
             <img
@@ -55,7 +55,7 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
           <span className="mr-5">following</span>
           <span className="font-bold">{user.followerCount}</span> followers
         </div>
-      </TopPanel>
+      </TopBarContent>
 
       <div className="px-3">
         <Listings path="/" listings={listings} />

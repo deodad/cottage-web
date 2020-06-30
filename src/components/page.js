@@ -41,9 +41,11 @@ export class Page extends React.Component {
   }
 
   render() {
+    const { children, ...topProps } = this.props
+
     return (
       <PageContext.Provider value={{ topBarEl: this.el }}>
-        <TopBar title={this.props.title} back={this.props.back} onBack={this.props.onBack}>
+        <TopBar {...topProps}>
           <div className="container" ref={this.container} />
         </TopBar>
 
@@ -68,6 +70,7 @@ export const TopBar = ({
   backLocation = -1,
   onBack,
   title,
+  top = 'bar'
 }) => {
   const { state, dispatch } = useAppContext()
   const [ isNavigating, setIsNavigating ] = useState()
@@ -77,6 +80,12 @@ export const TopBar = ({
     setIsNavigating(true)
   }
   
+  if (top === 'panel') {
+    return (
+      <div className="p-3 mb-3 bg-white border-b">{children}</div>
+    )
+  }
+
   return (
     <div className="sticky top-0 z-30 flex items-center justify-between h-10 px-3 py-2 mb-3 bg-white border-b box-content">
       <div className="flex items-center flex-none">

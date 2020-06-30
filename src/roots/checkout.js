@@ -1,15 +1,14 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
 import { RequestError } from "../error"
-import { Page } from "../components/page"
 import { get } from "../api"
-import { compose, withLayout, withUser } from "../hoc"
+import { withUserPage } from "../hoc"
 
 const refetchInterval = 5 * 60 * 1000 // 5 minutes
 const getCheckout = () => get("checkout")
 
 const Checkout = lazy(() => import("../pages/checkout"))
-const CheckoutContainer = () => {
+const CheckoutRoot = () => {
   const { data } = useQuery("checkout", getCheckout, {
     refetchOnWindowFocus: false,
     refetchInterval,
@@ -25,12 +24,4 @@ const CheckoutContainer = () => {
   return <Checkout checkout={data.checkout} />
 }
 
-const CheckoutRoot = (props) =>
-  <Page title="Checkout">
-    <CheckoutContainer {...props} /> 
-  </Page>
-
-export default compose(
-  withUser, 
-  withLayout("user", { focus: true })
-)(CheckoutRoot)
+export default withUserPage({ page: { title: "Checkout", back: true }})(CheckoutRoot)

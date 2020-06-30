@@ -1,6 +1,6 @@
 import React, { lazy } from "react"
 import { queryCache, useMutation, useQuery } from "react-query"
-import { compose, withUser, withLayout } from "../hoc"
+import { withUserPage } from "../hoc"
 import { request, follow, unfollow } from "../api"
 
 const queryProfile = (username) => request(`
@@ -70,7 +70,4 @@ const ProfileRoot = ({ handle, ...rest }) => {
   )
 }
 
-export default compose(
-  withUser, 
-  withLayout("user")
-)(ProfileRoot)
+export default withUserPage({ page: { top: 'panel' }})(ProfileRoot)

@@ -107,7 +107,3 @@ const SideNav = ({ isOpen, dispatch }) =>
       </div>
     }
   />
-
-export const TopPanel = ({ children }) => (
-  <div className="p-3 mb-3 bg-white border-b">{children}</div>
-)

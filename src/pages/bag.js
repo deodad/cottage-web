@@ -1,24 +1,24 @@
 import React from "react"
 import { navigate } from "@reach/router"
-import { compose, withUser, withLayout } from "../hoc"
+import { withUserPage } from "../hoc"
 import { useBag, useRemove } from "../hooks/use-bag"
 import { ContainedButton } from "../components/button"
-import { Page, TopBarContent } from "../components/page"
+import { TopBarContent } from "../components/page"
 import Currency from "../components/currency"
 
 const Bag = () => {
   const { data } = useBag()
 
   return (
-    <Page title="Shopping Bag">
+    <>
       <TopBarContent>
-        <ContainedButton onClick={() => navigate("/checkout", { replace: true })} disabled={data.items.length === 0}>
+        <ContainedButton onClick={() => navigate("/checkout")} disabled={data.items.length === 0}>
           Checkout
         </ContainedButton>
       </TopBarContent>
 
       <Contents items={data.items} total={data.total} />
-    </Page>
+    </>
   )
 }
 
@@ -62,7 +62,4 @@ const Item = ({ item, remove }) => (
   </div>
 )
 
-export default compose(
-  withUser,
-  withLayout("user", { focus: true })
-)(Bag)
+export default withUserPage({ page: { title: "Bag", back: true }})(Bag)
