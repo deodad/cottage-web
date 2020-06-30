@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { withUserPage } from "../hoc"
 import { createListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
-import { Page, TopBarContent } from "../components/page"
+import { TopBarContent } from "../components/page"
 
 const AddListing = () => {
   const [error, setError] = useState(null)
@@ -57,9 +56,4 @@ const AddListing = () => {
   )
 }
 
-export default withUserPage({ 
-  page: { 
-    title: "Add listing", 
-    back: true 
-  }
-})(AddListing)
+export default AddListing

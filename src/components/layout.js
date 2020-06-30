@@ -1,8 +1,5 @@
 import React, { Suspense, useReducer } from "react"
-import { Link, navigate } from "@reach/router"
-import Currency from "../components/currency"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "@reach/router"
 import cx from "classnames"
 import { Size } from "../media-match"
 import { useAppContext } from "../hooks"
@@ -10,7 +7,6 @@ import { Spinner } from "./spinner"
 import Navigation from "./navigation"
 import BottomNavBar from "./bottom-nav-bar"
 import { LayoutContext } from "../context"
-import { TextButton } from "./button"
 
 const reducer = (state, { layout, options }) => ({
   ...state,

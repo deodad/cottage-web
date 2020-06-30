@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, Router } from "@reach/router"
+import { Router } from "@reach/router"
 import { useQuery } from "react-query"
 import { request } from "../api"
 import { HorizontalListing } from "../components/listing"
@@ -7,7 +7,7 @@ import { ContainedLink } from "../components/button"
 import { Page, TopBarContent } from "../components/page"
 
 import EditListing from "../roots/edit-listing"
-import AddListing from"../pages/add-listing"
+import AddListing from"../roots/add-listing"
 
 const ListingsApp = () => (
   <Router>

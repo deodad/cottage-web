@@ -20,9 +20,6 @@ import Profile from "./roots/profile"
 import ProfileSettings from "./roots/profile-settings"
 import StripeConnect from "./roots/stripe-connect"
 
-import StoreOrders from "./roots/store-orders"
-import StoreOrder from "./roots/store-order"
-
 const Home = lazy(() => import("./pages/home"))
 const Login = lazy(() => import("./pages/login"))
 const Market = lazy(() => import("./pages/market"))
@@ -122,9 +119,6 @@ const App = ({ me }) => {
                       <Bag path="bag" state={state.bag} dispatch={dispatch} />
                       <Checkout path="checkout/*" />
                       <Orders path="orders/*" />
-
-                      <StoreOrders path="store/orders" />
-                      <StoreOrder path="store/orders/:orderNumber" />
 
                       <NotFound default />
                     </Router>
