@@ -28,7 +28,7 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
           )}
         </div>
 
-        <div className="flex justify-between mt-5">
+        <div className="flex justify-between mt-8">
           <div className="w-full">
             <img
               src={user.imageUrl}
