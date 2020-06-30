@@ -13,7 +13,6 @@ export class Page extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
-    this.el.className = "el"
     this.container = React.createRef()
     this.state = { error: null }
   }
@@ -83,13 +82,14 @@ export const TopBar = ({
   if (top === 'panel') {
     return (
       <div className="relative mb-3 bg-white border-b">
-        { back && (
-          <div className="absolute top-0 left-0 z-10 mt-3 ml-3">
+        <div className="fixed top-0 px-3 py-2">
+          { back && (
             <FloatingButton onClick={handleBack}>
               <FontAwesomeIcon icon={faArrowLeft} />
             </FloatingButton>
-          </div>
-        )}
+          )}
+        </div>
+
         {children}
       </div>
     )
