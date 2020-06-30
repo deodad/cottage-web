@@ -1,7 +1,10 @@
 import React from "react"
-import { Link } from "@reach/router"
 import { UserBadge } from "../components/user"
-import { ListingImage, ListingDisplayPrice } from "../components/listing"
+import { 
+  EditListingLink, 
+  ListingImage, 
+  ListingDisplayPrice 
+} from "../components/listing"
 import { TopBarContent } from "../components/page"
 import AddToBag from "../components/add-to-bag"
 
@@ -14,9 +17,9 @@ const Listing = ({ authenticatedUser, data }) => {
       <TopBarContent>
         {isOwn && (
           <div className="absolute top-0 right-0 z-10 mt-3 mr-3">
-            <Link to={`/store/listing/${listing.id}`} className="surface btn-flt">
+            <EditListingLink listingId={listing.id} className="surface btn-flt">
               Edit
-            </Link>
+            </EditListingLink>
           </div>
         )}
 

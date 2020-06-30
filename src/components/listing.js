@@ -7,6 +7,9 @@ import Currency from "./currency"
 export const ListingLink = ({ listing, ...rest }) =>
   <Link to={`/listing/${listing.id}`} {...rest} />
 
+export const EditListingLink = ({ listingId, ...rest }) =>
+  <Link to={`/store/listings/${listingId}`} {...rest} />
+
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
 
