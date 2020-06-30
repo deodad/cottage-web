@@ -14,6 +14,10 @@ export const ContainedButton = ({ className, ...rest }) => (
   <button className={cx("surface btn-ctn btn-1", className)} {...rest} />
 )
 
+export const FloatingButton = ({ className, ...rest }) => (
+  <button className={cx("surface btn-flt", className)} {...rest} />
+)
+
 export const ToggleButton = ({ active, ...rest }) =>
   active ? <ContainedButton {...rest} /> : <OutlineButton {...rest} />
 

@@ -13,8 +13,8 @@ const Listing = ({ authenticatedUser, data }) => {
     <>
       <TopBarContent>
         {isOwn && (
-          <div className="absolute top-0 right-0 z-10 mt-5 mr-3">
-            <Link to={`/listing/${listing.id}/edit`} className="btn-txt">
+          <div className="absolute top-0 right-0 z-10 mt-3 mr-3">
+            <Link to={`/listing/${listing.id}/edit`} className="surface btn-flt">
               Edit
             </Link>
           </div>

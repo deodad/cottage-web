@@ -6,7 +6,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { PageContext } from "../context"
 import { ApplicationError } from "../error"
 import { useAppContext } from "../hooks"
-import { TextButton } from "./button"
+import { FloatingButton, TextButton } from "./button"
 import { Spinner } from "./spinner"
 
 export class Page extends React.Component {
@@ -79,15 +79,15 @@ export const TopBar = ({
     onBack ? onBack() : navigate(backLocation)
     setIsNavigating(true)
   }
-  
+
   if (top === 'panel') {
     return (
       <div className="relative mb-3 bg-white border-b">
         { back && (
           <div className="absolute top-0 left-0 z-10 mt-3 ml-3">
-            <TextButton onClick={handleBack}>
+            <FloatingButton onClick={handleBack}>
               <FontAwesomeIcon icon={faArrowLeft} />
-            </TextButton>
+            </FloatingButton>
           </div>
         )}
         {children}
