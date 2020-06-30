@@ -1,5 +1,5 @@
-import React, { Suspense, useState, useReducer } from "react"
-import { Link, navigate } from "@reach/router"
+import React, { Suspense, useLayoutEffect, useReducer, useState } from "react"
+import { Link, navigate, useMatch } from "@reach/router"
 import cx from "classnames"
 import { Size } from "../media-match"
 import { useAppContext } from "../hooks"
@@ -61,6 +61,13 @@ const Simple = ({ children, title }) => (
 
 const User = ({ children, focus }) => {
   const [mode, setMode] = useState('buyer')
+  const isStore = useMatch("/store/*")
+
+  useLayoutEffect(() => {
+    if (isStore && mode !== 'seller') {
+      setMode('seller')
+    }
+  }, [isStore])
 
   const changeToBuyer = () => {
     setMode('buyer')
@@ -87,7 +94,7 @@ const User = ({ children, focus }) => {
       {!focus && (
         <div className="flex-none sm:hidden">
           <div className="bg-white">
-            <BottomNavBar />
+            <BottomNavBar mode={mode} />
           </div>
         </div>
       )}
