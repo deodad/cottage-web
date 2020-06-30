@@ -1,6 +1,6 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
-import { compose, withLayout, withPage, withUser } from "../hoc"
+import { withUserPage } from "../hoc"
 import { request } from "../api"
 
 const profileQuery = () => request(`
@@ -19,6 +19,7 @@ const profileQuery = () => request(`
 `)
 
 const ProfileSettings = lazy(() => import("../pages/profile-settings"))
+
 const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
   const { data } = useQuery(
     [authenticatedUser.username, "profile", "settings"],
@@ -30,8 +31,9 @@ const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
   )
 }
 
-export default compose(
-  withUser,
-  withPage({ title: "Profile Settings", back: true }),
-  withLayout("user")
-)(ProfileSettingsRoot)
+export default withUserPage({ 
+  page: { 
+    title: "Profile Settings", 
+    back: true 
+  }
+})(ProfileSettingsRoot)

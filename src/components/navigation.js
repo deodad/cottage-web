@@ -5,7 +5,7 @@ import { withUser } from "../hoc"
 import { useUserContext } from "../hooks"
 import { logout as logoutReq } from "../api"
 
-const navLinkClass = "inline-block my-1 btn-txt text-lg surface"
+const navLinkClass = "w-full text-left block my-1 btn-txt text-lg surface"
 
 const NavLink = (props) => {
   const getProps = ({ isPartiallyCurrent }) => ({
@@ -108,7 +108,7 @@ const StoreNav = ({ logout, changeToBuyer }) => (
         <ModeButton onClick={changeToBuyer}>Switch to buyer</ModeButton>
       </li>
       <li>
-        <NavLink to="/store/ashboard">Dashboard</NavLink>
+        <NavLink to="/store/dashboard">Dashboard</NavLink>
       </li>
       <li>
         <NavLink to="/store/orders">Orders</NavLink>

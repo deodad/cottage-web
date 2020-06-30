@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { withUserDefault } from "../hoc"
+import { withUserPage } from "../hoc"
 import { createListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
@@ -10,7 +10,6 @@ const AddListing = () => {
   const [error, setError] = useState(null)
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
-    console.log("Submit")
     if (isSubmitting) {
       return
     }
@@ -42,22 +41,25 @@ const AddListing = () => {
   }
 
   return (
-    <Page title="Add listing" back={true}>
-      <ListingForm id="add-listing" onSubmit={handleSubmit} error={error}>
-        {({ fields }) => (
-          <>
-            <TopBarContent>
-              <ContainedButton type="submit" form="add-listing">Save</ContainedButton>
-            </TopBarContent>
+    <ListingForm id="add-listing" onSubmit={handleSubmit} error={error}>
+      {({ fields }) => (
+        <>
+          <TopBarContent>
+            <ContainedButton type="submit" form="add-listing">Save</ContainedButton>
+          </TopBarContent>
 
-            <div className="px-3">
-              {fields}
-            </div>
-          </>
-        )}
-      </ListingForm>
-    </Page>
+          <div className="px-3">
+            {fields}
+          </div>
+        </>
+      )}
+    </ListingForm>
   )
 }
 
-export default withUserDefault(AddListing)
+export default withUserPage({ 
+  page: { 
+    title: "Add listing", 
+    back: true 
+  }
+})(AddListing)

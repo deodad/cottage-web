@@ -4,11 +4,11 @@ import { ContainedButton } from "../components/button"
 import { TopBarContent } from "../components/page"
 
 const ProfileSettings = ({ user }) => (
-  <ProfileForm user={user}>
-    {({ fields, error }) => (
+  <ProfileForm user={user} formOptions={{ id: 'profile-settings' }}>
+    {({ fields }) => (
       <>
         <TopBarContent title="Edit Profile" back={true}>
-          <ContainedButton type="submit">Save</ContainedButton>
+          <ContainedButton form="profile-settings" type="submit">Save</ContainedButton>
         </TopBarContent>
 
         <div className="px-3">{fields}</div>

@@ -5,6 +5,14 @@ import { UserBadge } from "../components/user"
 import { ShortDate } from "../components/time"
 
 const Orders = ({ orders }) => {
+  if (orders.nodes.length === 0) {
+    return (
+      <div className="px-3">
+        You haven't placed any orders.
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="space-y-4">

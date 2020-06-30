@@ -1,8 +1,7 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
-import { withUserDefault } from "../hoc"
+import { withUserPage } from "../hoc"
 import { request } from "../api"
-import { Page } from "../components/page"
 
 const listingQuery = (_key, listingId) => request(`
   {
@@ -20,16 +19,11 @@ const listingQuery = (_key, listingId) => request(`
 
 const EditListing = lazy(() => import("../pages/edit-listing"))
 
-const EditListingContainer = ({ id, ...rest }) => {
+const EditListingRoot = ({ id, ...rest }) => {
   const listingKey = ["edit-listing", id]
   const { data } = useQuery(listingKey, listingQuery)
 
   return <EditListing {...rest } listing={data.listing} />
 }
 
-const EditListingRoot = (props) => 
-  <Page title="Edit Listing" back={true}>
-    <EditListingContainer {...props} />
-  </Page>
-
-export default withUserDefault(EditListingRoot)
+export default withUserPage({ page: { title: "Edit listing", back: true }})(EditListingRoot)

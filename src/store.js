@@ -1,6 +1,5 @@
 import React from "react"
 import { Redirect, Router } from "@reach/router"
-import { withUserDefault } from "./hoc"
 import Listings from "./pages/store-listings"
 
 const Dashboard = () => (<Redirect to="listings" />)
@@ -14,4 +13,4 @@ const ShopApp = () => {
   )
 }
 
-export default withUserDefault(ShopApp)
+export default ShopApp

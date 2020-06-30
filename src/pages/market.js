@@ -5,9 +5,9 @@ import {
   connectSearchBox,
   connectHits,
 } from "react-instantsearch-dom"
-import { compose, withUser, withLayout } from "../hoc"
+import { withUserPage } from "../hoc"
 import { HorizontalListing} from "../components/listing"
-import { Page, TopBarContent } from "../components/page"
+import { TopBarContent } from "../components/page"
 import Map from "../components/map"
 import { searchClient } from "../algolia"
 import { formatDistance } from "../util/distance"
@@ -59,19 +59,17 @@ const Market = ({ authenticatedUser }) => {
           { from: 5000, value: 2000 },
         ]}
       />
-      <Page>
-        <TopBarContent>
-          <SearchBox />
-        </TopBarContent>
+      <TopBarContent>
+        <SearchBox />
+      </TopBarContent>
 
-        <Map />
+      <Map />
 
-        <div className="mx-3 mt-3">
-          <Hits />
-        </div>
-      </Page>
+      <div className="mx-3 mt-3">
+        <Hits />
+      </div>
     </InstantSearch>
   )
 }
 
-export default compose(withUser, withLayout("user"))(Market)
+export default withUserPage({ page: {} })(Market)

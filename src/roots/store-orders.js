@@ -1,8 +1,7 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
 import { request } from "../api"
-import { compose, withUser, withLayout } from "../hoc"
-import { Page } from "../components/page"
+import { withUserPage } from "../hoc"
 
 const getOrders = () => request(`
   query MyStoreOrders {
@@ -34,18 +33,11 @@ const getOrders = () => request(`
 `)
 
 const Orders = lazy(() => import("../pages/store-orders"))
-const OrdersContainer = ({ ...rest }) => {
+
+const OrdersRoot = ({ ...rest }) => {
   const { data } = useQuery('orders', getOrders)
 
   return <Orders orders={data.orders}  {...rest } />
 }
 
-const OrdersRoot = (props) =>
-  <Page title="Orders">
-    <OrdersContainer {...props} />
-  </Page>
-
-export default compose(
-  withUser, 
-  withLayout("user")
-)(OrdersRoot)
+export default withUserPage({ page: { title: "Orders" }})(OrdersRoot)

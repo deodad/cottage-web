@@ -1,11 +1,11 @@
 import React, { lazy } from "react"
 import { useQuery } from "react-query"
-import { compose, withUser, withLayout } from "../hoc"
+import { withUserPage } from "../hoc"
 import { request } from "../api"
-import { Page } from "../components/page"
 
 const Listing = lazy(() => import("../pages/listing"))
-const ListingContainer = ({ id, ...rest }) => {
+
+const ListingRoot = ({ id, ...rest }) => {
   const { data } = useQuery(
     ["listing", id],
     (_key, listingId) => request(`
@@ -33,12 +33,4 @@ const ListingContainer = ({ id, ...rest }) => {
   return <Listing {...{ data, ...rest}} />
 }
 
-const ListingRoot = (props) =>
-  <Page title="Listing">
-    <ListingContainer {...props} /> 
-  </Page>
-
-export default compose(
-  withUser,
-  withLayout("user")
-)(ListingRoot)
+export default withUserPage({ page: { title: "Listing" }})(ListingRoot)

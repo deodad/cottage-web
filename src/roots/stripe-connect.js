@@ -1,15 +1,9 @@
 import React from "react"
 import { useQuery } from "react-query"
 import { get } from "../api"
-import { withUserDefault } from "../hoc"
-import { Page } from "../components/page"
+import { withUserPage } from "../hoc"
 
-const StripeConnectRoot = (props) =>
-  <Page title="Stripe Connect" back="/settings">
-    <StripeConnectContainer {...props} /> 
-  </Page>
-
-const StripeConnectContainer = () => {
+const StripeConnectRoot = () => {
   const { data } = useQuery("stripe-connect", () => get("stripe/connect"))
 
   if (data.connected) {
@@ -53,4 +47,9 @@ const StripeDashboardLink = () => {
   )
 }
 
-export default withUserDefault(StripeConnectRoot)
+export default withUserPage({ 
+  page: { 
+    title: "Stripe Connect", 
+    back: "/settings"
+  }
+})(StripeConnectRoot)

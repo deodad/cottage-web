@@ -22,7 +22,7 @@ const validationSchema = object({
     .required("Where's your local community?"),
 })
 
-const ProfileForm = ({ user, children }) => {
+const ProfileForm = ({ user, children, formOptions = {} }) => {
   const [error, setError] = useState(null)
 
   const handleSubmit = (values, { isSubmitting, setSubmitting }) => {
@@ -88,7 +88,7 @@ const ProfileForm = ({ user, children }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>{children({ fields })}</Form>
+        <Form {...formOptions}>{children({ fields })}</Form>
       </Formik>
     </>
   )
