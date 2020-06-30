@@ -11,8 +11,8 @@ const ShopApp = () => {
     <Router>
       <Dashboard path="/" />
       <Listings path="listings/*" />
-      <Orders path="store/orders" />
-      <Order path="store/orders/:orderNumber" />
+      <Orders path="orders" />
+      <Order path="orders/:orderNumber" />
     </Router>
   )
 }
