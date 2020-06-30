@@ -22,21 +22,9 @@ const ModeButton = (props) => (
   <button className="inline-block mb-3 btn-otl btn-2 surface" {...props} />
 )
 
-const Navigation = ({ authenticatedUser }) => {
+const Navigation = ({ authenticatedUser, changeToBuyer, changeToSeller, mode }) => {
   const { logout } = useUserContext()
-  const [mode, setMode] = useState('buyer')
-
   const handleLogout = () => logoutReq().then(() => logout())
-
-  const changeToBuyer = () => {
-    setMode('buyer')
-    navigate("/home")
-  }
-
-  const changeToSeller = () => {
-    setMode('seller')
-    navigate("/store")
-  }
 
   return (
     <div className="px-6">
@@ -71,62 +59,58 @@ const Navigation = ({ authenticatedUser }) => {
 }
 
 const Nav = ({ logout, changeToSeller }) => (
-  <>
-    <ul>
-      <li>
-        <ModeButton onClick={changeToSeller}>Switch to seller</ModeButton>
-      </li>
-      <li>
-        <NavLink to="/home">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/market">Market</NavLink>
-      </li>
-      <li>
-        <NavLink to="/bag">Bag</NavLink>
-      </li>
-      <li>
-        <NavLink to="/orders">Orders</NavLink>
-      </li>
-      <li>
-        <button
-          onClick={logout}
-          className={navLinkClass}
-          style={{ outline: "none" }}
-        >
-          Log out
-        </button>
-      </li>
-    </ul>
-  </>
+  <ul>
+    <li>
+      <ModeButton onClick={changeToSeller}>Switch to seller</ModeButton>
+    </li>
+    <li>
+      <NavLink to="/home">Home</NavLink>
+    </li>
+    <li>
+      <NavLink to="/market">Market</NavLink>
+    </li>
+    <li>
+      <NavLink to="/bag">Bag</NavLink>
+    </li>
+    <li>
+      <NavLink to="/orders">Orders</NavLink>
+    </li>
+    <li>
+      <button
+        onClick={logout}
+        className={navLinkClass}
+        style={{ outline: "none" }}
+      >
+        Log out
+      </button>
+    </li>
+  </ul>
 )
 
 const StoreNav = ({ logout, changeToBuyer }) => (
-  <>
-    <ul>
-      <li>
-        <ModeButton onClick={changeToBuyer}>Switch to buyer</ModeButton>
-      </li>
-      <li>
-        <NavLink to="/store/dashboard">Dashboard</NavLink>
-      </li>
-      <li>
-        <NavLink to="/store/orders">Orders</NavLink>
-      </li>
-      <li>
-        <NavLink to="/store/listings">Listings</NavLink>
-      </li>
-      <li>
-        <button
-          onClick={logout}
-          className={navLinkClass}
-          style={{ outline: "none" }}
-        >
-          Log out
-        </button>
-      </li>
-    </ul>
-  </>
+  <ul>
+    <li>
+      <ModeButton onClick={changeToBuyer}>Switch to buyer</ModeButton>
+    </li>
+    <li>
+      <NavLink to="/store/dashboard">Dashboard</NavLink>
+    </li>
+    <li>
+      <NavLink to="/store/orders">Orders</NavLink>
+    </li>
+    <li>
+      <NavLink to="/store/listings">Listings</NavLink>
+    </li>
+    <li>
+      <button
+        onClick={logout}
+        className={navLinkClass}
+        style={{ outline: "none" }}
+      >
+        Log out
+      </button>
+    </li>
+  </ul>
 )
 
 export default withUser(Navigation)

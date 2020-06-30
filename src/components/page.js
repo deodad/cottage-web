@@ -48,8 +48,7 @@ export class Page extends React.Component {
         <TopBar {...topProps}>
           <div className="flex-1" ref={this.container} />
         </TopBar>
-
-        <Suspense fallback={<Spinner className="flex justify-center pt-16" />}>
+        <Suspense fallback={<LoadingSpinner />}>
           {this.state.error ? (
               <div className="px-3 text-error">
                 {this.state.error.message}
@@ -63,6 +62,9 @@ export class Page extends React.Component {
     )
   }
 }
+
+const LoadingSpinner = () =>
+  <Spinner className="flex justify-center p-16" />
 
 export const TopBar = ({
   children,

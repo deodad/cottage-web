@@ -1,5 +1,5 @@
-import React, { Suspense, useReducer } from "react"
-import { Link } from "@reach/router"
+import React, { Suspense, useState, useReducer } from "react"
+import { Link, navigate } from "@reach/router"
 import cx from "classnames"
 import { Size } from "../media-match"
 import { useAppContext } from "../hooks"
@@ -59,47 +59,61 @@ const Simple = ({ children, title }) => (
   </div>
 )
 
-const User = ({ children, focus }) => (
-  <div className="flex flex-col justify-center h-full overflow-y-auto sm:flex-row">
-    <SideNavContainer />
-    <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible max-w-screen-sm">
-      <div className="min-h-full pb-3 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
-        <Suspense
-          fallback={<Spinner className="flex justify-center pt-16" />}
-        >
-          {children}
-        </Suspense>
-      </div>
-    </div>
-    {!focus && (
-      <div className="flex-none sm:hidden">
-        <div className="bg-white">
-          <BottomNavBar />
+const User = ({ children, focus }) => {
+  const [mode, setMode] = useState('buyer')
+
+  const changeToBuyer = () => {
+    setMode('buyer')
+    navigate("/home")
+  }
+
+  const changeToSeller = () => {
+    setMode('seller')
+    navigate("/store")
+  }
+
+  return (
+    <div className="flex flex-col justify-center h-full overflow-y-auto sm:flex-row">
+      <SideNavContainer {...{ mode, changeToBuyer, changeToSeller }} />
+      <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible max-w-screen-sm">
+        <div className="min-h-full pb-3 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
+          <Suspense
+            fallback={<Spinner className="flex justify-center pt-16" />}
+          >
+            {children}
+          </Suspense>
         </div>
       </div>
-    )}
-  </div>
-)
-
-const SideNavContainer = () => {
-  const { state, dispatch } = useAppContext()
-
-  return <SideNav isOpen={state.isSideNavOpen} dispatch={dispatch} />
+      {!focus && (
+        <div className="flex-none sm:hidden">
+          <div className="bg-white">
+            <BottomNavBar />
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
-const SideNav = ({ isOpen, dispatch }) => 
+const SideNavContainer = (props) => {
+  const { state, dispatch } = useAppContext()
+
+  return <SideNav isOpen={state.isSideNavOpen} dispatch={dispatch} {...props} />
+}
+
+const SideNav = ({ isOpen, dispatch, ...rest }) => 
   <Size.Matcher
     default={
       <div className={cx(!isOpen && "hidden", "fixed inset-0 z-40 bg-black bg-opacity-disabled")} onClick={() => dispatch({ type: 'toggleSideNav' })}>
           <Size.Matcher sm='small' md='md' lg='lg' />
         <div className="fixed top-0 left-0 z-20 w-64 pb-3 bg-white" style={{height: '100vh'}}>
-          <Navigation />
+          <Navigation {...rest} />
         </div>
       </div>
     }
     sm={
       <div className="sticky top-0 flex-none w-64" style={{height: '100vh'}} >
-        <Navigation />
+        <Navigation {...rest} />
       </div>
     }
   />
