@@ -29,12 +29,6 @@ body {
   color: rgba(20, 20, 21, 0.87);
 }
 
-@screen sm {
-  body {
-    @apply overflow-y-scroll;
-  }
-}
-
 p {
   @apply mb-2;
 }

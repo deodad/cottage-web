@@ -60,7 +60,7 @@ const Simple = ({ children, title }) => (
 )
 
 const User = ({ children, focus }) => (
-  <div className="flex flex-col justify-center h-full sm:flex-row">
+  <div className="flex flex-col justify-center h-full overflow-y-auto sm:flex-row">
     <SideNavContainer />
     <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible max-w-screen-sm">
       <div className="min-h-full pb-3 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
