@@ -24,7 +24,7 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
               />
             ) : (
               <Link to="/settings/profile" className="surface btn-flt">
-                Edit Profile
+                Edit
               </Link>
             )}
           </div>
