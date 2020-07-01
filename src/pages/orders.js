@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import Currency from "../components/currency"
+import { ListingImage } from "../components/listing"
 import { UserBadge } from "../components/user"
 import { ShortDate } from "../components/time"
 
@@ -53,7 +54,7 @@ const Order = ({ order }) => (
 const ItemSummary = ({ item }) => (
   <div className="flex">
     <div className="mr-3">
-      <img className="w-32 h-32" src={item.listing.imageUrl} />
+      <ListingImage className="w-32 h-32 rounded" image={item.listing.smallImage} listing={item} />
     </div>
     <div>
       <div className="font-bold">{item.listing.name}</div>

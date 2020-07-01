@@ -16,7 +16,6 @@ const ListingRoot = ({ id, ...rest }) => {
           price
           shortDescription
           description
-          imageUrl
           image {
             base64
             cdnUrl

@@ -4,6 +4,7 @@ import { withUserPage } from "../hoc"
 import { useBag, useRemove } from "../hooks/use-bag"
 import { ContainedButton } from "../components/button"
 import { TopBarContent } from "../components/page"
+import { ListingImage } from "../components/listing"
 import Currency from "../components/currency"
 
 const Bag = () => {
@@ -48,7 +49,7 @@ const Contents = ({ items, total }) => {
 const Item = ({ item, remove }) => (
   <div className="flex">
     <div className="mr-3">
-      <img className="w-32 h-32 rounded" src={item.imageUrl} />
+      <ListingImage className="w-32 h-32 rounded" image={item.smallImage} listing={item} />
     </div>
     <div>
       <div className="font-bold">{item.name}</div>

@@ -1,5 +1,6 @@
 import React from "react"
 import Currency from "../components/currency"
+import { Image } from "../components/image"
 import { UserBadge } from "../components/user"
 import { ShortDate } from "../components/time"
 
@@ -44,7 +45,7 @@ const Order = ({ order }) => (
 const ItemSummary = ({ item }) => (
   <div className="flex">
     <div className="mr-3">
-      <img className="w-32 h-32" src={item.listing.imageUrl} />
+      <Image className="w-32 h-32 rounded" image={item.listing.smallImage} alt={item.listing.name} />
     </div>
     <div>
       <div className="font-bold">{item.listing.name}</div>

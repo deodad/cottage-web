@@ -8,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { request, post } from "../api"
+import { Image } from "../components/image"
 import { TopBarContent } from "../components/page"
 import { ContainedButton } from "../components/button"
 import Currency from "../components/currency"
@@ -173,7 +174,7 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
 const ItemSummary = ({ item }) => (
   <div className="flex">
     <div className="mr-3">
-      <img className="w-32 h-32" src={item.imageUrl} />
+      <Image className="w-32 h-32 rounded" image={item.smallImage} alt={item.name} />
     </div>
     <div>
       <div className="mb-1 font-bold">{item.name}</div>

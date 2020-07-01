@@ -17,8 +17,12 @@ const getOrders = () => request(`
             price
             listing {
               name
-              imageUrl
               isReviewed
+              smallImage {
+                cdnUrl
+                webpCdnUrl
+                base64
+              }
             }
           }
         }

@@ -16,7 +16,11 @@ const getStoreOrder = (number) => request(`
           price
           listing {
             name
-            imageUrl
+            smallImage {
+              cdnUrl
+              webpCdnUrl
+              base64
+            }
           }
         }
       }
