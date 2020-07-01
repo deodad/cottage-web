@@ -97,35 +97,33 @@ const App = ({ me }) => {
           <ReactQueryConfigProvider config={{ suspense: true }}>
             <SWRConfig value={swrConfig}>
               <LocationProvider>
-                <Layout>
-                  <ErrorBoundary>
-                    <Suspense
-                      fallback={<Spinner className="flex justify-center pt-16" />}
-                    >
-                      <Router>
-                        <Store path="/store/*" />
-                        <Front path="/" signIn={signIn} />
-                        <Login path="/login" />
-                        <Pricing path="/pricing" />
-                        <Privacy path="/privacy" />
-                        <SignUp path="/sign-up" />
-                        <Trust path="/trust" />
+                <Suspense fallback={<div />}>
+                  <Layout>
+                    <ErrorBoundary>
+                        <Router>
+                          <Store path="/store/*" />
+                          <Front path="/" signIn={signIn} />
+                          <Login path="/login" />
+                          <Pricing path="/pricing" />
+                          <Privacy path="/privacy" />
+                          <SignUp path="/sign-up" />
+                          <Trust path="/trust" />
 
-                        <Home path="home/*" />
-                        <Market path="market/*" />
-                        <Profile path="profile/:handle/*" />
-                        <ProfileSettings path="settings/profile" />
-                        <StripeConnect path="settings/connect" />
-                        <Listing path="listing/:id" />
-                        <Bag path="bag" state={state.bag} dispatch={dispatch} />
-                        <Checkout path="checkout/*" />
-                        <Orders path="orders/*" />
+                          <Home path="home/*" />
+                          <Market path="market/*" />
+                          <Profile path="profile/:handle/*" />
+                          <ProfileSettings path="settings/profile" />
+                          <StripeConnect path="settings/connect" />
+                          <Listing path="listing/:id" />
+                          <Bag path="bag" state={state.bag} dispatch={dispatch} />
+                          <Checkout path="checkout/*" />
+                          <Orders path="orders/*" />
 
-                        <NotFound default />
-                      </Router>
-                    </Suspense>
-                  </ErrorBoundary>
-                </Layout>
+                          <NotFound default />
+                        </Router>
+                    </ErrorBoundary>
+                  </Layout>
+                </Suspense>
               </LocationProvider>
             </SWRConfig>
           </ReactQueryConfigProvider>

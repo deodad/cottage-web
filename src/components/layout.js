@@ -84,9 +84,7 @@ const User = ({ children, focus }) => {
       <SideNavContainer {...{ mode, changeToBuyer, changeToSeller }} />
       <div className="relative flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible max-w-screen-sm">
         <div className="min-h-full pb-3 sm:border-l sm:border-r" style={{minHeight: '100vh'}}>
-          <Suspense
-            fallback={<Spinner className="flex justify-center pt-16" />}
-          >
+          <Suspense fallback={<div />}>
             {children}
           </Suspense>
         </div>
