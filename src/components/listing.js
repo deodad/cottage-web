@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "@reach/router"
 import cx from "classnames"
 import { CompactUserBadge } from "./user"
+import { Image } from "./image"
 import Currency from "./currency"
 
 export const ListingLink = ({ listing, ...rest }) =>
@@ -13,17 +14,8 @@ export const EditListingLink = ({ listingId, ...rest }) =>
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
 
-export const ListingImage = ({ listing, image, className }) =>
-  !image ? "no" : 
-  <div className={cx("relative overflow-hidden", className)} >
-    <div style={{paddingTop: "100%"}} />
-    <img className="absolute inset-0 w-full" src={image.base64} style={{filter: "blur(.5rem)"}}/>
-    <picture className="absolute inset-0 w-full">
-      <source srcSet={image.webpCdnUrl} type="image/webp" />
-      <source srcSet={image.cdnUrl} />
-      <img src={image.cdnUrl} alt={listing.name} loading="lazy" />
-    </picture>
-  </div>
+export const ListingImage = ({ listing, ...rest }) =>
+  <Image alt={listing.name} {...rest} />
 
 export const Listing = ({ listing, user, distance, ...rest }) => (
   <div>
