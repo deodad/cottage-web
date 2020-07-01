@@ -28,10 +28,10 @@ const EditListing = ({ listing }) => {
     setError(null)
     updateListing(listing.id, formData)
       .then(() => {
-        setSubmitting(false)
         navigate(-1)
       })
       .catch((err) => setError(err.message || "Failed to update listing."))
+      .then(() => setSubmitting(false))
   }
 
   listing.image = listing.imageUrl

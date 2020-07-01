@@ -17,6 +17,11 @@ const ListingRoot = ({ id, ...rest }) => {
           shortDescription
           description
           imageUrl
+          image {
+            base64
+            cdnUrl
+            webpCdnUrl
+          }
           personId
           person {
             name

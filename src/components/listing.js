@@ -13,10 +13,17 @@ export const EditListingLink = ({ listingId, ...rest }) =>
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
 
-const imagePlaceholder = "https://place-hold.it/400x400/999999/333333&text=Image"
-
-export const ListingImage = ({ listing }) =>
-  <img src={listing.imageUrl || imagePlaceholder} />
+export const ListingImage = ({ listing, image, className }) =>
+  !image ? "no" : 
+  <div className={cx("relative overflow-hidden", className)} >
+    <div style={{paddingTop: "100%"}} />
+    <img className="absolute inset-0 w-full" src={image.base64} style={{filter: "blur(.5rem)"}}/>
+    <picture className="absolute inset-0 w-full">
+      <source srcSet={image.webpCdnUrl} type="image/webp" />
+      <source srcSet={image.cdnUrl} />
+      <img src={image.cdnUrl} alt={listing.name} loading="lazy" />
+    </picture>
+  </div>
 
 export const Listing = ({ listing, user, distance, ...rest }) => (
   <div>
@@ -46,7 +53,7 @@ export const Listing = ({ listing, user, distance, ...rest }) => (
 export const HorizontalListing = ({ linkProps = {}, listing, user, distance, compact = false }) => (
   <ListingLink listing={listing} className="flex rounded surface" {...linkProps}>
     <div className={cx("flex-none", compact ? "w-32 h-32" : "w-48 h-48")}>
-      <img src={listing.imageUrl} alt={listing.name} className="rounded" />
+      <ListingImage listing={listing} image={listing.smallImage} className="w-full rounded" />
     </div>
 
     <div className="flex-1 p-2 ml-1">

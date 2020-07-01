@@ -85,7 +85,7 @@ export const TopBar = ({
   if (top === 'panel') {
     return (
       <div className="relative mb-3 bg-white border-b">
-        <div className="fixed top-0 px-3 py-2">
+        <div className="fixed top-0 z-10 px-3 py-2">
           { back && (
             <FloatingButton onClick={handleBack}>
               <FontAwesomeIcon icon={faArrowLeft} />

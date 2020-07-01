@@ -32,6 +32,11 @@ const ListingsContainer = () => {
               description
               imageUrl
               deletedAt
+              smallImage {
+                cdnUrl
+                webpCdnUrl
+                base64
+              }
             }
           }
         }

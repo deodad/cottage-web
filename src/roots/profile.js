@@ -23,7 +23,11 @@ const queryProfile = (username) => request(`
           id
           name
           shortDescription
-          imageUrl
+          smallImage {
+            cdnUrl
+            webpCdnUrl
+            base64
+          }
           price
         }
       }

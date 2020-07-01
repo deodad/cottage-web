@@ -23,7 +23,7 @@ const Listing = ({ authenticatedUser, data }) => {
           </div>
         )}
 
-        <ListingImage listing={listing} />
+        <ListingImage listing={listing} image={listing.image} className="w-full" />
       </TopBarContent>
 
       <div className="px-3 mb-2">
