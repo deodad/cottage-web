@@ -25,7 +25,11 @@ const getOrders = () => request(`
         person {
           name
           username
-          imageUrl
+          image: thumbnailImage {
+            cdnUrl
+            webpCdnUrl
+            base64
+          }
         }
       }
     }

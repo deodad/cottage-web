@@ -17,31 +17,6 @@ export const ListingDisplayPrice = ({ price }) =>
 export const ListingImage = ({ listing, ...rest }) =>
   <Image alt={listing.name} {...rest} />
 
-export const Listing = ({ listing, user, distance, ...rest }) => (
-  <div>
-    {user && (
-      <div className="px-2 mb-1">
-        <CompactUserBadge user={user} />
-      </div>
-    )}
-
-    <ListingLink listing={listing} {...rest}>
-      <img src={listing.imageUrl} alt={listing.name} />
-
-      <div className="px-2 mt-1 text-sm">
-        <div className="text-lg font-bold">{listing.name}</div>
-        <div className="emphasis-medium">
-          <Currency amount={listing.price} />
-          {distance && <span> &middot; {distance}</span>}
-        </div>
-        {listing.shortDescription && (
-          <div className="mt-1">{listing.shortDescription}</div>
-        )}
-      </div>
-    </ListingLink>
-  </div>
-)
-
 export const HorizontalListing = ({ linkProps = {}, listing, user, distance, compact = false }) => (
   <ListingLink listing={listing} className="flex rounded surface" {...linkProps}>
     <div className={cx("flex-none", compact ? "w-32 h-32" : "w-48 h-48")}>

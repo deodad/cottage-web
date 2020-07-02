@@ -5,6 +5,7 @@ import { faMapMarker, faCalendar } from "@fortawesome/free-solid-svg-icons"
 import { HorizontalListing } from "../components/listing"
 import { ToggleButton } from "../components/button"
 import { TopBarContent } from "../components/page"
+import { Image } from "../components/image"
 import { ShortDate } from "../components/time"
 
 const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
@@ -31,9 +32,10 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
 
           <div className="flex justify-between mt-8">
             <div className="w-full">
-              <img
-                src={user.imageUrl}
-                className="w-40 h-40 border rounded-full"
+              <Image
+                image={user.image}
+                alt={user.name}
+                className="w-48 h-48 border rounded-full"
               />
               <div className="mt-1 text-lg font-bold">{user.name}</div>
               <div className="emphasis-medium">@{user.username}</div>

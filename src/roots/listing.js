@@ -25,9 +25,13 @@ const ListingRoot = ({ id, ...rest }) => {
           person {
             name
             username
-            imageUrl
             isFollower
             isSeller
+            image: thumbnailImage {
+              cdnUrl
+              webpCdnUrl
+              base64
+            }
           }
         }
       }

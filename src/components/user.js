@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import classnames from "classnames"
+import { Image } from "./image"
 import { TimeAgo } from "./time"
 
 export const UserLink = ({ user, ...rest }) => (
@@ -13,14 +14,10 @@ export const ProfileImage = ({
   size = "w-10 h-10",
   ...rest
 }) => (
-  <img
-    src={
-      user.imageUrl
-        ? user.imageUrl
-        : "https://place-hold.it/60x60/999999/333333"
-    }
+  <Image
+    image={user.image}
     className={classnames(className, size, "rounded-full border")}
-    alt={`${user.username} profile picture`}
+    alt={user.username}
     {...rest}
   />
 )

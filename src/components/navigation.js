@@ -4,6 +4,7 @@ import classnames from "classnames"
 import { withUser } from "../hoc"
 import { useUserContext } from "../hooks"
 import { logout as logoutReq } from "../api"
+import { Image } from "../components/image"
 
 const navLinkClass = "w-full text-left block my-1 btn-txt text-lg surface"
 
@@ -40,7 +41,7 @@ const Navigation = ({ authenticatedUser, changeToBuyer, changeToSeller, mode }) 
 
       <div className="hidden py-2 sm:block">
         <Link to={`/profile/${authenticatedUser.username}`} className="flex items-center px-3 py-2 -ml-3 rounded surface">
-          <img className="w-12 h-12 rounded-full" src={authenticatedUser.imageUrl} />
+          <Image className="w-12 h-12 rounded-full" image={authenticatedUser.image} alt={authenticatedUser.name} />
           <div className="ml-3">
             <div className="font-bold leading-none">{authenticatedUser.name}</div>
             <div className="text-sm emphasis-low">@{authenticatedUser.username}</div>

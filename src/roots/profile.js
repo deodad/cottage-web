@@ -9,7 +9,11 @@ const queryProfile = (username) => request(`
       id
       name
       username
-      imageUrl
+      image {
+        cdnUrl
+        webpCdnUrl
+        base64
+      }
       bio
       location
       createdAt

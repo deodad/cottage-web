@@ -27,9 +27,13 @@ const getStoreOrder = (number) => request(`
       person {
         name
         username
-        imageUrl
         isSeller
         isFollower
+        image: thumbnailImage {
+          cdnUrl
+          webpCdnUrl
+          base64
+        }
       }
     }
   }
