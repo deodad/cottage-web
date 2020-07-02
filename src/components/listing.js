@@ -20,7 +20,7 @@ export const ListingImage = ({ listing, ...rest }) =>
 export const HorizontalListing = ({ linkProps = {}, listing, user, distance, compact = false }) => (
   <ListingLink listing={listing} className="flex rounded surface" {...linkProps}>
     <div className={cx("flex-none", compact ? "w-32 h-32" : "w-48 h-48")}>
-      <ListingImage listing={listing} image={listing.smallImage} className="w-full rounded" />
+      <ListingImage listing={listing} image={listing.smallImage || listing.image} className="w-full rounded" />
     </div>
 
     <div className="flex-1 p-2 ml-1">
