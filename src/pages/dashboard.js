@@ -14,6 +14,11 @@ const Dashboard = ({ data }) => {
           <div className="text-xl"><Currency amount={data.lifetimeEarnings} /></div>
         </div>
       </div>
+
+      { data.lifetimeOrders === 0 && (
+        <div className="mt-5 text-lg">
+        </div>
+      )}
     </div>
   ) 
 }
