@@ -7,7 +7,7 @@ export const Image = ({
   alt, 
   className,
   image,
-  loading = "lazy"
+  loading = "eager"
 }) =>
   <div className={cx("relative overflow-hidden", className)} >
     <div style={{paddingTop: "100%"}} />

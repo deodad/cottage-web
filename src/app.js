@@ -7,7 +7,6 @@ import swrConfig from "./swr"
 import { Size } from "./media-match"
 import ErrorBoundary from "./components/error-boundary"
 import { Layout } from "./components/layout"
-import { Spinner } from "./components/spinner"
 
 import Store from "./store"
 import Bag from "./pages/bag"
@@ -65,6 +64,12 @@ const reducer = (state, action) => {
   }
 }
 
+const reactQueryConfig = {
+  shared: {
+    suspense: true
+  }
+}
+
 const App = ({ me }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -94,7 +99,7 @@ const App = ({ me }) => {
     <Size.Provider>
       <AppContext.Provider value={{ state, dispatch }}>
         <UserContext.Provider value={userContext}>
-          <ReactQueryConfigProvider config={{ suspense: true }}>
+          <ReactQueryConfigProvider config={reactQueryConfig}>
             <SWRConfig value={swrConfig}>
               <LocationProvider>
                 <Suspense fallback={<div />}>
