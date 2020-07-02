@@ -58,7 +58,7 @@ const reducer = (state, action) => {
     case "toggleSideNav":
       return {
         ...state,
-        isSideNavOpen: !state.isSideNavOpen,
+        isSideNavOpen: action.isOpen !== undefined ? action.isOpen : !state.isSideNavOpen,
       }
     default:
       throw new Error(`Unknown action type '${action.type}'`)

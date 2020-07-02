@@ -1,9 +1,8 @@
-import React, { Suspense, useLayoutEffect, useReducer, useState } from "react"
-import { Link, navigate, useMatch } from "@reach/router"
+import React, { Suspense, useRef, useEffect, useLayoutEffect, useReducer, useState } from "react"
+import { Link, navigate, useLocation, useMatch } from "@reach/router"
 import cx from "classnames"
 import { Size } from "../media-match"
 import { useAppContext } from "../hooks"
-import { Spinner } from "./spinner"
 import Navigation from "./navigation"
 import BottomNavBar from "./bottom-nav-bar"
 import { LayoutContext } from "../context"
@@ -106,17 +105,54 @@ const SideNavContainer = (props) => {
 
 const SideNav = ({ isOpen, dispatch, ...rest }) => 
   <Size.Matcher
-    default={
-      <div className={cx(!isOpen && "hidden", "fixed inset-0 z-40 bg-black bg-opacity-disabled")} onClick={() => dispatch({ type: 'toggleSideNav' })}>
-          <Size.Matcher sm='small' md='md' lg='lg' />
-        <div className="fixed top-0 left-0 z-20 w-64 pb-3 bg-white" style={{height: '100vh'}}>
-          <Navigation {...rest} />
-        </div>
-      </div>
-    }
+    default={<MobileSideNav isOpen={isOpen} dispatch={dispatch} {...rest} />}
     sm={
       <div className="sticky top-0 flex-none w-64" style={{height: '100vh'}} >
         <Navigation {...rest} />
       </div>
     }
   />
+
+const MobileSideNav = ({ isOpen, dispatch, ...rest }) => {
+  const node = useRef()
+  const { pathname } = useLocation()
+  
+  /* Close side nav on navigation. */
+  useEffect(() => {
+    dispatch({ type: "toggleSideNav", isOpen: false })
+  }, [pathname])
+
+  /* Close side nav when users clicks off of it. */
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (node.current.contains(e.target)) return
+      dispatch({ type: "toggleSideNav" })
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen])
+
+  return (
+    <div 
+      className={cx(
+        !isOpen && "hidden", 
+        "fixed inset-0 z-40 bg-black bg-opacity-disabled"
+      )} 
+    >
+        <Size.Matcher sm='small' md='md' lg='lg' />
+        <div 
+          ref={node}
+          className="fixed top-0 left-0 z-20 w-64 pb-3 bg-white" 
+          style={{height: '100vh'}}
+        >
+        <Navigation {...rest} />
+      </div>
+    </div>
+  )
+}
