@@ -29,7 +29,11 @@ const getOrders = () => request(`
         seller {
           name
           username
-          imageUrl
+          image: thumbnailImage {
+            cdnUrl
+            webpCdnUrl
+            base64
+          }
         }
       }
     }
