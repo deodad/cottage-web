@@ -11,25 +11,8 @@ const getOrders = () => request(`
         number
         total
         createdAt
-        items: transactionItems {
-          nodes {
-            id
-            price
-            listing {
-              name
-              imageUrl
-              isReviewed
-            }
-          }
-        }
         person {
           name
-          username
-          image: thumbnailImage {
-            cdnUrl
-            webpCdnUrl
-            base64
-          }
         }
       }
     }

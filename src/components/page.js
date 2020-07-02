@@ -7,6 +7,7 @@ import { PageContext } from "../context"
 import { ApplicationError } from "../error"
 import { useAppContext } from "../hooks"
 import { FloatingButton, TextButton } from "./button"
+import { Image } from "./image"
 import { Spinner } from "./spinner"
 
 export class Page extends React.Component {
@@ -103,7 +104,7 @@ export const TopBar = ({
       <div className="flex items-center flex-none">
         { state.user && 
           <button className="p-1 mr-3 sm:hidden focus:outline-none" onClick={() => dispatch({ type: 'toggleSideNav' })}>
-            <img className="w-10 h-10 rounded-full" src={state.user.imageUrl} />  
+            <Image className="w-10 h-10 rounded-full" image={state.user.image} alt={state.user.name} />
           </button>
         }
         <div className="flex items-center flex-none">
