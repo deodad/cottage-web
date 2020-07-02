@@ -22,7 +22,7 @@ const getOrders = () => request(`
 const Orders = lazy(() => import("../pages/store-orders"))
 
 const OrdersRoot = ({ ...rest }) => {
-  const { data } = useQuery('orders', getOrders)
+  const { data } = useQuery('store-orders', getOrders)
 
   return <Orders orders={data.orders}  {...rest } />
 }
