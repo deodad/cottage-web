@@ -39,7 +39,7 @@ const Navigation = ({ authenticatedUser, changeToBuyer, changeToSeller, mode }) 
         </Link>
       </div>
 
-      <div className="hidden py-2 sm:block">
+      <div className="py-2">
         <Link to={`/profile/${authenticatedUser.username}`} className="flex items-center px-3 py-2 -ml-3 rounded surface">
           <Image className="w-12 h-12 rounded-full" image={authenticatedUser.image} alt={authenticatedUser.name} />
           <div className="ml-3">

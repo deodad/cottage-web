@@ -70,11 +70,11 @@ const User = ({ children, focus }) => {
   }, [isStore])
 
   const changeToBuyer = () => {
-    navigate("/home").then(() => setMode('buyer'))
+    setMode('buyer')
   }
 
   const changeToSeller = () => {
-    navigate("/store").then(() => setMode('seller'))
+    setMode('seller')
   }
 
   return (
