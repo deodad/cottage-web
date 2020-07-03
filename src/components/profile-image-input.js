@@ -8,40 +8,50 @@ const cropperOptions = {
   aspectRatio: 1,
   viewMode: 2,
   zoomable: false,
+  rotatable: false,
+  minCropBoxWidth: 192,
+  minCropBoxHeight: 192,
 }
 
 const getCroppedCanvasOptions = {
-  maxWidth: 200,
-  maxHeight: 200,
+  maxHeight: 192,
+  maxWidth: 192,
 }
 
 const ProfileImageInput = ({ name }) => {
   const [, meta, helpers] = useField(name)
-  const [inputImage, setInputImage] = useState(null)
+  const [objectUrl, setObjectUrl] = useState(null)
+  const [file, setFile] = useState(null)
   const inputRef = useRef()
 
   const handleInputChange = (e) => {
-    var reader = new FileReader()
-    reader.onload = (e) => setInputImage(e.target.result)
-    reader.readAsDataURL(e.target.files[0])
+    const { files } = e.target
+
+    if (files.length) {
+      const f = files[0]
+
+      setFile(f)
+      setObjectUrl(URL.createObjectURL(f))
+    }
   }
 
-  const handleCrop = ({ dataUrl, blob }) => {
-    setInputImage(null)
+  const handleCrop = ({ cropData, dataUrl }) => {
     setValue({
-      blob,
-      dataUrl,
+      file,
+      url: dataUrl,
+      cropData
     })
+    setObjectUrl(null)
   }
 
   const handleCancel = () => {
-    setInputImage(null)
+    setObjectUrl(null)
   }
 
   const { value } = meta
   const { setValue } = helpers
 
-  const imageSrc = value && (typeof value === "string" ? value : value.dataUrl)
+  const imageSrc = value && value.url
 
   return (
     <div className="mb-2">
@@ -58,9 +68,10 @@ const ProfileImageInput = ({ name }) => {
         />
       </DivButton>
 
-      {inputImage && (
+      {objectUrl && (
         <Crop
-          image={inputImage}
+          file={file}
+          image={objectUrl}
           onCrop={handleCrop}
           onCancel={handleCancel}
           rounded={true}

@@ -28,11 +28,12 @@ const ListingImageUrl = ({ name }) => {
     reader.readAsDataURL(e.target.files[0])
   }
 
-  const handleCrop = ({ dataUrl, blob }) => {
+  const handleCrop = ({ dataUrl, cropData }) => {
     setInputImage(null)
     setValue({
-      blob,
-      dataUrl,
+      file: inputRef.current.files[0],
+      url: dataUrl,
+      transformations: { extract: cropData }
     })
   }
 

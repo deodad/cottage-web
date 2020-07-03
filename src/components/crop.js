@@ -12,7 +12,7 @@ const Crop = ({
   onCancel,
   rounded = false,
   cropperOptions = {},
-  getCroppedCanvasOptions = {},
+  getCroppedCanvasOptions
 }) => {
   const [el, setEl] = useState()
   const ref = useCallback((node) => {
@@ -26,14 +26,21 @@ const Crop = ({
   const handleCrop = (e) => {
     e.preventDefault()
 
-    const canvas = cropper.current.getCroppedCanvas(getCroppedCanvasOptions)
-    const dataUrl = canvas.toDataURL()
+    if (!cropper.current) {
+      return
+    }
 
-    canvas.toBlob((blob) => {
-      onCrop({
-        dataUrl,
-        blob,
-      })
+    const data = cropper.current.getData(true)
+    const dataUrl = cropper.current.getCroppedCanvas(getCroppedCanvasOptions).toDataURL()
+
+    onCrop({
+      cropData: {
+        top: data.y,
+        left: data.x,
+        width: data.width,
+        height: data.height
+      },
+      dataUrl
     })
   }
 
@@ -44,6 +51,38 @@ const Crop = ({
       return () => cropper.current.destroy()
     }
   }, [image, el])
+
+  // useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     var e = event || window.event
+
+  //     if (e.target !== this || !cropper || this.scrollTop > 300) {
+  //       return
+  //     }
+
+  //     switch (e.keyCode) {
+  //       case 37:
+  //         e.preventDefault();
+  //         cropper.move(-1, 0);
+  //         break
+  //       case 38:
+  //         e.preventDefault();
+  //         cropper.move(0, -1);
+  //         break
+  //       case 39:
+  //         e.preventDefault();
+  //         cropper.move(1, 0);
+  //         break
+  //       case 40:
+  //         e.preventDefault();
+  //         cropper.move(0, 1);
+  //         break
+  //     }
+  //   }
+      
+  //   document.body.addEventListener('keydown', handleKeyDown)
+  //   return () => document.body.removeEventListener('keydown', handleKeyDown)
+  // })
 
   return (
     <ReactModal

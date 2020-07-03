@@ -11,7 +11,9 @@ const listingQuery = (_key, listingId) => request(`
       price
       shortDescription
       description
-      imageUrl
+      smallImage {
+        cdnUrl
+      }
       personId
     }
   }

@@ -13,7 +13,9 @@ const profileQuery = () => request(`
       location
       lat
       lng
-      imageUrl
+      image {
+        url: cdnUrl
+      }
     }
   }
 `)

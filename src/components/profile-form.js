@@ -39,8 +39,10 @@ const ProfileForm = ({ user, children, formOptions = {} }) => {
      * url, if the user adds an image it change to an object with
      * { dataUrl, blob }
      */
-    if (typeof values.imageUrl !== "string") {
-      data.set("image", values.imageUrl.blob)
+    if (values.image.file) {
+      const { file, cropData } = values.image
+      data.set("image_settings", JSON.stringify({ extract: { ...cropData } }))
+      data.set("image", file)
     }
 
     data.set("name", values.name)
@@ -59,7 +61,7 @@ const ProfileForm = ({ user, children, formOptions = {} }) => {
 
   const fields = (
     <>
-      <ProfileImageInput name="imageUrl" />
+      <ProfileImageInput name="image" />
       <Input type="text" label="Name" name="name" />
       <Input type="text" label="Bio" name="bio" />
       <LocationInput type="text" label="Location" name="location" />
@@ -83,7 +85,7 @@ const ProfileForm = ({ user, children, formOptions = {} }) => {
           name: user.name,
           bio: user.bio || "",
           location: initialLocation,
-          imageUrl: user.imageUrl,
+          image: user.image,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}

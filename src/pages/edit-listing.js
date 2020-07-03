@@ -20,8 +20,9 @@ const EditListing = ({ listing }) => {
     formData.set("price", values.price)
 
     // If the image is a string it hasn't been updated
-    if (typeof values.image !== "string") {
-      formData.set("image", values.image.blob)
+    if (values.image.file) {
+      formData.set("image_settings", JSON.stringify(values.image.transformations))
+      formData.set("image", values.image.file)
     }
 
     // TODO prevent double submissions
@@ -33,8 +34,6 @@ const EditListing = ({ listing }) => {
       .catch((err) => setError(err.message || "Failed to update listing."))
       .then(() => setSubmitting(false))
   }
-
-  listing.image = listing.imageUrl
 
   return (
     <>
