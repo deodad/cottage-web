@@ -22,7 +22,6 @@ const BottomNavBar = ({ authenticatedUser, mode }) => {
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/market">Market</NavLink>
         <NavLink to="/bag">Bag</NavLink>
-        <NavLink to={`/profile/${authenticatedUser.username}`}>Profile</NavLink>
       </div>
     )
   }
