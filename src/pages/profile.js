@@ -7,6 +7,7 @@ import { ToggleButton } from "../components/button"
 import { TopBarContent } from "../components/page"
 import { Image } from "../components/image"
 import { ShortDate } from "../components/time"
+import { UserBadges } from "../components/user"
 
 const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
   const listings = user.listings.nodes
@@ -38,8 +39,10 @@ const Profile = ({ authenticatedUser, user, follow, unfollow }) => {
                 className="w-48 h-48 border rounded-full"
               />
               <div className="mt-1 text-lg font-bold">{user.name}</div>
-              <div className="emphasis-medium">@{user.username}</div>
-
+              <div className="flex items-center">
+                <div className="mr-2 emphasis-medium">@{user.username}</div>
+                <UserBadges user={user} />
+              </div>
             </div>
           </div>
 

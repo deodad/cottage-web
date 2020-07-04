@@ -247,5 +247,18 @@ p {
   @apply -mx-5;
 }
 
+.badge {
+  color: var(--color-on-primary);
+  background-color: rgb(118, 119, 113); /* amherst */
+  @apply px-1 py-px text-sm font-bold rounded-sm;
+}
+
+.badge.active {
+  background-color: rgb(223, 185, 103);
+}
+
+.badge.seller {
+  background-color: rgb(141, 90, 87);
+}
 
 @import "tailwindcss/utilities";

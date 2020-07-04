@@ -21,7 +21,10 @@ const queryProfile = (username) => request(`
       followerCount
       sellerReviewCount
       averageSellerRating
+      isActive
       isFollowed
+      isFollower
+      isSeller
       listings(filter: { deletedAt: { isNull: true } }){
         nodes {
           id
