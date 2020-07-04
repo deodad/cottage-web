@@ -9,8 +9,6 @@ const cropperOptions = {
   viewMode: 2,
   zoomable: false,
   rotatable: false,
-  minCropBoxWidth: 192,
-  minCropBoxHeight: 192,
 }
 
 const getCroppedCanvasOptions = {

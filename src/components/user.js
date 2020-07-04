@@ -15,7 +15,7 @@ export const ProfileImage = ({
   ...rest
 }) => (
   <Image
-    image={user.image}
+    image={user.image || user.smallImage}
     className={classnames(className, size, "rounded-full border")}
     alt={user.username}
     {...rest}
@@ -57,6 +57,7 @@ export const CompactUserBadge = ({ user }) => (
   <div className="flex items-center">
     <ProfileImage user={user} size="w-8 h-8" className="mr-2" />
     <div className="text-sm font-bold leading-tight">{user.username}</div>
+    <UserBadges user={user} />
   </div>
 )
 
