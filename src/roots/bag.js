@@ -12,6 +12,8 @@ const BagRoot = () => {
 
 export default withUserPage({
   page: {
-    title: "Bag"
+    title: "Bag",
+    back: true,
+    focus: true
   }
 })(BagRoot)
