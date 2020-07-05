@@ -24,4 +24,10 @@ const CheckoutRoot = () => {
   return <Checkout checkout={data.checkout} />
 }
 
-export default withUserPage({ page: { title: "Checkout", back: true }})(CheckoutRoot)
+export default withUserPage({ 
+  page: { 
+    title: "Checkout", 
+    back: true,
+    focus: true
+  }
+})(CheckoutRoot)
