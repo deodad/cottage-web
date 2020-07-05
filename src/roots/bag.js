@@ -14,6 +14,8 @@ export default withUserPage({
   page: {
     title: "Bag",
     back: true,
+  },
+  layout: {
     focus: true
   }
 })(BagRoot)

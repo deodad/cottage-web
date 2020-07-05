@@ -11,10 +11,10 @@ export * from "./with-user"
 export const compose = (...fns) =>
   fns.reduce((f, g) => (...args) => f(g(...args)))
 
-export const withUserPage = ({ page }) => 
+export const withUserPage = ({ page = {}, layout = {} }) => 
   (Component) =>
     compose(
       withUser,
-      withLayout("user"),
+      withLayout("user", layout),
       withPage(page)
     )(Component)

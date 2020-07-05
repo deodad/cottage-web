@@ -28,6 +28,8 @@ export default withUserPage({
   page: { 
     title: "Checkout", 
     back: true,
+  }, 
+  layout: {
     focus: true
   }
 })(CheckoutRoot)

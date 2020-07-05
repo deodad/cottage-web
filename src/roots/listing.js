@@ -46,5 +46,8 @@ export default withUserPage({
     top: 'panel',
     title: 'Listing',
     back: true
+  },
+  layout: {
+    focus: true
   }
 })(ListingRoot)
