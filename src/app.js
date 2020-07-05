@@ -9,9 +9,9 @@ import ErrorBoundary from "./components/error-boundary"
 import { Layout } from "./components/layout"
 
 import Store from "./store"
-import Bag from "./pages/bag"
 import Front from "./pages/front"
 
+import Bag from "./roots/bag"
 import Checkout from "./roots/checkout"
 import Listing from "./roots/listing"
 import Orders from "./roots/orders"

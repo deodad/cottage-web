@@ -1,7 +1,7 @@
 import { queryCache, useMutation, useQuery } from "react-query"
 import { get, post, put, del } from "../api"
 
-export const useBag = () => useQuery('bag', () => get("bag"))
+export const useBag = () => useQuery('bag', get)
 
 export const useAdd = () => useMutation(
   (data) => post("bag", data), 
