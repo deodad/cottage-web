@@ -15,26 +15,20 @@ const AddListing = () => {
     const data = new FormData()
 
     data.set("name", values.name)
-    data.set("short_description", values.short_description)
+    data.set("short_description", values.shortDescription)
     data.set("price", values.price)
-    data.set("image", values.image.blob)
+
+    // If the image is a string it hasn't been updated
+    if (values.image && values.image.file) {
+      data.set("image_settings", JSON.stringify(values.image.transformations))
+      data.set("image", values.image.file)
+    }
 
     // TODO prevent double submissions
     setError(null)
     createListing(data)
-      .then((res) => {
-        if (res.ok) {
-          navigate(-1)
-          return
-        }
-
-        if (res.status === 400) {
-          return res.json().then(({ message }) => setError(message))
-        }
-
-        return Promise.reject()
-      })
-      .catch(() => setError("Failed to create listing. Try again."))
+      .then(() => navigate("/store/listings"))
+      .catch((error) => setError(error.message || "An error occurred."))
       .then(() => setSubmitting(false))
   }
 

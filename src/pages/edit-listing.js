@@ -3,7 +3,6 @@ import { navigate } from "@reach/router"
 import { deleteListing, updateListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
-import { TopBarContent } from "../components/page"
 
 const EditListing = ({ listing }) => {
   const [error, setError] = useState(null)
@@ -65,7 +64,7 @@ const DeleteListing = ({ id }) => {
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this listing?")) {
       deleteListing(id)
-        .then(() => navigate("/home/listings"))
+        .then(() => navigate("/store/listings"))
         .catch(() => setError("An error occured deleting this listing."))
     }
   }

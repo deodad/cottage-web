@@ -7,7 +7,7 @@ import ListingImageInput from "./listing-image-input"
 const validationSchema = object({
   name: string().max(120, "120 character max").required(),
   shortDescription: string().required(),
-  price: number().min(0).max(9999).required(),
+  price: number().min(0).max(99999).required(),
   image: mixed().required(),
 })
 
