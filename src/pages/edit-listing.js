@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { navigate } from "@reach/router"
-import { deleteListing, updateListing } from "../api"
+import { updateListing } from "../api"
+import { useRemove  } from "../hooks/use-listing"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
 
@@ -59,11 +60,12 @@ const EditListing = ({ listing }) => {
 }
 
 const DeleteListing = ({ id }) => {
+  const [remove] = useRemove()
   const [error, setError] = useState(null)
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this listing?")) {
-      deleteListing(id)
+      remove(id)
         .then(() => navigate("/store/listings"))
         .catch(() => setError("An error occured deleting this listing."))
     }
