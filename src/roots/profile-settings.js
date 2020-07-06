@@ -25,7 +25,8 @@ const ProfileSettings = lazy(() => import("../pages/profile-settings"))
 const ProfileSettingsRoot = ({ authenticatedUser, ...rest }) => {
   const { data } = useQuery(
     [authenticatedUser.username, "profile", "settings"],
-    profileQuery
+    profileQuery,
+    { cacheTime: 0 }
   )
 
   return (
