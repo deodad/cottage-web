@@ -17,7 +17,7 @@ export const Input = ({
         <input
           className={cx(
             "w-full pb-1 border-b-2 outline-none focus:border-primary",
-            meta.error && "border-error"
+            meta.touched && meta.error && "border-error"
           )}
           {...field}
           {...rest}

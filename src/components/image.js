@@ -21,7 +21,7 @@ export const Image = ({
             <source srcSet={image.webpCdnUrl} type="image/webp" />
           }
           <source srcSet={image.cdnUrl} />
-          <img src={image.cdnUrl} alt={alt} loading={loading} />
+          <img src={image.cdnUrl} alt={alt} loading={loading} className="w-full" />
         </picture>
       </>
     ) : (

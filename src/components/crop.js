@@ -25,6 +25,7 @@ const Crop = ({
 
   const handleCrop = (e) => {
     e.preventDefault()
+    e.stopPropagation()
 
     if (!cropper.current) {
       return

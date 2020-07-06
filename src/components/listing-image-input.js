@@ -21,7 +21,7 @@ const ListingImageUrl = ({ name }) => {
   const [inputImage, setInputImage] = useState(null)
   const inputRef = useRef()
 
-  const { error, value } = meta
+  const { error, touched, value } = meta
   const { setValue } = helpers
 
   const handleInputChange = (e) => {
