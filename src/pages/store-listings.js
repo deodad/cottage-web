@@ -9,7 +9,7 @@ const Listings = ({ listings }) => (
       <ContainedLink
         emphasis="highest"
         size="lg"
-        to="new"
+        to="add"
       >
         Add Listing
       </ContainedLink>
