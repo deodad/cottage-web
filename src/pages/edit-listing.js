@@ -51,7 +51,7 @@ const EditListing = ({ listing }) => {
         )}
       </ListingForm>
 
-      <div className="px-3 mt-5">
+      <div className="px-3 mt-8">
         <DeleteListing id={listing.id} />
       </div>
     </>
