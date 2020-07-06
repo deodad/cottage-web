@@ -37,12 +37,17 @@ const EditListing = ({ listing }) => {
 
   return (
     <>
-      <ListingForm listing={listing} onSubmit={handleSubmit} error={error} id="edit-listing">
+      <ListingForm listing={listing} onSubmit={handleSubmit} id="edit-listing">
         {({ isSubmitting }) => (
-          <div className="px-3">
+          <div className="flex items-center">
             <ContainedButton type="submit" form="edit-listing" disabled={isSubmitting}>
               Save
             </ContainedButton>
+            { error &&
+              <div className="ml-5 text-error">
+                {error}
+              </div>
+            }
           </div>
         )}
       </ListingForm>

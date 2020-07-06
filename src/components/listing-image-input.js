@@ -52,11 +52,15 @@ const ListingImageUrl = ({ name }) => {
     <div className="-mt-3">
       <DivButton 
         onClick={() => inputRef.current.click()} 
-        className={cx("surface surface-1", error && "border-b-2 border-error")}
+        className="surface surface-1" 
       >
         <Image className="w-full" image={image}>
           <ImageOverlay className="flex items-center justify-center h-full">
-            { !image && <div className="font-mono text-sm font-bold emphasis-low">Upload an image</div> }
+            { !image && 
+              <div className={cx("font-mono text-sm font-bold emphasis-low border-b-2", error ? "border-error" : "border-transparent")}> 
+                Upload an image
+              </div> 
+            }
           </ImageOverlay>
         </Image>
         <input

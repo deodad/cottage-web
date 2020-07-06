@@ -23,11 +23,19 @@ const listingQuery = (_key, listingId) => request(`
 
 const EditListing = lazy(() => import("../pages/edit-listing"))
 
-const EditListingRoot = ({ id, ...rest }) => {
-  const listingKey = ["edit-listing", id]
+const EditListingRoot = ({ listingId, ...rest }) => {
+  const listingKey = ["edit-listing", listingId]
   const { data } = useQuery(listingKey, listingQuery, { cacheTime: 0 })
 
   return <EditListing {...rest } listing={data.listing} />
 }
 
-export default withUserPage({ page: { title: "Edit listing", back: true }})(EditListingRoot)
+export default withUserPage({ 
+  page: { 
+    title: "Edit listing", 
+    back: true 
+  },
+  layout: {
+    focus: true
+  }
+})(EditListingRoot)

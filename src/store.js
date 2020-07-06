@@ -7,22 +7,30 @@ import AddListing from"./roots/add-listing"
 import Orders from "./roots/store-orders"
 import Order from "./roots/store-order"
 
-const ShopApp = () => {
+const StoreApp = () => {
   return (
     <Router>
       <Dashboard path="dashboard" />
-      <div path="listings">
-        <Listings path="/" />
-        <AddListing path="add" />
-        <EditListing path=":id" />
-      </div>
-      <div path="orders">
-        <Orders path="/" />
-        <Order path=":orderNumber" />
-      </div>
+      <ListingsApp path="listings/*" />
+      <OrdersApp path="orders/*" />
       <Redirect from="/" to="dashboard" />
     </Router>
   )
 }
 
-export default ShopApp
+const ListingsApp = () => (
+  <Router>
+    <Listings path="/" />
+    <AddListing path="add" />
+    <EditListing path=":listingId" />
+  </Router>
+)
+
+const OrdersApp = () => (
+  <Router>
+    <Orders path="/" />
+    <Order path=":orderNumber" />
+  </Router>
+)
+
+export default StoreApp

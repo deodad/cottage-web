@@ -39,10 +39,17 @@ const AddListing = () => {
   }
 
   return (
-    <ListingForm id="add-listing" onSubmit={handleSubmit} error={error}>
+    <ListingForm id="add-listing" onSubmit={handleSubmit}> 
       {({ isSubmitting }) => (
-        <div className="px-3">
-          <ContainedButton type="submit" form="add-listing" disabled={isSubmitting}>Add Listing</ContainedButton>
+        <div className="flex items-center">
+          <ContainedButton type="submit" form="add-listing" disabled={isSubmitting}>
+            Add Listing
+          </ContainedButton>
+          { error &&
+            <div className="ml-5 text-error">
+              {error}
+            </div>
+          }
         </div>
       )}
     </ListingForm>
