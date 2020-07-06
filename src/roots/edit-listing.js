@@ -11,8 +11,10 @@ const listingQuery = (_key, listingId) => request(`
       price
       shortDescription
       description
-      smallImage {
+      image {
         cdnUrl
+        webpCdnUrl
+        base64
       }
       personId
     }
@@ -23,7 +25,7 @@ const EditListing = lazy(() => import("../pages/edit-listing"))
 
 const EditListingRoot = ({ id, ...rest }) => {
   const listingKey = ["edit-listing", id]
-  const { data } = useQuery(listingKey, listingQuery)
+  const { data } = useQuery(listingKey, listingQuery, { cacheTime: 0 })
 
   return <EditListing {...rest } listing={data.listing} />
 }
