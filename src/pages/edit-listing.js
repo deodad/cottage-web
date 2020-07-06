@@ -40,7 +40,7 @@ const EditListing = ({ listing }) => {
       <ListingForm listing={listing} onSubmit={handleSubmit} id="edit-listing">
         {({ isSubmitting }) => (
           <div className="flex items-center">
-            <ContainedButton type="submit" form="edit-listing" disabled={isSubmitting}>
+            <ContainedButton type="submit" disabled={isSubmitting} className="btn-lg" form="edit-listing">
               Save
             </ContainedButton>
             { error &&

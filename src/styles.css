@@ -124,10 +124,6 @@ p {
   border-radius: 0.25rem;
 }
 
-.btn-full {
-  @apply w-full text-center; 
-}
-
 .btn-txt {
   @apply btn;
   color: var(--color-primary);
@@ -188,6 +184,17 @@ p {
   background-color: rgba(98, 125, 152, 0.66);
   color: var(--color-on-primary);
 }
+
+/* button modifiers */
+
+.btn-lg {
+  @apply px-5 py-4 text-base;
+}
+
+.btn-full {
+  @apply w-full text-center; 
+}
+
 
 .file-input {
   width: 0.1px;

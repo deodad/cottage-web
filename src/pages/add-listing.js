@@ -42,8 +42,8 @@ const AddListing = () => {
     <ListingForm id="add-listing" onSubmit={handleSubmit}> 
       {({ isSubmitting }) => (
         <div className="flex items-center">
-          <ContainedButton type="submit" form="add-listing" disabled={isSubmitting}>
-            Add Listing
+          <ContainedButton type="submit" disabled={isSubmitting} className="btn-lg" form="add-listing">
+            Save 
           </ContainedButton>
           { error &&
             <div className="ml-5 text-error">

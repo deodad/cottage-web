@@ -34,7 +34,7 @@ export const ListingForm = ({ children, listing = {}, onSubmit, ...rest }) => {
             <Input type="text" label="Short Description" name="shortDescription" />
             <Input type="number" label="Price" name="price" inputMode="decimal" />
             
-            <div className="mt-3">
+            <div className="mt-5">
               {children({ isSubmitting })}
             </div>
           </div>
