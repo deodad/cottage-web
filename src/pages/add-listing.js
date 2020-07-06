@@ -24,7 +24,6 @@ const AddListing = () => {
     createListing(data)
       .then((res) => {
         if (res.ok) {
-          setSubmitting(false)
           navigate(-1)
           return
         }
@@ -36,6 +35,7 @@ const AddListing = () => {
         return Promise.reject()
       })
       .catch(() => setError("Failed to create listing. Try again."))
+      .then(() => setSubmitting(false))
   }
 
   return (
