@@ -38,16 +38,12 @@ const EditListing = ({ listing }) => {
   return (
     <>
       <ListingForm listing={listing} onSubmit={handleSubmit} error={error} id="edit-listing">
-        {({ fields, isSubmitting }) => (
-          <>
-            <TopBarContent>
-              <ContainedButton type="submit" form="edit-listing" disabled={isSubmitting}>
-                Save
-              </ContainedButton>
-            </TopBarContent>
-
-            <div className="px-3">{fields}</div>
-          </>
+        {({ isSubmitting }) => (
+          <div className="px-3">
+            <ContainedButton type="submit" form="edit-listing" disabled={isSubmitting}>
+              Save
+            </ContainedButton>
+          </div>
         )}
       </ListingForm>
 

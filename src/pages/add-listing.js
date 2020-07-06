@@ -3,7 +3,6 @@ import { navigate } from "@reach/router"
 import { createListing } from "../api"
 import { ListingForm } from "../components/listing-form"
 import { ContainedButton } from "../components/button"
-import { TopBarContent } from "../components/page"
 
 const AddListing = () => {
   const [error, setError] = useState(null)
@@ -41,16 +40,10 @@ const AddListing = () => {
 
   return (
     <ListingForm id="add-listing" onSubmit={handleSubmit} error={error}>
-      {({ fields }) => (
-        <>
-          <TopBarContent>
-            <ContainedButton type="submit" form="add-listing">Save</ContainedButton>
-          </TopBarContent>
-
-          <div className="px-3">
-            {fields}
-          </div>
-        </>
+      {({ isSubmitting }) => (
+        <div className="px-3">
+          <ContainedButton type="submit" form="add-listing" disabled={isSubmitting}>Add Listing</ContainedButton>
+        </div>
       )}
     </ListingForm>
   )

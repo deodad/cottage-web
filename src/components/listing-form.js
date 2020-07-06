@@ -12,21 +12,10 @@ const validationSchema = object({
 })
 
 export const ListingForm = ({ children, error, listing = {}, onSubmit, ...rest }) => {
-  const fields = (
-    <>
-      <Input type="text" label="Name" name="name" />
-      <Input type="text" label="Short Description" name="shortDescription" />
-      <Input type="number" step="0.01" label="Price" name="price" />
-      <ListingImageInput name="image" />
-
-      {error && <div className="mt-3 text-error">{error}</div>}
-    </>
-  )
-
   const initialValues = {
     name: "",
     shortDescription: "",
-    price: 1,
+    price: 1000,
     ...listing,
   }
 
@@ -38,7 +27,17 @@ export const ListingForm = ({ children, error, listing = {}, onSubmit, ...rest }
     >
       {({ isSubmitting }) => (
         <Form {...rest}>
-          {children({ fields, isSubmitting })}
+          <ListingImageInput name="image" />
+
+          <div className="px-3 mt-3">
+            <Input type="text" label="Name" name="name" />
+            <Input type="text" label="Short Description" name="shortDescription" />
+            <Input type="number" inputmode="decimal" label="Price" name="price" />
+          </div>
+
+          {error && <div className="mt-3 text-error">{error}</div>}
+
+          {children({ isSubmitting })}
         </Form>
       )}
     </Formik>

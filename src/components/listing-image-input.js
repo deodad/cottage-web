@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react"
+import cx from "classnames"
 import { useField } from "formik"
+import { Image, ImageOverlay } from "./image"
 import { DivButton } from "./button"
 import Crop from "./crop"
 
@@ -41,19 +43,22 @@ const ListingImageUrl = ({ name }) => {
     setInputImage(null)
   }
 
-  const imageSrc =
-    typeof value === "string" || typeof value === "undefined"
-      ? value
-      : value.dataUrl
+  const image = value && {
+    ...value,
+    cdnUrl: value.cdnUrl || value.url
+  }
 
   return (
-    <div className="mb-2">
-      <DivButton onClick={() => inputRef.current.click()}>
-        {imageSrc ? (
-          <img src={imageSrc} />
-        ) : (
-          <div className="btn-otl btn-1">Upload image</div>
-        )}
+    <div className="-mt-3">
+      <DivButton 
+        onClick={() => inputRef.current.click()} 
+        className={cx("surface surface-1", error && "border-b-2 border-error")}
+      >
+        <Image className="w-full" image={image}>
+          <ImageOverlay className="flex items-center justify-center h-full">
+            { !image && <div className="font-mono text-sm font-bold emphasis-low">Upload an image</div> }
+          </ImageOverlay>
+        </Image>
         <input
           ref={inputRef}
           type="file"
@@ -63,8 +68,6 @@ const ListingImageUrl = ({ name }) => {
           className="file-input"
         />
       </DivButton>
-
-      {error && <div className="text-error">{error}</div>}
 
       {inputImage && (
         <Crop

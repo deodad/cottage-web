@@ -84,6 +84,7 @@ p {
   left: calc(50% - 100%);
   width: 200%;
   height: 200%;
+  z-index: 20;
 }
 
 .surface:hover::before {
@@ -240,7 +241,7 @@ p {
 }
 
 .label {
-  @apply block px-2 py-1 bg-gray-100 border-b-2;
+  @apply font-mono text-xs font-bold emphasis-medium;
 }
 
 .gutter-none {

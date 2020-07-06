@@ -1,27 +1,37 @@
 import React from "react"
 import { useField } from "formik"
-import classnames from "classnames"
+import cx from "classnames"
 
-export const Input = ({ label, className, ...props }) => {
-  const [field, meta] = useField(props)
+export const Input = ({ 
+  className, 
+  label, 
+  showError = false,
+  ...rest 
+}) => {
+  const [field, meta] = useField(rest)
 
   return (
-    <div className={classnames(className, "mb-1")}>
-      <label className="block bg-gray-200 rounded-t">
-        <div className="px-3 py-1 text-sm font-bold text-gray-700">{label}</div>
+    <div className={cx(className, showError ? "mb-1" : "mb-4")}>
+      <label className="block">
+        <div className="py-1 label">{label}</div>
         <input
-          className={classnames(
-            "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-primary",
+          className={cx(
+            "w-full pb-1 border-b-2 outline-none focus:border-primary",
             meta.error && "border-error"
           )}
           {...field}
-          {...props}
+          {...rest}
         />
       </label>
 
-      <div className="h-6 px-3 text-sm text-error">
-        {meta.touched && meta.error}
-      </div>
+      { showError &&
+        <div className="h-6 px-3 text-sm text-error">
+          {meta.touched && meta.error}
+        </div>
+      }
     </div>
   )
 }
+
+export const CurrencyInput = ({ field, ...rest }) =>
+  <Input {...rest} field={field} value={field.value} inputmode="decimal" />
