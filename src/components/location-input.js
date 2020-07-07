@@ -7,24 +7,23 @@ const LocationInput = ({ label, className, ...props }) => {
   const [field, meta, helpers] = useField(props)
 
   return (
-    <div className={cx(className, "mb-1")}>
-      <label className="block bg-gray-200 rounded-t">
-        <div className="py-1 px-3 text-sm text-gray-700 font-bold">{label}</div>
+    <div className={cx(className, "mb-4")}>
+      <label className="block">
+        <div className="py-1 label">{label}</div>
         <PlaceInput
           name={field.name}
           onBlur={field.onBlur}
           onChange={helpers.setValue}
           initialValue={meta.initialValue}
+          touched={meta.touched}
+          error={meta.error}
         />
       </label>
-      <div className="px-3 text-sm text-error h-6">
-        {meta.touched && meta.error}
-      </div>
     </div>
   )
 }
 
-const PlaceInput = ({ onChange, initialValue, ...rest }) => {
+const PlaceInput = ({ touched, error, onChange, initialValue, ...rest }) => {
   const [value, setValue] = useState(initialValue)
   const ref = useRef()
   const maps = useGoogleMaps()
@@ -73,7 +72,8 @@ const PlaceInput = ({ onChange, initialValue, ...rest }) => {
     <input
       ref={ref}
       className={cx(
-        "w-full pb-1 px-3 bg-gray-200 border-b-2 bg-inherit outline-none focus:border-primary"
+        "w-full pb-1 border-b-2 outline-none focus:border-primary",
+        touched && error && "border-error"
       )}
       onChange={handleChange}
       defaultValue={defaultValue}
