@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { navigate } from "@reach/router"
 import { useUpdate, useRemove } from "../hooks/use-bag"
 import { OutlineButton, ContainedButton } from "../components/button"
@@ -82,6 +82,7 @@ const Item = ({ item, remove }) => {
 }
 
 const QuantityForm = ({ onSubmit, initialQuantity }) => {
+  const el = useRef()
   const [quantity, setQuantity] = useState(initialQuantity)
 
   const handleSubmit = (e) => {
@@ -90,12 +91,15 @@ const QuantityForm = ({ onSubmit, initialQuantity }) => {
     onSubmit({ quantity })
   }
 
+  useEffect(() => el.current.focus(), [])
+
   return (
     <form className="flex items-center" onSubmit={handleSubmit}>
       <input 
         type="number" 
         value={quantity} 
         onChange={(e) => setQuantity(e.target.value)} 
+        ref={el}
         step="1" 
         min="1" 
         className="w-16 h-10 px-2 mr-3 border" 
