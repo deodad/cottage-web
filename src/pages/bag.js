@@ -105,6 +105,7 @@ const QuantityForm = ({ onSubmit, initialQuantity }) => {
         ref={el}
         step="1" 
         min="1" 
+        inputMode="numeric"
         className="w-16 h-10 px-2 mr-3 border" 
       />
       <OutlineButton>Update</OutlineButton>
