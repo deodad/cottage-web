@@ -91,7 +91,10 @@ const QuantityForm = ({ onSubmit, initialQuantity }) => {
     onSubmit({ quantity })
   }
 
-  useEffect(() => el.current.focus(), [])
+  useEffect(() => {
+    el.current.focus()
+    el.current.select()
+  }, [])
 
   return (
     <form className="flex items-center" onSubmit={handleSubmit}>
