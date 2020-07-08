@@ -9,7 +9,7 @@ export const ListingLink = ({ listing, ...rest }) =>
   <Link to={`/listing/${listing.id}`} {...rest} />
 
 export const EditListingLink = ({ listingId, ...rest }) =>
-  <Link to={`/store/listings/${listingId}`} {...rest} />
+  <Link to={`/sell/listings/${listingId}`} {...rest} />
 
 export const ListingDisplayPrice = ({ price }) =>
   price === 0 ? "Free" : <Currency amount={price} />
@@ -43,16 +43,3 @@ export const HorizontalListing = ({ linkProps = {}, listing, user, distance, com
     </div>
   </ListingLink>
 )
-
-export const Listings = ({ listings }) => {
-  return (
-    // <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    <ul className="space-y-3">
-      {listings.map((listing) => (
-        <li key={listing.id}>
-          <Listing listing={listing} />
-        </li>
-      ))}
-    </ul>
-  )
-}

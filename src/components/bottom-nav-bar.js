@@ -28,9 +28,9 @@ const BottomNavBar = ({ authenticatedUser, mode }) => {
 
   return (
     <div className="flex border-t">
-      <NavLink to="/store/dashboard">Dashboard</NavLink>
-      <NavLink to="/store/orders">Orders</NavLink>
-      <NavLink to="/store/listings">Listings</NavLink>
+      <NavLink to="/sell/dashboard">Dashboard</NavLink>
+      <NavLink to="/sell/orders">Orders</NavLink>
+      <NavLink to="/sell/listings">Listings</NavLink>
     </div>
   )
 }

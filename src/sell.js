@@ -7,7 +7,7 @@ import AddListing from"./roots/add-listing"
 import Orders from "./roots/store-orders"
 import Order from "./roots/store-order"
 
-const StoreApp = () => {
+const SellApp = () => {
   return (
     <Router>
       <Dashboard path="dashboard" />
@@ -33,4 +33,4 @@ const OrdersApp = () => (
   </Router>
 )
 
-export default StoreApp
+export default SellApp

@@ -28,9 +28,7 @@ const EditListing = ({ listing }) => {
     // TODO prevent double submissions
     setError(null)
     updateListing(listing.id, formData)
-      .then(() => {
-        navigate(-1)
-      })
+      .then(() => navigate("/sell/listings"))
       .catch((err) => setError(err.message || "Failed to update listing."))
       .then(() => setSubmitting(false))
   }
@@ -66,7 +64,7 @@ const DeleteListing = ({ id }) => {
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this listing?")) {
       remove(id)
-        .then(() => navigate("/store/listings"))
+        .then(() => navigate("/sell/listings"))
         .catch(() => setError("An error occured deleting this listing."))
     }
   }

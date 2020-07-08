@@ -1,4 +1,12 @@
-import React, { Suspense, useRef, useEffect, useLayoutEffect, useReducer, useState } from "react"
+import React, { 
+  Suspense, 
+  useCallback,
+  useEffect, 
+  useLayoutEffect, 
+  useReducer, 
+  useRef, 
+  useState 
+} from "react"
 import { Link, navigate, useLocation, useMatch } from "@reach/router"
 import cx from "classnames"
 import { Size } from "../media-match"
@@ -60,21 +68,21 @@ const Simple = ({ children, title }) => (
 
 const User = ({ children, focus }) => {
   const [mode, setMode] = useState('buyer')
-  const isStore = useMatch("/store/*")
+  const isSell = useMatch("/sell/*")
 
   useLayoutEffect(() => {
-    if (isStore && mode !== 'seller') {
+    if (isSell && mode !== 'sell') {
       setMode('seller')
     }
-  }, [isStore])
+  }, [isSell])
 
-  const changeToBuyer = () => {
+  const changeToBuyer = useCallback(() => {
     navigate("/home").then(() => setMode('buyer'))
-  }
+  }, [setMode])
 
-  const changeToSeller = () => {
-    navigate("/store").then(() => setMode('seller'))
-  }
+  const changeToSeller = useCallback(() => {
+    navigate("/sell/dashboard").then(() => setMode('sell'))
+  }, [setMode])
 
   return (
     <div className="flex flex-col justify-center h-full overflow-y-scroll sm:flex-row">

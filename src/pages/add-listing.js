@@ -27,7 +27,7 @@ const AddListing = () => {
     // TODO prevent double submissions
     setError(null)
     createListing(data)
-      .then(() => navigate("/store/listings"))
+      .then(() => navigate("/sell/listings"))
       .catch((error) => setError(error.message || "An error occurred."))
       .then(() => setSubmitting(false))
   }
