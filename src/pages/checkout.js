@@ -49,6 +49,7 @@ const initialState = {
   error: null, // { message, type?, code? }
 }
 
+// This is loading whether or not the checkout needs to use Stripe
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
 const CheckoutContainer = ({ checkout }) => {
@@ -79,7 +80,7 @@ const cardOptions = {
   }
 }
 
-const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
+const CheckoutForm = ({ checkout, emptyBag, clientSecret }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -111,17 +112,16 @@ const CheckoutForm = ({ checkout, emptyBag, onComplete, clientSecret }) => {
           dispatch({ type: "error", message: result.error })
         } else {
           if (result.paymentIntent.status === "succeeded") {
-            dispatch({ type: "complete" })
-            request(`
-              mutation EmptyBag {
-                emptyBag(input: {}) {
-                  clientMutationId
-                }
-              }
-            `).then(emptyBag)
-            // TODO navigate away!
-
-            onComplete && onComplete()
+            post('checkout/confirm')
+              .then(() => navigate('/orders'))
+              .catch(() => {
+                dispatch({
+                  type: "error",
+                  error: {
+                    message: "An error occurred. You have not been charged.",
+                  }
+                })
+              })
           }
         }
       })
