@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useReducer } from "react"
 import { navigate, LocationProvider, Router } from "@reach/router"
-import { ReactQueryConfigProvider } from "react-query"
+import { ReactQueryConfigProvider, queryCache } from "react-query"
 import { AppContext, UserContext } from "./context"
 import { Size } from "./media-match"
 import ErrorBoundary from "./components/error-boundary"
@@ -78,6 +78,7 @@ const App = ({ me }) => {
 
   const logout = () => {
     dispatch({ type: "logout" })
+    queryCache.clear()
     navigate("/")
   }
 
