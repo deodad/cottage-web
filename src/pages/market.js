@@ -51,13 +51,14 @@ const Market = ({ authenticatedUser }) => {
       indexName={`search_${process.env.NODE_ENV}`}
     >
       <Configure
-        getRankingInfo={true}
         aroundLatLng={`${authenticatedUser.lat}, ${authenticatedUser.lng}`}
         aroundPrecision={[
           { from: 0, value: 250 },
           { from: 1000, value: 500 },
           { from: 5000, value: 2000 },
         ]}
+        getRankingInfo={true}
+        filters={`user.id != ${authenticatedUser.id}`}
       />
       <TopBarContent>
         <SearchBox />
