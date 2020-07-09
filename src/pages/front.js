@@ -1,6 +1,6 @@
 import React from "react"
 import { withLayout } from "../hoc"
-import { LoginForm } from "../components/login"
+import LoginForm from "../components/login"
 
 const Front = () => (
   <div>

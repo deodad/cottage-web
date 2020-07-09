@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, withGuest, withLayout } from "../hoc"
-import { LoginForm } from "../components/login"
+import LoginForm from "../components/login"
 
 const Login = () => <LoginForm />
 

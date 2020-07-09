@@ -1,11 +1,10 @@
 import React from "react"
 import { Redirect } from "@reach/router"
-import { useAppContext } from "../hooks"
+import { useUserContext } from "../hooks"
 
 export const withUser = (Component) => {
   const WithUser = (props) => {
-    const { state } = useAppContext()
-    const { user } = state
+    const { user } = useUserContext()
 
     if (user === undefined) return null
     if (user === null) return <Redirect to="/login" />
@@ -14,4 +13,14 @@ export const withUser = (Component) => {
   }
 
   return WithUser
+}
+
+export const withMaybeUser = (Component) => {
+  const WithMaybeUser = (props) => {
+    const { user } = useUserContext()
+
+    return <Component user={user} {...props} />
+  }
+
+  return WithMaybeUser
 }

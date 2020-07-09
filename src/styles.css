@@ -120,7 +120,7 @@ p {
 }
 
 .btn {
-  @apply inline-block px-4 py-3 text-sm font-bold leading-none tracking-wide;
+  @apply inline-block px-4 py-3 text-sm font-bold leading-none tracking-wide text-center;
   border-radius: 0.25rem;
 }
 
