@@ -38,7 +38,7 @@ p {
 }
 
 .table th {
-  @apply px-3 pt-2 pb-1 text-sm tracking-wide text-left uppercase;
+  @apply px-3 pt-2 pb-1 font-mono text-xs text-left emphasis-medium;
 }
 
 .table td {
@@ -188,7 +188,7 @@ p {
 /* button modifiers */
 
 .btn-lg {
-  @apply px-5 py-4 text-base;
+  @apply px-6 py-4 text-base;
 }
 
 .btn-full {
@@ -248,8 +248,13 @@ p {
 }
 
 .label {
-  @apply font-mono text-xs font-bold emphasis-medium;
+  @apply font-mono text-xs emphasis-medium;
 }
+
+.text-label {
+  @apply font-mono text-xs emphasis-medium;
+}
+
 
 .gutter-none {
   @apply -mx-5;

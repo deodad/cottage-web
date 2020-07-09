@@ -6,29 +6,30 @@ import { ShortDate } from "../components/time"
 
 const Order = ({ order }) => (
   <div className="px-3 space-y-4">
-    <div>
-      <div className="text-sm emphasis-medium">
-        Placed on
+    <div className="flex justify-between">
+      <div>
+        <div className="text-label">
+          Order Number
+        </div>
+        {order.number}
       </div>
-      <ShortDate date={order.createdAt} />
+      <div>
+        <div className="text-label">
+          Placed on
+        </div>
+        <ShortDate date={order.createdAt} />
+      </div>
     </div>
 
     <div>
-      <div className="text-sm emphasis-medium">
+      <div className="text-label">
         Total
       </div>
       <Currency amount={order.total} />
     </div>
 
     <div>
-      <div className="mb-1 text-sm emphasis-medium">
-        Customer
-      </div>
-      <UserBadge user={order.person} />
-    </div>
-
-    <div>
-      <div className="mb-1 text-sm emphasis-medium">
+      <div className="mb-1 text-label">
         Items
       </div>
       <div className="space-y-3">
@@ -38,6 +39,13 @@ const Order = ({ order }) => (
           </div>
         ))}
       </div>
+    </div>
+
+    <div>
+      <div className="mb-1 text-label">
+        Customer
+      </div>
+      <UserBadge user={order.person} />
     </div>
   </div>
 )

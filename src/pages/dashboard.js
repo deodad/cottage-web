@@ -6,11 +6,11 @@ const Dashboard = ({ data }) => {
     <div className="px-3">
       <div className="flex">
         <div className="w-1/2">
-          <div className="text-sm font-bold emphasis-medium">Lifetime orders</div>
+          <div className="text-label">Lifetime orders</div>
           <div className="text-xl">{data.lifetimeOrders}</div>
         </div>
         <div className="w-1/2">
-          <div className="text-sm font-bold emphasis-medium">Lifetime earnings</div>
+          <div className="text-label">Lifetime earnings</div>
           <div className="text-xl"><Currency amount={data.lifetimeEarnings} /></div>
         </div>
       </div>

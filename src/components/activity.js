@@ -1,6 +1,5 @@
 import React from "react"
 import { UserActivity } from "./user"
-import { ListingLink } from "./listing"
 import { HorizontalListing } from "./listing"
 
 export const Activity = ({ activity, user, date }) => (
