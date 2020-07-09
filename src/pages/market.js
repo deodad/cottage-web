@@ -63,7 +63,9 @@ const Market = ({ authenticatedUser }) => {
         <SearchBox />
       </TopBarContent>
 
-      <Map />
+      <div className="-mt-3">
+        <Map />
+      </div>
 
       <div className="mx-3 mt-3">
         <Hits />
