@@ -18,7 +18,4 @@ export const useRemove = () => useMutation(
   { onSuccess: bag => queryCache.setQueryData('bag', bag), useErrorBoundary: false, throwOnError: true }
 )
 
-export const useEmpty = () => useMutation(
-  ({ listingId }) => del("bag", { listingId }),
-  { onSuccess: bag => queryCache.setQueryData('bag', bag), useErrorBoundary: false, throwOnError: true }
-)
+export const clearCache = () => queryCache.removeQueries('bag')

@@ -7,7 +7,8 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import { request, post } from "../api"
+import { post } from "../api"
+import { clearCache } from "../hooks/use-bag"
 import { Image } from "../components/image"
 import { TopBarContent } from "../components/page"
 import { ContainedButton } from "../components/button"
@@ -113,7 +114,10 @@ const CheckoutForm = ({ checkout, emptyBag, clientSecret }) => {
         } else {
           if (result.paymentIntent.status === "succeeded") {
             post('checkout/confirm')
-              .then(() => navigate('/orders'))
+              .then(() => {
+                navigate('/orders')
+                clearCache()
+              })
               .catch(() => {
                 dispatch({
                   type: "error",
@@ -198,7 +202,10 @@ const FreeCheckoutForm = ({ checkout }) => {
     dispatch({ type: "submit" })
 
     post('checkout/confirm')
-      .then(() => navigate('/orders'))
+      .then(() => {
+        navigate('/orders')
+        clearCache()
+      })
       .catch(() => {
         dispatch({
           type: "error",
