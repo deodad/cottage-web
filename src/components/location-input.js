@@ -16,8 +16,8 @@ const LocationInput = ({ label, className, ...props }) => {
   const handleDone = (result) => {
     setIsOpen(false)
     helpers.setValue({
-      lat: result.result.center[0],
-      lng: result.result.center[1],
+      lng: result.result.center[0],
+      lat: result.result.center[1],
       address: result.result.place_name
     })
   }

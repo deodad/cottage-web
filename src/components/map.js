@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useReducer } from "react"
+import React, { useEffect, useRef } from "react"
 import ReactDOMServer from "react-dom/server"
 import mapboxgl from "../mapbox-gl"
 import { connectGeoSearch } from "react-instantsearch-dom"
-import { CompactUserImageLink } from "./user"
+import Currency from "./currency"
+import { Image } from "./image"
 
 const Map = connectGeoSearch(
   ({ currentRefinement, hits, position, refinement }) => {
@@ -15,8 +16,8 @@ const Map = connectGeoSearch(
       map.current = new mapboxgl.Map({
         container: container.current,
         style: "mapbox://styles/mapbox/streets-v11",
-        center: [-97.716, 30.279],
-        zoom: 13,
+        center: [-97.72, 30.268],
+        zoom: 12,
       })
     }, [container])
 
@@ -52,14 +53,14 @@ const Map = connectGeoSearch(
 const Popup = ({ distance, listing }) => (
   <div className="flex items-center">
     <div className="flex-none w-12 h-12">
-      <img src={listing.image_url} alt={listing.name} className="rounded" />
+      <Image image={listing.image} className="rounded" />
     </div>
 
     <div className="flex-1 ml-3">
       <div className="mt-1 text-sm">
-        <div className="text-lg font-bold">{listing.name}</div>
+        <div className="font-bold">{listing.name}</div>
         <div className="emphasis-medium">
-          ${listing.price}
+          <Currency amount={listing.price} />
           {distance && <span> &middot; {distance}</span>}
         </div>
       </div>
