@@ -3,7 +3,17 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import mapboxgl from "../mapbox-gl"
 
-const Geocoder = ({ onResult }) => {
+const defaultGeocoderOptions = {
+  accessToken: mapboxgl.accessToken,
+  mapboxgl: mapboxgl,
+  country: "us",
+  types: 'postcode,neighborhood,address,poi'
+}
+
+const Geocoder = ({ 
+  onResult, 
+  geocoderOptions = defaultGeocoderOptions 
+}) => {
   const container = useRef()
   const map = useRef()
   const geocoder = useRef()
@@ -16,15 +26,10 @@ const Geocoder = ({ onResult }) => {
       zoom: 13,
     })
 
-    geocoder.current = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-      types: 'postcode,neighborhood,address,poi'
-    })
+    geocoder.current = new MapboxGeocoder(geocoderOptions)
 
     map.current.addControl(geocoder.current)
-    map.current.addControl(new mapboxgl.GeolocateControl())
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-left')
+    // map.current.addControl(new mapboxgl.GeolocateControl())
 
     /* This will move focus to the geocoder input
      * See https://github.com/mapbox/mapbox-gl-geocoder/issues/239 */
