@@ -5,6 +5,7 @@ import { useGoogleMaps } from "../hooks"
 
 const LocationInput = ({ label, className, ...props }) => {
   const [field, meta, helpers] = useField(props)
+  console.log(field, meta)
 
   return (
     <div className={cx(className, "mb-4")}>

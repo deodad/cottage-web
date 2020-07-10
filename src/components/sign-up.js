@@ -61,14 +61,11 @@ const validationSchema = object({
   email: string()
     .email("Invalid email address")
     .required("Where can we reach you?"),
-  location: object()
-    .shape({
-      lng: number(),
-      lat: number(),
-      location: string(),
-    })
-    .typeError("Select a location from the autocomplete")
-    .required("Where's your local community?"),
+  location: object({
+    lng: number().required(),
+    lat: number().required(),
+    address: string().required(),
+  }).required("Where's your local community?"),
   password: string()
     .min(8, "8 character min")
     .max(64, "64 character max")
