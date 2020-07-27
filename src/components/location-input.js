@@ -25,9 +25,15 @@ const LocationInput = ({ label, className, ...props }) => {
   return (
     <div className={cx(className, "mb-4")}>
       <label className="block">
-        <div className="py-1 label">{label}</div>
+        <div className="py-1 label">
+          {label}<br/>
+          <div className="my-2">
+          Your location will be visible as part of your profile<br/>
+          Search for you neighborhood if you don't want to use your home address
+          </div>
+        </div>
         <div className="flex items-center">
-          <OutlineButton onClick={handleClick}>Select</OutlineButton>
+          <OutlineButton onClick={handleClick}>Select a location</OutlineButton>
           <div className="ml-3">
             { meta.value && meta.value.address }
           </div>
